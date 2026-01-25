@@ -13,10 +13,36 @@ export default function HomePage() {
     <main className="bg-white text-slate-900">
 
       {/* =========================
+          HEADER
+      ========================== */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" className="font-semibold tracking-tight">
+            Starting Gate Financial
+          </Link>
+
+          <nav className="hidden md:flex gap-8 text-sm font-semibold text-slate-600">
+            <Link href="/financing-options">Financing</Link>
+            <Link href="/industries">Industries</Link>
+            <Link href="/tools">Tools</Link>
+            <Link href="/technology">Technology</Link>
+            <Link href="/partners">Partners</Link>
+          </nav>
+
+          <Link
+            href="/apply"
+            className="bg-emerald-700 text-white px-5 py-2 font-semibold"
+          >
+            Pre-Qualify
+          </Link>
+        </div>
+      </header>
+
+      {/* =========================
           HERO
       ========================== */}
       <section className="border-b">
-        <div className="max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-12 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-12 gap-16 items-center">
           <div className="md:col-span-7">
             <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
               Business Financing,
@@ -31,7 +57,7 @@ export default function HomePage() {
               and growth capital with discipline, clarity, and lender-aligned structure.
             </p>
 
-            <div className="mt-10 flex gap-6">
+            <div className="mt-10 flex gap-8 items-center">
               <Link
                 href="/apply"
                 className="bg-emerald-700 text-white px-7 py-3 font-semibold"
@@ -40,7 +66,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/financing-options"
-                className="text-slate-700 font-semibold underline underline-offset-4"
+                className="font-semibold text-slate-700 underline underline-offset-4"
               >
                 Explore Financing Options
               </Link>
@@ -48,35 +74,30 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-span-5">
-            <Image
-              src="/images/hero-business-owner.jpg"
-              alt="Business owner reviewing financial documents"
-              width={640}
-              height={480}
-              priority
-              className="rounded-lg shadow-sm"
-            />
+            <div className="aspect-[4/3] bg-slate-100 rounded-lg border flex items-center justify-center text-slate-400 font-semibold">
+              Hero Image
+            </div>
           </div>
         </div>
       </section>
 
       {/* =========================
-          TRUST
+          TRUST BAR (we refine later)
       ========================== */}
-      <section className="py-10 border-b">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <p className="text-sm uppercase tracking-wide text-slate-500">
-            Trusted by Business Owners Nationwide
-          </p>
-          <p className="text-sm text-slate-600">★★★★★ Google Reviews</p>
+      <section className="py-8 border-b">
+        <div className="max-w-7xl mx-auto px-6 flex justify-between text-sm text-slate-500 uppercase tracking-wide">
+          <span>Trusted by Business Owners Nationwide</span>
+          <span className="normal-case tracking-normal font-semibold">
+            ★★★★★ Google Reviews
+          </span>
         </div>
       </section>
 
       {/* =========================
           THREE CORE PILLARS
       ========================== */}
-      <section className="py-28">
-        <div className="max-w-6xl mx-auto px-6 space-y-24">
+      <section className="py-32">
+        <div className="max-w-6xl mx-auto px-6 space-y-28">
 
           <Pillar
             title="Business & Working Capital"
@@ -90,17 +111,20 @@ export default function HomePage() {
             ]}
           />
 
-          <div className="pl-8 border-l-4 border-emerald-700">
-            <Pillar
-              title="Commercial & Investment Real Estate"
-              desc="Acquisition, refinance, construction, and DSCR-based financing
-                    for income-producing properties."
-              items={[
-                "Commercial Real Estate Loans",
-                "DSCR Rental Loans",
-                "Fix & Flip Financing",
-              ]}
-            />
+          {/* Anchored middle pillar */}
+          <div className="bg-slate-50 py-24 px-14 rounded-xl">
+            <div className="pl-8 border-l-4 border-emerald-700">
+              <Pillar
+                title="Commercial & Investment Real Estate"
+                desc="Acquisition, refinance, construction, and DSCR-based financing
+                      for income-producing properties."
+                items={[
+                  "Commercial Real Estate Loans",
+                  "DSCR Rental Loans",
+                  "Fix & Flip Financing",
+                ]}
+              />
+            </div>
           </div>
 
           <Pillar
@@ -121,17 +145,17 @@ export default function HomePage() {
       {/* =========================
           INDUSTRIES
       ========================== */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-28 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-xl font-semibold mb-8">Industries We Serve</h3>
+          <h2 className="text-xl font-semibold mb-12">Industries We Serve</h2>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            <Industry label="Construction" image="/images/industry-construction.jpg" />
-            <Industry label="Restaurants & Food" image="/images/industry-restaurant.jpg" />
-            <Industry label="Healthcare" image="/images/industry-healthcare.jpg" />
-            <Industry label="Oil & Gas Services" image="/images/industry-oil-gas.jpg" />
-            <Industry label="Transportation" image="/images/industry-transportation.jpg" />
-            <Industry label="Professional Services" image="/images/industry-professional.jpg" />
+          <div className="grid md:grid-cols-3 gap-12">
+            <Industry label="Construction" />
+            <Industry label="Restaurants & Food" />
+            <Industry label="Healthcare" />
+            <Industry label="Oil & Gas Services" />
+            <Industry label="Transportation" />
+            <Industry label="Professional Services" />
           </div>
         </div>
       </section>
@@ -139,23 +163,20 @@ export default function HomePage() {
       {/* =========================
           TECHNOLOGY
       ========================== */}
-      <section className="py-28">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-16 items-center">
           <div className="md:col-span-5">
-            <Image
-              src="/images/technology-analytics.jpg"
-              alt="Financial analytics and intake technology"
-              width={560}
-              height={420}
-              className="rounded-lg shadow-sm"
-            />
+            <div className="aspect-[4/3] bg-slate-100 rounded-lg border flex items-center justify-center text-slate-400 font-semibold">
+              Technology Image
+            </div>
           </div>
 
           <div className="md:col-span-7">
             <h2 className="text-3xl font-semibold">
               Technology That Supports Better Outcomes
             </h2>
-            <p className="mt-4 text-slate-600 max-w-xl">
+
+            <p className="mt-6 text-slate-600 max-w-xl">
               Our internal technology accelerates intake and routing
               without replacing underwriting judgment.
             </p>
@@ -180,46 +201,61 @@ export default function HomePage() {
       </section>
 
       {/* =========================
-          TOOLS
+          TOOLS + PROCESS (FIXED)
       ========================== */}
-      <section className="py-16 border-y">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-12 text-slate-700 font-medium">
-          <span>Business Loan Calculator</span>
-          <span>DSCR Calculator</span>
-          <span>MCA Planning Tool</span>
+      <section className="py-28 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20">
+
+          <div>
+            <h3 className="text-xl font-semibold">Planning Tools</h3>
+            <p className="mt-3 text-slate-600 max-w-md">
+              Deterministic calculators built for clarity—not assumptions.
+            </p>
+
+            <div className="mt-6 flex gap-10 flex-wrap font-semibold text-slate-700">
+              <Link href="/tools/business-loan-calculator" className="underline underline-offset-4">
+                Business Loan Calculator
+              </Link>
+              <Link href="/tools/dscr-calculator" className="underline underline-offset-4">
+                DSCR Calculator
+              </Link>
+              <Link href="/tools/mca-calculator" className="underline underline-offset-4">
+                MCA Planning Tool
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold">How It Works</h3>
+            <ol className="mt-6 space-y-4 text-slate-700">
+              <li><strong>1.</strong> Explore financing paths by program or industry</li>
+              <li><strong>2.</strong> Complete a short pre-qualification</li>
+              <li><strong>3.</strong> Execute lender-aligned next steps</li>
+            </ol>
+          </div>
+
         </div>
       </section>
 
       {/* =========================
-          PROCESS
+          FOOTER / PARTNERS
       ========================== */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6 space-y-4 text-slate-700">
-          <p>1. Explore financing paths</p>
-          <p>2. Complete pre-qualification</p>
-          <p>3. Execute lender-aligned next steps</p>
-        </div>
-      </section>
-
-      {/* =========================
-          PARTNERS
-      ========================== */}
-      <section className="py-28 bg-slate-900 text-white">
+      <footer className="py-32 bg-slate-900 text-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-semibold">
             Built for Advisors, Operators, and Strategic Partners
           </h2>
-          <p className="mt-4 text-slate-300">
+          <p className="mt-6 text-slate-300 max-w-xl mx-auto">
             Structured alignment. Clean execution. Long-term relationships.
           </p>
           <Link
             href="/partners"
-            className="inline-block mt-8 border border-white px-8 py-3 font-semibold"
+            className="inline-block mt-10 border border-white px-8 py-3 font-semibold"
           >
             Become a Partner
           </Link>
         </div>
-      </section>
+      </footer>
 
     </main>
   );
@@ -241,8 +277,8 @@ function Pillar({
   return (
     <div>
       <h2 className="text-3xl font-semibold">{title}</h2>
-      <p className="mt-4 text-slate-600 max-w-xl">{desc}</p>
-      <ul className="mt-6 space-y-2 text-slate-700">
+      <p className="mt-6 text-slate-600 max-w-[52ch]">{desc}</p>
+      <ul className="mt-8 space-y-2 text-slate-700 font-medium">
         {items.map((item) => (
           <li key={item}>— {item}</li>
         ))}
@@ -251,17 +287,11 @@ function Pillar({
   );
 }
 
-function Industry({ label, image }: { label: string; image: string }) {
+function Industry({ label }: { label: string }) {
   return (
     <div>
-      <Image
-        src={image}
-        alt={`${label} industry`}
-        width={400}
-        height={260}
-        className="rounded-md"
-      />
-      <p className="mt-3 font-semibold">{label}</p>
+      <div className="aspect-[16/10] bg-slate-200 rounded-md mb-4" />
+      <p className="font-semibold">{label}</p>
     </div>
   );
 }
