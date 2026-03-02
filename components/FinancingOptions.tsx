@@ -1,94 +1,70 @@
 import Link from "next/link";
+import { products } from "@/lib/financing-data";
 
-type PillarItem = { label: string; href: string };
-
-const pillars: {
-  title: string;
-  desc: string;
-  items: PillarItem[];
-  featured?: boolean;
-}[] = [
-  {
-    title: "Business & Working Capital",
-    desc: "Flexible capital solutions designed around cash flow, timing, and operational realities.",
-    items: [
-      { label: "Business Lines of Credit & Term Loans", href: "/financing/business-loc" },
-      { label: "Accounts Receivable Financing",         href: "/financing/accounts-receivable" },
-      { label: "Equipment Financing",                   href: "/financing/equipment-financing" },
-      { label: "Merchant Cash Advance",                 href: "/financing/merchant-cash-advance" },
-    ],
-  },
-  {
-    title: "Commercial & Investment Real Estate",
-    desc: "Acquisition, refinance, construction, and DSCR-based financing for income-producing properties.",
-    items: [
-      { label: "Commercial Real Estate Loans", href: "/financing/commercial-real-estate" },
-      { label: "DSCR Rental Loans",            href: "/financing/rental-loans" },
-      { label: "Fix & Flip Financing",         href: "/financing/fix-and-flip" },
-    ],
-    featured: true,
-  },
-  {
-    title: "SBA & Structured Financing",
-    desc: "Long-term capital for qualified owner-operated businesses requiring disciplined underwriting.",
-    items: [
-      { label: "SBA 7(a) & 504 Loans",  href: "/financing/sba-loans" },
-      { label: "Franchise Financing",    href: "/financing/franchise-financing" },
-      { label: "Startup Financing",      href: "/financing/startup-financing" },
-    ],
-  },
-];
-
-function Pillar({
-  title,
-  desc,
-  items,
-}: {
-  title: string;
-  desc: string;
-  items: PillarItem[];
-}) {
+function ArrowRight() {
   return (
-    <div>
-      <h2 className="font-serif text-3xl font-semibold">{title}</h2>
-      <p className="mt-6 text-slate-600 max-w-[52ch]">{desc}</p>
-      <ul className="mt-8 space-y-2 font-medium">
-        {items.map(({ label, href }) => (
-          <li key={href}>
-            <Link
-              href={href}
-              className="text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
-            >
-              — {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <Link
-        href="/financing"
-        className="inline-block mt-6 text-sm font-semibold text-[var(--sgf-green-500)] underline underline-offset-4 hover:text-[var(--sgf-green-600)]"
-      >
-        View all programs →
-      </Link>
-    </div>
+    <svg
+      className="w-4 h-4 shrink-0 text-slate-400 group-hover:text-[var(--sgf-green-500)] transition-colors"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      <path d="M3 8h10M9 4l4 4-4 4" />
+    </svg>
   );
 }
 
 export default function FinancingOptions() {
   return (
-    <section className="py-32">
-      <div className="max-w-6xl mx-auto px-6 space-y-28">
-        {pillars.map((pillar) =>
-          pillar.featured ? (
-            <div key={pillar.title} className="bg-slate-50 py-24 px-14 rounded-xl">
-              <div className="pl-8 border-l-4 border-[var(--sgf-green-500)]">
-                <Pillar {...pillar} />
+    <section className="py-24 bg-white">
+      <div className="max-w-5xl mx-auto px-6">
+
+        {/* Centered heading */}
+        <div className="text-center mb-14">
+          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+            Capital Solutions
+          </p>
+          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+            Discover Optimal Financing for Your Business
+          </h2>
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+            From SBA loans to commercial real estate — capital structured for
+            your stage and sector.
+          </p>
+        </div>
+
+        {/* Compact 2-col product grid — 5 rows × 2 cols = 10 cards */}
+        <div className="grid md:grid-cols-2 gap-2">
+          {products.map((product) => (
+            <Link
+              key={product.slug}
+              href={`/financing/${product.slug}`}
+              className="group flex items-center justify-between px-5 py-[14px] border border-slate-200 hover:shadow-[inset_3px_0_0_#2E7D32] hover:bg-slate-50 transition-all duration-150"
+            >
+              <div className="min-w-0 pr-4">
+                <p className="text-sm font-semibold text-slate-900 group-hover:text-[var(--sgf-green-500)] transition-colors truncate">
+                  {product.title}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5 truncate">
+                  {product.subtitle}
+                </p>
               </div>
-            </div>
-          ) : (
-            <Pillar key={pillar.title} {...pillar} />
-          )
-        )}
+              <ArrowRight />
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/financing"
+            className="text-sm font-semibold text-[var(--sgf-green-500)] underline underline-offset-4 hover:text-[var(--sgf-green-600)] transition-colors"
+          >
+            Browse all financing programs →
+          </Link>
+        </div>
+
       </div>
     </section>
   );

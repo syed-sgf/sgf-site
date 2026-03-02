@@ -1,25 +1,63 @@
+import Link from "next/link";
+
 const steps = [
-  "Explore financing paths by program or industry",
-  "Complete a short pre-qualification",
-  "Execute lender-aligned next steps",
+  {
+    num:   "01",
+    label: "Explore",
+    desc:  "Browse financing paths by program or industry — no commitment required.",
+  },
+  {
+    num:   "02",
+    label: "Pre-Qualify",
+    desc:  "Complete a short intake. We assess fit and identify the right capital structure.",
+  },
+  {
+    num:   "03",
+    label: "Execute",
+    desc:  "We place your deal with aligned lenders and guide you through closing.",
+  },
 ];
 
 export default function Process() {
   return (
-    <section className="py-20 bg-slate-50 border-t">
-      <div className="max-w-7xl mx-auto px-6">
-        <h3 className="font-serif text-xl font-semibold">How It Works</h3>
+    <section className="py-24 bg-slate-50 border-t border-slate-100">
+      <div className="max-w-5xl mx-auto px-6">
 
-        <ol className="mt-6 space-y-4 text-slate-700">
-          {steps.map((step, i) => (
-            <li key={i} className="flex gap-4 items-start">
-              <span className="font-serif font-semibold text-[var(--sgf-green-500)] text-lg leading-tight">
-                {i + 1}.
-              </span>
-              <span>{step}</span>
-            </li>
+        {/* Centered heading */}
+        <div className="text-center mb-16">
+          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+            Our Process
+          </p>
+          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+            A Structured Path to Capital
+          </h2>
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+            We remove the guesswork from the financing process.
+          </p>
+        </div>
+
+        {/* 3-column steps */}
+        <div className="grid md:grid-cols-3 gap-10 text-center">
+          {steps.map(({ num, label, desc }) => (
+            <div key={num}>
+              <p className="font-serif text-5xl font-semibold text-[var(--sgf-green-500)] leading-none">
+                {num}
+              </p>
+              <p className="mt-5 font-semibold text-slate-900">{label}</p>
+              <p className="mt-2 text-sm text-slate-600 max-w-[24ch] mx-auto">{desc}</p>
+            </div>
           ))}
-        </ol>
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link
+            href="/apply"
+            className="inline-block bg-[var(--sgf-green-500)] hover:bg-[var(--sgf-green-600)] text-white px-10 py-3 font-semibold transition-colors"
+          >
+            Start Pre-Qualification
+          </Link>
+        </div>
+
       </div>
     </section>
   );

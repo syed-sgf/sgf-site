@@ -3,52 +3,63 @@ import Link from "next/link";
 const tools = [
   {
     label: "Business Loan Calculator",
-    desc: "Monthly payment & total cost",
-    href: "/tools/business-loan-calculator",
+    desc:  "Monthly payment & amortization",
+    href:  "/tools/business-loan-calculator",
   },
   {
     label: "DSCR Calculator",
-    desc: "Debt service coverage ratio",
-    href: "/tools/dscr-calculator",
+    desc:  "Debt service coverage ratio",
+    href:  "/tools/dscr-calculator",
   },
   {
     label: "MCA Planning Tool",
-    desc: "True cost of capital",
-    href: "/tools/mca-calculator",
+    desc:  "True cost of capital",
+    href:  "/tools/mca-calculator",
   },
   {
-    label: "FICA Tip Credit Calculator",
-    desc: "IRC § 45B employer credit",
-    href: "/tools/fica-tip-calculator",
+    label: "FICA Tip Credit",
+    desc:  "IRC § 45B employer credit",
+    href:  "/tools/fica-tip-calculator",
   },
 ];
 
 export default function Tools() {
   return (
-    <section className="py-20 border-t">
-      <div className="max-w-7xl mx-auto px-6">
-        <h3 className="font-serif text-xl font-semibold">Planning Tools</h3>
-        <p className="mt-3 text-slate-600 max-w-md">
-          Deterministic calculators built for clarity—not assumptions.
-        </p>
+    <section className="py-24 bg-white border-t border-slate-100">
+      <div className="max-w-5xl mx-auto px-6">
 
-        <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Centered heading */}
+        <div className="text-center mb-14">
+          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+            Planning Tools
+          </p>
+          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+            Model Your Financing Before You Apply
+          </h2>
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+            Deterministic calculators built for clarity — not assumptions.
+          </p>
+        </div>
+
+        {/* 4-card grid — bank-style ruled grid */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
           {tools.map(({ label, desc, href }) => (
             <Link
               key={href}
               href={href}
-              className="group border border-slate-200 rounded-lg p-5 hover:border-[var(--sgf-green-500)] hover:shadow-sm transition-all"
+              className="group border border-slate-200 p-6 hover:shadow-[inset_3px_0_0_#2E7D32] hover:bg-slate-50 transition-all duration-150"
             >
-              <p className="font-semibold text-slate-900 group-hover:text-[var(--sgf-green-500)] transition-colors">
+              <p className="text-sm font-semibold text-slate-900 group-hover:text-[var(--sgf-green-500)] transition-colors">
                 {label}
               </p>
-              <p className="mt-1 text-sm text-slate-500">{desc}</p>
-              <p className="mt-3 text-sm font-semibold text-[var(--sgf-green-500)] group-hover:underline underline-offset-4">
+              <p className="mt-1 text-xs text-slate-500">{desc}</p>
+              <p className="mt-5 text-xs font-semibold text-[var(--sgf-green-500)]">
                 Open →
               </p>
             </Link>
           ))}
         </div>
+
       </div>
     </section>
   );
