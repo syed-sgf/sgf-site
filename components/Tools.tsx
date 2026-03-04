@@ -25,7 +25,7 @@ const tools = [
 
 export default function Tools() {
   return (
-    <section className="py-24 bg-white border-t border-slate-100">
+    <section className="py-16 bg-white border-t border-slate-100">
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}

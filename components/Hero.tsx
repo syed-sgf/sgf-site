@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const slides = [
   {
@@ -86,8 +87,8 @@ export default function Hero() {
 
         {/* Image slot */}
         <div className="md:col-span-5">
-          <div className="aspect-[4/3] bg-slate-100 rounded-lg border flex items-center justify-center text-slate-400 font-semibold">
-            Slide {current + 1}
+          <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+            <Image src={slide.image} alt={slide.heading} fill className="object-cover" />
           </div>
         </div>
 

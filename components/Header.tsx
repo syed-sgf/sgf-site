@@ -124,8 +124,9 @@ export default function Header() {
         {/* ── Logo ── */}
         <Link
           href="/"
-          className="font-serif font-semibold text-slate-900 text-[15px] tracking-tight shrink-0"
+          className="flex items-center gap-2 font-serif font-semibold text-slate-900 text-[15px] tracking-tight shrink-0"
         >
+          <img src="/images/sgf-logo.jpg" alt="SGF" className="h-8 w-8 object-contain rounded" />
           Starting Gate Financial
         </Link>
 

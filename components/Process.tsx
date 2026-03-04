@@ -20,7 +20,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="py-24 bg-slate-50 border-t border-slate-100">
+    <section className="py-16 bg-slate-50 border-t border-slate-100">
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
@@ -34,6 +34,35 @@ export default function Process() {
           <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
             We remove the guesswork from the financing process.
           </p>
+        </div>
+
+        {/* Testimonials */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {[
+            {
+              quote: "SGF structured our SBA loan exactly the way our lender needed it. Closed in 45 days.",
+              name: "Michael R.",
+              role: "Restaurant Owner, Dallas TX",
+            },
+            {
+              quote: "They understood our cash flow from day one. No back and forth, no surprises at closing.",
+              name: "Priya S.",
+              role: "Healthcare Practice, Plano TX",
+            },
+            {
+              quote: "Three DSCR loans in 18 months. SGF knows how to get deals across the line.",
+              name: "James T.",
+              role: "Real Estate Investor, Fort Worth TX",
+            },
+          ].map(({ quote, name, role }) => (
+            <div key={name} className="bg-white border border-slate-200 p-6">
+              <p className="text-sm text-slate-700 italic">"{quote}"</p>
+              <div className="mt-4">
+                <p className="font-semibold text-slate-900 text-sm">{name}</p>
+                <p className="text-xs text-slate-500">{role}</p>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* 3-column steps */}

@@ -18,7 +18,7 @@ function ArrowRight() {
 
 export default function Industries() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-16 bg-slate-50">
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
