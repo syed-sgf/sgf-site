@@ -4,18 +4,74 @@
   --background: #ffffff;
   --foreground: #0f172a;
 
-  /* SGF Brand */
+  /* SGF Green Scale */
+  --sgf-green-50:  #E8F5E9;
+  --sgf-green-100: #C8E6C9;
   --sgf-green-500: #2E7D32;
   --sgf-green-600: #1B5E20;
-  --sgf-gold-500:  #D4AF37;
-  --sgf-gold-600:  #C9A227;
+  --sgf-green-700: #145214;
+  --sgf-green-800: #0D3B0F;
+  --sgf-green-900: #082B09;
+
+  /* SGF Gold Scale */
+  --sgf-gold-200: #FFE082;
+  --sgf-gold-300: #FFD54F;
+  --sgf-gold-500: #D4AF37;
+  --sgf-gold-600: #C9A227;
+  --sgf-gold-700: #B8860B;
+
+  /* SGF Slate Scale */
+  --sgf-slate-50:  #F8FAFC;
+  --sgf-slate-100: #F1F5F9;
+  --sgf-slate-200: #E2E8F0;
+  --sgf-slate-300: #CBD5E1;
+  --sgf-slate-400: #94A3B8;
+  --sgf-slate-500: #64748B;
+  --sgf-slate-600: #475569;
+  --sgf-slate-700: #334155;
+  --sgf-slate-900: #0F172A;
+
+  /* SGF Stone */
+  --sgf-stone-50:  #FAFAF9;
+
+  /* Shadows */
+  --shadow-soft:   0 8px 30px rgba(0,0,0,0.06);
+  --shadow-card:   0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-lifted: 0 8px 40px rgba(0,0,0,0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans:   var(--font-source-sans);
-  --font-serif:  var(--font-playfair);
+  --font-sans:  var(--font-source-sans);
+  --font-serif: var(--font-playfair);
+
+  /* Expose SGF tokens to Tailwind classes */
+  --color-sgf-green-50:  var(--sgf-green-50);
+  --color-sgf-green-100: var(--sgf-green-100);
+  --color-sgf-green-500: var(--sgf-green-500);
+  --color-sgf-green-600: var(--sgf-green-600);
+  --color-sgf-green-700: var(--sgf-green-700);
+  --color-sgf-green-800: var(--sgf-green-800);
+  --color-sgf-green-900: var(--sgf-green-900);
+
+  --color-sgf-gold-200: var(--sgf-gold-200);
+  --color-sgf-gold-300: var(--sgf-gold-300);
+  --color-sgf-gold-500: var(--sgf-gold-500);
+  --color-sgf-gold-600: var(--sgf-gold-600);
+  --color-sgf-gold-700: var(--sgf-gold-700);
+
+  --color-sgf-slate-50:  var(--sgf-slate-50);
+  --color-sgf-slate-100: var(--sgf-slate-100);
+  --color-sgf-slate-200: var(--sgf-slate-200);
+  --color-sgf-slate-300: var(--sgf-slate-300);
+  --color-sgf-slate-400: var(--sgf-slate-400);
+  --color-sgf-slate-500: var(--sgf-slate-500);
+  --color-sgf-slate-600: var(--sgf-slate-600);
+  --color-sgf-slate-700: var(--sgf-slate-700);
+  --color-sgf-slate-900: var(--sgf-slate-900);
+
+  --color-sgf-stone-50: var(--sgf-stone-50);
 }
 
 html {
@@ -48,6 +104,11 @@ h3 {
 
 p {
   max-width: 62ch;
+}
+
+::selection {
+  background-color: var(--sgf-gold-200);
+  color: var(--sgf-slate-900);
 }
 
 @keyframes review-marquee {
