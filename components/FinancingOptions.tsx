@@ -21,7 +21,7 @@ export default function FinancingOptions() {
           <p style={{
             fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase",
             color: "#CE9562", fontWeight: "600", marginBottom: "1rem",
-            fontFamily: "var(--font-source-sans)", display: "block", textAlign: "center"
+            fontFamily: "var(--font-source-sans)", display: "block", textAlign: "center", width: "100%"
           }}>01 — Capital Solutions</p>
           <h2 style={{
             fontFamily: "var(--font-playfair)", fontSize: "clamp(1.9rem, 3vw, 2.5rem)",

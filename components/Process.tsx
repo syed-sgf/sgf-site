@@ -21,7 +21,7 @@ export default function Process() {
           <p style={{
             fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase",
             color: "#CE9562", fontWeight: "600", marginBottom: "1rem",
-            fontFamily: "var(--font-source-sans)", display: "block"
+            fontFamily: "var(--font-source-sans)", display: "block", textAlign: "center", width: "100%"
           }}>03 — Client Outcomes</p>
           <h2 style={{
             fontFamily: "var(--font-playfair)", fontSize: "clamp(1.9rem, 3vw, 2.5rem)",
@@ -89,7 +89,7 @@ export default function Process() {
           <p style={{
             fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase",
             color: "#CE9562", fontWeight: "600", marginBottom: "1rem",
-            fontFamily: "var(--font-source-sans)", display: "block"
+            fontFamily: "var(--font-source-sans)", display: "block", textAlign: "center", width: "100%"
           }}>How We Work</p>
           <h2 style={{
             fontFamily: "var(--font-playfair)", fontSize: "clamp(1.7rem, 2.5vw, 2.2rem)",
