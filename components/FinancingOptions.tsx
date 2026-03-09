@@ -26,10 +26,10 @@ export default function FinancingOptions() {
           <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
             Capital Solutions
           </p>
-          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Discover Optimal Financing for Your Business
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
             From SBA loans to commercial real estate — capital structured for
             your stage and sector.
           </p>

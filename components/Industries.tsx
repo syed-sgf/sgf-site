@@ -26,10 +26,10 @@ export default function Industries() {
           <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
             Industry Focus
           </p>
-          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Funding Designed to Match Your Industry
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
             Every sector has unique capital needs. We speak your language.
           </p>
         </div>

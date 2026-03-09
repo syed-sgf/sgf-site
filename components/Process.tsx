@@ -28,10 +28,10 @@ export default function Process() {
           <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
             Our Process
           </p>
-          <h2 className="font-serif text-4xl font-semibold text-slate-900">
+          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             A Structured Path to Capital
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto">
+          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
             We remove the guesswork from the financing process.
           </p>
         </div>

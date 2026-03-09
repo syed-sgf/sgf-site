@@ -9,19 +9,19 @@ const slides = [
     heading: "Business Financing,",
     sub: "Structured the Way Lenders Expect",
     body: "We help business owners navigate SBA loans, commercial real estate, and growth capital with discipline, clarity, and lender-aligned structure.",
-    image: "/images/hero-1.jpg",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
   },
   {
     heading: "SBA Loans Done Right,",
     sub: "Aligned with Lender Standards",
     body: "From SBA 7(a) to 504 programs, we structure your application the way underwriters expect — maximizing approval outcomes.",
-    image: "/images/hero-2.jpg",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
   },
   {
     heading: "Commercial Real Estate,",
     sub: "Financed with Precision",
     body: "Acquisition, refinance, construction, and DSCR-based financing for income-producing properties nationwide.",
-    image: "/images/hero-3.jpg",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
   },
 ];
 

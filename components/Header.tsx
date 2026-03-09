@@ -127,10 +127,10 @@ export default function Header() {
           <Image
             src="/images/sgf-icon.png"
             alt="Starting Gate Financial"
-            width={44}
-            height={44}
+            width={48}
+            height={48}
             priority
-            className="h-11 w-11 object-contain"
+            className="h-12 w-12 object-contain"
           />
         </Link>
 
