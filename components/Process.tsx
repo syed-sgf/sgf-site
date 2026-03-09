@@ -43,15 +43,17 @@ const reviews = [
 
 export default function Process() {
   return (
-    <section className="py-16 bg-slate-50 border-t border-slate-100">
+    <section className="py-20 bg-slate-50 border-b border-slate-100">
       <div className="max-w-5xl mx-auto px-6">
 
-        {/* Centered heading */}
         <div className="text-center mb-12">
           <p className="text-xs tracking-widest uppercase font-semibold mb-3" style={{ color: "#CE9562" }}>
             Our Process
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
+          <h2
+            className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
             A Structured Path to Capital
           </h2>
           <p className="text-base text-slate-500 max-w-xl mx-auto">
@@ -59,41 +61,46 @@ export default function Process() {
           </p>
         </div>
 
-        {/* Google review cards — 2-col grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        {/* Google review cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-200">
           {reviews.map(({ text, name, detail }) => (
-            <div key={name} className="bg-white border border-slate-200 p-6">
-              <div className="flex gap-1 mb-3">
+            <div key={name} className="bg-white p-6">
+              <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-[#CE9562] text-sm">★</span>
+                  <span key={i} style={{ color: "#CE9562", fontSize: "13px" }}>★</span>
                 ))}
               </div>
-              <p className="text-sm text-slate-700 italic">"{text}"</p>
-              <div className="mt-4">
-                <p className="font-semibold text-slate-900 text-sm">{name}</p>
-                <span className="text-xs text-slate-400 mt-1">{detail}</span>
+              <p className="text-sm text-slate-700 italic leading-relaxed">"{text}"</p>
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <p className="text-sm font-semibold text-slate-900">{name}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{detail}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 3-column steps */}
-        <div className="grid md:grid-cols-3 gap-10 text-center mt-16">
+        {/* 3-step process */}
+        <div className="grid md:grid-cols-3 gap-px bg-slate-200 mt-px">
           {steps.map(({ num, label, desc }) => (
-            <div key={num}>
-              <p className="font-serif text-5xl font-semibold text-[#118241] leading-none">
+            <div key={num} className="bg-white px-8 py-10 text-center">
+              <p
+                className="font-serif leading-none"
+                style={{ fontFamily: "var(--font-playfair)", fontSize: "3rem", fontWeight: 700, color: "#118241" }}
+              >
                 {num}
               </p>
-              <p className="mt-5 font-semibold text-slate-900">{label}</p>
-              <p className="mt-2 text-sm text-slate-600 max-w-[24ch] mx-auto">{desc}</p>
+              <p className="mt-4 font-semibold text-slate-900 text-sm">{label}</p>
+              <p className="mt-2 text-sm text-slate-500 leading-relaxed" style={{ maxWidth: "22ch", margin: "8px auto 0" }}>
+                {desc}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-12 text-center">
           <Link
             href="/apply"
-            className="inline-block bg-[#118241] hover:bg-[#082B09] text-white px-10 py-3 font-semibold transition-colors duration-200"
+            className="inline-block bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold px-10 py-3 transition-colors duration-200"
           >
             Start Pre-Qualification
           </Link>

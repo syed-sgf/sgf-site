@@ -25,15 +25,17 @@ const tools = [
 
 export default function Tools() {
   return (
-    <section className="py-16 bg-white border-t border-slate-100">
+    <section className="py-20 bg-white border-b border-slate-100">
       <div className="max-w-5xl mx-auto px-6">
 
-        {/* Centered heading */}
         <div className="text-center mb-12">
           <p className="text-xs tracking-widest uppercase font-semibold mb-3" style={{ color: "#CE9562" }}>
             Planning Tools
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
+          <h2
+            className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
             Model Your Financing Before You Apply
           </h2>
           <p className="text-base text-slate-500 max-w-xl mx-auto">
@@ -41,19 +43,20 @@ export default function Tools() {
           </p>
         </div>
 
-        {/* 4-card grid — bank-style ruled grid */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-px bg-slate-200">
           {tools.map(({ label, desc, href }) => (
             <Link
               key={href}
               href={href}
-              className="group border border-slate-200 p-6 hover:shadow-[inset_3px_0_0_#2E7D32] hover:bg-slate-50 transition-all duration-150"
+              className="group flex flex-col justify-between p-6 bg-white hover:bg-slate-50 transition-colors duration-150 min-h-[120px]"
             >
-              <p className="text-sm font-semibold text-slate-900 group-hover:text-[var(--sgf-green-500)] transition-colors">
-                {label}
-              </p>
-              <p className="mt-1 text-xs text-slate-500">{desc}</p>
-              <p className="mt-5 text-xs font-semibold text-[var(--sgf-green-500)]">
+              <div>
+                <p className="text-sm font-semibold text-slate-900 group-hover:text-[#118241] transition-colors leading-snug">
+                  {label}
+                </p>
+                <p className="mt-1.5 text-xs text-slate-500">{desc}</p>
+              </div>
+              <p className="mt-5 text-xs font-semibold text-[#118241]">
                 Open →
               </p>
             </Link>
