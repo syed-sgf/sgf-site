@@ -1,3 +1,4 @@
+"use client";
 const programs = [
   { title: 'SBA Financing', desc: 'Long-term capital for owner-operated growth', href: '/financing-options/sba-financing' },
   { title: 'Commercial Real Estate', desc: 'Acquisition, refinance, and construction execution', href: '/financing-options/commercial-real-estate' },

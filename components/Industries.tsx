@@ -1,3 +1,4 @@
+"use client";
 const industries = [
   { name: 'Construction & Contractors', desc: 'Project-driven capital for builders, GCs, and specialty trades', href: '/industries/construction' },
   { name: 'Healthcare & Medical', desc: 'Practice acquisition, expansion, and equipment upgrades', href: '/industries/healthcare' },

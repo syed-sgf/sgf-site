@@ -1,3 +1,4 @@
+"use client";
 const tools = [
   { title: 'SBA Loan Calculator', desc: 'Payment scenarios for SBA and term loans', href: '/tools/sba-loan-calculator' },
   { title: 'DSCR Calculator', desc: 'Evaluate debt service coverage ratio for rental properties', href: '/tools/dscr-calculator' },
