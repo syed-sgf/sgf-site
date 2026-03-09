@@ -47,14 +47,14 @@ export default function Process() {
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
-          <p className="text-xs tracking-widest uppercase text-[#CE9562] font-semibold">
+        <div className="text-center mb-12">
+          <p className="text-xs tracking-widest uppercase font-semibold mb-3" style={{ color: "#CE9562" }}>
             Our Process
           </p>
-          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center mt-3">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
             A Structured Path to Capital
           </h2>
-          <p className="text-center text-base text-slate-500 max-w-xl mx-auto">
+          <p className="text-base text-slate-500 max-w-xl mx-auto">
             We remove the guesswork from the financing process.
           </p>
         </div>
