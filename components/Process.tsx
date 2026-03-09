@@ -18,6 +18,29 @@ const steps = [
   },
 ];
 
+const reviews = [
+  {
+    text: "Syed helped us secure an SBA loan when two other brokers couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.",
+    name: "Marcus T.",
+    detail: "Restaurant Owner · Google Review",
+  },
+  {
+    text: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.",
+    name: "Linda K.",
+    detail: "Healthcare Practice Owner · Google Review",
+  },
+  {
+    text: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.",
+    name: "Carlos R.",
+    detail: "Trucking Company Owner · Google Review",
+  },
+  {
+    text: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.",
+    name: "David M.",
+    detail: "Real Estate Investor · Google Review",
+  },
+];
+
 export default function Process() {
   return (
     <section className="py-16 bg-slate-50 border-t border-slate-100">
@@ -25,48 +48,37 @@ export default function Process() {
 
         {/* Centered heading */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-[#CE9562] font-semibold mb-3 text-center">
+          <p className="text-xs tracking-widest uppercase text-[#CE9562] font-semibold">
             Our Process
           </p>
-          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
+          <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center mt-3">
             A Structured Path to Capital
           </h2>
-          <p className="mt-4 text-slate-600 mx-auto text-center">
+          <p className="text-center text-base text-slate-500 max-w-xl mx-auto">
             We remove the guesswork from the financing process.
           </p>
         </div>
 
-        {/* Testimonials */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              quote: "SGF structured our SBA loan exactly the way our lender needed it. Closed in 45 days.",
-              name: "Michael R.",
-              role: "Restaurant Owner, Dallas TX",
-            },
-            {
-              quote: "They understood our cash flow from day one. No back and forth, no surprises at closing.",
-              name: "Priya S.",
-              role: "Healthcare Practice, Plano TX",
-            },
-            {
-              quote: "Three DSCR loans in 18 months. SGF knows how to get deals across the line.",
-              name: "James T.",
-              role: "Real Estate Investor, Fort Worth TX",
-            },
-          ].map(({ quote, name, role }) => (
+        {/* Google review cards — 2-col grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+          {reviews.map(({ text, name, detail }) => (
             <div key={name} className="bg-white border border-slate-200 p-6">
-              <p className="text-sm text-slate-700 italic">"{quote}"</p>
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-[#CE9562] text-sm">★</span>
+                ))}
+              </div>
+              <p className="text-sm text-slate-700 italic">"{text}"</p>
               <div className="mt-4">
                 <p className="font-semibold text-slate-900 text-sm">{name}</p>
-                <p className="text-xs text-slate-500">{role}</p>
+                <span className="text-xs text-slate-400 mt-1">{detail}</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* 3-column steps */}
-        <div className="grid md:grid-cols-3 gap-10 text-center">
+        <div className="grid md:grid-cols-3 gap-10 text-center mt-16">
           {steps.map(({ num, label, desc }) => (
             <div key={num}>
               <p className="font-serif text-5xl font-semibold text-[#118241] leading-none">

@@ -29,7 +29,7 @@ export default function FinancingOptions() {
           <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Discover Optimal Financing for Your Business
           </h2>
-          <p className="mt-4 text-slate-600 mx-auto text-center">
+          <p className="text-center text-base text-slate-500 max-w-xl mx-auto">
             From SBA loans to commercial real estate — capital structured for
             your stage and sector.
           </p>

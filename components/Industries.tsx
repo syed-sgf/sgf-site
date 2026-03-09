@@ -29,7 +29,7 @@ export default function Industries() {
           <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Funding Designed to Match Your Industry
           </h2>
-          <p className="mt-4 text-slate-600 mx-auto text-center">
+          <p className="text-center text-base text-slate-500 max-w-xl mx-auto">
             Every sector has unique capital needs. We speak your language.
           </p>
         </div>

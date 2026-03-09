@@ -60,7 +60,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-white/60 leading-relaxed">
-              Commercial loan brokerage serving the DFW Metroplex. SBA loans, CRE financing, equipment, and more.
+              Commercial financing solutions for businesses across the DFW Metroplex. SBA loans, commercial real estate, equipment financing, and more.
             </p>
 
             <div className="flex flex-col gap-2 mt-1">
