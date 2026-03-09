@@ -126,7 +126,7 @@ export default function Header() {
           <img
             src="/FB_Logo.png"
             alt="Starting Gate Financial"
-            style={{ height: "56px", width: "auto" }}
+            style={{ height: "64px", width: "auto" }}
           />
         </Link>
 

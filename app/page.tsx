@@ -59,10 +59,10 @@ const tools = [
 
 function SectionHeader({ eyebrow, h2, sub, light = false }: { eyebrow: string; h2: string; sub: string; light?: boolean }) {
   return (
-    <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-      <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans, display: "block" }}>{eyebrow}</p>
-      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.9rem, 3vw, 2.5rem)", fontWeight: "700", color: light ? "white" : G.textDark, lineHeight: "1.2", marginBottom: "1rem" }} dangerouslySetInnerHTML={{ __html: h2 }} />
-      <p style={{ fontSize: "1rem", color: light ? "rgba(255,255,255,0.55)" : "#64748B", maxWidth: "480px", margin: "0 auto", lineHeight: "1.75", fontFamily: G.sans }}>{sub}</p>
+    <div style={{ textAlign: "center", marginBottom: "3.5rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>{eyebrow}</p>
+      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.9rem, 3vw, 2.5rem)", fontWeight: "700", color: light ? "white" : G.textDark, lineHeight: "1.2", marginBottom: "1rem", textAlign: "center" }} dangerouslySetInnerHTML={{ __html: h2 }} />
+      <p style={{ fontSize: "1rem", color: light ? "rgba(255,255,255,0.55)" : "#64748B", maxWidth: "480px", lineHeight: "1.75", fontFamily: G.sans, textAlign: "center" }}>{sub}</p>
     </div>
   );
 }
@@ -308,13 +308,15 @@ export default function HomePage() {
       </section>
 
       {/* — CTA BAND — */}
-      <section style={{ background: G.dark, padding: "5rem 2rem", textAlign: "center", borderTop: `3px solid ${G.gold}` }}>
-        <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans, display: "block" }}>Ready to Move Forward?</p>
-        <h2 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", color: "white", marginBottom: "1rem", lineHeight: "1.2" }}>Structure Your Next Move<br />with Confidence</h2>
-        <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", maxWidth: "440px", margin: "0 auto 2.5rem", lineHeight: "1.75", fontFamily: G.sans }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="/apply" style={{ display: "inline-block", background: "white", color: G.dark, padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "700", letterSpacing: "0.04em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Get Pre-Qualified</a>
-          <a href="/contact" style={{ display: "inline-block", border: "1px solid rgba(255,255,255,0.3)", color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600", textDecoration: "none", borderRadius: "2px" }}>Contact Us</a>
+      <section style={{ background: G.dark, padding: "5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
+        <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans }}>Ready to Move Forward?</p>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", color: "white", marginBottom: "1rem", lineHeight: "1.2" }}>Structure Your Next Move<br />with Confidence</h2>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", marginBottom: "2.5rem", lineHeight: "1.75", fontFamily: G.sans }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="/apply" style={{ display: "inline-block", background: "white", color: G.dark, padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "700", letterSpacing: "0.04em", textTransform: "uppercase" as const, textDecoration: "none", borderRadius: "2px" }}>Get Pre-Qualified</a>
+            <a href="/contact" style={{ display: "inline-block", border: "1px solid rgba(255,255,255,0.3)", color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600", textDecoration: "none", borderRadius: "2px" }}>Contact Us</a>
+          </div>
         </div>
       </section>
 
