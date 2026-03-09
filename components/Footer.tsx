@@ -52,18 +52,14 @@ export default function Footer() {
 
           {/* Column 1 — Brand + Contact */}
           <div className="lg:col-span-1 flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center">
               <Image
-                src="/images/sgf-icon.png"
+                src="/FB_Logo.png"
                 alt="Starting Gate Financial"
-                width={40}
+                width={120}
                 height={40}
-                className="h-10 w-10 object-contain"
+                className="h-10 w-auto object-contain brightness-0 invert"
               />
-              <span className="font-serif text-base font-semibold leading-tight text-white">
-                Starting Gate<br />
-                <span className="text-[#CE9562] tracking-widest text-xs font-normal uppercase">Financial</span>
-              </span>
             </Link>
 
             <p className="text-sm text-white/60 leading-relaxed">
@@ -182,9 +178,20 @@ export default function Footer() {
           program and borrower profile. Nothing on this website constitutes a commitment to lend or a guarantee of 
           financing. Consult a qualified financial advisor before making financing decisions.
         </p>
-        <p className="text-xs text-white/25 text-center mt-3">
-          © {new Date().getFullYear()} Starting Gate Financial. All rights reserved. &nbsp;·&nbsp; Richardson, TX
-        </p>
+        <div className="flex flex-col items-center gap-2 mt-3">
+          <p className="text-xs text-white/25 text-center">
+            © {new Date().getFullYear()} Starting Gate Financial. All rights reserved. &nbsp;·&nbsp; Richardson, TX
+          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+              Terms of Use
+            </Link>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
       </div>
 
     </footer>

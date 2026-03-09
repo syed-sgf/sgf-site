@@ -125,12 +125,12 @@ export default function Header() {
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/sgf-icon.png"
+            src="/FB_Logo.png"
             alt="Starting Gate Financial"
-            width={48}
-            height={48}
+            width={120}
+            height={40}
             priority
-            className="h-12 w-12 object-contain"
+            className="h-10 w-auto object-contain"
           />
         </Link>
 
