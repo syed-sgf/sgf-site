@@ -84,7 +84,7 @@ export default function HomePage() {
       {/* — HERO — */}
       <section style={{ background: G.cream, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center", minHeight: "calc(100vh - 68px)", paddingTop: "5rem", paddingBottom: "5rem" }}>
+          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center", minHeight: "calc(100vh - 68px)", paddingTop: "5rem", paddingBottom: "5rem" }}>
 
             {/* Left */}
             <div>
@@ -103,7 +103,7 @@ export default function HomePage() {
               </p>
 
               {/* Trust strip */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem 1.5rem", marginBottom: "2rem" }}>
+              <div className="trust-strip" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem 1.5rem", marginBottom: "2rem" }}>
                 {["No Upfront Fees", "Lender-Aligned Structuring", "We Close Deals Others Can't", "Nationwide · Based in Richardson, TX"].map(item => (
                   <span key={item} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.78rem", fontWeight: "600", color: G.dark, fontFamily: G.sans }}>
                     <span style={{ color: G.primary }}>✓</span>{item}
@@ -112,7 +112,7 @@ export default function HomePage() {
               </div>
 
               {/* CTAs */}
-              <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
+              <div className="hero-ctas" style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
                 <a href="/apply" style={{ display: "inline-block", background: G.primary, color: "white", padding: "0.85rem 2rem", fontSize: "0.85rem", fontWeight: "600", letterSpacing: "0.05em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px", fontFamily: G.sans }}>
                   Start Pre-Qualification →
                 </a>
@@ -136,7 +136,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: Slideshow */}
-            <div style={{ position: "relative" }}>
+            <div className="hero-visual" style={{ position: "relative" }}>
               <div style={{ position: "absolute", top: "-20px", right: "-20px", bottom: "20px", left: "20px", border: `1px solid ${G.gold}`, borderRadius: "2px", zIndex: 0 }} />
               <div style={{ position: "relative", zIndex: 1, borderRadius: "2px", overflow: "hidden", height: "520px" }}>
                 {slides.map((src, i) => (
@@ -166,7 +166,7 @@ export default function HomePage() {
             h2="Financing Paths Built for How<br />Businesses Actually Operate"
             sub="From SBA loans to commercial real estate — capital structured for your stage and sector."
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", border: `1px solid ${G.border}` }}>
+          <div className="programs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", border: `1px solid ${G.border}` }}>
             {programs.map((p, i) => (
               <a key={p.href} href={p.href}
                 onMouseEnter={() => setHoveredProgram(i)}
@@ -195,7 +195,7 @@ export default function HomePage() {
             sub="And what lenders need to see. Industry fluency is not optional in commercial financing."
             light
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="industries-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "1px solid rgba(255,255,255,0.08)" }}>
             {industries.map((ind, i) => (
               <a key={ind.href} href={ind.href}
                 onMouseEnter={() => setHoveredIndustry(i)}
@@ -223,7 +223,7 @@ export default function HomePage() {
           />
 
           {/* Google trust row */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", marginBottom: "2.5rem", padding: "1.25rem 2rem", background: "white", border: `1px solid ${G.border}`, borderRadius: "2px", flexWrap: "wrap" }}>
+          <div className="trust-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", marginBottom: "2.5rem", padding: "1.25rem 2rem", background: "white", border: `1px solid ${G.border}`, borderRadius: "2px", flexWrap: "wrap" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
               <span style={{ color: G.gold, fontSize: "1.1rem" }}>★★★★★</span>
               <span style={{ fontWeight: "700", fontSize: "0.95rem", color: G.textDark }}>5.0</span>
@@ -236,7 +236,7 @@ export default function HomePage() {
           </div>
 
           {/* Review cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "5rem" }}>
+          <div className="reviews-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "5rem" }}>
             {reviews.map((r, i) => (
               <div key={i} style={{ background: "white", border: `1px solid ${G.border}`, padding: "1.75rem 2rem", borderRadius: "2px" }}>
                 <div style={{ display: "flex", gap: "3px", marginBottom: "1rem" }}>
@@ -261,7 +261,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: `1px solid ${G.border}`, marginBottom: "3rem" }}>
+          <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: `1px solid ${G.border}`, marginBottom: "3rem" }}>
             {[
               { num: "01", title: "Assess", desc: "We review your business profile, goals, and financials to identify the right capital path — before any lender sees your file." },
               { num: "02", title: "Structure", desc: "We build your deal the way lenders expect it — clean package, correct program, right timing. No credit pull. No obligation." },
@@ -289,7 +289,7 @@ export default function HomePage() {
             h2="Numbers Before Narratives"
             sub="Deterministic calculators built for clarity — not assumptions. Model your financing before you apply."
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "2.5rem" }}>
+          <div className="tools-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "2.5rem" }}>
             {tools.map((t, i) => (
               <a key={t.href} href={t.href}
                 onMouseEnter={() => setHoveredTool(i)}
@@ -315,7 +315,7 @@ export default function HomePage() {
           <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans, display: "block", textAlign: "center", width: "100%" }}>Ready to Move Forward?</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", color: "white", marginBottom: "1rem", lineHeight: "1.2" }}>Structure Your Next Move<br />with Confidence</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", marginBottom: "2.5rem", lineHeight: "1.75", fontFamily: G.sans }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="cta-btns" style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <a href="/apply" style={{ display: "inline-block", background: "white", color: G.dark, padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "700", letterSpacing: "0.04em", textTransform: "uppercase" as const, textDecoration: "none", borderRadius: "2px" }}>Get Pre-Qualified</a>
             <a href="/contact" style={{ display: "inline-block", border: "1px solid rgba(255,255,255,0.3)", color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600", textDecoration: "none", borderRadius: "2px" }}>Contact Us</a>
           </div>

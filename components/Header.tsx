@@ -131,7 +131,7 @@ export default function Header() {
         </Link>
 
         {/* ── Desktop nav ── */}
-        <nav className="hidden lg:flex items-stretch flex-1 justify-center" aria-label="Primary">
+        <nav className="nav-links hidden lg:flex items-stretch flex-1 justify-center" aria-label="Primary">
 
           {/* Financing */}
           <div
@@ -256,7 +256,7 @@ export default function Header() {
         </nav>
 
         {/* ── Right side ── */}
-        <div className="hidden lg:flex items-center gap-5 shrink-0">
+        <div className="nav-ctas hidden lg:flex items-center gap-5 shrink-0">
           <Link
             href="/partners"
             className="bg-[#118241] hover:bg-[#082B09] text-white px-5 py-2 text-[13px] font-semibold transition-colors duration-200"

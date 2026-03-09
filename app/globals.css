@@ -132,3 +132,137 @@ p {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* ── SGF RESPONSIVE ── */
+
+/* Tablet: 769px–1024px */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+    min-height: auto !important;
+    padding-top: 3rem !important;
+    padding-bottom: 4rem !important;
+  }
+  .hero-visual {
+    display: none !important;
+  }
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Mobile: 0–768px */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    min-height: auto !important;
+    padding-top: 2.5rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .hero-visual {
+    display: none !important;
+  }
+  .hero-ctas {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .trust-strip {
+    gap: 0.5rem !important;
+  }
+
+  /* Financing */
+  .programs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .programs-grid a {
+    border-right: none !important;
+  }
+
+  /* Industries */
+  .industries-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .industries-grid a {
+    border-right: none !important;
+    grid-column: auto !important;
+  }
+
+  /* Reviews */
+  .reviews-grid {
+    grid-template-columns: 1fr !important;
+    margin-bottom: 3rem !important;
+  }
+
+  /* Trust row */
+  .trust-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+  }
+  .trust-row > div[style*="width: 1px"] {
+    display: none !important;
+  }
+
+  /* Process steps */
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .steps-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid #E2DDD6 !important;
+  }
+  .steps-grid > div:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Tools */
+  .tools-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA band */
+  .cta-btns {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .cta-btns a {
+    width: 100% !important;
+    max-width: 280px !important;
+    text-align: center !important;
+  }
+
+  /* Footer */
+  .footer-inner {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* General section padding reduction */
+  section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  /* Container padding */
+  .container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* Mobile header */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+  .nav-ctas .btn-outline {
+    display: none !important;
+  }
+}
