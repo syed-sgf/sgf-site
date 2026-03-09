@@ -1,69 +1,37 @@
-import Link from "next/link";
-
 const tools = [
-  {
-    label: "Business Loan Calculator",
-    desc:  "Monthly payment & amortization",
-    href:  "/tools/business-loan-calculator",
-  },
-  {
-    label: "DSCR Calculator",
-    desc:  "Debt service coverage ratio",
-    href:  "/tools/dscr-calculator",
-  },
-  {
-    label: "MCA Planning Tool",
-    desc:  "True cost of capital",
-    href:  "/tools/mca-calculator",
-  },
-  {
-    label: "FICA Tip Credit",
-    desc:  "IRC § 45B employer credit",
-    href:  "/tools/fica-tip-calculator",
-  },
-];
-
+  { title: 'SBA Loan Calculator', desc: 'Payment scenarios for SBA and term loans', href: '/tools/sba-loan-calculator' },
+  { title: 'DSCR Calculator', desc: 'Evaluate debt service coverage ratio for rental properties', href: '/tools/dscr-calculator' },
+  { title: 'MCA Calculator', desc: 'Estimate true cost of a merchant cash advance', href: '/tools/mca-calculator' },
+  { title: 'Working Capital Calculator', desc: 'Estimate short-term capital coverage needs', href: '/tools/working-capital-calculator' },
+]
 export default function Tools() {
   return (
-    <section className="py-20 bg-white border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6">
-
-        <div className="text-center mb-12">
-          <p className="text-xs tracking-widest uppercase font-semibold mb-3" style={{ color: "#CE9562" }}>
-            Planning Tools
-          </p>
-          <h2
-            className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4"
-            style={{ fontFamily: "var(--font-playfair)" }}
-          >
-            Model Your Financing Before You Apply
-          </h2>
-          <p className="text-base text-slate-500 max-w-xl mx-auto">
-            Deterministic calculators built for clarity — not assumptions.
+    <section style={{ background: 'white', padding: '6rem 0', borderTop: '1px solid #E5E0D8' }}>
+      <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '600', marginBottom: '1rem', fontFamily: 'var(--font-source-sans)' }}>Planning Tools</p>
+          <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: '700', color: '#0F172A', marginBottom: '1rem', lineHeight: '1.2' }}>Numbers Before Narratives</h2>
+          <p style={{ fontSize: '1rem', color: '#64748B', maxWidth: '420px', margin: '0 auto', lineHeight: '1.7', fontFamily: 'var(--font-source-sans)' }}>
+            Deterministic calculators built for clarity — not assumptions. Model your financing before you apply.
           </p>
         </div>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-px bg-slate-200">
-          {tools.map(({ label, desc, href }) => (
-            <Link
-              key={href}
-              href={href}
-              className="group flex flex-col justify-between p-6 bg-white hover:bg-slate-50 transition-colors duration-150 min-h-[120px]"
-            >
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem', marginBottom: '2.5rem' }}>
+          {tools.map((t) => (
+            <a key={t.href} href={t.href} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.75rem 2rem', border: '1px solid #E5E0D8', background: 'white', textDecoration: 'none', transition: 'border-color 0.2s, background 0.15s', borderRadius: '2px' }}>
               <div>
-                <p className="text-sm font-semibold text-slate-900 group-hover:text-[#118241] transition-colors leading-snug">
-                  {label}
-                </p>
-                <p className="mt-1.5 text-xs text-slate-500">{desc}</p>
+                <p style={{ fontFamily: 'var(--font-playfair)', fontSize: '1rem', fontWeight: '600', color: '#0F172A', marginBottom: '0.3rem' }}>{t.title}</p>
+                <p style={{ fontSize: '0.82rem', color: '#64748B', fontFamily: 'var(--font-source-sans)' }}>{t.desc}</p>
               </div>
-              <p className="mt-5 text-xs font-semibold text-[#118241]">
-                Open →
-              </p>
-            </Link>
+              <span style={{ color: '#118241', fontSize: '1.2rem', marginLeft: '1rem' }}>→</span>
+            </a>
           ))}
         </div>
-
+        <div style={{ textAlign: 'center' }}>
+          <a href="/tools" style={{ fontSize: '0.9rem', fontWeight: '600', color: '#082B09', textDecoration: 'none', borderBottom: '1px solid #CE9562', paddingBottom: '2px', fontFamily: 'var(--font-source-sans)' }}>
+            Open all calculators →
+          </a>
+        </div>
       </div>
     </section>
-  );
+  )
 }

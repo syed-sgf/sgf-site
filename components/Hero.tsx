@@ -1,115 +1,60 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-
-const slides = [
-  {
-    heading: "Business Financing,",
-    sub: "Structured the Way Lenders Expect",
-    body: "We help business owners navigate SBA loans, commercial real estate, and growth capital with discipline, clarity, and lender-aligned structure.",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
-  },
-  {
-    heading: "SBA Loans Done Right,",
-    sub: "Aligned with Lender Standards",
-    body: "From SBA 7(a) to 504 programs, we structure your application the way underwriters expect — maximizing approval outcomes.",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
-  },
-  {
-    heading: "Commercial Real Estate,",
-    sub: "Financed with Precision",
-    body: "Acquisition, refinance, construction, and DSCR-based financing for income-producing properties nationwide.",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80",
-  },
-];
-
 export default function Hero() {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const slide = slides[current];
-
   return (
-    <section className="border-b border-slate-200 overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-12 gap-12 md:gap-16 items-center">
-
-        {/* Copy */}
-        <div className="md:col-span-7">
-
-          {/* Gold rule */}
-          <div style={{ width: "36px", height: "2px", backgroundColor: "#CE9562", marginBottom: "1.5rem" }} />
-
-          <h1
-            className="font-serif leading-[1.05] tracking-tight text-slate-900"
-            style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2.5rem, 4.5vw, 3.75rem)", fontWeight: 700 }}
-          >
-            {slide.heading}
-            <br />
-            <span className="font-normal text-slate-500">{slide.sub}</span>
-          </h1>
-
-          <p className="mt-6 text-lg text-slate-600 leading-relaxed" style={{ maxWidth: "520px" }}>
-            {slide.body}
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4 items-center">
-            <Link
-              href="/apply"
-              className="bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold px-7 py-3 transition-colors duration-200"
-            >
-              Start Pre-Qualification
-            </Link>
-            <Link
-              href="/financing"
-              className="text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-900 transition-colors"
-            >
-              Explore Financing Options
-            </Link>
+    <section style={{ background: '#F8F6F1', borderBottom: '1px solid #E5E0D8' }}>
+      <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr',
+          gap: '4rem', alignItems: 'center',
+          minHeight: '88vh', paddingTop: '6rem', paddingBottom: '6rem'
+        }}>
+          <div>
+            <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '600', marginBottom: '1.5rem', fontFamily: 'var(--font-source-sans)' }}>
+              Richardson, Texas · DFW Metroplex
+            </p>
+            <h1 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: '700', color: '#0F172A', lineHeight: '1.15', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
+              Business Financing,<br />
+              <span style={{ color: '#082B09' }}>Structured the Way</span><br />
+              Lenders Expect.
+            </h1>
+            <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: '1.7', marginBottom: '2.5rem', maxWidth: '460px', fontFamily: 'var(--font-source-sans)' }}>
+              We help business owners navigate SBA loans, commercial real estate, and growth capital with discipline, clarity, and lender-aligned structure.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <a href="/apply" style={{ display: 'inline-block', background: '#118241', color: 'white', padding: '0.85rem 2rem', fontSize: '0.9rem', fontWeight: '600', letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none', fontFamily: 'var(--font-source-sans)', borderRadius: '2px' }}>
+                Start Pre-Qualification
+              </a>
+              <a href="/financing-options" style={{ display: 'inline-block', color: '#082B09', padding: '0.85rem 0', fontSize: '0.9rem', fontWeight: '600', textDecoration: 'none', fontFamily: 'var(--font-source-sans)', borderBottom: '1px solid #CE9562', letterSpacing: '0.02em' }}>
+                Explore Financing Options →
+              </a>
+            </div>
+            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid #E5E0D8' }}>
+              <p style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: '0.75rem', fontFamily: 'var(--font-source-sans)' }}>
+                Trusted by operators in
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1.5rem', fontSize: '0.85rem', color: '#475569', fontWeight: '500', fontFamily: 'var(--font-source-sans)' }}>
+                {['Construction', 'Healthcare', 'Restaurants', 'Real Estate', 'Transportation'].map((ind, i, arr) => (
+                  <span key={ind} style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                    {ind}{i < arr.length - 1 && <span style={{ color: '#CE9562', fontSize: '8px' }}>◆</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-
-          {/* Slide indicators */}
-          <div className="mt-10 flex gap-2 items-center">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className="transition-all duration-300"
-                style={{
-                  height: "3px",
-                  width: i === current ? "32px" : "12px",
-                  backgroundColor: i === current ? "#118241" : "#CBD5E1",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Image — no rounded corners */}
-        <div className="md:col-span-5">
-          <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
-            <Image
-              src={slide.image}
-              alt={slide.heading}
-              fill
-              className="object-cover"
-              priority
+          <div style={{ position: 'relative' }}>
+            <div style={{ position: 'absolute', top: '-1.5rem', right: '-1.5rem', bottom: '1.5rem', left: '1.5rem', border: '1px solid #CE9562', borderRadius: '2px', zIndex: 0 }} />
+            <img
+              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80"
+              alt="Commercial real estate financing"
+              style={{ width: '100%', height: '520px', objectFit: 'cover', borderRadius: '2px', position: 'relative', zIndex: 1, display: 'block' }}
             />
+            <div style={{ position: 'absolute', bottom: '-1.5rem', left: '2rem', background: '#082B09', color: 'white', padding: '1rem 1.5rem', zIndex: 2, borderRadius: '2px' }}>
+              <p style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#CE9562', marginBottom: '0.25rem', fontFamily: 'var(--font-source-sans)' }}>Programs Available</p>
+              <p style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.4rem', fontWeight: '700', color: 'white' }}>10+ Financing Paths</p>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
-  );
+  )
 }

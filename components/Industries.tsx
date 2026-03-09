@@ -1,61 +1,40 @@
-import Link from "next/link";
-import { industries } from "@/lib/industry-data";
-
+const industries = [
+  { name: 'Construction & Contractors', desc: 'Project-driven capital for builders, GCs, and specialty trades', href: '/industries/construction' },
+  { name: 'Healthcare & Medical', desc: 'Practice acquisition, expansion, and equipment upgrades', href: '/industries/healthcare' },
+  { name: 'Restaurants & Food Service', desc: 'Cash flow-aware financing for operators', href: '/industries/restaurants' },
+  { name: 'Real Estate Investors', desc: 'Portfolio growth, DSCR, and bridge capital', href: '/industries/real-estate-investors' },
+  { name: 'Oil & Gas Services', desc: 'Capital for equipment, expansion, and project execution', href: '/industries/oil-and-gas' },
+  { name: 'Trucking & Transportation', desc: 'Fleet financing and working capital for operators', href: '/industries/trucking-transportation' },
+  { name: 'Professional Services', desc: 'Growth capital for established service businesses', href: '/industries/professional-services' },
+]
 export default function Industries() {
   return (
-    <section className="py-20 bg-slate-50 border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6">
-
-        <div className="text-center mb-12">
-          <p className="text-xs tracking-widest uppercase font-semibold mb-3" style={{ color: "#CE9562" }}>
-            Industry Focus
-          </p>
-          <h2
-            className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4"
-            style={{ fontFamily: "var(--font-playfair)" }}
-          >
-            Funding Designed to Match Your Industry
+    <section style={{ background: '#082B09', padding: '6rem 0' }}>
+      <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '600', marginBottom: '1rem', fontFamily: 'var(--font-source-sans)' }}>02 — Industry Expertise</p>
+          <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: '700', color: 'white', marginBottom: '1rem', lineHeight: '1.2' }}>
+            We Understand How Your<br />Industry Operates
           </h2>
-          <p className="text-base text-slate-500 max-w-xl mx-auto">
-            Every sector has unique capital needs. We speak your language.
+          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.6)', maxWidth: '460px', margin: '0 auto', lineHeight: '1.7', fontFamily: 'var(--font-source-sans)' }}>
+            And what lenders need to see. Industry fluency is not optional in commercial financing.
           </p>
         </div>
-
-        <div className="grid md:grid-cols-2 gap-px bg-slate-200">
-          {industries.map(({ slug, title, subtitle }) => (
-            <Link
-              key={slug}
-              href={`/industries/${slug}`}
-              className="group flex items-center justify-between px-5 py-4 bg-white hover:bg-slate-50 transition-colors duration-150"
-            >
-              <div className="min-w-0 pr-4">
-                <p className="text-sm font-semibold text-slate-900 group-hover:text-[#118241] transition-colors">
-                  {title}
-                </p>
-                <p className="text-xs text-slate-500 mt-0.5 truncate">
-                  {subtitle}
-                </p>
-              </div>
-              <svg
-                className="w-4 h-4 shrink-0 text-slate-300 group-hover:text-[#118241] transition-colors"
-                viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"
-              >
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            </Link>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.1)' }}>
+          {industries.map((ind) => (
+            <a key={ind.href} href={ind.href} style={{ display: 'block', padding: '1.75rem 2rem', background: '#082B09', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.2s, background 0.2s' }}>
+              <div style={{ width: '24px', height: '2px', background: '#CE9562', marginBottom: '1rem' }} />
+              <p style={{ fontFamily: 'var(--font-playfair)', fontSize: '1rem', fontWeight: '600', color: 'white', marginBottom: '0.4rem' }}>{ind.name}</p>
+              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-source-sans)', lineHeight: '1.5' }}>{ind.desc}</p>
+            </a>
           ))}
         </div>
-
-        <div className="mt-10 text-center">
-          <Link
-            href="/industries"
-            className="text-sm font-semibold text-[#118241] underline underline-offset-4 hover:text-[#082B09] transition-colors"
-          >
-            View all industries →
-          </Link>
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <a href="/industries" style={{ fontSize: '0.9rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', borderBottom: '1px solid #CE9562', paddingBottom: '2px', fontFamily: 'var(--font-source-sans)' }}>
+            Explore all industries →
+          </a>
         </div>
-
       </div>
     </section>
-  );
+  )
 }
