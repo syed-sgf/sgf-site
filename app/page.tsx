@@ -90,7 +90,7 @@ export default function HomePage() {
             <div>
               <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "0.75rem", fontFamily: G.sans }}>
                 <span style={{ display: "block", width: "24px", height: "1px", background: G.gold, flexShrink: 0 }} />
-                Commercial Loan Brokerage · Richardson, TX
+                Richardson, TX · Nationwide Commercial Financing
               </p>
 
               <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", fontWeight: "700", color: G.textDark, lineHeight: "1.15", letterSpacing: "-0.02em", marginBottom: "1.25rem" }}>
