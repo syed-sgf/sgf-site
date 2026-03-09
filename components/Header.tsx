@@ -242,6 +242,12 @@ export default function Header() {
             About
           </Link>
           <Link
+            href="/blog"
+            className="flex items-center px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors"
+          >
+            Blog
+          </Link>
+          <Link
             href="/contact"
             className="flex items-center px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors"
           >
@@ -321,6 +327,12 @@ export default function Header() {
               className="block py-4 text-sm font-semibold text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
             >
               About
+            </Link>
+            <Link
+              href="/blog"
+              className="block py-4 text-sm font-semibold text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
+            >
+              Blog
             </Link>
             <Link
               href="/contact"
