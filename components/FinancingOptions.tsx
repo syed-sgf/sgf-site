@@ -15,7 +15,7 @@ export default function FinancingOptions() {
     <section style={{ background: 'white', padding: '6rem 0', borderBottom: '1px solid #E5E0D8' }}>
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '600', marginBottom: '1rem', fontFamily: 'var(--font-source-sans)' }}>01 — Capital Solutions</p>
+          <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '600', marginBottom: '1rem', fontFamily: 'var(--font-source-sans)', textAlign: 'center', width: '100%', display: 'block' }}>01 — Capital Solutions</p>
           <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: '700', color: '#0F172A', marginBottom: '1rem', lineHeight: '1.2' }}>
             Financing Paths Built for How<br />Businesses Actually Operate
           </h2>

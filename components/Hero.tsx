@@ -1,5 +1,21 @@
 "use client";
+import { useState, useEffect } from 'react'
+
+const slides = [
+  '/images/hero-1.jpg',
+  '/images/hero-2.jpg',
+  '/images/hero-3.jpg',
+]
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(prev => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <section style={{ background: '#F8F6F1', borderBottom: '1px solid #E5E0D8' }}>
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem' }}>
@@ -44,9 +60,10 @@ export default function Hero() {
           <div style={{ position: 'relative' }}>
             <div style={{ position: 'absolute', top: '-1.5rem', right: '-1.5rem', bottom: '1.5rem', left: '1.5rem', border: '1px solid #CE9562', borderRadius: '2px', zIndex: 0 }} />
             <img
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80"
-              alt="Commercial real estate financing"
-              style={{ width: '100%', height: '520px', objectFit: 'cover', borderRadius: '2px', position: 'relative', zIndex: 1, display: 'block' }}
+              key={current}
+              src={slides[current]}
+              alt="Starting Gate Financial"
+              style={{ width: '100%', height: '520px', objectFit: 'cover', borderRadius: '2px', position: 'relative', zIndex: 1, display: 'block', animation: 'fadeIn 0.8s ease-in-out' }}
             />
             <div style={{ position: 'absolute', bottom: '-1.5rem', left: '2rem', background: '#082B09', color: 'white', padding: '1rem 1.5rem', zIndex: 2, borderRadius: '2px' }}>
               <p style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#CE9562', marginBottom: '0.25rem', fontFamily: 'var(--font-source-sans)' }}>Programs Available</p>

@@ -52,18 +52,9 @@ export default function Footer() {
           {/* Column 1 — Brand + Contact */}
           <div className="lg:col-span-1 flex flex-col gap-5">
             <Link href="/" className="flex items-center gap-3">
-              <img
-                src="/images/sgf-icon.png"
-                alt="Starting Gate Financial"
-                style={{ height: "48px", width: "48px", filter: "brightness(0) invert(1)" }}
-              />
-              <div className="flex flex-col">
-                <span style={{ fontFamily: "var(--font-playfair)", fontSize: "15px", fontWeight: "600", color: "white", lineHeight: "1.2" }}>
-                  Starting Gate
-                </span>
-                <span style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#CE9562", fontWeight: "500" }}>
-                  Financial
-                </span>
+              <div style={{ marginBottom: '0' }}>
+                <span style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.3rem', fontWeight: '700', color: 'white', display: 'block' }}>Starting Gate</span>
+                <span style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#CE9562', fontWeight: '500', fontFamily: 'var(--font-source-sans)', display: 'block' }}>Financial</span>
               </div>
             </Link>
 
