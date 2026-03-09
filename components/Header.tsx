@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/financing-data";
 import { industries } from "@/lib/industry-data";
@@ -122,12 +123,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
 
         {/* ── Logo ── */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-serif font-semibold text-slate-900 text-[15px] tracking-tight shrink-0"
-        >
-          <img src="/images/sgf-logo.jpg" alt="SGF" className="h-8 w-8 object-contain rounded" />
-          Starting Gate Financial
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/sgf-icon.png"
+            alt="Starting Gate Financial"
+            width={44}
+            height={44}
+            priority
+            className="h-11 w-11 object-contain"
+          />
         </Link>
 
         {/* ── Desktop nav ── */}
