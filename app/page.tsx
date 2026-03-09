@@ -253,10 +253,12 @@ export default function HomePage() {
           </div>
 
           {/* Process steps */}
-          <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "4rem", marginBottom: "3rem", textAlign: "center" }}>
-            <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans, display: "block" }}>How We Work</p>
-            <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.7rem, 2.5vw, 2.2rem)", fontWeight: "700", color: G.textDark, marginBottom: "1rem" }}>Assess. Structure. Close.</h2>
-            <p style={{ fontSize: "1rem", color: "#64748B", maxWidth: "440px", margin: "0 auto", fontFamily: G.sans, lineHeight: "1.75" }}>A financing process built around how lenders actually think — not how brokers hope it works.</p>
+          <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "4rem", marginBottom: "3rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+              <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>How We Work</p>
+              <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.7rem, 2.5vw, 2.2rem)", fontWeight: "700", color: G.textDark, marginBottom: "1rem", textAlign: "center" }}>Assess. Structure. Close.</h2>
+              <p style={{ fontSize: "1rem", color: "#64748B", maxWidth: "440px", fontFamily: G.sans, lineHeight: "1.75", textAlign: "center" }}>A financing process built around how lenders actually think — not how brokers hope it works.</p>
+            </div>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: `1px solid ${G.border}`, marginBottom: "3rem" }}>
@@ -310,7 +312,7 @@ export default function HomePage() {
       {/* — CTA BAND — */}
       <section style={{ background: G.dark, padding: "5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
         <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans }}>Ready to Move Forward?</p>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans, display: "block", textAlign: "center", width: "100%" }}>Ready to Move Forward?</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", color: "white", marginBottom: "1rem", lineHeight: "1.2" }}>Structure Your Next Move<br />with Confidence</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", marginBottom: "2.5rem", lineHeight: "1.75", fontFamily: G.sans }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
