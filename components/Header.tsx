@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/financing-data";
 import { industries } from "@/lib/industry-data";
@@ -124,13 +123,10 @@ export default function Header() {
 
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center">
-          <Image
+          <img
             src="/FB_Logo.png"
             alt="Starting Gate Financial"
-            width={120}
-            height={40}
-            priority
-            className="h-10 w-auto object-contain"
+            style={{ height: "40px", width: "auto" }}
           />
         </Link>
 
@@ -257,13 +253,13 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-5 shrink-0">
           <Link
             href="/partners"
-            className="text-[13px] font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+            className="bg-[#118241] hover:bg-[#082B09] text-white px-5 py-2 text-[13px] font-semibold transition-colors duration-200"
           >
             Become a Partner
           </Link>
           <Link
             href="/apply"
-            className="bg-[var(--sgf-green-500)] hover:bg-[var(--sgf-green-600)] text-white px-5 py-2 text-[13px] font-semibold transition-colors"
+            className="bg-[#118241] hover:bg-[#082B09] text-white px-5 py-2 text-[13px] font-semibold transition-colors duration-200"
           >
             Apply Now
           </Link>
@@ -336,13 +332,13 @@ export default function Header() {
           <div className="px-6 py-5 border-t border-slate-200 flex flex-col gap-3">
             <Link
               href="/partners"
-              className="block text-center py-2.5 border border-slate-300 text-sm font-semibold text-slate-700 hover:border-slate-400 transition-colors"
+              className="block text-center py-3 bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold transition-colors duration-200"
             >
               Become a Partner
             </Link>
             <Link
               href="/apply"
-              className="block text-center py-3 bg-[var(--sgf-green-500)] hover:bg-[var(--sgf-green-600)] text-white text-sm font-semibold transition-colors"
+              className="block text-center py-3 bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold transition-colors duration-200"
             >
               Apply Now
             </Link>

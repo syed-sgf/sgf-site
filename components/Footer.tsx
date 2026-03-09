@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 const financingLinks = [
@@ -53,12 +52,10 @@ export default function Footer() {
           {/* Column 1 — Brand + Contact */}
           <div className="lg:col-span-1 flex flex-col gap-5">
             <Link href="/" className="flex items-center">
-              <Image
+              <img
                 src="/FB_Logo.png"
                 alt="Starting Gate Financial"
-                width={120}
-                height={40}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                style={{ height: "40px", width: "auto", filter: "brightness(0) invert(1)" }}
               />
             </Link>
 
@@ -170,15 +167,9 @@ export default function Footer() {
       {/* Divider */}
       <div className="border-t border-white/10" />
 
-      {/* Legal disclaimer band */}
+      {/* Legal band */}
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <p className="text-xs text-white/35 leading-relaxed text-center max-w-4xl mx-auto">
-          Starting Gate Financial is a commercial loan brokerage, not a direct lender. All financing is subject to 
-          lender approval, underwriting criteria, and applicable regulations. Rates, terms, and eligibility vary by 
-          program and borrower profile. Nothing on this website constitutes a commitment to lend or a guarantee of 
-          financing. Consult a qualified financial advisor before making financing decisions.
-        </p>
-        <div className="flex flex-col items-center gap-2 mt-3">
+        <div className="flex flex-col items-center gap-2">
           <p className="text-xs text-white/25 text-center">
             © {new Date().getFullYear()} Starting Gate Financial. All rights reserved. &nbsp;·&nbsp; Richardson, TX
           </p>

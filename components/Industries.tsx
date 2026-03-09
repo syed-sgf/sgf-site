@@ -22,14 +22,14 @@ export default function Industries() {
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
-        <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+        <div className="text-center mb-14 max-w-2xl mx-auto">
+          <p className="text-xs uppercase tracking-widest text-[#CE9562] font-semibold mb-3 text-center">
             Industry Focus
           </p>
           <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Funding Designed to Match Your Industry
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
+          <p className="mt-4 text-slate-600 mx-auto text-center">
             Every sector has unique capital needs. We speak your language.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function Industries() {
         <div className="mt-10 text-center">
           <Link
             href="/industries"
-            className="text-sm font-semibold text-[var(--sgf-green-500)] underline underline-offset-4 hover:text-[var(--sgf-green-600)] transition-colors"
+            className="text-sm font-semibold text-[#118241] underline underline-offset-4 hover:text-[#082B09] transition-colors"
           >
             View all industries →
           </Link>

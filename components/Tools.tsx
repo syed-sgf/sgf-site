@@ -29,14 +29,14 @@ export default function Tools() {
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
-        <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+        <div className="text-center mb-14 max-w-2xl mx-auto">
+          <p className="text-xs uppercase tracking-widest text-[#CE9562] font-semibold mb-3 text-center">
             Planning Tools
           </p>
           <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             Model Your Financing Before You Apply
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
+          <p className="mt-4 text-slate-600 mx-auto text-center">
             Deterministic calculators built for clarity — not assumptions.
           </p>
         </div>

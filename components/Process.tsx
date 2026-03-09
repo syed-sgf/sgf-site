@@ -24,14 +24,14 @@ export default function Process() {
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Centered heading */}
-        <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-widest text-[var(--sgf-green-500)] font-semibold mb-3">
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-xs uppercase tracking-widest text-[#CE9562] font-semibold mb-3 text-center">
             Our Process
           </p>
           <h2 className="font-serif text-4xl font-semibold text-slate-900 text-center">
             A Structured Path to Capital
           </h2>
-          <p className="mt-4 text-slate-600 max-w-[600px] mx-auto text-center">
+          <p className="mt-4 text-slate-600 mx-auto text-center">
             We remove the guesswork from the financing process.
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function Process() {
         <div className="grid md:grid-cols-3 gap-10 text-center">
           {steps.map(({ num, label, desc }) => (
             <div key={num}>
-              <p className="font-serif text-5xl font-semibold text-[var(--sgf-green-500)] leading-none">
+              <p className="font-serif text-5xl font-semibold text-[#118241] leading-none">
                 {num}
               </p>
               <p className="mt-5 font-semibold text-slate-900">{label}</p>
@@ -81,7 +81,7 @@ export default function Process() {
         <div className="mt-16 text-center">
           <Link
             href="/apply"
-            className="inline-block bg-[var(--sgf-green-500)] hover:bg-[var(--sgf-green-600)] text-white px-10 py-3 font-semibold transition-colors"
+            className="inline-block bg-[#118241] hover:bg-[#082B09] text-white px-10 py-3 font-semibold transition-colors duration-200"
           >
             Start Pre-Qualification
           </Link>

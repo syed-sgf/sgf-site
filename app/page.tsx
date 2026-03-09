@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
 import FinancingOptions from "@/components/FinancingOptions";
 import Industries from "@/components/Industries";
 import Tools from "@/components/Tools";
@@ -16,7 +15,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
       <FinancingOptions />
       <Industries />
       <Tools />
