@@ -162,7 +162,7 @@ export default function HomePage() {
       <section style={{ background: "white", padding: "6rem 0", borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
           <SectionHeader
-            eyebrow="01 — Capital Solutions"
+                          eyebrow="01 — Capital Solutions"
             h2="Financing Paths Built for How<br />Businesses Actually Operate"
             sub="From SBA loans to commercial real estate — capital structured for your stage and sector."
           />
@@ -190,7 +190,7 @@ export default function HomePage() {
       <section style={{ background: G.dark, padding: "6rem 0" }}>
         <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
           <SectionHeader
-            eyebrow="02 — Industry Expertise"
+                      eyebrow="02 — Industry Expertise"
             h2="We Understand How Your<br />Industry Operates"
             sub="And what lenders need to see. Industry fluency is not optional in commercial financing."
             light
@@ -217,7 +217,7 @@ export default function HomePage() {
       <section style={{ background: G.cream, padding: "6rem 0", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
           <SectionHeader
-            eyebrow="03 — Client Outcomes"
+                        eyebrow="03 — Client Outcomes"
             h2="Real Businesses. Real Closings."
             sub="What business owners say about working with Starting Gate Financial."
           />
@@ -283,7 +283,7 @@ export default function HomePage() {
       <section style={{ background: "white", padding: "6rem 0", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
           <SectionHeader
-            eyebrow="Planning Tools"
+                        eyebrow="Planning Tools"
             h2="Numbers Before Narratives"
             sub="Deterministic calculators built for clarity — not assumptions. Model your financing before you apply."
           />
