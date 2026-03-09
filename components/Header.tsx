@@ -159,7 +159,7 @@ export default function Header() {
                 </div>
                 <div className="border-t border-slate-100 mt-2 pt-2 px-5">
                   <Link
-                    href="/financing"
+                    href="/financing-options"
                     className="text-[11px] font-semibold text-[var(--sgf-green-500)] hover:underline underline-offset-2"
                   >
                     Browse all programs →
@@ -303,7 +303,7 @@ export default function Header() {
               isOpen={mobileSection === "financing"}
               onToggle={() => toggleMobile("financing")}
               links={financingLinks}
-              allHref="/financing"
+              allHref="/financing-options"
               allLabel="All financing programs"
             />
             <MobileSection

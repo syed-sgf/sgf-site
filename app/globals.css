@@ -257,6 +257,22 @@ p {
   }
 }
 
+/* Financing Options page grids */
+@media (max-width: 1024px) {
+  .fo-think-grid,
+  .fo-programs-grid,
+  .fo-structure-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 768px) {
+  .fo-think-grid,
+  .fo-programs-grid,
+  .fo-structure-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Mobile header */
 @media (max-width: 768px) {
   .nav-links {
