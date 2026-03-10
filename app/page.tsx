@@ -1,6 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
 
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { products } from "@/lib/financing-data";
+
+/* ── Design tokens ──────────────────────────────────────────────── */
 const G = {
   dark: "#082B09",
   primary: "#118241",
@@ -9,315 +13,232 @@ const G = {
   border: "#E2DDD6",
   textDark: "#0F172A",
   textMid: "#475569",
-  textLight: "#94A3B8",
   serif: "var(--font-playfair)",
   sans: "var(--font-source-sans)",
 };
 
-const programs = [
-  { title: "SBA Financing", desc: "Long-term capital for owner-operated growth", href: "/financing-options/sba-financing" },
-  { title: "Commercial Real Estate", desc: "Acquisition, refinance, and construction execution", href: "/financing-options/commercial-real-estate" },
-  { title: "Business LOC & Term Loans", desc: "Working capital and operational stability", href: "/financing-options/business-loc-term-loans" },
-  { title: "Equipment Financing", desc: "Acquire without straining cash flow", href: "/financing-options/equipment-financing" },
-  { title: "DSCR Rental Loans", desc: "Investment property financing on cash flow", href: "/financing-options/dscr-rental-loans" },
-  { title: "Fix & Flip Loans", desc: "Short-term capital for rehab execution", href: "/financing-options/fix-and-flip-loans" },
-  { title: "Accounts Receivable", desc: "Turn outstanding invoices into working capital", href: "/financing-options/accounts-receivable-financing" },
-  { title: "Franchise Financing", desc: "Structured capital for startup and expansion", href: "/financing-options/franchise-financing" },
-  { title: "Merchant Cash Advance", desc: "Revenue-based advances for fast-moving businesses", href: "/financing-options/merchant-cash-advance" },
-  { title: "Startup Financing", desc: "Capital pathways for early-stage businesses", href: "/financing-options/startup-financing" },
+/* ── Hero slides ────────────────────────────────────────────────── */
+const heroSlides = [
+  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=90&auto=format&fit=crop", label: "Commercial Real Estate" },
+  { url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=90&auto=format&fit=crop", label: "Construction" },
+  { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=90&auto=format&fit=crop", label: "Business Capital" },
+  { url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=90&auto=format&fit=crop", label: "Oil & Gas" },
+  { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90&auto=format&fit=crop", label: "Food & Beverage" },
 ];
 
-const industries = [
-  { name: "Construction & Contractors", desc: "Project-driven capital for builders, GCs, and specialty trades", href: "/industries/construction" },
-  { name: "Healthcare & Medical", desc: "Practice acquisition, expansion, and equipment upgrades", href: "/industries/healthcare" },
-  { name: "Restaurants & Food Service", desc: "Cash flow-aware financing for operators", href: "/industries/restaurants" },
-  { name: "Real Estate Investors", desc: "Portfolio growth, DSCR, and bridge capital", href: "/industries/real-estate-investors" },
-  { name: "Oil & Gas Services", desc: "Capital for equipment, expansion, and project execution", href: "/industries/oil-and-gas" },
-  { name: "Trucking & Transportation", desc: "Fleet financing and working capital for operators", href: "/industries/trucking-transportation" },
-  { name: "Professional Services", desc: "Growth capital for established service businesses", href: "/industries/professional-services" },
-];
-
-const reviews = [
-  { text: "Syed helped us secure an SBA loan when two other brokers couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", detail: "Restaurant Owner · Dallas TX" },
-  { text: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.", name: "Linda K.", detail: "Healthcare Practice Owner" },
-  { text: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.", name: "Carlos R.", detail: "Trucking Company Owner" },
-  { text: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.", name: "David M.", detail: "Real Estate Investor · Fort Worth TX" },
-];
-
-const slides = [
-  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=80",
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80",
-  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80",
-];
-
-const tools = [
-  { title: "SBA Loan Calculator", desc: "Payment scenarios for SBA and term loans", href: "/tools/sba-loan-calculator" },
-  { title: "DSCR Calculator", desc: "Evaluate debt service coverage ratio for rental properties", href: "/tools/dscr-calculator" },
-  { title: "MCA Calculator", desc: "Estimate true cost of a merchant cash advance", href: "/tools/mca-calculator" },
-  { title: "Working Capital Calculator", desc: "Estimate short-term capital coverage needs", href: "/tools/working-capital-calculator" },
-];
-
-function SectionHeader({ eyebrow, h2, sub, light = false }: { eyebrow: string; h2: string; sub: string; light?: boolean }) {
+/* ── Section heading ────────────────────────────────────────────── */
+function SectionHeader({ eyebrow, h2, sub, light = false }: { eyebrow: string; h2: string; sub?: string; light?: boolean }) {
   return (
-    <div style={{ textAlign: "center", marginBottom: "3.5rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>{eyebrow}</p>
-      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.9rem, 3vw, 2.5rem)", fontWeight: "700", color: light ? "white" : G.textDark, lineHeight: "1.2", marginBottom: "1rem", textAlign: "center" }} dangerouslySetInnerHTML={{ __html: h2 }} />
-      <p style={{ fontSize: "1rem", color: light ? "rgba(255,255,255,0.55)" : "#64748B", maxWidth: "480px", lineHeight: "1.75", fontFamily: G.sans, textAlign: "center" }}>{sub}</p>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+      <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>{eyebrow}</p>
+      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.8rem,3vw,2.4rem)", fontWeight: "700", color: light ? "#fff" : G.textDark, lineHeight: "1.2", margin: "0 0 0.75rem", textAlign: "center" }}>{h2}</h2>
+      {sub && <p style={{ fontSize: "1rem", color: light ? "rgba(255,255,255,0.72)" : G.textMid, maxWidth: "520px", lineHeight: "1.7", fontFamily: G.sans, textAlign: "center", margin: 0 }}>{sub}</p>}
     </div>
   );
 }
 
+/* ── Page ───────────────────────────────────────────────────────── */
 export default function HomePage() {
   const [current, setCurrent] = useState(0);
-  const [hoveredProgram, setHoveredProgram] = useState<number | null>(null);
-  const [hoveredIndustry, setHoveredIndustry] = useState<number | null>(null);
-  const [hoveredTool, setHoveredTool] = useState<number | null>(null);
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent(p => (p + 1) % slides.length), 5000);
+    const t = setInterval(() => setCurrent((p) => (p + 1) % heroSlides.length), 5000);
     return () => clearInterval(t);
   }, []);
 
+  const industries = [
+    { name: "Construction & Contractors", slug: "construction", icon: "⚒" },
+    { name: "Food & Beverage", slug: "food-beverage", icon: "🍽" },
+    { name: "Healthcare & Medical", slug: "healthcare", icon: "⚕" },
+    { name: "Oil & Gas", slug: "oil-gas", icon: "⛽" },
+    { name: "Real Estate Investors", slug: "real-estate-investors", icon: "⬡" },
+  ];
+
+  const testimonials = [
+    { stars: 5, quote: "Syed helped us secure an SBA loan when two other brokers couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", title: "Restaurant Owner · Dallas TX" },
+    { stars: 5, quote: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.", name: "Linda K.", title: "Healthcare Practice Owner" },
+    { stars: 5, quote: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.", name: "David R.", title: "Contractor · Fort Worth TX" },
+    { stars: 5, quote: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.", name: "Priya M.", title: "CRE Investor · DFW" },
+  ];
+
   return (
-    <main>
+    <main style={{ background: G.cream, fontFamily: G.sans }}>
 
-      {/* — HERO — */}
-      <section style={{ background: G.cream, borderBottom: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center", minHeight: "calc(100vh - 68px)", paddingTop: "5rem", paddingBottom: "5rem" }}>
+      {/* ── HERO ── */}
+      <section style={{ position: "relative", minHeight: "580px", overflow: "hidden", background: G.dark }}>
+        {/* Gold top line */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`, zIndex: 10 }} />
 
-            {/* Left */}
-            <div>
-              <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "0.75rem", fontFamily: G.sans }}>
-                <span style={{ display: "block", width: "24px", height: "1px", background: G.gold, flexShrink: 0 }} />
-                Richardson, TX · Nationwide Commercial Financing
-              </p>
+        {/* Slides */}
+        {heroSlides.map((slide, i) => (
+          <div key={slide.url} style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, transition: "opacity 1.2s ease-in-out" }}>
+            <img src={slide.url} alt={slide.label} loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : "low"} decoding={i === 0 ? "sync" : "async"}
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+          </div>
+        ))}
+        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}F0 0%, ${G.dark}C0 55%, ${G.dark}80 100%)`, zIndex: 2 }} />
 
-              <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", fontWeight: "700", color: G.textDark, lineHeight: "1.15", letterSpacing: "-0.02em", marginBottom: "1.25rem" }}>
-                SBA Loans & Business Financing,{" "}
-                <em style={{ color: G.dark, fontStyle: "italic" }}>Built for Approval.</em>
-              </h1>
+        {/* Hero content: left copy + right GHL form */}
+        <div style={{ position: "relative", zIndex: 3, maxWidth: "1200px", margin: "0 auto", padding: "5rem 2rem 4rem", display: "grid", gridTemplateColumns: "1fr 420px", gap: "4rem", alignItems: "center" }}>
 
-              <p style={{ fontSize: "1rem", color: G.textMid, lineHeight: "1.75", maxWidth: "440px", marginBottom: "1.75rem", fontFamily: G.sans }}>
-                We structure SBA loans, commercial real estate, and working capital deals the way underwriters expect — so your file gets funded, not declined.
-              </p>
+          {/* Left */}
+          <div>
+            <p style={{ fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans }}>
+              Richardson, TX · Nationwide Commercial Financing
+            </p>
+            <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem,4vw,3.2rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", marginBottom: "1.25rem" }}>
+              SBA Loans & Business Financing,{" "}
+              <em style={{ color: G.gold, fontStyle: "italic" }}>Built for Approval.</em>
+            </h1>
+            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.75", marginBottom: "2rem", maxWidth: "480px", fontFamily: G.sans }}>
+              We structure SBA loans, commercial real estate, and working capital deals the way underwriters expect — so your file gets funded, not declined.
+            </p>
 
-              {/* Trust strip */}
-              <div className="trust-strip" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem 1.5rem", marginBottom: "2rem" }}>
-                {["No Upfront Fees", "Lender-Aligned Structuring", "We Close Deals Others Can't", "Nationwide · Based in Richardson, TX"].map(item => (
-                  <span key={item} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.78rem", fontWeight: "600", color: G.dark, fontFamily: G.sans }}>
-                    <span style={{ color: G.primary }}>✓</span>{item}
-                  </span>
-                ))}
-              </div>
-
-              {/* CTAs */}
-              <div className="hero-ctas" style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
-                <a href="/apply" style={{ display: "inline-block", background: G.primary, color: "white", padding: "0.85rem 2rem", fontSize: "0.85rem", fontWeight: "600", letterSpacing: "0.05em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px", fontFamily: G.sans }}>
-                  Start Pre-Qualification →
-                </a>
-                <a href="/financing-options" style={{ display: "inline-block", color: G.dark, fontSize: "0.88rem", fontWeight: "600", textDecoration: "none", borderBottom: `1px solid ${G.gold}`, paddingBottom: "2px", fontFamily: G.sans }}>
-                  Explore Financing Options →
-                </a>
-              </div>
-
-              {/* Industries */}
-              <div style={{ paddingTop: "1.75rem", borderTop: `1px solid ${G.border}` }}>
-                <p style={{ fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: G.textLight, marginBottom: "0.65rem", fontFamily: G.sans }}>Trusted by operators in</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0 1.5rem", fontSize: "0.82rem", fontWeight: "500", color: G.textMid, fontFamily: G.sans }}>
-                  {["Construction", "Healthcare", "Restaurants", "Real Estate", "Transportation"].map((ind, i, arr) => (
-                    <span key={ind} style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-                      {ind}
-                      {i < arr.length - 1 && <span style={{ width: "4px", height: "4px", background: G.gold, borderRadius: "50%", display: "inline-block" }} />}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {/* Trust badges */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "2rem" }}>
+              {["No Upfront Fees", "Lender-Aligned Structuring", "We Close Deals Others Can't", "Nationwide · Based in Richardson, TX"].map((badge) => (
+                <span key={badge} style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.8)", fontFamily: G.sans, display: "flex", alignItems: "center", gap: "0.3rem" }}>
+                  <span style={{ color: G.gold }}>✓</span> {badge}
+                </span>
+              ))}
             </div>
 
-            {/* Right: Slideshow */}
-            <div className="hero-visual" style={{ position: "relative" }}>
-              <div style={{ position: "absolute", top: "-20px", right: "-20px", bottom: "20px", left: "20px", border: `1px solid ${G.gold}`, borderRadius: "2px", zIndex: 0 }} />
-              <div style={{ position: "relative", zIndex: 1, borderRadius: "2px", overflow: "hidden", height: "520px" }}>
-                {slides.map((src, i) => (
-                  <div key={i} style={{ position: "absolute", inset: 0, backgroundImage: `url(${src})`, backgroundSize: "cover", backgroundPosition: "center", opacity: i === current ? 1 : 0, transition: "opacity 1s ease-in-out" }} />
-                ))}
-                <div style={{ position: "absolute", bottom: "1.25rem", right: "1.25rem", zIndex: 3, display: "flex", gap: "6px" }}>
-                  {slides.map((_, i) => (
-                    <button key={i} onClick={() => setCurrent(i)} style={{ width: "6px", height: "6px", borderRadius: "50%", background: i === current ? G.gold : "rgba(255,255,255,0.4)", border: "none", cursor: "pointer", padding: 0 }} />
-                  ))}
-                </div>
-              </div>
-              <div style={{ position: "absolute", bottom: "-20px", left: "2rem", zIndex: 2, background: G.dark, padding: "1rem 1.5rem", borderRadius: "2px", borderLeft: `3px solid ${G.gold}` }}>
-                <p style={{ fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: G.gold, marginBottom: "0.2rem", fontFamily: G.sans }}>Programs Available</p>
-                <p style={{ fontFamily: G.serif, fontSize: "1.4rem", fontWeight: "700", color: "white" }}>10+ Financing Paths</p>
-              </div>
+            {/* CTAs */}
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2rem", background: G.primary, color: "#fff", fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+                Start Pre-Qualification →
+              </Link>
+              <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.45)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+                Explore Financing Options →
+              </Link>
             </div>
 
+            {/* Dot nav */}
+            <div style={{ display: "flex", gap: "0.5rem", marginTop: "2.5rem" }}>
+              {heroSlides.map((_, i) => (
+                <button key={i} onClick={() => setCurrent(i)}
+                  style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? G.gold : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+                  aria-label={`Slide ${i + 1}`} />
+              ))}
+            </div>
+          </div>
+
+          {/* Right — GHL form slot */}
+          <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.12)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px", padding: "2rem" }}>
+            <p style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.5rem", fontFamily: G.sans }}>Free Consultation</p>
+            <p style={{ fontFamily: G.serif, fontSize: "1.2rem", fontWeight: "700", color: "#fff", marginBottom: "1.5rem", lineHeight: "1.3" }}>See If You Qualify</p>
+            {/* GHL FORM — DO NOT MODIFY */}
+            <div id="ghl-form-container" style={{ minHeight: "300px" }}>
+              {/* GoHighLevel embed renders here */}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* — FINANCING OPTIONS — */}
-      <section style={{ background: "white", padding: "6rem 0", borderBottom: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <SectionHeader
-                          eyebrow="01 — Capital Solutions"
-            h2="Financing Paths Built for How<br />Businesses Actually Operate"
-            sub="From SBA loans to commercial real estate — capital structured for your stage and sector."
-          />
-          <div className="programs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", border: `1px solid ${G.border}` }}>
-            {programs.map((p, i) => (
-              <a key={p.href} href={p.href}
-                onMouseEnter={() => setHoveredProgram(i)}
-                onMouseLeave={() => setHoveredProgram(null)}
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.35rem 1.75rem", background: hoveredProgram === i ? G.cream : "white", textDecoration: "none", borderRight: i % 2 === 0 ? `1px solid ${G.border}` : "none", borderBottom: `1px solid ${G.border}`, transition: "background 0.15s" }}>
+      {/* ── TRUST BAR ── */}
+      <section style={{ background: G.dark, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "1.25rem 2rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "3rem", flexWrap: "wrap" }}>
+          {[
+            { label: "Trusted by Operators In", value: "Construction · Healthcare · Restaurants · Real Estate · Transportation" },
+            { label: "Programs Available", value: "10+ Financing Paths" },
+            { label: "Google Rating", value: "★★★★★  5.0" },
+          ].map((item) => (
+            <div key={item.label} style={{ textAlign: "center" }}>
+              <p style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", fontFamily: G.sans, marginBottom: "0.25rem" }}>{item.label}</p>
+              <p style={{ fontSize: "0.85rem", color: G.gold, fontFamily: G.sans, fontWeight: "600" }}>{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FINANCING PROGRAMS ── */}
+      <section style={{ padding: "4rem 2rem", background: G.cream }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <SectionHeader eyebrow="01 — Financing Programs" h2="Capital Structures We Work With" sub="Every program is matched to your business profile, not reverse-engineered from a product sheet." />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem", marginBottom: "2rem" }}>
+            {products.map((p) => (
+              <Link key={p.slug} href={`/financing/${p.slug}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 1.25rem", background: "#fff", border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderLeftColor = G.gold; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(8,43,9,0.08)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderLeftColor = G.primary; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                 <div>
-                  <p style={{ fontFamily: G.serif, fontSize: "0.98rem", fontWeight: "600", color: G.textDark, marginBottom: "0.2rem" }}>{p.title}</p>
-                  <p style={{ fontSize: "0.8rem", color: "#64748B", fontFamily: G.sans }}>{p.desc}</p>
+                  <p style={{ fontFamily: G.serif, fontSize: "0.95rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.2rem" }}>{p.title}</p>
+                  <p style={{ fontSize: "0.8rem", color: G.textMid, margin: 0, fontFamily: G.sans }}>{p.subtitle}</p>
                 </div>
-                <span style={{ color: G.gold, fontSize: "1rem", marginLeft: "1rem", flexShrink: 0 }}>→</span>
-              </a>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: "2.25rem" }}>
-            <a href="/financing-options" style={{ fontSize: "0.88rem", fontWeight: "600", color: G.dark, textDecoration: "none", borderBottom: `1px solid ${G.gold}`, paddingBottom: "2px", fontFamily: G.sans }}>View all financing options →</a>
-          </div>
-        </div>
-      </section>
-
-      {/* — INDUSTRIES — */}
-      <section style={{ background: G.dark, padding: "6rem 0" }}>
-        <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <SectionHeader
-                      eyebrow="02 — Industry Expertise"
-            h2="We Understand How Your<br />Industry Operates"
-            sub="And what lenders need to see. Industry fluency is not optional in commercial financing."
-            light
-          />
-          <div className="industries-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            {industries.map((ind, i) => (
-              <a key={ind.href} href={ind.href}
-                onMouseEnter={() => setHoveredIndustry(i)}
-                onMouseLeave={() => setHoveredIndustry(null)}
-                style={{ display: "block", padding: "2rem", background: hoveredIndustry === i ? "rgba(255,255,255,0.04)" : G.dark, textDecoration: "none", borderRight: (i % 3 !== 2) ? "1px solid rgba(255,255,255,0.08)" : "none", borderBottom: "1px solid rgba(255,255,255,0.08)", borderTop: hoveredIndustry === i ? `2px solid ${G.gold}` : "2px solid transparent", transition: "all 0.2s", gridColumn: i === 6 ? "2 / 3" : "auto" }}>
-                <div style={{ width: "28px", height: "2px", background: G.gold, marginBottom: "1.1rem" }} />
-                <p style={{ fontFamily: G.serif, fontSize: "0.98rem", fontWeight: "600", color: "white", marginBottom: "0.4rem" }}>{ind.name}</p>
-                <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", fontFamily: G.sans, lineHeight: "1.55" }}>{ind.desc}</p>
-              </a>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: "2.25rem" }}>
-            <a href="/industries" style={{ fontSize: "0.88rem", fontWeight: "600", color: "rgba(255,255,255,0.65)", textDecoration: "none", borderBottom: `1px solid ${G.gold}`, paddingBottom: "2px", fontFamily: G.sans }}>Explore all industries →</a>
-          </div>
-        </div>
-      </section>
-
-      {/* — CLIENT OUTCOMES — */}
-      <section style={{ background: G.cream, padding: "6rem 0", borderTop: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <SectionHeader
-                        eyebrow="03 — Client Outcomes"
-            h2="Real Businesses. Real Closings."
-            sub="What business owners say about working with Starting Gate Financial."
-          />
-
-          {/* Google trust row */}
-          <div className="trust-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", marginBottom: "2.5rem", padding: "1.25rem 2rem", background: "white", border: `1px solid ${G.border}`, borderRadius: "2px", flexWrap: "wrap" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <span style={{ color: G.gold, fontSize: "1.1rem" }}>★★★★★</span>
-              <span style={{ fontWeight: "700", fontSize: "0.95rem", color: G.textDark }}>5.0</span>
-              <span style={{ fontSize: "0.82rem", color: "#64748B", fontFamily: G.sans }}>Google Rating</span>
-            </div>
-            <div style={{ width: "1px", height: "24px", background: G.border }} />
-            <span style={{ fontSize: "0.82rem", color: "#64748B", fontFamily: G.sans }}>SBA · CRE · Equipment · Working Capital</span>
-            <div style={{ width: "1px", height: "24px", background: G.border }} />
-            <a href="https://g.page/r/startinggatefinancial/review" style={{ fontSize: "0.82rem", fontWeight: "600", color: G.primary, textDecoration: "none", borderBottom: `1px solid ${G.gold}`, paddingBottom: "1px", fontFamily: G.sans }}>Read All Reviews →</a>
-          </div>
-
-          {/* Review cards */}
-          <div className="reviews-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "5rem" }}>
-            {reviews.map((r, i) => (
-              <div key={i} style={{ background: "white", border: `1px solid ${G.border}`, padding: "1.75rem 2rem", borderRadius: "2px" }}>
-                <div style={{ display: "flex", gap: "3px", marginBottom: "1rem" }}>
-                  {[...Array(5)].map((_, j) => <span key={j} style={{ color: G.gold, fontSize: "13px" }}>★</span>)}
-                </div>
-                <p style={{ fontSize: "0.9rem", color: "#334155", lineHeight: "1.75", fontStyle: "italic", marginBottom: "1.25rem", fontFamily: G.sans }}>&ldquo;{r.text}&rdquo;</p>
-                <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "0.9rem" }}>
-                  <p style={{ fontWeight: "600", color: G.textDark, fontSize: "0.87rem", fontFamily: G.sans }}>{r.name}</p>
-                  <p style={{ fontSize: "0.77rem", color: G.textLight, fontFamily: G.sans }}>{r.detail}</p>
-                  <p style={{ fontSize: "0.71rem", color: G.gold, marginTop: "0.3rem", fontFamily: G.sans, letterSpacing: "0.05em" }}>★ Google Review</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Process steps */}
-          <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "4rem", marginBottom: "3rem" }}>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
-              <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>How We Work</p>
-              <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.7rem, 2.5vw, 2.2rem)", fontWeight: "700", color: G.textDark, marginBottom: "1rem", textAlign: "center" }}>Assess. Structure. Close.</h2>
-              <p style={{ fontSize: "1rem", color: "#64748B", maxWidth: "440px", fontFamily: G.sans, lineHeight: "1.75", textAlign: "center" }}>A financing process built around how lenders actually think — not how brokers hope it works.</p>
-            </div>
-          </div>
-
-          <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: `1px solid ${G.border}`, marginBottom: "3rem" }}>
-            {[
-              { num: "01", title: "Assess", desc: "We review your business profile, goals, and financials to identify the right capital path — before any lender sees your file." },
-              { num: "02", title: "Structure", desc: "We build your deal the way lenders expect it — clean package, correct program, right timing. No credit pull. No obligation." },
-              { num: "03", title: "Close", desc: "We manage lender communication, underwriting questions, and closing coordination from start to funded." },
-            ].map((s, i) => (
-              <div key={s.num} style={{ padding: "2.5rem 2rem", textAlign: "center", borderRight: i < 2 ? `1px solid ${G.border}` : "none" }}>
-                <p style={{ fontFamily: G.serif, fontSize: "2.8rem", fontWeight: "700", color: G.primary, lineHeight: "1", marginBottom: "0.75rem" }}>{s.num}</p>
-                <p style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "600", color: G.textDark, marginBottom: "0.5rem" }}>{s.title}</p>
-                <p style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: "1.65", fontFamily: G.sans }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: "center" }}>
-            <a href="/apply" style={{ display: "inline-block", background: G.primary, color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600", letterSpacing: "0.05em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px", fontFamily: G.sans }}>Start Pre-Qualification</a>
-          </div>
-        </div>
-      </section>
-
-      {/* — TOOLS — */}
-      <section style={{ background: "white", padding: "6rem 0", borderTop: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "0 2rem" }}>
-          <SectionHeader
-                        eyebrow="Planning Tools"
-            h2="Numbers Before Narratives"
-            sub="Deterministic calculators built for clarity — not assumptions. Model your financing before you apply."
-          />
-          <div className="tools-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginBottom: "2.5rem" }}>
-            {tools.map((t, i) => (
-              <a key={t.href} href={t.href}
-                onMouseEnter={() => setHoveredTool(i)}
-                onMouseLeave={() => setHoveredTool(null)}
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.75rem 2rem", border: `1px solid ${hoveredTool === i ? G.primary : G.border}`, background: hoveredTool === i ? G.cream : "white", textDecoration: "none", borderRadius: "2px", transition: "all 0.15s" }}>
-                <div>
-                  <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "600", color: G.textDark, marginBottom: "0.3rem" }}>{t.title}</p>
-                  <p style={{ fontSize: "0.81rem", color: "#64748B", fontFamily: G.sans }}>{t.desc}</p>
-                </div>
-                <span style={{ color: G.primary, fontSize: "1.1rem", marginLeft: "1rem", flexShrink: 0 }}>→</span>
-              </a>
+                <span style={{ color: G.gold, fontSize: "1rem", flexShrink: 0, marginLeft: "1rem" }}>→</span>
+              </Link>
             ))}
           </div>
           <div style={{ textAlign: "center" }}>
-            <a href="/tools" style={{ fontSize: "0.88rem", fontWeight: "600", color: G.dark, textDecoration: "none", borderBottom: `1px solid ${G.gold}`, paddingBottom: "2px", fontFamily: G.sans }}>Open all calculators →</a>
+            <Link href="/financing-options" style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans, textDecoration: "none" }}>
+              View all financing programs →
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* — CTA BAND — */}
-      <section style={{ background: G.dark, padding: "5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
-        <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans, display: "block", textAlign: "center", width: "100%" }}>Ready to Move Forward?</p>
-          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", color: "white", marginBottom: "1rem", lineHeight: "1.2", textAlign: "center" }}>Structure Your Next Move<br />with Confidence</h2>
-          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", maxWidth: "440px", margin: "0 auto 2.5rem", lineHeight: "1.75", fontFamily: G.sans, textAlign: "center" }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
-          <div className="cta-btns" style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/apply" style={{ display: "inline-block", background: "white", color: G.dark, padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "700", letterSpacing: "0.04em", textTransform: "uppercase" as const, textDecoration: "none", borderRadius: "2px" }}>Get Pre-Qualified</a>
-            <a href="/contact" style={{ display: "inline-block", border: "1px solid rgba(255,255,255,0.3)", color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600", textDecoration: "none", borderRadius: "2px" }}>Contact Us</a>
+      {/* ── INDUSTRY EXPERTISE ── */}
+      <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <SectionHeader eyebrow="02 — Industry Expertise" h2="We Understand How Your Industry Operates" sub="Capital needs differ by sector. We structure financing around how your business actually earns, spends, and grows." light />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem" }}>
+            {industries.map((ind) => (
+              <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; }}>
+                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem" }}>{ind.icon}</span>
+                <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
+                <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section style={{ padding: "4rem 2rem", background: G.cream }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <SectionHeader eyebrow="03 — Client Outcomes" h2="Real Businesses. Real Closings." sub="What business owners say about working with Starting Gate Financial." />
+
+          {/* Rating bar */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", padding: "1rem 2rem", background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", marginBottom: "2rem", flexWrap: "wrap" }}>
+            <span style={{ color: G.gold, fontSize: "1rem" }}>★★★★★ <strong style={{ color: G.textDark, fontFamily: G.sans }}>5.0</strong> <span style={{ color: G.textMid, fontSize: "0.85rem" }}>Google Rating</span></span>
+            <span style={{ width: "1px", height: "24px", background: G.border }} />
+            <span style={{ fontSize: "0.85rem", color: G.textMid, fontFamily: G.sans }}>SBA · CRE · Equipment · Working Capital</span>
+            <span style={{ width: "1px", height: "24px", background: G.border }} />
+            <Link href="#" style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans, textDecoration: "none" }}>Read All Reviews →</Link>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+            {testimonials.map((t) => (
+              <div key={t.name} style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", padding: "1.75rem" }}>
+                <div style={{ color: G.gold, fontSize: "0.9rem", marginBottom: "1rem" }}>{"★".repeat(t.stars)}</div>
+                <p style={{ fontFamily: G.serif, fontSize: "1rem", color: G.textDark, lineHeight: "1.7", marginBottom: "1.25rem", fontStyle: "italic" }}>"{t.quote}"</p>
+                <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "1rem" }}>
+                  <p style={{ fontFamily: G.sans, fontWeight: "700", fontSize: "0.9rem", color: G.textDark, margin: "0 0 0.2rem" }}>{t.name}</p>
+                  <p style={{ fontFamily: G.sans, fontSize: "0.8rem", color: G.textMid, margin: "0 0 0.4rem" }}>{t.title}</p>
+                  <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>★ Google Review</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA BAND ── */}
+      <section style={{ background: G.dark, padding: "3.5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
+        <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Ready to Move Forward</p>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Let's Talk About Your Capital Need</h2>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
+            No cost. No obligation. A direct conversation about whether SGF is the right fit for your deal.
+          </p>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Start Pre-Qualification
+            </Link>
+            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Explore Programs
+            </Link>
           </div>
         </div>
       </section>
@@ -325,3 +246,4 @@ export default function HomePage() {
     </main>
   );
 }
+
