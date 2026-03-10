@@ -56,7 +56,7 @@ export default function IndustriesPage() {
           </div>
         ))}
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}CC 0%, ${G.dark}88 55%, ${G.dark}55 100%)`, zIndex: 2 }} />
-        <div style={{ position: "relative", zIndex: 3, maxWidth: "800px", margin: "0 auto", padding: "5rem 2rem 4rem", textAlign: "center" }}>
+        <div style={{ position: "relative", zIndex: 3, maxWidth: "800px", margin: "0 auto", padding: "5rem 2rem 4rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <p style={{ fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans }}>Industry Focus</p>
           <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem,4vw,3rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", marginBottom: "1.25rem" }}>
             Industries We Finance
@@ -68,6 +68,10 @@ export default function IndustriesPage() {
             {heroSlides.map((_, i) => (
               <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? G.gold : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} aria-label={`Slide ${i + 1}`} />
             ))}
+          </div>
+          <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", justifyContent: "center" }}>
+            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2rem", background: G.primary, color: "#fff", fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification →</Link>
+            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.45)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Explore Financing Options →</Link>
           </div>
         </div>
       </section>
