@@ -166,7 +166,7 @@ export default function FinancingOptionsPage() {
                     </div>
                     <div style={{ flex: 1 }}>
                       <h3 style={{ fontFamily: G.serif, fontSize: "1.15rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.25rem", lineHeight: "1.3" }}>{program.title}</h3>
-                      <p style={{ fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{program.tagline || program.category}</p>
+                      <p style={{ fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{program.subtitle}</p>
                       <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.6", margin: "0 0 1rem" }}>
                         {program.description?.substring(0, 110)}{program.description?.length > 110 ? "…" : ""}
                       </p>
