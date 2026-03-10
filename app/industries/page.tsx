@@ -85,12 +85,12 @@ export default function IndustriesPage() {
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderTopColor = G.gold; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(8,43,9,0.1)"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderTopColor = G.primary; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                   <div style={{ width: "44px", height: "44px", borderRadius: "4px", background: G.cream, border: `1px solid ${G.border}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "1.3rem" }}>
-                    {ind.icon || "⬡"}
+                    {ind.title.charAt(0)}
                   </div>
                   <div style={{ flex: 1 }}>
                     <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.3rem" }}>{ind.name}</h3>
-                    <p style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{ind.tagline || ind.subtitle || ""}</p>
-                    <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.6", margin: "0 0 1rem", fontFamily: G.sans }}>{ind.description?.substring(0, 120)}{(ind.description?.length ?? 0) > 120 ? "…" : ""}</p>
+                    <p style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{ind.subtitle}</p>
+                    <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.6", margin: "0 0 1rem", fontFamily: G.sans }}>{ind.description.substring(0, 120)}{(ind.description.length) > 120 ? "…" : ""}</p>
                     <span style={{ fontSize: "0.8rem", color: G.primary, fontWeight: "600", fontFamily: G.sans }}>View financing options →</span>
                   </div>
                 </Link>
