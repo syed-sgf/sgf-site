@@ -185,7 +185,13 @@ export default function HomePage() {
               <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; }}>
-                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", filter: "brightness(0) invert(1)" }}>{ind.icon}</span>
+                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", opacity: 0.85 }}>
+                  {ind.slug === "construction" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M2 20h20M6 20V10l6-6 6 6v10M10 20v-6h4v6"/></svg>}
+                  {ind.slug === "food-beverage" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>}
+                  {ind.slug === "healthcare" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
+                  {ind.slug === "oil-gas" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
+                  {ind.slug === "real-estate-investors" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>}
+                </span>
                 <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
                 <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>
               </Link>
