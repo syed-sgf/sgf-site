@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products, FinancingProduct } from "@/lib/financing-data";
+import { products } from "@/lib/financing-data";
+
+
+export async function generateStaticParams() {
+  return products.map((p) => ({ slug: p.slug }));
+}
 
 const G = {
   dark: "#082B09",
