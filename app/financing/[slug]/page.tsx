@@ -139,7 +139,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
           <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.75", maxWidth: "600px", fontFamily: G.sans, textAlign: "center", marginBottom: "2.5rem" }}>{product.description}</p>
 
           {/* Stats bar */}
-          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: "4px", width: "100%" }}>
+          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)"} as React.CSSProperties} className="fin-stats" style={{display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: "4px", width: "100%" }}>
             {[
               { label: "Loan Range", value: `${product.minAmount} – ${product.maxAmount}` },
               { label: "Term Range", value: product.termRange },
@@ -161,7 +161,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>What It's Used For</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem", textAlign: "center" }}>Common Use Cases</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }} className="fin-grid-3">
             {product.useCases.map((uc) => (
               <div key={uc} style={{ padding: "1.25rem 1.5rem", background: "#fff", border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
                 <span style={{ color: G.primary, fontSize: "1rem", flexShrink: 0, marginTop: "0.1rem" }}>✓</span>
@@ -179,7 +179,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Program Details</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem", textAlign: "center" }}>Key Features</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="fin-grid-2">
             {product.keyFeatures.map((f) => (
               <div key={f} style={{ padding: "1rem 1.5rem", background: G.cream, border: `1px solid ${G.border}`, borderRadius: "3px", display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
                 <span style={{ color: G.gold, fontSize: "0.9rem", flexShrink: 0, marginTop: "0.15rem" }}>◆</span>
@@ -210,7 +210,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Fit Assessment</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem", textAlign: "center" }}>Is This the Right Program?</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }} className="fin-grid-2">
             <div style={{ padding: "2rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px" }}>
               <p style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: G.textDark, marginBottom: "1.25rem" }}>✓ This program IS a good fit when:</p>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -262,7 +262,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Keep Exploring</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0", textAlign: "center" }}>Related Programs</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }} className="fin-grid-3">
             {related.map((p) => (
               <Link key={p.slug} href={`/financing/${p.slug}`} style={{ padding: "1.5rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", display: "block" }}>
                 <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.4rem" }}>{p.title}</p>
@@ -280,7 +280,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
           <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Ready to Move Forward</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>{product.ctaText}</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>No cost. No obligation. A direct conversation about whether this program fits your deal.</p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }} className="fin-cta-btns">
             <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification</Link>
             <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>View All Programs</Link>
           </div>
