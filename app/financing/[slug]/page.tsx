@@ -111,7 +111,8 @@ const faqMap: Record<string, {q: string; a: string}[]> = {
   ],
 };
 
-export default function FinancingSlugPage({ params }: { params: { slug: string } }) {
+export default async function FinancingSlugPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const product = products.find((p) => p.slug === params.slug);
   if (!product) notFound();
 
