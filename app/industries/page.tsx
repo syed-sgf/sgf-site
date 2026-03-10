@@ -90,7 +90,7 @@ export default function IndustriesPage() {
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderTopColor = G.gold; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(8,43,9,0.1)"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderTopColor = G.primary; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                   <div style={{ width: "44px", height: "44px", borderRadius: "4px", background: G.cream, border: `1px solid ${G.border}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "1.3rem" }}>
-                    {ind.title.charAt(0)}
+                    {{"construction":"⚒","food-beverage":"🍽","healthcare":"⚕","oil-gas":"⛽","real-estate-investors":"⬡"}[ind.slug] || "◆"}
                   </div>
                   <div style={{ flex: 1 }}>
                     <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.3rem" }}>{ind.title}</h3>
