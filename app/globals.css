@@ -505,3 +505,6 @@ p {
     gap: 2rem !important;
   }
 }
+
+/* ── Footer link hover ────────────────────────────────────── */
+.footer-link:hover { color: #fff !important; }

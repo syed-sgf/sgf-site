@@ -87,9 +87,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {financingLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }}
-                    onMouseEnter={e => (e.target as HTMLElement).style.color = "#fff"}
-                    onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)"}>
+                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }} className="footer-link">
                     {link.label}
                   </Link>
                 </li>
@@ -105,9 +103,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {industryLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }}
-                    onMouseEnter={e => (e.target as HTMLElement).style.color = "#fff"}
-                    onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)"}>
+                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }} className="footer-link">
                     {link.label}
                   </Link>
                 </li>
@@ -123,9 +119,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {toolLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }}
-                    onMouseEnter={e => (e.target as HTMLElement).style.color = "#fff"}
-                    onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)"}>
+                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }} className="footer-link">
                     {link.label}
                   </Link>
                 </li>
@@ -141,9 +135,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }}
-                    onMouseEnter={e => (e.target as HTMLElement).style.color = "#fff"}
-                    onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)"}>
+                  <Link href={link.href} style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", lineHeight: 1.5 }} className="footer-link">
                     {link.label}
                   </Link>
                 </li>
