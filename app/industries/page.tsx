@@ -88,7 +88,7 @@ export default function IndustriesPage() {
                     {ind.title.charAt(0)}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.3rem" }}>{ind.name}</h3>
+                    <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.3rem" }}>{ind.title}</h3>
                     <p style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{ind.subtitle}</p>
                     <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.6", margin: "0 0 1rem", fontFamily: G.sans }}>{ind.description.substring(0, 120)}{(ind.description.length) > 120 ? "…" : ""}</p>
                     <span style={{ fontSize: "0.8rem", color: G.primary, fontWeight: "600", fontFamily: G.sans }}>View financing options →</span>
