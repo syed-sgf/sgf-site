@@ -78,7 +78,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>What We See Most</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0", textAlign: "center" }}>Common Financing Needs</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="ind-needs-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="ind-needs-grid sgf-odd-center">
             {industry.commonFinancingNeeds.map((need) => (
               <div key={need} style={{ padding: "1.25rem 1.5rem", background: G.cream, border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
                 <span style={{ color: G.primary, flexShrink: 0, marginTop: "0.1rem" }}>✓</span>
