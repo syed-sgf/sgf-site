@@ -90,24 +90,24 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* RELEVANT PROGRAMS — dark green */}
-      <section style={{ padding: "4rem 2rem", background: G.dark }}>
+      <section style={{ padding: "4rem 2rem", background: "#fff", borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Capital Solutions</p>
-            <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", margin: "0", textAlign: "center" }}>Relevant Financing Programs</h2>
+            <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0", textAlign: "center" }}>Relevant Financing Programs</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="ind-products-grid">
             {relatedProducts.map((product) => {
               if (!product) return null;
               return (
-                <Link key={product.slug} href={`/financing/${product.slug}`} style={{ padding: "1.75rem", background: "rgba(255,255,255,0.04)", border: `1px solid rgba(206,149,98,0.25)`, borderTop: `3px solid ${G.gold}`, borderRadius: "3px", textDecoration: "none", display: "block" }}>
-                  <h3 style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: "#fff", margin: "0 0 0.4rem" }}>{product.title}</h3>
-                  <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.58)", margin: "0 0 0.85rem", fontFamily: G.sans, lineHeight: "1.5" }}>{product.subtitle}</p>
+                <Link key={product.slug} href={`/financing/${product.slug}`} style={{ padding: "1.75rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", display: "block" }}>
+                  <h3 style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.4rem" }}>{product.title}</h3>
+                  <p style={{ fontSize: "0.85rem", color: G.textMid, margin: "0 0 0.85rem", fontFamily: G.sans, lineHeight: "1.5" }}>{product.subtitle}</p>
                   <div style={{ display: "flex", gap: "1.25rem", marginBottom: "0.85rem" }}>
-                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.45)", fontFamily: G.sans }}>From <strong style={{ color: G.gold }}>{product.minAmount}</strong></span>
-                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.45)", fontFamily: G.sans }}>Up to <strong style={{ color: G.gold }}>{product.maxAmount}</strong></span>
+                    <span style={{ fontSize: "0.78rem", color: G.textMid, fontFamily: G.sans }}>From <strong style={{ color: G.primary }}>{product.minAmount}</strong></span>
+                    <span style={{ fontSize: "0.78rem", color: G.textMid, fontFamily: G.sans }}>Up to <strong style={{ color: G.primary }}>{product.maxAmount}</strong></span>
                   </div>
-                  <span style={{ fontSize: "0.8rem", color: G.gold, fontWeight: "600", fontFamily: G.sans }}>View program →</span>
+                  <span style={{ fontSize: "0.8rem", color: G.primary, fontWeight: "600", fontFamily: G.sans }}>View program →</span>
                 </Link>
               );
             })}
