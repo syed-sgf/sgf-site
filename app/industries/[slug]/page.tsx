@@ -45,26 +45,34 @@ export default async function IndustryPage({
     <main className="bg-white text-slate-900">
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="bg-slate-900 text-white py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-sm uppercase tracking-widest text-[var(--sgf-gold-500)] font-semibold mb-4">
+      {/* ── Hero ──────────────────────────────────────────────────── */}
+      <section style={{ background: "#082B09", padding: "5rem 2rem 4rem", borderBottom: "3px solid #CE9562" }}>
+        <div style={{ maxWidth: "780px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
+            <Link href="/industries" style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Industries</Link>
+            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.8rem" }}>›</span>
+            <span style={{ fontSize: "0.8rem", color: "#CE9562" }}>{industry.title}</span>
+          </div>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#CE9562", fontWeight: "600", marginBottom: "1rem" }}>
             Industry Focus
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-semibold leading-tight">
+          <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", marginBottom: "1.25rem" }}>
             {industry.title}
           </h1>
-          <p className="mt-4 text-xl text-slate-300 max-w-2xl">
+          <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.7", maxWidth: "580px", marginBottom: "0.85rem" }}>
             {industry.subtitle}
           </p>
-          <p className="mt-4 text-slate-400 max-w-2xl leading-relaxed">
+          <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.58)", lineHeight: "1.75", maxWidth: "580px", marginBottom: "2.25rem" }}>
             {industry.description}
           </p>
-          <Link
-            href="/apply"
-            className="inline-block mt-8 bg-[var(--sgf-green-500)] hover:bg-[var(--sgf-green-600)] text-white px-8 py-3 font-semibold transition-colors"
-          >
-            Start Pre-Qualification
-          </Link>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
+            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "#CE9562", color: "#082B09", fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Start Pre-Qualification
+            </Link>
+            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Explore Programs
+            </Link>
+          </div>
         </div>
       </section>
 
