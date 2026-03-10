@@ -79,7 +79,7 @@ export default function HomePage() {
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}CC 0%, ${G.dark}88 55%, ${G.dark}55 100%)`, zIndex: 2 }} />
 
         {/* Hero content: left copy + right GHL form */}
-        <div style={{ position: "relative", zIndex: 3, maxWidth: "1200px", margin: "0 auto", padding: "5rem 2rem 4rem", display: "grid", gridTemplateColumns: "1fr 420px", gap: "4rem", alignItems: "center" }}>
+        <div style={{ position: "relative", zIndex: 3, maxWidth: "1200px", margin: "0 auto", padding: "5rem 2rem 4rem", display: "grid", gridTemplateColumns: "1fr 420px", gap: "4rem", alignItems: "center" }} className="sgf-hero-grid">
 
           {/* Left */}
           <div>
@@ -155,7 +155,7 @@ export default function HomePage() {
       <section style={{ padding: "4rem 2rem", background: G.cream }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader eyebrow="01 — Financing Programs" h2="Capital Structures We Work With" sub="Every program is matched to your business profile, not reverse-engineered from a product sheet." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem", marginBottom: "2rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem", marginBottom: "2rem" }} className="sgf-programs-grid">
             {products.map((p) => (
               <Link key={p.slug} href={`/financing/${p.slug}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 1.25rem", background: "#fff", border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderLeftColor = G.gold; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(8,43,9,0.08)"; }}
@@ -180,7 +180,7 @@ export default function HomePage() {
       <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader eyebrow="02 — Industry Expertise" h2="We Understand How Your Industry Operates" sub="Capital needs differ by sector. We structure financing around how your business actually earns, spends, and grows." light />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem" }} className="sgf-industry-grid">
             {industries.map((ind) => (
               <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
@@ -214,7 +214,7 @@ export default function HomePage() {
             <Link href="#" style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans, textDecoration: "none" }}>Read All Reviews →</Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }} className="sgf-testimonials-grid">
             {testimonials.map((t) => (
               <div key={t.name} style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", padding: "1.75rem" }}>
                 <div style={{ color: G.gold, fontSize: "0.9rem", marginBottom: "1rem" }}>{"★".repeat(t.stars)}</div>

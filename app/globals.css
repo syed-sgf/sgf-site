@@ -316,3 +316,135 @@ p {
     max-width: 100%;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SGF MOBILE RESPONSIVE — covers all pages
+   Mobile-first: max-width 768px stacks everything to 1-col
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── HOMEPAGE ─────────────────────────────────────────── */
+
+  /* Hero: stack copy on top, form below */
+  .sgf-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Financing programs: 2-col → 1-col */
+  .sgf-programs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Industry cards: 5-col → 2-col → 1-col */
+  .sgf-industry-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Testimonials: 2-col → 1-col */
+  .sgf-testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Trust bar: wrap items */
+  .sgf-trust-bar {
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
+  }
+
+  /* ── FINANCING-OPTIONS HUB ────────────────────────────── */
+
+  /* Structure before source: 3-col → 1-col */
+  .fin-insight-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── FINANCING SLUG PAGES ─────────────────────────────── */
+
+  /* Use cases: 3-col → 1-col */
+  .fin-grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Key features + fit assessment: 2-col → 1-col */
+  .fin-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats bar: horizontal → vertical */
+  .fin-stats {
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    padding: 1.25rem !important;
+  }
+
+  /* CTA buttons: side-by-side → stacked */
+  .fin-cta-btns {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  .fin-cta-btns a {
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── INDUSTRY SLUG PAGES ──────────────────────────────── */
+
+  /* Stats bar: 3-col → 1-col */
+  .ind-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Financing needs + products: 2-col → 1-col */
+  .ind-needs-grid,
+  .ind-products-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Odd-center: reset on mobile */
+  .sgf-odd-center > *:last-child:nth-child(odd) {
+    grid-column: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* ── GLOBAL SECTION PADDING ───────────────────────────── */
+  section {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* ── HERO SECTIONS ────────────────────────────────────── */
+  h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
+  }
+
+  /* ── CTA BANDS — all pages ────────────────────────────── */
+  .sgf-cta-band-btns {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  .sgf-cta-band-btns a {
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  /* Extra small — industry 2-col → 1-col */
+  .sgf-industry-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Nav buttons — hide text on very small screens */
+  .sgf-nav-cta-text {
+    display: none !important;
+  }
+}
