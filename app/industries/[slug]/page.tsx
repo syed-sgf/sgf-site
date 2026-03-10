@@ -96,11 +96,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Capital Solutions</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0", textAlign: "center" }}>Relevant Financing Programs</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="ind-products-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="ind-products-grid sgf-odd-center">
             {relatedProducts.map((product) => {
               if (!product) return null;
               return (
-                <Link key={product.slug} href={`/financing/${product.slug}`} style={{ padding: "1.75rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", display: "block" }}>
+                <Link key={product.slug} href={`/financing/${product.slug}`} style={{ padding: "1.75rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.gold}`, borderRadius: "3px", textDecoration: "none", display: "block", transition: "border-color 0.2s" }}>
                   <h3 style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.4rem" }}>{product.title}</h3>
                   <p style={{ fontSize: "0.85rem", color: G.textMid, margin: "0 0 0.85rem", fontFamily: G.sans, lineHeight: "1.5" }}>{product.subtitle}</p>
                   <div style={{ display: "flex", gap: "1.25rem", marginBottom: "0.85rem" }}>
