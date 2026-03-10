@@ -448,3 +448,16 @@ p {
     display: none !important;
   }
 }
+
+/* ── Header responsive ────────────────────────────────────── */
+.sgf-desktop-nav  { display: flex !important; }
+.sgf-desktop-ctas { display: flex !important; }
+.sgf-hamburger    { display: none !important; }
+.sgf-mobile-menu  { display: none !important; }
+
+@media (max-width: 1024px) {
+  .sgf-desktop-nav  { display: none !important; }
+  .sgf-desktop-ctas { display: none !important; }
+  .sgf-hamburger    { display: flex !important; }
+  .sgf-mobile-menu  { display: block !important; }
+}

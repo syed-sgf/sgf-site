@@ -8,34 +8,31 @@ import { industries } from "@/lib/industry-data";
 type MenuKey = "financing" | "industries" | "tools" | null;
 
 const toolLinks = [
-  { label: "Business Loan Calculator", href: "/tools/business-loan-calculator" },
-  { label: "DSCR Calculator",          href: "/tools/dscr-calculator" },
-  { label: "MCA Planning Tool",         href: "/tools/mca-calculator" },
-  { label: "FICA Tip Credit Calculator",href: "/tools/fica-tip-calculator" },
+  { label: "Business Loan Calculator",   href: "/tools/business-loan-calculator" },
+  { label: "DSCR Calculator",            href: "/tools/dscr-calculator" },
+  { label: "MCA Planning Tool",          href: "/tools/mca-calculator" },
+  { label: "FICA Tip Credit Calculator", href: "/tools/fica-tip-calculator" },
 ];
-
-/* ─── Micro-components ──────────────────────────────────────────────── */
 
 function Chevron({ rotated }: { rotated: boolean }) {
   return (
     <svg
-      className={`w-[11px] h-[11px] transition-transform duration-200 ${rotated ? "rotate-180" : ""}`}
-      viewBox="0 0 12 8"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden="true"
+      style={{ width: 11, height: 11, transition: "transform 0.2s", transform: rotated ? "rotate(180deg)" : "rotate(0deg)", flexShrink: 0 }}
+      viewBox="0 0 12 8" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"
     >
       <path d="M1 1l5 5 5-5" />
     </svg>
   );
 }
 
-function DropdownLink({ href, label }: { href: string; label: string }) {
+function DropdownLink({ href, label, onClick }: { href: string; label: string; onClick?: () => void }) {
   return (
     <Link
       href={href}
-      className="block px-5 py-[9px] text-[13px] text-slate-700 hover:bg-slate-50 hover:text-[var(--sgf-green-500)] transition-colors"
+      onClick={onClick}
+      style={{ display: "block", padding: "9px 20px", fontSize: 13, color: "#475569", textDecoration: "none", whiteSpace: "nowrap" }}
+      onMouseEnter={e => { (e.target as HTMLElement).style.color = "#118241"; (e.target as HTMLElement).style.background = "#f8f6f1"; }}
+      onMouseLeave={e => { (e.target as HTMLElement).style.color = "#475569"; (e.target as HTMLElement).style.background = "transparent"; }}
     >
       {label}
     </Link>
@@ -43,43 +40,37 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
 }
 
 function MobileSection({
-  label,
-  isOpen,
-  onToggle,
-  links,
-  allHref,
-  allLabel,
+  label, isOpen, onToggle, links, allHref, allLabel, onLinkClick,
 }: {
-  label: string;
-  isOpen: boolean;
-  onToggle: () => void;
+  label: string; isOpen: boolean; onToggle: () => void;
   links: { label: string; href: string }[];
-  allHref: string;
-  allLabel: string;
+  allHref: string; allLabel: string; onLinkClick: () => void;
 }) {
   return (
-    <div className="border-b border-slate-100 last:border-b-0">
+    <div style={{ borderBottom: "1px solid #f1f5f9" }}>
       <button
-        className="w-full flex items-center justify-between py-4 text-sm font-semibold text-slate-700 hover:text-slate-900"
         onClick={onToggle}
+        style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", background: "none", border: "none", cursor: "pointer" }}
       >
         {label}
         <Chevron rotated={isOpen} />
       </button>
       {isOpen && (
-        <div className="pb-4 pl-3 space-y-0.5">
+        <div style={{ paddingBottom: "1rem", paddingLeft: "0.75rem" }}>
           {links.map(({ label: lbl, href }) => (
             <Link
               key={href}
               href={href}
-              className="block py-1.5 text-[13px] text-slate-600 hover:text-[var(--sgf-green-500)] transition-colors"
+              onClick={onLinkClick}
+              style={{ display: "block", padding: "0.4rem 0", fontSize: 13, color: "#475569", textDecoration: "none" }}
             >
               {lbl}
             </Link>
           ))}
           <Link
             href={allHref}
-            className="block pt-2 mt-1 text-xs font-semibold text-[var(--sgf-green-500)] hover:underline underline-offset-2"
+            onClick={onLinkClick}
+            style={{ display: "block", paddingTop: "0.6rem", marginTop: "0.25rem", fontSize: 12, fontWeight: 700, color: "#118241", textDecoration: "none" }}
           >
             {allLabel} →
           </Link>
@@ -89,11 +80,9 @@ function MobileSection({
   );
 }
 
-/* ─── Header ────────────────────────────────────────────────────────── */
-
 export default function Header() {
-  const [open, setOpen]               = useState<MenuKey>(null);
-  const [mobileOpen, setMobileOpen]   = useState(false);
+  const [open, setOpen]             = useState<MenuKey>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<MenuKey>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -107,61 +96,45 @@ export default function Header() {
   function toggleMobile(key: MenuKey) {
     setMobileSection((prev) => (prev === key ? null : key));
   }
+  function closeMobile() {
+    setMobileOpen(false);
+    setMobileSection(null);
+  }
 
-  const financingLinks = products.map((p) => ({
-    label: p.title,
-    href:  `/financing/${p.slug}`,
-  }));
-  const industryLinks = industries.map((i) => ({
-    label: i.title,
-    href:  `/industries/${i.slug}`,
-  }));
+  const financingLinks = products.map((p) => ({ label: p.title, href: `/financing/${p.slug}` }));
+  const industryLinks  = industries.map((i) => ({ label: i.title, href: `/industries/${i.slug}` }));
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "#fff", borderBottom: "1px solid #e2e8f0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
 
-        {/* ── Logo ── */}
-        <Link href="/" className="flex items-center">
-          <img
-            src="/FB_Logo.png"
-            alt="Starting Gate Financial"
-            style={{ height: "64px", width: "auto" }}
-          />
+        {/* Logo */}
+        <Link href="/" onClick={closeMobile} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+          <img src="/FB_Logo.png" alt="Starting Gate Financial" style={{ height: 56, width: "auto" }} />
         </Link>
 
-        {/* ── Desktop nav ── */}
-        <nav className="nav-links hidden lg:flex items-stretch flex-1 justify-center" aria-label="Primary">
+        {/* Desktop nav */}
+        <nav style={{ display: "flex", alignItems: "stretch", flex: 1, justifyContent: "center" }} className="sgf-desktop-nav">
 
-          {/* Financing */}
-          <div
-            className="relative flex items-stretch"
-            onMouseEnter={() => enter("financing")}
-            onMouseLeave={leave}
-          >
-            <button className="flex items-center gap-[5px] px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors">
+          {/* Financing dropdown */}
+          <div style={{ position: "relative", display: "flex", alignItems: "stretch" }}
+            onMouseEnter={() => enter("financing")} onMouseLeave={leave}>
+            <button style={{ display: "flex", alignItems: "center", gap: 5, padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", background: "none", border: "none", cursor: "pointer" }}>
               Financing <Chevron rotated={open === "financing"} />
             </button>
             {open === "financing" && (
-              <div
-                className="absolute top-full left-0 bg-white border border-slate-200 shadow-lg py-3 z-50"
-                style={{ width: 500 }}
-                onMouseEnter={() => enter("financing")}
-                onMouseLeave={leave}
-              >
-                <p className="px-5 pb-2 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold border-b border-slate-100">
+              <div style={{ position: "absolute", top: "100%", left: 0, background: "#fff", border: "1px solid #e2e8f0", boxShadow: "0 8px 24px rgba(0,0,0,0.08)", padding: "0.75rem 0", zIndex: 50, width: 480 }}
+                onMouseEnter={() => enter("financing")} onMouseLeave={leave}>
+                <p style={{ padding: "0 20px 8px", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "#94a3b8", fontWeight: 600, borderBottom: "1px solid #f1f5f9", marginBottom: 4 }}>
                   Financing Programs
                 </p>
-                <div className="grid grid-cols-2">
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
                   {financingLinks.map(({ label, href }) => (
                     <DropdownLink key={href} href={href} label={label} />
                   ))}
                 </div>
-                <div className="border-t border-slate-100 mt-2 pt-2 px-5">
-                  <Link
-                    href="/financing-options"
-                    className="text-[11px] font-semibold text-[var(--sgf-green-500)] hover:underline underline-offset-2"
-                  >
+                <div style={{ borderTop: "1px solid #f1f5f9", marginTop: 8, padding: "8px 20px 0" }}>
+                  <Link href="/financing-options" style={{ fontSize: 11, fontWeight: 700, color: "#118241", textDecoration: "none" }}>
                     Browse all programs →
                   </Link>
                 </div>
@@ -169,32 +142,23 @@ export default function Header() {
             )}
           </div>
 
-          {/* Industries */}
-          <div
-            className="relative flex items-stretch"
-            onMouseEnter={() => enter("industries")}
-            onMouseLeave={leave}
-          >
-            <button className="flex items-center gap-[5px] px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors">
+          {/* Industries dropdown */}
+          <div style={{ position: "relative", display: "flex", alignItems: "stretch" }}
+            onMouseEnter={() => enter("industries")} onMouseLeave={leave}>
+            <button style={{ display: "flex", alignItems: "center", gap: 5, padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", background: "none", border: "none", cursor: "pointer" }}>
               Industries <Chevron rotated={open === "industries"} />
             </button>
             {open === "industries" && (
-              <div
-                className="absolute top-full left-0 bg-white border border-slate-200 shadow-lg py-3 z-50 w-60"
-                onMouseEnter={() => enter("industries")}
-                onMouseLeave={leave}
-              >
-                <p className="px-5 pb-2 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold border-b border-slate-100">
+              <div style={{ position: "absolute", top: "100%", left: 0, background: "#fff", border: "1px solid #e2e8f0", boxShadow: "0 8px 24px rgba(0,0,0,0.08)", padding: "0.75rem 0", zIndex: 50, width: 240 }}
+                onMouseEnter={() => enter("industries")} onMouseLeave={leave}>
+                <p style={{ padding: "0 20px 8px", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "#94a3b8", fontWeight: 600, borderBottom: "1px solid #f1f5f9", marginBottom: 4 }}>
                   Industries
                 </p>
                 {industryLinks.map(({ label, href }) => (
                   <DropdownLink key={href} href={href} label={label} />
                 ))}
-                <div className="border-t border-slate-100 mt-2 pt-2 px-5">
-                  <Link
-                    href="/industries"
-                    className="text-[11px] font-semibold text-[var(--sgf-green-500)] hover:underline underline-offset-2"
-                  >
+                <div style={{ borderTop: "1px solid #f1f5f9", marginTop: 8, padding: "8px 20px 0" }}>
+                  <Link href="/industries" style={{ fontSize: 11, fontWeight: 700, color: "#118241", textDecoration: "none" }}>
                     All industries →
                   </Link>
                 </div>
@@ -202,32 +166,23 @@ export default function Header() {
             )}
           </div>
 
-          {/* Tools */}
-          <div
-            className="relative flex items-stretch"
-            onMouseEnter={() => enter("tools")}
-            onMouseLeave={leave}
-          >
-            <button className="flex items-center gap-[5px] px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors">
+          {/* Tools dropdown */}
+          <div style={{ position: "relative", display: "flex", alignItems: "stretch" }}
+            onMouseEnter={() => enter("tools")} onMouseLeave={leave}>
+            <button style={{ display: "flex", alignItems: "center", gap: 5, padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", background: "none", border: "none", cursor: "pointer" }}>
               Tools <Chevron rotated={open === "tools"} />
             </button>
             {open === "tools" && (
-              <div
-                className="absolute top-full left-0 bg-white border border-slate-200 shadow-lg py-3 z-50 w-60"
-                onMouseEnter={() => enter("tools")}
-                onMouseLeave={leave}
-              >
-                <p className="px-5 pb-2 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold border-b border-slate-100">
+              <div style={{ position: "absolute", top: "100%", left: 0, background: "#fff", border: "1px solid #e2e8f0", boxShadow: "0 8px 24px rgba(0,0,0,0.08)", padding: "0.75rem 0", zIndex: 50, width: 240 }}
+                onMouseEnter={() => enter("tools")} onMouseLeave={leave}>
+                <p style={{ padding: "0 20px 8px", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "#94a3b8", fontWeight: 600, borderBottom: "1px solid #f1f5f9", marginBottom: 4 }}>
                   Calculators
                 </p>
                 {toolLinks.map(({ label, href }) => (
                   <DropdownLink key={href} href={href} label={label} />
                 ))}
-                <div className="border-t border-slate-100 mt-2 pt-2 px-5">
-                  <Link
-                    href="/tools"
-                    className="text-[11px] font-semibold text-[var(--sgf-green-500)] hover:underline underline-offset-2"
-                  >
+                <div style={{ borderTop: "1px solid #f1f5f9", marginTop: 8, padding: "8px 20px 0" }}>
+                  <Link href="/tools" style={{ fontSize: 11, fontWeight: 700, color: "#118241", textDecoration: "none" }}>
                     All tools →
                   </Link>
                 </div>
@@ -235,58 +190,38 @@ export default function Header() {
             )}
           </div>
 
-          <Link
-            href="/about"
-            className="flex items-center px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="/blog"
-            className="flex items-center px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/contact"
-            className="flex items-center px-4 text-[13px] font-semibold text-slate-700 hover:text-slate-900 transition-colors"
-          >
-            Contact
-          </Link>
+          {["About", "Blog", "Contact"].map((label) => (
+            <Link key={label} href={`/${label.toLowerCase()}`}
+              style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
+              {label}
+            </Link>
+          ))}
         </nav>
 
-        {/* ── Right side ── */}
-        <div className="nav-ctas hidden lg:flex items-center gap-5 shrink-0">
-          <Link
-            href="/partners"
-            className="bg-[#118241] hover:bg-[#082B09] text-white px-5 py-2 text-[13px] font-semibold transition-colors duration-200"
-          >
+        {/* Desktop CTAs */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }} className="sgf-desktop-ctas">
+          <Link href="/partners" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
             Become a Partner
           </Link>
-          <Link
-            href="/apply"
-            className="bg-[#118241] hover:bg-[#082B09] text-white px-5 py-2 text-[13px] font-semibold transition-colors duration-200"
-          >
+          <Link href="/apply" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
             Apply Now
           </Link>
         </div>
 
-        {/* ── Mobile hamburger ── */}
+        {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2 -mr-2 text-slate-700 hover:text-slate-900 transition-colors"
-          onClick={() => {
-            setMobileOpen((prev) => !prev);
-            setMobileSection(null);
-          }}
+          onClick={() => { setMobileOpen(prev => !prev); setMobileSection(null); }}
           aria-label="Toggle navigation"
           aria-expanded={mobileOpen}
+          style={{ display: "none", padding: "0.5rem", background: "none", border: "none", cursor: "pointer", color: "#334155" }}
+          className="sgf-hamburger"
         >
           {mobileOpen ? (
-            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 4l12 12M16 4L4 16" />
             </svg>
           ) : (
-            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 5h14M3 10h14M3 15h14" />
             </svg>
           )}
@@ -294,64 +229,30 @@ export default function Header() {
 
       </div>
 
-      {/* ── Mobile menu ── */}
+      {/* Mobile menu panel */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white max-h-[75vh] overflow-y-auto">
-          <div className="px-6 divide-y divide-slate-100">
-            <MobileSection
-              label="Financing"
-              isOpen={mobileSection === "financing"}
-              onToggle={() => toggleMobile("financing")}
-              links={financingLinks}
-              allHref="/financing-options"
-              allLabel="All financing programs"
-            />
-            <MobileSection
-              label="Industries"
-              isOpen={mobileSection === "industries"}
-              onToggle={() => toggleMobile("industries")}
-              links={industryLinks}
-              allHref="/industries"
-              allLabel="All industries"
-            />
-            <MobileSection
-              label="Tools"
-              isOpen={mobileSection === "tools"}
-              onToggle={() => toggleMobile("tools")}
-              links={toolLinks}
-              allHref="/tools"
-              allLabel="All tools"
-            />
-            <Link
-              href="/about"
-              className="block py-4 text-sm font-semibold text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/blog"
-              className="block py-4 text-sm font-semibold text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/contact"
-              className="block py-4 text-sm font-semibold text-slate-700 hover:text-[var(--sgf-green-500)] transition-colors"
-            >
-              Contact
-            </Link>
+        <div style={{ background: "#fff", borderTop: "1px solid #e2e8f0", maxHeight: "78vh", overflowY: "auto" }} className="sgf-mobile-menu">
+          <div style={{ padding: "0 1.5rem" }}>
+            <MobileSection label="Financing" isOpen={mobileSection === "financing"} onToggle={() => toggleMobile("financing")}
+              links={financingLinks} allHref="/financing-options" allLabel="All financing programs" onLinkClick={closeMobile} />
+            <MobileSection label="Industries" isOpen={mobileSection === "industries"} onToggle={() => toggleMobile("industries")}
+              links={industryLinks} allHref="/industries" allLabel="All industries" onLinkClick={closeMobile} />
+            <MobileSection label="Tools" isOpen={mobileSection === "tools"} onToggle={() => toggleMobile("tools")}
+              links={toolLinks} allHref="/tools" allLabel="All tools" onLinkClick={closeMobile} />
+            {["About", "Blog", "Contact"].map((label) => (
+              <Link key={label} href={`/${label.toLowerCase()}`} onClick={closeMobile}
+                style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
+                {label}
+              </Link>
+            ))}
           </div>
-          <div className="px-6 py-5 border-t border-slate-200 flex flex-col gap-3">
-            <Link
-              href="/partners"
-              className="block text-center py-3 bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold transition-colors duration-200"
-            >
+          <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid #e2e8f0", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <Link href="/partners" onClick={closeMobile}
+              style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
               Become a Partner
             </Link>
-            <Link
-              href="/apply"
-              className="block text-center py-3 bg-[#118241] hover:bg-[#082B09] text-white text-sm font-semibold transition-colors duration-200"
-            >
+            <Link href="/apply" onClick={closeMobile}
+              style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
               Apply Now
             </Link>
           </div>
