@@ -185,7 +185,7 @@ export default function HomePage() {
               <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; }}>
-                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", filter: "brightness(2) sepia(1) saturate(3) hue-rotate(5deg)" }}>{ind.icon}</span>
+                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", filter: "brightness(0) invert(1)" }}>{ind.icon}</span>
                 <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
                 <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>
               </Link>
