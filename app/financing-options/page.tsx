@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { industries } from "@/lib/industry-data";
-import type { Metadata } from "next";
+import { products } from "@/lib/financing-data";
 
-/* ─── Design tokens (matches financing-options page exactly) ────── */
+/* ── Design tokens ──────────────────────────────────────────────── */
 const G = {
   dark: "#082B09",
   primary: "#118241",
@@ -15,439 +14,166 @@ const G = {
   textDark: "#0F172A",
   textMid: "#475569",
   textLight: "#94A3B8",
-  slate50: "#F8FAFC",
   serif: "var(--font-playfair)",
   sans: "var(--font-source-sans)",
 };
 
-/* ─── Hero slideshow images ────────────────────────────────────── */
+/* ── Hero slideshow images ────────────────────────────────────────── */
 const heroSlides = [
-  {
-    url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=90&auto=format&fit=crop",
-    label: "Construction",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=90&auto=format&fit=crop",
-    label: "Healthcare",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90&auto=format&fit=crop",
-    label: "Food & Beverage",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=90&auto=format&fit=crop",
-    label: "Commercial Real Estate",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=90&auto=format&fit=crop",
-    label: "Oil & Gas",
-  },
+  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=90&auto=format&fit=crop", label: "Commercial Real Estate" },
+  { url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=90&auto=format&fit=crop", label: "Construction" },
+  { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=90&auto=format&fit=crop", label: "Business Capital" },
+  { url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=90&auto=format&fit=crop", label: "Energy & Industry" },
+  { url: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=90&auto=format&fit=crop", label: "Financial Advisory" },
 ];
 
-/* ─── Industry SVG icons ───────────────────────────────────────── */
-const icons: Record<string, React.ReactNode> = {
-  construction: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="w-7 h-7">
-      <path d="M2 20h20" />
-      <path d="M4 20V10l8-6 8 6v10" />
-      <rect x="8" y="13" width="8" height="7" rx="0.5" />
-    </svg>
-  ),
-  "food-beverage": (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="w-7 h-7">
-      <path d="M3 2v7c0 1.5 2 3 2 3v9a1 1 0 002 0v-9s2-1.5 2-3V2" />
-      <path d="M8 2v5" />
-      <path d="M13 2c0 0 3 2.5 3 6s-3 6-3 6v7a1 1 0 002 0V2" />
-    </svg>
-  ),
-  healthcare: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="w-7 h-7">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M12 8v8M8 12h8" />
-    </svg>
-  ),
-  "oil-gas": (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="w-7 h-7">
-      <path d="M12 2C10 7 6 10 6 15a6 6 0 0012 0c0-5-4-8-6-13z" />
-      <path d="M12 12v5" />
-    </svg>
-  ),
-  "real-estate-investors": (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="w-7 h-7">
-      <path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1v-9.5z" />
-      <path d="M9 21V13h6v8" />
-    </svg>
-  ),
+/* ── Program icons ──────────────────────────────────────────────── */
+const programIcons: Record<string, string> = {
+  "business-loc": "◈",
+  "commercial-real-estate": "⬡",
+  "sba-loans": "★",
+  "equipment-financing": "⚙",
+  "fix-and-flip": "⌂",
+  "dscr-rental": "⊞",
+  "franchise-financing": "◉",
+  "accounts-receivable": "⊜",
+  "startup-financing": "◎",
+  "merchant-cash-advance": "⟁",
 };
 
-/* ─── Hero Slideshow component ─────────────────────────────────── */
+/* ── SectionHeader ──────────────────────────────────────────────── */
+function SectionHeader({
+  eyebrow, h2, sub, light = false,
+}: { eyebrow: string; h2: string; sub?: string; light?: boolean }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+      <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>{eyebrow}</p>
+      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.8rem,3vw,2.4rem)", fontWeight: "700", color: light ? "#fff" : G.textDark, lineHeight: "1.2", textAlign: "center", margin: "0 0 0.75rem" }}>{h2}</h2>
+      {sub && <p style={{ fontSize: "1rem", color: light ? "rgba(255,255,255,0.75)" : G.textMid, maxWidth: "520px", lineHeight: "1.7", fontFamily: G.sans, textAlign: "center", margin: 0 }}>{sub}</p>}
+    </div>
+  );
+}
+
+/* ── HeroSlideshow ──────────────────────────────────────────────── */
 function HeroSlideshow() {
   const [current, setCurrent] = useState(0);
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setCurrent((p) => (p + 1) % heroSlides.length), 5000);
+    return () => clearInterval(t);
   }, []);
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "540px",
-        overflow: "hidden",
-      }}
-    >
-      {/* Slides — img tags for LCP/lazy-load control */}
+    <section style={{ position: "relative", height: "480px", overflow: "hidden", background: G.dark }}>
+      {/* Gold accent line */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`, zIndex: 10 }} />
+
+      {/* Slides */}
       {heroSlides.map((slide, i) => (
-        <div
-          key={slide.url}
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: i === current ? 1 : 0,
-            transition: "opacity 1.2s ease-in-out",
-          }}
-        >
+        <div key={slide.url} style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, transition: "opacity 1.2s ease-in-out" }}>
           <img
             src={slide.url}
             alt={slide.label}
             loading={i === 0 ? "eager" : "lazy"}
             fetchPriority={i === 0 ? "high" : "low"}
             decoding={i === 0 ? "sync" : "async"}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
-              display: "block",
-            }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
           />
         </div>
       ))}
 
-      {/* Dark overlay — SGF green tinted */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to bottom, rgba(8,43,9,0.72) 0%, rgba(8,43,9,0.55) 60%, rgba(8,43,9,0.75) 100%)",
-          zIndex: 1,
-        }}
-      />
+      {/* Overlay */}
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}E8 0%, ${G.dark}B0 60%, ${G.dark}80 100%)`, zIndex: 2 }} />
 
-      {/* Gold accent line — top */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: `linear-gradient(to right, transparent, ${G.gold}, transparent)`,
-          zIndex: 2,
-        }}
-      />
-
-      {/* Hero content — centered */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 2,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "2rem",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "11px",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: G.gold,
-            fontWeight: "600",
-            marginBottom: "1.25rem",
-            fontFamily: G.sans,
-          }}
-        >
-          Industry Focus
-        </p>
-
-        <h1
-          style={{
-            fontFamily: G.serif,
-            fontSize: "clamp(2.4rem, 4.5vw, 3.5rem)",
-            fontWeight: "700",
-            color: "white",
-            lineHeight: "1.1",
-            letterSpacing: "-0.02em",
-            marginBottom: "1.5rem",
-            maxWidth: "700px",
-          }}
-        >
-          Industries We Finance
+      {/* Content */}
+      <div style={{ position: "relative", zIndex: 3, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", padding: "0 2rem", textAlign: "center" }}>
+        <p style={{ fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>Financing Programs</p>
+        <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem,4vw,3rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", maxWidth: "700px", marginBottom: "1.25rem" }}>
+          Capital Structures Built for Your Business
         </h1>
-
-        <p
-          style={{
-            fontSize: "1.05rem",
-            color: "rgba(255,255,255,0.78)",
-            maxWidth: "520px",
-            lineHeight: "1.75",
-            fontFamily: G.sans,
-            marginBottom: "2.5rem",
-          }}
-        >
-          Every industry has its own capital rhythm. We structure financing around how your
-          sector actually operates — not generic loan templates.
+        <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", maxWidth: "540px", lineHeight: "1.7", fontFamily: G.sans, marginBottom: "2rem" }}>
+          SGF works as a capital advisor — not a product vendor. Every engagement starts with understanding how the capital will be used.
         </p>
-
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
-          <Link
-            href="/apply"
-            style={{
-              display: "inline-block",
-              background: G.gold,
-              color: G.dark,
-              padding: "0.85rem 2.25rem",
-              fontSize: "0.85rem",
-              fontWeight: "700",
-              letterSpacing: "0.04em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              fontFamily: G.sans,
-            }}
-          >
+          <Link href="/apply" style={{ display: "inline-block", padding: "0.85rem 2rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
             Start Pre-Qualification
           </Link>
-          <Link
-            href="/financing-options"
-            style={{
-              display: "inline-block",
-              background: "transparent",
-              color: "white",
-              border: "1px solid rgba(255,255,255,0.45)",
-              padding: "0.85rem 2.25rem",
-              fontSize: "0.85rem",
-              fontWeight: "600",
-              letterSpacing: "0.04em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              fontFamily: G.sans,
-            }}
-          >
-            Explore Programs
+          <Link href="/industries" style={{ display: "inline-block", padding: "0.85rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.5)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+            Browse by Industry
           </Link>
         </div>
-
-        {/* Slide dots */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "1.75rem",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            gap: "8px",
-          }}
-        >
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              style={{
-                width: i === current ? "28px" : "8px",
-                height: "8px",
-                borderRadius: "4px",
-                background: i === current ? G.gold : "rgba(255,255,255,0.4)",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transition: "all 0.3s ease",
-              }}
-              aria-label={`Slide ${i + 1}: ${heroSlides[i].label}`}
-            />
-          ))}
-        </div>
       </div>
-    </div>
+
+      {/* Dot nav */}
+      <div style={{ position: "absolute", bottom: "1.5rem", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "0.5rem", zIndex: 4 }}>
+        {heroSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? G.gold : "rgba(255,255,255,0.4)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 
-/* ─── Page ─────────────────────────────────────────────────────── */
-export default function IndustriesHubPage() {
+/* ── Main Page ──────────────────────────────────────────────────── */
+export default function FinancingOptionsPage() {
+  const isLastOdd = products.length % 2 !== 0;
+
   return (
-    <main>
-      {/* ── HERO — image slideshow ──────────────────────────────── */}
+    <main style={{ background: G.cream, fontFamily: G.sans }}>
+      {/* Hero */}
       <HeroSlideshow />
 
-      {/* ── INDUSTRY CARDS GRID ─────────────────────────────────── */}
-      <section
-        style={{
-          background: G.cream,
-          padding: "5rem 2rem",
-          borderBottom: `1px solid ${G.border}`,
-        }}
-      >
+      {/* Programs Grid */}
+      <section style={{ padding: "4rem 2rem" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          {/* Section heading — centered */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "3.5rem",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "11px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: G.gold,
-                fontWeight: "600",
-                marginBottom: "1rem",
-                fontFamily: G.sans,
-              }}
-            >
-              Select Your Sector
-            </p>
-            <h2
-              style={{
-                fontFamily: G.serif,
-                fontSize: "clamp(1.9rem, 3vw, 2.5rem)",
-                fontWeight: "700",
-                color: G.textDark,
-                lineHeight: "1.2",
-                marginBottom: "1rem",
-                textAlign: "center",
-              }}
-            >
-              Industries We Serve
-            </h2>
-            <p
-              style={{
-                fontSize: "1rem",
-                color: G.textMid,
-                maxWidth: "480px",
-                lineHeight: "1.75",
-                fontFamily: G.sans,
-                textAlign: "center",
-              }}
-            >
-              Select your sector to see the programs, structures, and lender relationships
-              most relevant to your business.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Core Programs"
+            h2="Financing Programs We Structure"
+            sub="Each program represents a category of capital we actively structure and submit through our lender network."
+          />
 
-          {/* Industry grid — 2-col, last odd card centered */}
-          <div
-            className="industries-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "1.5rem",
-            }}
-          >
-            {industries.map((industry, idx) => {
-              const isLastOdd =
-                idx === industries.length - 1 && industries.length % 2 !== 0;
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+            {products.map((program, idx) => {
+              const isLastAndOdd = isLastOdd && idx === products.length - 1;
               return (
                 <Link
-                  key={industry.slug}
-                  href={`/industries/${industry.slug}`}
+                  key={program.slug}
+                  href={`/financing/${program.slug}`}
                   style={{
-                    gridColumn: isLastOdd ? "1 / -1" : undefined,
-                    maxWidth: isLastOdd ? "560px" : undefined,
-                    margin: isLastOdd ? "0 auto" : undefined,
-                    width: isLastOdd ? "100%" : undefined,
-                    display: "flex",
-                    gap: "1.5rem",
-                    alignItems: "flex-start",
+                    gridColumn: isLastAndOdd ? "1 / -1" : undefined,
+                    maxWidth: isLastAndOdd ? "560px" : undefined,
+                    margin: isLastAndOdd ? "0 auto" : undefined,
+                    width: isLastAndOdd ? "100%" : undefined,
+                    display: "block",
+                    background: "#fff",
                     border: `1px solid ${G.border}`,
-                    padding: "2rem",
+                    borderTop: `3px solid ${G.primary}`,
+                    borderRadius: "4px",
+                    padding: "1.5rem",
                     textDecoration: "none",
-                    background: "white",
-                    transition: "border-color 0.2s, box-shadow 0.2s",
+                    transition: "box-shadow 0.2s, border-color 0.2s",
                   }}
-                  className="industry-card-link"
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(8,43,9,0.12)"; (e.currentTarget as HTMLElement).style.borderTopColor = G.gold; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; (e.currentTarget as HTMLElement).style.borderTopColor = G.primary; }}
                 >
-                  {/* Icon */}
-                  <div
-                    style={{
-                      flexShrink: 0,
-                      width: "48px",
-                      height: "48px",
-                      border: `1px solid ${G.border}`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: G.primary,
-                      background: G.cream,
-                    }}
-                  >
-                    {icons[industry.slug]}
-                  </div>
-
-                  <div style={{ minWidth: 0 }}>
-                    <h3
-                      style={{
-                        fontFamily: G.serif,
-                        fontSize: "1.2rem",
-                        fontWeight: "700",
-                        color: G.textDark,
-                        marginBottom: "0.35rem",
-                        lineHeight: "1.3",
-                      }}
-                    >
-                      {industry.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "0.82rem",
-                        color: G.gold,
-                        fontWeight: "600",
-                        marginBottom: "0.75rem",
-                        fontFamily: G.sans,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.04em",
-                      }}
-                    >
-                      {industry.subtitle}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "0.9rem",
-                        color: G.textMid,
-                        lineHeight: "1.65",
-                        fontFamily: G.sans,
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {industry.description}
-                    </p>
-                    <p
-                      style={{
-                        marginTop: "1rem",
-                        fontSize: "0.83rem",
-                        fontWeight: "700",
-                        color: G.primary,
-                        fontFamily: G.sans,
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      View financing options →
-                    </p>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                    <div style={{ width: "40px", height: "40px", borderRadius: "6px", background: G.cream, border: `1px solid ${G.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", color: G.primary, flexShrink: 0 }}>
+                      {programIcons[program.slug] || "◈"}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontFamily: G.serif, fontSize: "1.15rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.25rem", lineHeight: "1.3" }}>{program.title}</h3>
+                      <p style={{ fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", color: G.gold, fontWeight: "600", margin: "0 0 0.6rem", fontFamily: G.sans }}>{program.tagline || program.category}</p>
+                      <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.6", margin: "0 0 1rem" }}>
+                        {program.description?.substring(0, 110)}{program.description?.length > 110 ? "…" : ""}
+                      </p>
+                      <span style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans }}>
+                        View Program Details →
+                      </span>
+                    </div>
                   </div>
                 </Link>
               );
@@ -456,247 +182,48 @@ export default function IndustriesHubPage() {
         </div>
       </section>
 
-      {/* ── WHY INDUSTRY CONTEXT MATTERS ─────────────────────────── */}
-      <section
-        style={{
-          background: G.dark,
-          padding: "5rem 2rem",
-          borderTop: `3px solid ${G.gold}`,
-          borderBottom: `3px solid ${G.gold}`,
-        }}
-      >
+      {/* Dark insight section */}
+      <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          {/* Centered heading */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "3.5rem",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "11px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: G.gold,
-                fontWeight: "600",
-                marginBottom: "1rem",
-                fontFamily: G.sans,
-              }}
-            >
-              Why It Matters
-            </p>
-            <h2
-              style={{
-                fontFamily: G.serif,
-                fontSize: "clamp(1.9rem, 3vw, 2.5rem)",
-                fontWeight: "700",
-                color: "white",
-                lineHeight: "1.2",
-                textAlign: "center",
-                marginBottom: "1rem",
-              }}
-            >
-              Industry Context Shapes Capital Structure
-            </h2>
-            <p
-              style={{
-                fontSize: "1rem",
-                color: "rgba(255,255,255,0.55)",
-                maxWidth: "480px",
-                lineHeight: "1.75",
-                fontFamily: G.sans,
-                textAlign: "center",
-              }}
-            >
-              Lenders underwrite differently by sector. Knowing your industry means knowing
-              which lenders fit, how they evaluate risk, and what documentation they require.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="How We Think About Capital"
+            h2="Structure Before Source"
+            sub="The right lender means nothing without the right structure. We start with use of funds, repayment horizon, and risk profile — then match to lenders."
+            light
+          />
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "2rem",
-            }}
-            className="fo-structure-grid"
-          >
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
             {[
-              {
-                n: "01",
-                title: "Cash Flow Patterns",
-                body: "Construction draws differently than a restaurant. Healthcare reimbursement cycles differ from oil & gas contract payments. Lenders evaluate repayment capacity against your industry's actual revenue timing.",
-              },
-              {
-                n: "02",
-                title: "Asset Intensity",
-                body: "Equipment-heavy industries — construction, oil & gas, trucking — have stronger asset-backed financing options. Service businesses rely more on cash flow and receivables-based structures.",
-              },
-              {
-                n: "03",
-                title: "Lender Familiarity",
-                body: "Not every lender understands every industry. We route files to lenders with documented experience in your sector — which means faster underwriting and fewer unnecessary conditions.",
-              },
+              { n: "01", title: "Working Capital vs. Asset-Backed", body: "Cash flow financing is repaid from operations. Asset-backed financing is secured by something tangible. The right structure depends on what the capital is actually being used for." },
+              { n: "02", title: "Short-Term vs. Long-Term", body: "Match the repayment horizon to the purpose. Inventory gaps need short-term structures. Real estate and equipment need amortization that matches the asset's useful life." },
+              { n: "03", title: "Startup vs. Established", body: "Lenders underwrite startups and established businesses differently. Time in business, revenue history, and collateral availability shape which programs apply." },
             ].map((item) => (
-              <div
-                key={item.n}
-                style={{
-                  padding: "2rem",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "rgba(255,255,255,0.04)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "clamp(2.5rem, 3vw, 3rem)",
-                    fontFamily: G.serif,
-                    fontWeight: "700",
-                    color: G.gold,
-                    opacity: 0.35,
-                    lineHeight: "1",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {item.n}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: G.serif,
-                    fontSize: "1.15rem",
-                    fontWeight: "700",
-                    color: "white",
-                    marginBottom: "0.85rem",
-                    lineHeight: "1.3",
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "0.92rem",
-                    color: "rgba(255,255,255,0.6)",
-                    lineHeight: "1.75",
-                    fontFamily: G.sans,
-                  }}
-                >
-                  {item.body}
-                </p>
+              <div key={item.n} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", padding: "1.75rem" }}>
+                <p style={{ fontSize: "2rem", fontFamily: G.serif, color: G.gold, opacity: 0.6, margin: "0 0 0.75rem", lineHeight: 1 }}>{item.n}</p>
+                <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem" }}>{item.title}</h3>
+                <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.65)", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────── */}
-      <section
-        style={{
-          background: G.cream,
-          padding: "5rem 2rem",
-          borderBottom: `1px solid ${G.border}`,
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "600px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          {/* Centered heading */}
-          <p
-            style={{
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: G.gold,
-              fontWeight: "600",
-              marginBottom: "1rem",
-              fontFamily: G.sans,
-            }}
-          >
-            Don&apos;t See Your Industry?
+      {/* CTA band */}
+      <section style={{ background: G.dark, padding: "3.5rem 2rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Get Started</p>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Not Sure Which Program Fits?</h2>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
+            Start a pre-qualification conversation. We'll identify the right structure based on your business profile, capital need, and timeline.
           </p>
-          <h2
-            style={{
-              fontFamily: G.serif,
-              fontSize: "clamp(1.9rem, 3vw, 2.4rem)",
-              fontWeight: "700",
-              color: G.textDark,
-              lineHeight: "1.2",
-              marginBottom: "1.25rem",
-              textAlign: "center",
-            }}
-          >
-            We Work Across Many Sectors
-          </h2>
-          <p
-            style={{
-              fontSize: "1rem",
-              color: G.textMid,
-              maxWidth: "440px",
-              lineHeight: "1.75",
-              fontFamily: G.sans,
-              marginBottom: "2.5rem",
-              textAlign: "center",
-            }}
-          >
-            Start a pre-qualification and we&apos;ll identify the right programs for your
-            business — regardless of industry classification.
-          </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
-            <Link
-              href="/apply"
-              style={{
-                display: "inline-block",
-                background: G.dark,
-                color: "white",
-                padding: "0.9rem 2.5rem",
-                fontSize: "0.85rem",
-                fontWeight: "700",
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: G.sans,
-              }}
-            >
-              Start Pre-Qualification
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Request a Financing Review
             </Link>
-            <Link
-              href="/financing-options"
-              style={{
-                display: "inline-block",
-                background: "transparent",
-                color: G.dark,
-                border: `1px solid ${G.border}`,
-                padding: "0.9rem 2.5rem",
-                fontSize: "0.85rem",
-                fontWeight: "600",
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: G.sans,
-              }}
-            >
-              Browse Programs
+            <Link href="/industries" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Browse by Industry
             </Link>
           </div>
-          <p
-            style={{
-              marginTop: "2rem",
-              fontSize: "0.78rem",
-              color: G.textLight,
-              fontFamily: G.sans,
-            }}
-          >
-            Financing is subject to underwriting, lender guidelines, and eligibility.
-          </p>
         </div>
       </section>
     </main>
