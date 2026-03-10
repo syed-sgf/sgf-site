@@ -198,10 +198,10 @@ export default function FinancingOptionsPage() {
               { n: "02", title: "Short-Term vs. Long-Term", body: "Match the repayment horizon to the purpose. Inventory gaps need short-term structures. Real estate and equipment need amortization that matches the asset's useful life." },
               { n: "03", title: "Startup vs. Established", body: "Lenders underwrite startups and established businesses differently. Time in business, revenue history, and collateral availability shape which programs apply." },
             ].map((item) => (
-              <div key={item.n} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", padding: "1.75rem" }}>
-                <p style={{ fontSize: "2rem", fontFamily: G.serif, color: G.gold, opacity: 0.6, margin: "0 0 0.75rem", lineHeight: 1 }}>{item.n}</p>
-                <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem" }}>{item.title}</h3>
-                <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.65)", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
+              <div key={item.n} style={{ background: "#fff", border: "1px solid #E2DDD6", borderTop: "3px solid #118241", borderRadius: "3px", padding: "1.75rem" }}>
+                <p style={{ fontSize: "2rem", fontFamily: G.serif, color: "#118241", opacity: 0.5, margin: "0 0 0.75rem", lineHeight: 1 }}>{item.n}</p>
+                <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: "700", color: "#0F172A", margin: "0 0 0.75rem" }}>{item.title}</h3>
+                <p style={{ fontSize: "0.9rem", color: "#475569", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
               </div>
             ))}
           </div>
