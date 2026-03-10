@@ -76,7 +76,7 @@ export default function HomePage() {
               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
           </div>
         ))}
-        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}F0 0%, ${G.dark}C0 55%, ${G.dark}80 100%)`, zIndex: 2 }} />
+        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}CC 0%, ${G.dark}88 55%, ${G.dark}55 100%)`, zIndex: 2 }} />
 
         {/* Hero content: left copy + right GHL form */}
         <div style={{ position: "relative", zIndex: 3, maxWidth: "1200px", margin: "0 auto", padding: "5rem 2rem 4rem", display: "grid", gridTemplateColumns: "1fr 420px", gap: "4rem", alignItems: "center" }}>
@@ -185,7 +185,7 @@ export default function HomePage() {
               <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; }}>
-                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem" }}>{ind.icon}</span>
+                <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", filter: "brightness(2) sepia(1) saturate(3) hue-rotate(5deg)" }}>{ind.icon}</span>
                 <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
                 <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>
               </Link>
@@ -226,7 +226,7 @@ export default function HomePage() {
 
       {/* ── CTA BAND ── */}
       <section style={{ background: G.dark, padding: "3.5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
-        <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
+        <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Ready to Move Forward</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Let's Talk About Your Capital Need</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
