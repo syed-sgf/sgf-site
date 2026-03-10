@@ -136,7 +136,7 @@ export default function FinancingOptionsPage() {
             sub="Each program represents a category of capital we actively structure and submit through our lender network."
           />
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }} className="sgf-programs-grid">
             {products.map((program, idx) => {
               const isLastAndOdd = isLastOdd && idx === products.length - 1;
               return (
@@ -191,7 +191,7 @@ export default function FinancingOptionsPage() {
             sub="The right lender means nothing without the right structure. We start with use of funds, repayment horizon, and risk profile — then match to lenders."
           />
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }} className="fin-insight-grid">
             {[
               { n: "01", title: "Working Capital vs. Asset-Backed", body: "Cash flow financing is repaid from operations. Asset-backed financing is secured by something tangible. The right structure depends on what the capital is actually being used for." },
               { n: "02", title: "Short-Term vs. Long-Term", body: "Match the repayment horizon to the purpose. Inventory gaps need short-term structures. Real estate and equipment need amortization that matches the asset's useful life." },

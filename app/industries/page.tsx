@@ -81,7 +81,7 @@ export default function IndustriesPage() {
       <section style={{ padding: "4rem 2rem", background: G.cream }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader eyebrow="Select Your Sector" h2="Find Financing Built for Your Business" sub="Each industry page outlines the programs, structures, and capital considerations most relevant to how you operate." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }} className="sgf-programs-grid">
             {industries.map((ind, idx) => {
               const isLast = isLastOdd && idx === industries.length - 1;
               return (
@@ -109,7 +109,7 @@ export default function IndustriesPage() {
       <section style={{ background: G.cream, padding: "4rem 2rem", borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader eyebrow="Our Approach" h2="Industry Context Drives Capital Structure" sub="Lenders evaluate risk through the lens of your sector. We know what they look for — and how to position your file accordingly." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }} className="fin-insight-grid">
             {[
               { title: "Sector-Specific Underwriting", body: "Every industry has different revenue patterns, collateral types, and risk profiles. We structure your file around what lenders in your sector actually require." },
               { title: "Lender Network Alignment", body: "We match your industry to lenders who specialize in it — not generalist banks unfamiliar with your business model or seasonal cash flow patterns." },
