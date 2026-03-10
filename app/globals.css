@@ -282,3 +282,10 @@ p {
     display: none !important;
   }
 }
+
+/* ── Industry slug page — mobile responsive ───────────────── */
+@media (max-width: 768px) {
+  .ind-stats-grid   { grid-template-columns: 1fr !important; }
+  .ind-needs-grid   { grid-template-columns: 1fr !important; }
+  .ind-products-grid { grid-template-columns: 1fr !important; }
+}
