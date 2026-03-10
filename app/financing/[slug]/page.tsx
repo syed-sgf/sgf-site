@@ -139,7 +139,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
           <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.75", maxWidth: "600px", fontFamily: G.sans, textAlign: "center", marginBottom: "2.5rem" }}>{product.description}</p>
 
           {/* Stats bar */}
-          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)"} as React.CSSProperties} className="fin-stats" style={{display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: "4px", width: "100%" }}>
+          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center", padding: "1.5rem 2rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: "4px", width: "100%" }} className="fin-stats">
             {[
               { label: "Loan Range", value: `${product.minAmount} – ${product.maxAmount}` },
               { label: "Term Range", value: product.termRange },
