@@ -183,7 +183,7 @@ export default function FinancingOptionsPage() {
       </section>
 
       {/* Dark insight section */}
-      <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
+      <section style={{ background: G.cream, padding: "4rem 2rem", borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader
             eyebrow="How We Think About Capital"
@@ -213,7 +213,7 @@ export default function FinancingOptionsPage() {
         <div style={{ maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
           <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Get Started</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Not Sure Which Program Fits?</h2>
-          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
+          <p style={{ fontSize: "1rem", color: G.textMid, lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
             Start a pre-qualification conversation. We'll identify the right structure based on your business profile, capital need, and timeline.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
