@@ -69,10 +69,7 @@ export default function IndustriesPage() {
               <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? G.gold : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} aria-label={`Slide ${i + 1}`} />
             ))}
           </div>
-          <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", justifyContent: "center" }}>
-            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2rem", background: G.primary, color: "#fff", fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification →</Link>
-            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.45)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Explore Financing Options →</Link>
-          </div>
+
           <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", justifyContent: "center" }}>
             <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2rem", background: G.primary, color: "#fff", fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification →</Link>
             <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.45)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Explore Financing Options →</Link>
@@ -109,18 +106,18 @@ export default function IndustriesPage() {
       </section>
 
       {/* DARK INSIGHT SECTION */}
-      <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
+      <section style={{ background: G.cream, padding: "4rem 2rem", borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <SectionHeader eyebrow="Our Approach" h2="Industry Context Drives Capital Structure" sub="Lenders evaluate risk through the lens of your sector. We know what they look for — and how to position your file accordingly." light />
+          <SectionHeader eyebrow="Our Approach" h2="Industry Context Drives Capital Structure" sub="Lenders evaluate risk through the lens of your sector. We know what they look for — and how to position your file accordingly." />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
             {[
               { title: "Sector-Specific Underwriting", body: "Every industry has different revenue patterns, collateral types, and risk profiles. We structure your file around what lenders in your sector actually require." },
               { title: "Lender Network Alignment", body: "We match your industry to lenders who specialize in it — not generalist banks unfamiliar with your business model or seasonal cash flow patterns." },
               { title: "Program Fit Over Product Push", body: "We don't start with a product and fit your business into it. We start with your use case, your industry, and build the capital structure from there." },
             ].map((item) => (
-              <div key={item.title} style={{ padding: "1.75rem", background: "rgba(255,255,255,0.04)", border: `1px solid rgba(206,149,98,0.3)`, borderRadius: "4px" }}>
-                <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem" }}>{item.title}</p>
-                <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.68)", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
+              <div key={item.title} style={{ padding: "1.75rem", background: "#fff", border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "4px" }}>
+                <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem" }}>{item.title}</p>
+                <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
               </div>
             ))}
           </div>
