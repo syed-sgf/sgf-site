@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact Starting Gate Financial | Schedule a Consultation",
-  description:
-    "Speak with a commercial financing specialist at Starting Gate Financial. Based in Richardson, TX — serving business owners nationwide.",
-};
+import Link from "next/link";
+import { useState } from "react";
 
 const G = {
   green: "#118241",
@@ -15,13 +11,59 @@ const G = {
   sans:  "var(--font-source-sans)",
 };
 
+function ContactCard({
+  icon,
+  title,
+  body,
+  detail,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  body: string;
+  detail: React.ReactNode;
+}) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "#fff",
+        border: `1px solid ${hovered ? G.gold : "#e2e8f0"}`,
+        padding: "2rem",
+        textAlign: "center",
+        transition: "border-color 0.2s",
+        cursor: "default",
+      }}
+    >
+      <div style={{
+        width: 48, height: 48, borderRadius: "50%",
+        background: G.green, display: "flex", alignItems: "center",
+        justifyContent: "center", margin: "0 auto 1.25rem",
+      }}>
+        {icon}
+      </div>
+      <h3 style={{
+        fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700,
+        color: G.dark, marginBottom: "0.5rem",
+      }}>
+        {title}
+      </h3>
+      <p style={{ fontSize: "0.875rem", color: "#64748b", marginBottom: "1rem", lineHeight: 1.6 }}>
+        {body}
+      </p>
+      {detail}
+    </div>
+  );
+}
+
 export default function ContactPage() {
   return (
     <main style={{ fontFamily: G.sans, color: "#1e293b" }}>
 
       {/* ── SECTION 1: Hero ─────────────────────────────────────── */}
-      <section style={{ background: G.dark, padding: "5rem 2rem 4rem" }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+      <section style={{ background: G.dark, padding: "5rem 2rem 4rem", textAlign: "center" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <p style={{
             fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
             color: G.gold, fontWeight: 600, fontFamily: G.sans, marginBottom: "1.25rem",
@@ -49,104 +91,66 @@ export default function ContactPage() {
 
       {/* ── SECTION 2: Contact Methods ──────────────────────────── */}
       <section style={{ background: "#f8f6f1", padding: "3.5rem 2rem" }}>
-        <div style={{
-          maxWidth: 1100, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem",
-        }} className="sgf-contact-methods">
-
-          {/* Phone */}
-          <div style={{
-            background: "#fff", border: "1px solid #e2e8f0",
-            padding: "2rem", textAlign: "center",
-          }}>
-            <div style={{
-              width: 48, height: 48, borderRadius: "50%",
-              background: G.green, display: "flex", alignItems: "center",
-              justifyContent: "center", margin: "0 auto 1.25rem",
-            }}>
+        <div
+          style={{
+            maxWidth: 1100, margin: "0 auto",
+            display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem",
+          }}
+          className="sgf-contact-methods"
+        >
+          <ContactCard
+            title="Call Us Directly"
+            body="Speak with a financing specialist during business hours."
+            icon={
               <svg width="22" height="22" fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
               </svg>
-            </div>
-            <h3 style={{
-              fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700,
-              color: G.dark, marginBottom: "0.5rem",
-            }}>
-              Call Us Directly
-            </h3>
-            <p style={{ fontSize: "0.875rem", color: "#64748b", marginBottom: "1rem", lineHeight: 1.6 }}>
-              Speak with a financing specialist during business hours.
-            </p>
-            <a href="tel:+12149231694" style={{
-              fontWeight: 700, color: G.green, textDecoration: "none",
-              fontSize: "1.05rem", fontFamily: G.sans,
-            }}>
-              +1 (214) 923-1694
-            </a>
-          </div>
+            }
+            detail={
+              <a
+                href="tel:+12149231694"
+                style={{ fontWeight: 700, color: G.green, textDecoration: "none", fontSize: "1.05rem" }}
+              >
+                +1 (214) 923-1694
+              </a>
+            }
+          />
 
-          {/* Email */}
-          <div style={{
-            background: "#fff", border: "1px solid #e2e8f0",
-            padding: "2rem", textAlign: "center",
-          }}>
-            <div style={{
-              width: 48, height: 48, borderRadius: "50%",
-              background: G.green, display: "flex", alignItems: "center",
-              justifyContent: "center", margin: "0 auto 1.25rem",
-            }}>
+          <ContactCard
+            title="Send an Email"
+            body="We respond to all inquiries within one business day."
+            icon={
               <svg width="22" height="22" fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
-            </div>
-            <h3 style={{
-              fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700,
-              color: G.dark, marginBottom: "0.5rem",
-            }}>
-              Send an Email
-            </h3>
-            <p style={{ fontSize: "0.875rem", color: "#64748b", marginBottom: "1rem", lineHeight: 1.6 }}>
-              We respond to all inquiries within one business day.
-            </p>
-            <a href="mailto:info@startinggatefinancial.com" style={{
-              fontWeight: 700, color: G.green, textDecoration: "none",
-              fontSize: "0.95rem", fontFamily: G.sans,
-            }}>
-              info@startinggatefinancial.com
-            </a>
-          </div>
+            }
+            detail={
+              <a
+                href="mailto:info@startinggatefinancial.com"
+                style={{ fontWeight: 700, color: G.green, textDecoration: "none", fontSize: "0.95rem" }}
+              >
+                info@startinggatefinancial.com
+              </a>
+            }
+          />
 
-          {/* Office */}
-          <div style={{
-            background: "#fff", border: "1px solid #e2e8f0",
-            padding: "2rem", textAlign: "center",
-          }}>
-            <div style={{
-              width: 48, height: 48, borderRadius: "50%",
-              background: G.green, display: "flex", alignItems: "center",
-              justifyContent: "center", margin: "0 auto 1.25rem",
-            }}>
+          <ContactCard
+            title="Our Office"
+            body="Based in Richardson, TX — serving business owners nationwide."
+            icon={
               <svg width="22" height="22" fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-            </div>
-            <h3 style={{
-              fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700,
-              color: G.dark, marginBottom: "0.5rem",
-            }}>
-              Our Office
-            </h3>
-            <p style={{ fontSize: "0.875rem", color: "#64748b", marginBottom: "1rem", lineHeight: 1.6 }}>
-              Based in Richardson, TX — serving business owners nationwide.
-            </p>
-            <p style={{ fontWeight: 600, color: G.dark, fontSize: "0.9rem", lineHeight: 1.6, margin: 0 }}>
-              803 Business Parkway<br />
-              Richardson, TX 75081
-            </p>
-          </div>
-
+            }
+            detail={
+              <p style={{ fontWeight: 600, color: G.dark, fontSize: "0.9rem", lineHeight: 1.6, margin: 0 }}>
+                803 Business Parkway<br />
+                Richardson, TX 75081
+              </p>
+            }
+          />
         </div>
       </section>
 
@@ -154,7 +158,12 @@ export default function ContactPage() {
       <section style={{ background: "#fff", padding: "5rem 2rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          {/* Centered heading block */}
+          <div style={{
+            textAlign: "center",
+            display: "flex", flexDirection: "column", alignItems: "center",
+            marginBottom: "3rem",
+          }}>
             <p style={{
               fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
               color: G.gold, fontWeight: 600, marginBottom: "0.75rem",
@@ -168,23 +177,29 @@ export default function ContactPage() {
               Schedule a Consultation
             </h2>
             <p style={{
-              fontSize: "1rem", color: "#64748b", maxWidth: 540,
-              margin: "0 auto", lineHeight: 1.75,
+              fontSize: "1rem", color: "#64748b",
+              maxWidth: 540, lineHeight: 1.75, margin: 0,
             }}>
               Select a time that works for you. We&rsquo;ll review your situation
               before the call so we can have a productive conversation from minute one.
             </p>
           </div>
 
-          {/* GHL Calendar / Form Embed */}
+          {/* GHL Embed — scrolling enabled, tall enough for page 2 + submit */}
           <div style={{
             maxWidth: 800, margin: "0 auto",
-            border: "1px solid #e2e8f0", padding: "2rem", background: "#f8f6f1",
+            border: "1px solid #e2e8f0", background: "#f8f6f1",
+            overflow: "hidden",
           }}>
             <iframe
               src="https://api.leadconnectorhq.com/widget/survey/qqU3TULl3V4uA2F8hDeA"
-              style={{ border: "none", width: "100%", minHeight: 600 }}
-              scrolling="no"
+              style={{
+                border: "none",
+                width: "100%",
+                minHeight: 750,
+                display: "block",
+              }}
+              scrolling="yes"
               id="qqU3TULl3V4uA2F8hDeA"
               title="Schedule a Consultation — Starting Gate Financial"
             />
@@ -194,7 +209,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── SECTION 4: Expectations & Disclaimer ────────────────── */}
+      {/* ── SECTION 4: What to Expect ───────────────────────────── */}
       <section style={{ background: "#f8f6f1", padding: "4rem 2rem" }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
 
@@ -205,10 +220,10 @@ export default function ContactPage() {
             What to Expect
           </h2>
 
-          <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem",
-          }} className="sgf-expectations-grid">
-
+          <div
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}
+            className="sgf-expectations-grid"
+          >
             {[
               {
                 step: "01",
@@ -254,23 +269,16 @@ export default function ContactPage() {
                 </div>
               </div>
             ))}
-
           </div>
 
-          {/* Disclaimer */}
-          <div style={{
-            marginTop: "2.5rem", padding: "1.5rem 2rem",
-            borderLeft: `3px solid ${G.gold}`, background: "#fff",
+          {/* Toned-down legal note — quiet, centered, no box */}
+          <p style={{
+            marginTop: "2rem", fontSize: "0.75rem", color: "#94a3b8",
+            lineHeight: 1.75, textAlign: "center", maxWidth: 600, margin: "2rem auto 0",
           }}>
-            <p style={{
-              fontSize: "0.8rem", color: "#94a3b8", lineHeight: 1.75, margin: 0,
-            }}>
-              <strong style={{ color: "#64748b" }}>Disclaimer:</strong> Starting Gate Financial is a commercial loan broker, not a lender.
-              We do not guarantee loan approval, funding amounts, or interest rates.
-              All financing is subject to lender underwriting and credit approval.
-              No upfront fees are charged for consultation or loan structuring services.
-            </p>
-          </div>
+            Starting Gate Financial arranges commercial financing on behalf of business owners.
+            All transactions are subject to lender approval. No upfront fees.
+          </p>
 
         </div>
       </section>
@@ -297,19 +305,25 @@ export default function ContactPage() {
           structure that fits your deal before we talk.
         </p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/financing-options" style={{
-            background: G.gold, color: G.dark, padding: "0.75rem 2rem",
-            fontWeight: 700, fontSize: "0.9rem", textDecoration: "none",
-            fontFamily: G.sans, letterSpacing: "0.05em",
-          }}>
+          <Link
+            href="/financing-options"
+            style={{
+              background: G.gold, color: G.dark, padding: "0.75rem 2rem",
+              fontWeight: 700, fontSize: "0.9rem", textDecoration: "none",
+              fontFamily: G.sans, letterSpacing: "0.05em",
+            }}
+          >
             Financing Programs →
           </Link>
-          <Link href="/industries" style={{
-            background: "transparent", color: "#fff",
-            border: "1px solid rgba(255,255,255,0.3)",
-            padding: "0.75rem 2rem", fontWeight: 600, fontSize: "0.9rem",
-            textDecoration: "none", fontFamily: G.sans,
-          }}>
+          <Link
+            href="/industries"
+            style={{
+              background: "transparent", color: "#fff",
+              border: "1px solid rgba(255,255,255,0.3)",
+              padding: "0.75rem 2rem", fontWeight: 600, fontSize: "0.9rem",
+              textDecoration: "none", fontFamily: G.sans,
+            }}
+          >
             Industries We Serve
           </Link>
         </div>
