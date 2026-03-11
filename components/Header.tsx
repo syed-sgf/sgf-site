@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { products } from "@/lib/financing-data";
 import { industries } from "@/lib/industry-data";
 
@@ -108,9 +109,16 @@ export default function Header() {
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "#fff", borderBottom: "1px solid #e2e8f0" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
 
-        {/* Logo */}
+        {/* Logo — next/image for automatic WebP + size optimization */}
         <Link href="/" onClick={closeMobile} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-          <img src="/FB_Logo.png" alt="Starting Gate Financial" style={{ height: 56, width: "auto" }} />
+          <Image
+            src="/FB_Logo.png"
+            alt="Starting Gate Financial"
+            width={180}
+            height={56}
+            priority
+            style={{ height: 56, width: "auto" }}
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -190,21 +198,18 @@ export default function Header() {
             )}
           </div>
 
-          {["About", "Blog", "Contact"].map((label) => (
-            <Link key={label} href={`/${label.toLowerCase()}`}
-              style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
-              {label}
-            </Link>
-          ))}
+          {/* Contact only — About/Blog/Partners hidden until pages are built */}
+          <Link href="/contact"
+            style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
+            Contact
+          </Link>
+
         </nav>
 
-        {/* Desktop CTAs */}
+        {/* Desktop CTA — single button until /apply is live */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }} className="sgf-desktop-ctas">
-          <Link href="/partners" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Become a Partner
-          </Link>
-          <Link href="/apply" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Apply Now
+          <Link href="/contact" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+            Get Started
           </Link>
         </div>
 
@@ -239,21 +244,19 @@ export default function Header() {
               links={industryLinks} allHref="/industries" allLabel="All industries" onLinkClick={closeMobile} />
             <MobileSection label="Tools" isOpen={mobileSection === "tools"} onToggle={() => toggleMobile("tools")}
               links={toolLinks} allHref="/tools" allLabel="All tools" onLinkClick={closeMobile} />
-            {["About", "Blog", "Contact"].map((label) => (
-              <Link key={label} href={`/${label.toLowerCase()}`} onClick={closeMobile}
-                style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
-                {label}
-              </Link>
-            ))}
-          </div>
-          <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid #e2e8f0", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            <Link href="/partners" onClick={closeMobile}
-              style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-              Become a Partner
+
+            {/* Contact only — About/Blog hidden until pages are built */}
+            <Link href="/contact" onClick={closeMobile}
+              style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
+              Contact
             </Link>
-            <Link href="/apply" onClick={closeMobile}
+          </div>
+
+          {/* Mobile CTA */}
+          <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid #e2e8f0" }}>
+            <Link href="/contact" onClick={closeMobile}
               style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-              Apply Now
+              Get Started
             </Link>
           </div>
         </div>
