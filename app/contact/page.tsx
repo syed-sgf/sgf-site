@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const G = {
@@ -10,6 +11,8 @@ const G = {
   serif: "var(--font-playfair)",
   sans:  "var(--font-source-sans)",
 };
+
+const HERO_IMAGE = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=85&auto=format&fit=crop";
 
 function ContactCard({
   icon,
@@ -61,66 +64,79 @@ export default function ContactPage() {
   return (
     <main style={{ fontFamily: G.sans, color: "#1e293b" }}>
 
-      {/* ── SECTION 1: Hero ─────────────────────────────────────── */}
+      {/* ── SECTION 1: Image Hero ────────────────────────────────── */}
       <section style={{
-        background: G.dark,
-        padding: "5rem 2rem 4rem",
+        position: "relative",
+        minHeight: 420,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
         textAlign: "center",
+        overflow: "hidden",
       }}>
-        <p style={{
-          fontSize: 11,
-          letterSpacing: "0.25em",
-          textTransform: "uppercase",
-          color: G.gold,
-          fontWeight: 600,
-          fontFamily: G.sans,
-          marginBottom: "1.25rem",
-          width: "100%",
-          textAlign: "center",
-        }}>
-          Richardson, TX · Nationwide Commercial Financing
-        </p>
-        <h1 style={{
-          fontFamily: G.serif,
-          fontSize: "clamp(2rem, 4vw, 3rem)",
-          fontWeight: 700,
-          color: "#fff",
-          lineHeight: 1.2,
-          marginBottom: "1.25rem",
-          maxWidth: 760,
-          width: "100%",
-          textAlign: "center",
-        }}>
-          Let&rsquo;s Talk About Your Deal
-        </h1>
-        <p style={{
-          fontSize: "1.1rem",
-          color: "rgba(255,255,255,0.65)",
-          lineHeight: 1.75,
-          maxWidth: 560,
-          width: "100%",
-          textAlign: "center",
-        }}>
-          We review every inquiry personally. Tell us what you&rsquo;re working on
-          and we&rsquo;ll tell you honestly whether and how we can help.
-        </p>
-      </section>
+        {/* Background image */}
+        <Image
+          src={HERO_IMAGE}
+          alt="Commercial real estate — Starting Gate Financial"
+          fill
+          priority
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          sizes="100vw"
+        />
 
-      {/* Gold divider */}
-      <div style={{ height: 3, background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)` }} />
+        {/* Dark overlay */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: `linear-gradient(135deg, ${G.dark}DD 0%, ${G.dark}99 60%, ${G.dark}77 100%)`,
+          zIndex: 1,
+        }} />
+
+        {/* Gold bottom accent line */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
+          background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`,
+          zIndex: 2,
+        }} />
+
+        {/* Content */}
+        <div style={{
+          position: "relative", zIndex: 3,
+          padding: "5rem 2rem 4rem",
+          display: "flex", flexDirection: "column", alignItems: "center",
+          width: "100%",
+        }}>
+          <p style={{
+            fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
+            color: G.gold, fontWeight: 600, fontFamily: G.sans,
+            marginBottom: "1.25rem", textAlign: "center",
+          }}>
+            Richardson, TX · Nationwide Commercial Financing
+          </p>
+          <h1 style={{
+            fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 700, color: "#fff", lineHeight: 1.2,
+            marginBottom: "1.25rem", textAlign: "center",
+            maxWidth: 700,
+          }}>
+            Let&rsquo;s Talk About Your Deal
+          </h1>
+          <p style={{
+            fontSize: "1.1rem", color: "rgba(255,255,255,0.75)",
+            lineHeight: 1.75, maxWidth: 540, textAlign: "center",
+          }}>
+            We review every inquiry personally. Tell us what you&rsquo;re working on
+            and we&rsquo;ll tell you honestly whether and how we can help.
+          </p>
+        </div>
+      </section>
 
       {/* ── SECTION 2: Contact Methods ──────────────────────────── */}
       <section style={{ background: "#f8f6f1", padding: "3.5rem 2rem" }}>
         <div
           style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "2rem",
+            maxWidth: 1100, margin: "0 auto",
+            display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem",
           }}
           className="sgf-contact-methods"
         >
@@ -176,44 +192,24 @@ export default function ContactPage() {
 
       {/* ── SECTION 3: GHL Consultation Form ───────────────────── */}
       <section style={{
-        background: "#fff",
-        padding: "5rem 2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        background: "#fff", padding: "5rem 2rem",
+        display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        {/* Centered heading block */}
         <p style={{
-          fontSize: 11,
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: G.gold,
-          fontWeight: 600,
-          marginBottom: "0.75rem",
-          textAlign: "center",
-          width: "100%",
+          fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+          color: G.gold, fontWeight: 600, marginBottom: "0.75rem", textAlign: "center",
         }}>
           Free Consultation
         </p>
         <h2 style={{
-          fontFamily: G.serif,
-          fontSize: "clamp(1.6rem, 3vw, 2.25rem)",
-          fontWeight: 700,
-          color: G.dark,
-          marginBottom: "1rem",
-          textAlign: "center",
-          width: "100%",
+          fontFamily: G.serif, fontSize: "clamp(1.6rem, 3vw, 2.25rem)",
+          fontWeight: 700, color: G.dark, marginBottom: "1rem", textAlign: "center",
         }}>
           Schedule a Consultation
         </h2>
         <p style={{
-          fontSize: "1rem",
-          color: "#64748b",
-          maxWidth: 540,
-          lineHeight: 1.75,
-          textAlign: "center",
-          marginBottom: "3rem",
-          width: "100%",
+          fontSize: "1rem", color: "#64748b", maxWidth: 540,
+          lineHeight: 1.75, textAlign: "center", marginBottom: "3rem",
         }}>
           Select a time that works for you. We&rsquo;ll review your situation
           before the call so we can have a productive conversation from minute one.
@@ -221,11 +217,8 @@ export default function ContactPage() {
 
         {/* GHL Embed */}
         <div style={{
-          width: "100%",
-          maxWidth: 800,
-          border: "1px solid #e2e8f0",
-          background: "#f8f6f1",
-          overflow: "hidden",
+          width: "100%", maxWidth: 800,
+          border: "1px solid #e2e8f0", background: "#f8f6f1", overflow: "hidden",
         }}>
           <iframe
             src="https://api.leadconnectorhq.com/widget/survey/qqU3TULl3V4uA2F8hDeA"
@@ -254,10 +247,10 @@ export default function ContactPage() {
             className="sgf-expectations-grid"
           >
             {[
-              { step: "01", title: "We Review Your Inquiry",            body: "Every submission is reviewed by a financing specialist — not a bot, not an automated pipeline." },
+              { step: "01", title: "We Review Your Inquiry",               body: "Every submission is reviewed by a financing specialist — not a bot, not an automated pipeline." },
               { step: "02", title: "We Reach Out Within One Business Day", body: "You'll hear from us within one business day to confirm receipt and ask any initial questions." },
-              { step: "03", title: "Consultation Call",                 body: "We discuss your deal, your goals, and the realistic financing paths available to you." },
-              { step: "04", title: "Honest Assessment",                 body: "We tell you what we can structure, what we can't, and why — before you commit to anything." },
+              { step: "03", title: "Consultation Call",                    body: "We discuss your deal, your goals, and the realistic financing paths available to you." },
+              { step: "04", title: "Honest Assessment",                    body: "We tell you what we can structure, what we can't, and why — before you commit to anything." },
             ].map(({ step, title, body }) => (
               <div key={step} style={{
                 background: "#fff", border: "1px solid #e2e8f0", padding: "1.75rem",
@@ -283,8 +276,8 @@ export default function ContactPage() {
 
           {/* Quiet legal note */}
           <p style={{
-            marginTop: "2rem", fontSize: "0.75rem", color: "#94a3b8",
-            lineHeight: 1.75, textAlign: "center", maxWidth: 600, margin: "2rem auto 0",
+            fontSize: "0.75rem", color: "#94a3b8", lineHeight: 1.75,
+            textAlign: "center", maxWidth: 600, margin: "2rem auto 0",
           }}>
             Starting Gate Financial arranges commercial financing on behalf of business owners.
             All transactions are subject to lender approval. No upfront fees.
@@ -295,44 +288,24 @@ export default function ContactPage() {
 
       {/* ── SECTION 5: Soft Routing CTA ─────────────────────────── */}
       <section style={{
-        background: G.dark,
-        padding: "4rem 2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
+        background: G.dark, padding: "4rem 2rem",
+        display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
       }}>
         <p style={{
-          fontSize: 11,
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: G.gold,
-          fontWeight: 600,
-          marginBottom: "1rem",
-          width: "100%",
-          textAlign: "center",
+          fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+          color: G.gold, fontWeight: 600, marginBottom: "1rem",
         }}>
           Not sure where to start?
         </p>
         <h2 style={{
-          fontFamily: G.serif,
-          fontSize: "clamp(1.4rem, 3vw, 2rem)",
-          fontWeight: 700,
-          color: "#fff",
-          marginBottom: "1rem",
-          textAlign: "center",
-          width: "100%",
+          fontFamily: G.serif, fontSize: "clamp(1.4rem, 3vw, 2rem)",
+          fontWeight: 700, color: "#fff", marginBottom: "1rem",
         }}>
           Explore Your Financing Options First
         </h2>
         <p style={{
-          color: "rgba(255,255,255,0.6)",
-          fontSize: "0.95rem",
-          maxWidth: 480,
-          marginBottom: "2rem",
-          lineHeight: 1.75,
-          textAlign: "center",
-          width: "100%",
+          color: "rgba(255,255,255,0.6)", fontSize: "0.95rem",
+          maxWidth: 480, marginBottom: "2rem", lineHeight: 1.75,
         }}>
           Browse our financing programs and industry pages to find the capital
           structure that fits your deal before we talk.
