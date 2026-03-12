@@ -198,7 +198,11 @@ export default function Header() {
             )}
           </div>
 
-          {/* Contact only — About/Blog/Partners hidden until pages are built */}
+          {/* Contact & About — Partners/Blog hidden until pages are built */}
+          <Link href="/about"
+            style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
+            About
+          </Link>
           <Link href="/contact"
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             Contact
@@ -245,7 +249,11 @@ export default function Header() {
             <MobileSection label="Tools" isOpen={mobileSection === "tools"} onToggle={() => toggleMobile("tools")}
               links={toolLinks} allHref="/tools" allLabel="All tools" onLinkClick={closeMobile} />
 
-            {/* Contact only — About/Blog hidden until pages are built */}
+            {/* About & Contact — Partners/Blog hidden until pages are built */}
+            <Link href="/about" onClick={closeMobile}
+              style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
+              About
+            </Link>
             <Link href="/contact" onClick={closeMobile}
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
               Contact
