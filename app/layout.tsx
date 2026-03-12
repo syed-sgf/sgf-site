@@ -4,6 +4,7 @@ import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { baseMetadata } from "@/lib/seo/metadata";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -17,18 +18,14 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Starting Gate Financial | Business Financing, Structured",
-  description:
-    "SBA loans, commercial real estate financing, and business capital structured the way lenders expect.",
-};
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${sourceSans.variable}`}>
       <body>
         <Header />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
