@@ -574,3 +574,14 @@ p {
   .sgf-about-principles { grid-template-columns: 1fr !important; }
   .sgf-about-exp-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
 }
+
+/* ── About Page Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sgf-about-industries { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 768px) {
+  .sgf-about-industries { grid-template-columns: 1fr 1fr !important; }
+  .sgf-about-principles { grid-template-columns: 1fr !important; }
+  .sgf-about-exp-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  .sgf-about-compliance { grid-template-columns: 1fr !important; }
+}
