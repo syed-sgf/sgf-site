@@ -15,7 +15,6 @@ const G = {
   sans: "var(--font-source-sans)",
 };
 
-// ── Consistent hover card (matches contact page pattern) ──────────
 function HoverCard({ children, style = {} }: { children: React.ReactNode; style?: React.CSSProperties }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -35,7 +34,6 @@ function HoverCard({ children, style = {} }: { children: React.ReactNode; style?
   );
 }
 
-// ── SVG icons matching contact page circle style ──────────────────
 const industryIcons: Record<string, React.ReactNode> = {
   construction: (
     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" width="22" height="22">
@@ -133,11 +131,54 @@ const compliance = [
   "We operate in compliance with applicable commercial lending regulations and do not engage in consumer mortgage lending.",
 ];
 
+// ── Reusable centered section header (defeats global p { max-width: 62ch }) ──
+function SectionHeader({
+  eyebrow,
+  title,
+  subtitle,
+  dark = false,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  subtitle?: string;
+  dark?: boolean;
+}) {
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      textAlign: "center", marginBottom: "2.5rem",
+    }}>
+      <p style={{
+        fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+        color: G.gold, fontWeight: 600, marginBottom: "0.6rem",
+        maxWidth: "none", width: "auto",
+      }}>
+        {eyebrow}
+      </p>
+      <h2 style={{
+        fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)",
+        fontWeight: 700, color: dark ? "#fff" : G.dark,
+        marginBottom: "0.75rem", lineHeight: 1.25,
+      }}>
+        {title}
+      </h2>
+      {subtitle && (
+        <p style={{
+          fontSize: "1rem", color: dark ? "rgba(255,255,255,0.65)" : G.textMid,
+          lineHeight: 1.8, maxWidth: 600, margin: "0 auto",
+        }}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
-      {/* ── 1. Hero with background photo ───────────────────────── */}
+      {/* ── 1. Hero ─────────────────────────────────────────────── */}
       <section style={{
         position: "relative",
         minHeight: 480,
@@ -162,12 +203,13 @@ export default function AboutPage() {
           height: 3, background: G.gold,
         }} />
 
-        {/* Content — centered */}
+        {/* ✅ FIX: flex column + alignItems center to center all hero content */}
         <div style={{
           position: "relative", zIndex: 2,
-          maxWidth: 1100, margin: "0 auto",
-          padding: "5rem 2rem 4rem",
           width: "100%",
+          display: "flex", flexDirection: "column", alignItems: "center",
+          textAlign: "center",
+          padding: "5rem 2rem 4rem",
         }}>
           <div style={{ maxWidth: 680 }}>
             <p style={{
@@ -187,13 +229,15 @@ export default function AboutPage() {
             <p style={{
               fontSize: "1.05rem", color: "rgba(255,255,255,0.75)",
               lineHeight: 1.85, marginBottom: "2.5rem",
+              maxWidth: 580, margin: "0 auto 2.5rem",
             }}>
               Starting Gate Financial is a commercial financing firm based in
               Richardson, TX. We structure and place business financing for
               owner-operators, real estate investors, and growth-stage companies
               across the United States.
             </p>
-            <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap" }}>
+            {/* ✅ FIX: justifyContent center on stat row */}
+            <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap", justifyContent: "center" }}>
               {[
                 { label: "Location", value: "Richardson, TX" },
                 { label: "Coverage", value: "Nationwide" },
@@ -219,25 +263,12 @@ export default function AboutPage() {
       {/* ── 2. Who We Serve ─────────────────────────────────────── */}
       <section style={{ padding: "4rem 2rem", background: G.cream, borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-            <p style={{
-              fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: G.gold, fontWeight: 600, marginBottom: "0.6rem",
-            }}>Who We Serve</p>
-            <h2 style={{
-              fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)",
-              fontWeight: 700, color: G.dark, marginBottom: "0.75rem",
-            }}>
-              Owner-Operators &amp; Investors Across Every Industry
-            </h2>
-            <p style={{
-              fontSize: "1rem", color: G.textMid, lineHeight: 1.8,
-              maxWidth: 600, margin: "0 auto",
-            }}>
-              We work with established businesses and growth-stage operators who
-              need financing structured correctly — not just submitted.
-            </p>
-          </div>
+          {/* ✅ FIX: SectionHeader component handles centering */}
+          <SectionHeader
+            eyebrow="Who We Serve"
+            title="Owner-Operators & Investors Across Every Industry"
+            subtitle="We work with established businesses and growth-stage operators who need financing structured correctly — not just submitted."
+          />
 
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem",
@@ -271,36 +302,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── 3. How SGF Approaches Financing ─────────────────────── */}
+      {/* ── 3. Our Approach ──────────────────────────────────────── */}
       <section style={{ padding: "4rem 2rem", borderBottom: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-            <p style={{
-              fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: G.gold, fontWeight: 600, marginBottom: "0.6rem",
-            }}>Our Approach</p>
-            <h2 style={{
-              fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)",
-              fontWeight: 700, color: G.dark, marginBottom: "0.75rem",
-            }}>
-              How Starting Gate Financial Structures Deals
-            </h2>
-            <p style={{
-              fontSize: "1rem", color: G.textMid, lineHeight: 1.8,
-              maxWidth: 600, margin: "0 auto",
-            }}>
-              Most declined applications fail at the file level — incomplete
-              documentation, wrong program fit, or narratives that don&rsquo;t
-              match the numbers. We fix that before submission.
-            </p>
-          </div>
+          {/* ✅ FIX: SectionHeader component handles centering */}
+          <SectionHeader
+            eyebrow="Our Approach"
+            title="How Starting Gate Financial Structures Deals"
+            subtitle="Most declined applications fail at the file level — incomplete documentation, wrong program fit, or narratives that don't match the numbers. We fix that before submission."
+          />
 
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem",
           }} className="sgf-about-principles">
             {principles.map(({ n, title, body }) => (
               <HoverCard key={n} style={{ padding: "2rem" }}>
-                {/* Number badge — beige bg, green font */}
                 <div style={{
                   display: "inline-flex", alignItems: "center", justifyContent: "center",
                   width: 36, height: 36,
@@ -415,16 +431,10 @@ export default function AboutPage() {
         borderBottom: `1px solid ${G.border}`,
       }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <p style={{
-              fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
-              color: G.gold, fontWeight: 600, marginBottom: "0.6rem",
-            }}>Compliance &amp; Responsibility</p>
-            <h2 style={{
-              fontFamily: G.serif, fontSize: "1.4rem",
-              fontWeight: 700, color: G.dark,
-            }}>How We Operate</h2>
-          </div>
+          <SectionHeader
+            eyebrow="Compliance & Responsibility"
+            title="How We Operate"
+          />
           <div style={{
             display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem",
           }} className="sgf-about-compliance">
