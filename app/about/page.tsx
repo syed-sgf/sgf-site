@@ -361,7 +361,7 @@ export default function AboutPage() {
               fontWeight: 700, color: "#fff",
               marginBottom: "1.25rem", lineHeight: 1.2,
             }}>
-              A Brokerage Built Around Lender Expectations
+              Built Around What Lenders Actually Require
             </h2>
             <p style={{
               fontSize: "0.95rem", color: "rgba(255,255,255,0.7)",
