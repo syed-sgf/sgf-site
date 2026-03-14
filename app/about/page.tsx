@@ -211,7 +211,7 @@ export default function AboutPage() {
           textAlign: "center",
           padding: "5rem 2rem 4rem",
         }}>
-          <div style={{ maxWidth: 680 }}>
+          <div style={{ maxWidth: 680, textAlign: "center", width: "100%" }}>
             <p style={{
               fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
               color: G.gold, fontWeight: 600, marginBottom: "1.25rem", textAlign: "center", width: "100%",
