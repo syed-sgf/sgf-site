@@ -416,7 +416,7 @@ export default function DSCRCalculatorPage() {
   }
 
   const relatedPrograms = [
-    { label: "DSCR Rental Loans", href: "/financing-options/dscr-loans", dark: true },
+    { label: "DSCR Rental Loans", href: "/financing-options/rental-loans", dark: true },
     { label: "Fix & Flip Loans", href: "/financing-options/fix-and-flip", dark: false },
     { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
     { label: "SBA Loans", href: "/financing-options/sba-loans", dark: true },
