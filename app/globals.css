@@ -561,8 +561,23 @@ p {
   .sgf-expectations-grid { grid-template-columns: 1fr !important; }
 }
 
+/* ── Tools Hub Grid & Calculator Layout (base) ────────────── */
+.sgf-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.sgf-calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
 /* Tools Hub & Calculator Responsive */
 @media (max-width: 768px) {
+  .sgf-tools-grid { grid-template-columns: 1fr; }
   .sgf-tools-why-grid { grid-template-columns: 1fr !important; }
   .sgf-calc-grid { grid-template-columns: 1fr !important; }
   .sgf-calc-layout { grid-template-columns: 1fr !important; gap: 2rem !important; }
