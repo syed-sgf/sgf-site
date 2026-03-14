@@ -23,29 +23,64 @@ function formatComma(raw: string): string {
 }
 
 function fmt(n: number): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+  return new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", maximumFractionDigits: 0,
+  }).format(n);
 }
 
-type Results = { dscr: number; annualNOI: number; monthlyNOI: number };
+type Results = {
+  dscr: number;
+  annualNOI: number;
+  annualIncome: number;
+  annualExpenses: number;
+  lendableCashFlow: number;
+  annualDebtService: number;
+};
 
-function calcDSCR(monthlyIncome: number, monthlyExpenses: number, annualDebtService: number): Results | null {
-  if (!isFinite(monthlyIncome) || monthlyIncome <= 0) return null;
-  if (!isFinite(monthlyExpenses) || monthlyExpenses < 0) return null;
-  if (!isFinite(annualDebtService) || annualDebtService <= 0) return null;
-  const annualNOI = (monthlyIncome * 12) - (monthlyExpenses * 12);
-  const monthlyNOI = annualNOI / 12;
-  const dscr = annualNOI / annualDebtService;
-  return { dscr, annualNOI, monthlyNOI };
+function calcDSCR(
+  annualIncome: number,
+  annualExpenses: number,
+  loanAmount: number,
+  interestRate: number
+): Results | null {
+  if (!isFinite(annualIncome) || annualIncome <= 0) return null;
+  if (!isFinite(annualExpenses) || annualExpenses < 0) return null;
+  if (!isFinite(loanAmount) || loanAmount <= 0) return null;
+  if (!isFinite(interestRate) || interestRate <= 0) return null;
+
+  const annualNOI = annualIncome - annualExpenses;
+  const lendableCashFlow = annualNOI;
+  // 25-year amortization standard for DSCR loans
+  const monthlyRate = interestRate / 100 / 12;
+  const n = 25 * 12;
+  const monthlyPayment =
+    loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, n)) /
+    (Math.pow(1 + monthlyRate, n) - 1);
+  const annualDebtService = monthlyPayment * 12;
+  const dscr = annualDebtService > 0 ? annualNOI / annualDebtService : 0;
+
+  return {
+    dscr,
+    annualNOI,
+    annualIncome,
+    annualExpenses,
+    lendableCashFlow,
+    annualDebtService,
+  };
 }
 
-function HoverCard({ children, style = {} }: { children: React.ReactNode; style?: React.CSSProperties }) {
+function HoverCard({
+  children, style = {}, dark = false,
+}: {
+  children: React.ReactNode; style?: React.CSSProperties; dark?: boolean;
+}) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: "#fff",
+        background: dark ? G.dark : "#fff",
         border: `1px solid ${hovered ? G.gold : G.border}`,
         transition: "border-color 0.2s, box-shadow 0.2s",
         boxShadow: hovered ? "0 4px 16px rgba(206,149,98,0.12)" : "none",
@@ -57,17 +92,34 @@ function HoverCard({ children, style = {} }: { children: React.ReactNode; style?
   );
 }
 
-function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: React.ReactNode; subtitle?: string }) {
+function SectionHeader({
+  eyebrow, title, subtitle, dark = false,
+}: {
+  eyebrow: string; title: React.ReactNode; subtitle?: string; dark?: boolean;
+}) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
-      <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 0.6rem 0", maxWidth: "none" }}>
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      textAlign: "center", marginBottom: "2.5rem",
+    }}>
+      <p style={{
+        fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+        color: G.gold, fontWeight: 600, margin: "0 0 0.6rem 0", maxWidth: "none",
+      }}>
         {eyebrow}
       </p>
-      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, color: G.dark, marginBottom: "0.75rem", lineHeight: 1.25 }}>
+      <h2 style={{
+        fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)",
+        fontWeight: 700, color: dark ? "#fff" : G.dark,
+        marginBottom: "0.75rem", lineHeight: 1.25,
+      }}>
         {title}
       </h2>
       {subtitle && (
-        <p style={{ fontSize: "1rem", color: G.textMid, lineHeight: 1.8, maxWidth: 600, margin: "0 auto" }}>
+        <p style={{
+          fontSize: "1rem", color: dark ? "rgba(255,255,255,0.65)" : G.textMid,
+          lineHeight: 1.8, maxWidth: 600, margin: "0 auto",
+        }}>
           {subtitle}
         </p>
       )}
@@ -86,7 +138,10 @@ function CalcInput({
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.875rem", fontWeight: 700, color: G.textDark, fontFamily: G.sans, margin: 0 }}>
+        <label style={{
+          fontSize: "0.875rem", fontWeight: 700, color: G.textDark,
+          fontFamily: G.sans, margin: 0,
+        }}>
           {label}
         </label>
         {tooltip && (
@@ -142,84 +197,287 @@ function CalcButton({ label, onClick }: { label: string; onClick: () => void }) 
   );
 }
 
-function ResultCard({ label, value }: { label: string; value: string }) {
+// DSCR risk band
+function DSCRBand({ dscr }: { dscr: number }) {
+  const bands = [
+    {
+      range: "≤ 1.15",
+      label: "High Risk",
+      note: "Likely loan decline",
+      check: dscr <= 1.15,
+      color: "#B91C1C",
+      bg: "#FEF2F2",
+      border: "#FECACA",
+    },
+    {
+      range: "1.16 – 1.24",
+      label: "Marginal",
+      note: "May need restructuring",
+      check: dscr > 1.15 && dscr < 1.25,
+      color: "#B45309",
+      bg: "#FFFBEB",
+      border: "#FDE68A",
+    },
+    {
+      range: "≥ 1.25",
+      label: "Bankable",
+      note: "Meets lender requirements",
+      check: dscr >= 1.25,
+      color: G.green,
+      bg: "#F0FDF4",
+      border: "#BBF7D0",
+    },
+  ];
+
   return (
-    <HoverCard style={{ padding: "1.25rem", textAlign: "center" }}>
-      <p style={{ fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", color: G.textMid, margin: "0 0 0.5rem 0", maxWidth: "none" }}>
-        {label}
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+      <p style={{
+        fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase",
+        color: G.textMid, margin: "0 0 0.5rem 0", maxWidth: "none", fontWeight: 600,
+      }}>
+        DSCR Risk Assessment
       </p>
-      <p style={{ fontFamily: G.serif, fontSize: "1.75rem", fontWeight: 700, color: G.dark, margin: 0, maxWidth: "none" }}>
-        {value}
+      {bands.map((b) => (
+        <div
+          key={b.label}
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "0.875rem 1rem",
+            background: b.check ? b.bg : "#fff",
+            border: `1px solid ${b.check ? b.border : G.border}`,
+            transition: "all 0.2s",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <span style={{
+              width: 10, height: 10, borderRadius: "50%",
+              background: b.check ? b.color : G.border,
+              flexShrink: 0, display: "inline-block",
+            }} />
+            <div>
+              <p style={{
+                fontSize: "0.875rem", fontWeight: b.check ? 700 : 500,
+                color: b.check ? b.color : G.textMid, margin: 0, maxWidth: "none",
+              }}>
+                {b.label}
+              </p>
+              <p style={{
+                fontSize: "0.75rem", color: G.textMid,
+                margin: 0, maxWidth: "none",
+              }}>
+                {b.note}
+              </p>
+            </div>
+          </div>
+          <span style={{
+            fontSize: "0.8rem", fontWeight: 700,
+            color: b.check ? b.color : G.textMid,
+            fontFamily: G.serif,
+          }}>
+            {b.range}
+          </span>
+        </div>
+      ))}
+      <p style={{
+        fontSize: "0.75rem", color: G.textMid, fontStyle: "italic",
+        margin: "0.25rem 0 0", maxWidth: "none",
+      }}>
+        No threshold is a guarantee of approval. Lender standards vary.
       </p>
-    </HoverCard>
+    </div>
   );
 }
 
-function CTABand() {
+const faqs = [
+  {
+    q: "Can I use DSCR for both real estate and business loans?",
+    a: "Yes — DSCR is used in both commercial real estate and business financing to assess repayment capacity. For real estate, lenders use property income versus debt service. For business loans, they use business cash flow versus total debt obligations.",
+  },
+  {
+    q: "How do I improve my DSCR?",
+    a: "You can improve your DSCR by increasing NOI (through higher revenue or lower expenses) or by lowering debt service via refinancing at a better rate, extending the loan term, or making a larger down payment to reduce the borrowed principal.",
+  },
+  {
+    q: "What does a DSCR lender look at beyond the ratio itself?",
+    a: "Most DSCR lenders also review property condition, market rent stability, borrower credit score, loan-to-value (LTV), and whether the income used is verified or projected. A strong DSCR on paper doesn't guarantee approval if other underwriting factors raise concerns.",
+  },
+  {
+    q: "Is a DSCR loan the same as a conventional investment property loan?",
+    a: "No. DSCR loans are specifically underwritten using property cash flow rather than the borrower's personal income or tax returns. This makes them popular with self-employed investors and those with multiple properties. Conventional loans typically require full income documentation and debt-to-income (DTI) analysis.",
+  },
+  {
+    q: "Can I use projected or pro forma income in a DSCR calculation?",
+    a: "Some lenders allow market rent projections for vacant or newly acquired properties, but most prefer documented rent rolls or lease agreements. Using inflated projections without documentation is one of the most common reasons DSCR loan files are declined at underwriting.",
+  },
+];
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
   return (
-    <section style={{ background: G.dark, padding: "4.5rem 2rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-      <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1rem 0", maxWidth: "none" }}>
-        Ready to Review Your Numbers?
-      </p>
-      <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.4rem, 3vw, 2rem)", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>
-        Schedule a Consultation
-      </h2>
-      <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.8, maxWidth: 460, marginBottom: "2rem" }}>
-        Bring your estimates. We&rsquo;ll tell you how lenders will look at them.
-      </p>
-      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }} className="sgf-cta-band-btns">
-        <Link href="/contact" style={{ background: G.gold, color: G.dark, padding: "0.875rem 2.5rem", fontWeight: 700, fontSize: "0.9rem", textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em", display: "inline-block" }}>
-          Schedule a Consultation →
-        </Link>
-        <Link href="/financing-options" style={{ background: "transparent", color: "#fff", padding: "0.875rem 2rem", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em", border: "1.5px solid rgba(255,255,255,0.3)", display: "inline-block" }}>
-          View Financing Programs
-        </Link>
+    <div style={{ borderBottom: `1px solid ${G.border}` }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%", display: "flex", justifyContent: "space-between",
+          alignItems: "center", padding: "1.25rem 0",
+          background: "none", border: "none", cursor: "pointer",
+          textAlign: "left", gap: "1rem",
+        }}
+      >
+        <span style={{
+          fontFamily: G.serif, fontSize: "1rem", fontWeight: 700,
+          color: G.dark, lineHeight: 1.4,
+        }}>
+          {q}
+        </span>
+        <span style={{
+          color: G.gold, fontSize: "1.25rem", flexShrink: 0,
+          transform: open ? "rotate(45deg)" : "rotate(0deg)",
+          transition: "transform 0.2s",
+        }}>+</span>
+      </button>
+      {open && (
+        <p style={{
+          fontSize: "0.9rem", color: G.textMid, lineHeight: 1.8,
+          padding: "0 0 1.25rem", margin: 0, maxWidth: "none",
+        }}>
+          {a}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Related program card
+function ProgramCard({
+  label, href, dark = false,
+}: {
+  label: string; href: string; dark?: boolean;
+}) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => {}}
+      style={{ textDecoration: "none" }}
+    >
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          background: dark ? G.dark : G.cream,
+          border: `1px solid ${hovered ? G.gold : G.border}`,
+          padding: "1.5rem",
+          transition: "border-color 0.2s, box-shadow 0.2s",
+          boxShadow: hovered ? "0 4px 16px rgba(206,149,98,0.12)" : "none",
+          textAlign: "center",
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center", gap: "0.5rem",
+        }}
+      >
+        <p style={{
+          fontFamily: G.serif, fontSize: "1rem", fontWeight: 700,
+          color: dark ? "#fff" : G.dark, margin: 0, maxWidth: "none",
+          lineHeight: 1.3,
+        }}>
+          {label}
+        </p>
+        <span style={{
+          fontSize: "0.8rem", color: dark ? G.gold : G.green,
+          fontWeight: 600,
+        }}>
+          Learn More →
+        </span>
       </div>
-    </section>
+    </Link>
   );
 }
 
 export default function DSCRCalculatorPage() {
-  const [monthlyIncome, setMonthlyIncome] = useState("");
-  const [monthlyExpenses, setMonthlyExpenses] = useState("");
-  const [annualDebtService, setAnnualDebtService] = useState("");
+  const [annualIncome, setAnnualIncome] = useState("");
+  const [annualExpenses, setAnnualExpenses] = useState("");
+  const [loanAmount, setLoanAmount] = useState("");
+  const [interestRate, setInterestRate] = useState("");
   const [results, setResults] = useState<Results | null>(null);
+  const [error, setError] = useState("");
 
   function handleCalculate() {
-    const income = parseFloat(monthlyIncome.replace(/,/g, ""));
-    const expenses = parseFloat(monthlyExpenses.replace(/,/g, ""));
-    const debt = parseFloat(annualDebtService.replace(/,/g, ""));
-    const calc = calcDSCR(income, expenses, debt);
-    if (!calc) return;
+    setError("");
+    const income = parseFloat(annualIncome.replace(/,/g, ""));
+    const expenses = parseFloat(annualExpenses.replace(/,/g, ""));
+    const loan = parseFloat(loanAmount.replace(/,/g, ""));
+    const rate = parseFloat(interestRate.replace(/,/g, ""));
+    const calc = calcDSCR(income, expenses, loan, rate);
+    if (!calc) {
+      setError("Please enter valid values in all fields.");
+      return;
+    }
     setResults(calc);
   }
+
+  const relatedPrograms = [
+    { label: "DSCR Rental Loans", href: "/financing-options/dscr-loans", dark: true },
+    { label: "Fix & Flip Loans", href: "/financing-options/fix-and-flip", dark: false },
+    { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
+    { label: "SBA Loans", href: "/financing-options/sba-loans", dark: true },
+  ];
 
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
+      <section style={{
+        position: "relative", minHeight: 400,
+        display: "flex", alignItems: "center", overflow: "hidden",
+      }}>
         <div style={{
           position: "absolute", inset: 0,
           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=85&auto=format&fit=crop')",
           backgroundSize: "cover", backgroundPosition: "center",
         }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(8,43,9,0.93) 0%, rgba(8,43,9,0.78) 60%, rgba(8,43,9,0.5) 100%)" }} />
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: G.gold }} />
-        <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "5rem 2rem 4rem" }}>
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(105deg, rgba(8,43,9,0.93) 0%, rgba(8,43,9,0.78) 60%, rgba(8,43,9,0.5) 100%)",
+        }} />
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          height: 3, background: G.gold,
+        }} />
+        <div style={{
+          position: "relative", zIndex: 2, width: "100%",
+          display: "flex", flexDirection: "column", alignItems: "center",
+          textAlign: "center", padding: "5rem 2rem 4rem",
+        }}>
           <div style={{ maxWidth: 680 }}>
-            <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1.25rem 0", maxWidth: "none" }}>
+            {/* Issue 1 fix: "Financial Tools" not "Tools Hub" */}
+            <p style={{
+              fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
+              color: G.gold, fontWeight: 600, margin: "0 0 0.5rem 0", maxWidth: "none",
+            }}>
               Financial Tools
             </p>
-            <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "1.25rem" }}>
+            {/* Breadcrumb BELOW eyebrow, above H1 */}
+            <p style={{
+              fontSize: "0.8rem", color: "rgba(255,255,255,0.45)",
+              margin: "0 0 1.25rem", maxWidth: "none",
+            }}>
+              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>
+                Tools
+              </Link>
+              {" → "}DSCR Calculator
+            </p>
+            <h1 style={{
+              fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "1.25rem",
+            }}>
               DSCR Calculator
             </h1>
-            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.85, maxWidth: 580, margin: "0 auto 1.25rem" }}>
-              Calculate your Debt Service Coverage Ratio to understand how property cash flow compares to loan obligations.
-            </p>
-            <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: 0, maxWidth: "none" }}>
-              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>Tools Hub</Link>
-              {" → "}DSCR Calculator
+            <p style={{
+              fontSize: "1.05rem", color: "rgba(255,255,255,0.8)",
+              lineHeight: 1.85, maxWidth: 580, margin: "0 auto",
+            }}>
+              Calculate your Debt Service Coverage Ratio to understand how
+              property cash flow compares to loan obligations.
             </p>
           </div>
         </div>
@@ -231,80 +489,220 @@ export default function DSCRCalculatorPage() {
           <SectionHeader
             eyebrow="DSCR Calculator"
             title="Calculate Your Debt Service Coverage Ratio"
-            subtitle="Enter monthly income, expenses, and annual debt service. Results are estimates only."
+            subtitle="Enter your annual income, expenses, and loan details. Results are estimates only — not a financing commitment."
           />
-          <div className="sgf-calc-layout">
 
-            {/* LEFT — Inputs */}
+          {/* 3-column layout: Cash Flow | Debt Assumptions | DSCR Result */}
+          <div className="sgf-dscr-grid">
+
+            {/* Column 1 — Business Cash Flow */}
             <HoverCard style={{ padding: "2rem" }}>
+              <p style={{
+                fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+                color: G.gold, fontWeight: 600, margin: "0 0 1.5rem", maxWidth: "none",
+              }}>
+                Business Cash Flow
+              </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 <CalcInput
-                  label="Monthly Rental Income ($)"
-                  value={monthlyIncome}
-                  onChange={setMonthlyIncome}
-                  placeholder="10,000"
-                  tooltip="Gross scheduled monthly rent from the property. Use the full rent roll, not net collected."
+                  label="Annual Income ($)"
+                  value={annualIncome}
+                  onChange={setAnnualIncome}
+                  placeholder="120,000"
+                  tooltip="Gross annual income from the property or business. Use documented income — rent rolls, tax returns, or bank statements."
                 />
                 <CalcInput
-                  label="Monthly Operating Expenses ($)"
-                  value={monthlyExpenses}
-                  onChange={setMonthlyExpenses}
-                  placeholder="3,500"
-                  tooltip="Monthly operating costs excluding debt service. Includes taxes, insurance, maintenance, management fees."
+                  label="Annual Expenses ($)"
+                  value={annualExpenses}
+                  onChange={setAnnualExpenses}
+                  placeholder="36,000"
+                  tooltip="Total annual operating costs excluding debt service. Includes taxes, insurance, maintenance, management fees, and utilities."
                 />
-                <CalcInput
-                  label="Annual Debt Service ($)"
-                  value={annualDebtService}
-                  onChange={setAnnualDebtService}
-                  placeholder="72,000"
-                  tooltip="Total annual loan payments (principal + interest). You can use the Business Loan Calculator to get this number."
-                />
-                <CalcButton label="Calculate DSCR" onClick={handleCalculate} />
+                {/* Lendable Cash Flow — calculated display */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <label style={{
+                    fontSize: "0.875rem", fontWeight: 700,
+                    color: G.textDark, fontFamily: G.sans, margin: 0,
+                  }}>
+                    Lendable Cash Flow (NOI)
+                  </label>
+                  <div style={{
+                    padding: "0.75rem 1rem",
+                    border: `1px solid ${G.border}`,
+                    background: G.cream,
+                    fontSize: "1rem", fontFamily: G.serif,
+                    fontWeight: 700, color: G.green,
+                  }}>
+                    {annualIncome && annualExpenses
+                      ? fmt(
+                          parseFloat(annualIncome.replace(/,/g, "") || "0") -
+                          parseFloat(annualExpenses.replace(/,/g, "") || "0")
+                        )
+                      : "—"}
+                  </div>
+                  <p style={{
+                    fontSize: "0.75rem", color: G.textMid,
+                    margin: 0, maxWidth: "none", fontStyle: "italic",
+                  }}>
+                    Annual Income minus Annual Expenses
+                  </p>
+                </div>
               </div>
             </HoverCard>
 
-            {/* RIGHT — Results */}
+            {/* Column 2 — Debt Assumptions */}
+            <HoverCard style={{ padding: "2rem" }}>
+              <p style={{
+                fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+                color: G.gold, fontWeight: 600, margin: "0 0 1.5rem", maxWidth: "none",
+              }}>
+                Debt Assumptions
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                <CalcInput
+                  label="Loan Amount ($)"
+                  value={loanAmount}
+                  onChange={setLoanAmount}
+                  placeholder="800,000"
+                  tooltip="The total loan amount you are seeking. This is used to calculate the annual debt service based on a 25-year amortization."
+                />
+                <CalcInput
+                  label="Interest Rate (%)"
+                  value={interestRate}
+                  onChange={setInterestRate}
+                  placeholder="7.50"
+                  tooltip="The annual interest rate for the loan. Enter as a percentage — e.g. 7.5 for 7.5%. Based on 25-year amortization standard."
+                />
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <label style={{
+                    fontSize: "0.875rem", fontWeight: 700,
+                    color: G.textDark, fontFamily: G.sans, margin: 0,
+                  }}>
+                    Est. Annual Debt Service
+                  </label>
+                  <div style={{
+                    padding: "0.75rem 1rem",
+                    border: `1px solid ${G.border}`,
+                    background: G.cream,
+                    fontSize: "1rem", fontFamily: G.serif,
+                    fontWeight: 700, color: G.dark,
+                  }}>
+                    {loanAmount && interestRate ? (() => {
+                      const loan = parseFloat(loanAmount.replace(/,/g, ""));
+                      const rate = parseFloat(interestRate.replace(/,/g, "")) / 100 / 12;
+                      const n = 25 * 12;
+                      if (!isFinite(loan) || !isFinite(rate) || rate <= 0) return "—";
+                      const pmt = loan * (rate * Math.pow(1 + rate, n)) / (Math.pow(1 + rate, n) - 1);
+                      return fmt(pmt * 12);
+                    })() : "—"}
+                  </div>
+                  <p style={{
+                    fontSize: "0.75rem", color: G.textMid,
+                    margin: 0, maxWidth: "none", fontStyle: "italic",
+                  }}>
+                    Based on 25-year amortization
+                  </p>
+                </div>
+                <CalcButton label="Calculate DSCR" onClick={handleCalculate} />
+                {error && (
+                  <p style={{
+                    color: "#B91C1C", fontSize: "0.85rem",
+                    margin: 0, maxWidth: "none",
+                  }}>
+                    {error}
+                  </p>
+                )}
+              </div>
+            </HoverCard>
+
+            {/* Column 3 — DSCR Result */}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               {results ? (
                 <>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1rem" }}>
-                    <ResultCard label="DSCR Ratio" value={results.dscr.toFixed(2)} />
-                    <ResultCard label="Annual NOI" value={fmt(results.annualNOI)} />
-                    <ResultCard label="Monthly NOI" value={fmt(results.monthlyNOI)} />
-                  </div>
-
-                  {/* Interpretation panel */}
-                  <HoverCard style={{ padding: "1.5rem" }}>
-                    <h4 style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: G.dark, marginBottom: "1rem" }}>
-                      What does this mean?
-                    </h4>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                      {[
-                        "DSCR above 1.25 — Most lenders consider this acceptable coverage.",
-                        "DSCR between 1.0–1.25 — Marginal. Some lenders may require additional reserves.",
-                        "DSCR below 1.0 — Cash flow does not cover debt service. Deal likely needs restructuring.",
-                      ].map((text) => (
-                        <div key={text} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start" }}>
-                          <span style={{ color: G.gold, fontSize: "0.65rem", flexShrink: 0, marginTop: "0.25rem" }}>◆</span>
-                          <p style={{ fontSize: "0.875rem", color: G.textMid, lineHeight: 1.7, margin: 0, maxWidth: "none" }}>
-                            {text}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    <p style={{ fontSize: "0.75rem", color: G.textMid, fontStyle: "italic", marginTop: "1rem", maxWidth: "none" }}>
-                      No threshold is a guarantee of approval. Lender standards vary.
+                  {/* Big DSCR number */}
+                  <HoverCard style={{ padding: "2rem", textAlign: "center" }}>
+                    <p style={{
+                      fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+                      color: G.gold, fontWeight: 600, margin: "0 0 0.75rem", maxWidth: "none",
+                    }}>
+                      Debt Service Coverage Ratio
+                    </p>
+                    <p style={{
+                      fontFamily: G.serif, fontSize: "3.5rem", fontWeight: 700,
+                      color: results.dscr >= 1.25 ? G.green : results.dscr >= 1.15 ? "#B45309" : "#B91C1C",
+                      margin: "0 0 0.25rem", lineHeight: 1, maxWidth: "none",
+                    }}>
+                      {results.dscr.toFixed(2)}
+                    </p>
+                    <p style={{
+                      fontSize: "0.85rem", color: G.textMid,
+                      margin: 0, maxWidth: "none",
+                    }}>
+                      {results.dscr >= 1.25
+                        ? "Bankable — Meets lender requirements"
+                        : results.dscr >= 1.15
+                        ? "Marginal — May need restructuring"
+                        : "High Risk — Likely loan decline"}
                     </p>
                   </HoverCard>
 
-                  <p style={{ fontSize: "0.8rem", color: G.textMid, fontStyle: "italic", margin: 0, maxWidth: "none" }}>
+                  {/* Supporting numbers */}
+                  <HoverCard style={{ padding: "1.5rem" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                      {[
+                        { label: "Annual NOI", value: fmt(results.annualNOI) },
+                        { label: "Annual Debt Service", value: fmt(results.annualDebtService) },
+                        { label: "Lendable Cash Flow", value: fmt(results.lendableCashFlow) },
+                      ].map(({ label, value }) => (
+                        <div key={label} style={{
+                          display: "flex", justifyContent: "space-between",
+                          alignItems: "center", paddingBottom: "0.75rem",
+                          borderBottom: `1px solid ${G.border}`,
+                        }}>
+                          <span style={{
+                            fontSize: "0.85rem", color: G.textMid,
+                          }}>
+                            {label}
+                          </span>
+                          <span style={{
+                            fontFamily: G.serif, fontWeight: 700,
+                            color: G.dark, fontSize: "0.95rem",
+                          }}>
+                            {value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </HoverCard>
+
+                  {/* Risk band */}
+                  <HoverCard style={{ padding: "1.5rem" }}>
+                    <DSCRBand dscr={results.dscr} />
+                  </HoverCard>
+
+                  <p style={{
+                    fontSize: "0.8rem", color: G.textMid, fontStyle: "italic",
+                    margin: 0, maxWidth: "none",
+                  }}>
                     This calculation is for estimation purposes only. Actual underwriting criteria may vary by lender.
                   </p>
                 </>
               ) : (
                 <HoverCard style={{ padding: "2rem" }}>
-                  <p style={{ color: G.textMid, fontSize: "0.95rem", fontStyle: "italic", textAlign: "center", margin: 0, maxWidth: "none" }}>
-                    Enter income, expenses, and debt service, then click &ldquo;Calculate DSCR&rdquo; to see your results.
+                  <p style={{
+                    fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+                    color: G.gold, fontWeight: 600, margin: "0 0 0.75rem", maxWidth: "none",
+                    textAlign: "center",
+                  }}>
+                    DSCR Result
+                  </p>
+                  {/* Static risk band preview */}
+                  <DSCRBand dscr={-1} />
+                  <p style={{
+                    color: G.textMid, fontSize: "0.875rem", fontStyle: "italic",
+                    textAlign: "center", margin: "1.25rem 0 0", maxWidth: "none",
+                  }}>
+                    Enter your numbers and click &ldquo;Calculate DSCR&rdquo; to see your result.
                   </p>
                 </HoverCard>
               )}
@@ -314,26 +712,88 @@ export default function DSCRCalculatorPage() {
       </section>
 
       {/* ── Related Programs ─────────────────────────────────────── */}
-      <section style={{ padding: "3rem 2rem", borderTop: `1px solid ${G.border}` }}>
+      <section style={{ padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1rem 0", maxWidth: "none" }}>
-            Related Programs
-          </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            {[
-              { label: "DSCR Rental Loans", href: "/financing-options/dscr-loans" },
-              { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate" },
-              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans" },
-            ].map(({ label, href }) => (
-              <Link key={href} href={href} style={{ border: `1px solid ${G.green}`, color: G.green, padding: "0.5rem 1.25rem", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
-                {label} →
-              </Link>
+          <SectionHeader
+            eyebrow="Related Programs"
+            title="Financing That Uses DSCR"
+            subtitle="These programs are underwritten using debt service coverage ratio as a primary qualification metric."
+          />
+          {/* 4-card grid: green, cream, cream, green */}
+          <div className="sgf-tools-grid">
+            {relatedPrograms.map(({ label, href, dark }) => (
+              <ProgramCard key={href} label={label} href={href} dark={dark} />
             ))}
           </div>
         </div>
       </section>
 
-      <CTABand />
+      {/* ── FAQ ──────────────────────────────────────────────────── */}
+      <section style={{ background: G.cream, padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <div style={{ maxWidth: 760, margin: "0 auto" }}>
+          <SectionHeader
+            eyebrow="Frequently Asked Questions"
+            title="DSCR Calculator — Common Questions"
+          />
+          <div>
+            {faqs.map((faq) => (
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA Band — cream bg (Issue 5) ────────────────────────── */}
+      <section style={{
+        background: G.cream,
+        borderTop: `1px solid ${G.border}`,
+        padding: "4.5rem 2rem",
+        display: "flex", flexDirection: "column",
+        alignItems: "center", textAlign: "center",
+      }}>
+        <p style={{
+          fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
+          color: G.gold, fontWeight: 600, margin: "0 0 1rem", maxWidth: "none",
+        }}>
+          Ready to Review Your Numbers?
+        </p>
+        <h2 style={{
+          fontFamily: G.serif, fontSize: "clamp(1.4rem, 3vw, 2rem)",
+          fontWeight: 700, color: G.dark, marginBottom: "1rem", maxWidth: 520,
+        }}>
+          Schedule a Consultation
+        </h2>
+        <p style={{
+          color: G.textMid, fontSize: "0.95rem",
+          maxWidth: 460, marginBottom: "2rem", lineHeight: 1.8,
+        }}>
+          Bring your estimates. We&rsquo;ll tell you how lenders will look at them.
+        </p>
+        <div style={{
+          display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center",
+        }}>
+          <Link href="/contact" style={{
+            background: G.green, color: "#fff",
+            padding: "0.875rem 2.5rem", fontWeight: 700,
+            fontSize: "0.9rem", textDecoration: "none",
+            fontFamily: G.sans, letterSpacing: "0.05em",
+            display: "inline-block",
+          }}>
+            Schedule a Consultation →
+          </Link>
+          <Link href="/financing-options" style={{
+            background: "transparent", color: G.dark,
+            padding: "0.875rem 2rem", fontWeight: 600,
+            fontSize: "0.875rem", textDecoration: "none",
+            fontFamily: G.sans, letterSpacing: "0.05em",
+            border: `1.5px solid ${G.border}`,
+            display: "inline-block",
+          }}>
+            View Financing Programs
+          </Link>
+        </div>
+      </section>
+
     </main>
   );
 }
