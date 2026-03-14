@@ -602,3 +602,17 @@ p {
   .sgf-about-exp-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
   .sgf-about-compliance { grid-template-columns: 1fr !important; }
 }
+
+/* DSCR 3-column calculator grid */
+.sgf-dscr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .sgf-dscr-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .sgf-dscr-grid { grid-template-columns: 1fr; }
+}
