@@ -143,6 +143,32 @@ export const products: FinancingProduct[] = [
     ctaText: "Fund Your Next Flip",
   },
   {
+    slug: "bridge-construction",
+    title: "Bridge & Construction Loans",
+    subtitle: "Short-term construction capital for developers and builders",
+    description:
+      "Bridge and construction financing provides fast, project-based capital for horizontal and vertical construction. We fund ground-up builds, lot acquisitions, and construction-to-permanent transitions — structured around draw schedules, not just personal credit.",
+    keyFeatures: [
+      "Construction loans from $50K to $25M+",
+      "Horizontal and vertical construction eligible",
+      "Draw schedules aligned with project milestones",
+      "Interest-only during the construction period",
+      "Transition to permanent financing at completion",
+      "Decisions driven by project scope and developer track record",
+    ],
+    useCases: [
+      "Ground-up residential and commercial construction",
+      "Horizontal land development and infrastructure",
+      "Builder spec homes and subdivision development",
+      "Construction-to-permanent bridge financing",
+      "Lot acquisition and pre-development funding",
+    ],
+    minAmount: "$50,000",
+    maxAmount: "$25,000,000",
+    termRange: "6 – 24 months",
+    ctaText: "Fund Your Construction Project",
+  },
+  {
     slug: "rental-loans",
     title: "Rental Property Loans",
     subtitle: "DSCR-based financing for long-term rental portfolios",
