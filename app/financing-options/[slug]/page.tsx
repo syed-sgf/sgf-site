@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/financing-data";
@@ -5,6 +6,25 @@ import { products } from "@/lib/financing-data";
 
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((p) => p.slug === slug);
+  if (!product) return { title: "Not Found" };
+  return {
+    title: `${product.title} | Starting Gate Financial`,
+    description: product.description.substring(0, 160),
+    openGraph: {
+      title: `${product.title} | Starting Gate Financial`,
+      description: product.description.substring(0, 160),
+      url: `https://startinggatefinancial.com/financing-options/${slug}`,
+      siteName: "Starting Gate Financial",
+      type: "website",
+    },
+    alternates: { canonical: `https://startinggatefinancial.com/financing-options/${slug}` },
+    robots: { index: true, follow: true },
+  };
 }
 
 const G = {
