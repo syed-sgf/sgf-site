@@ -359,8 +359,8 @@ export default function MCACalculatorPage() {
   const relatedPrograms = [
     { label: "Merchant Cash Advance", href: "/financing-options/merchant-cash-advance", dark: true },
     { label: "Business Lines of Credit", href: "/financing-options/business-loc", dark: false },
-    { label: "Working Capital", href: "/financing-options/working-capital", dark: false },
-    { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: true },
+    { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: false },
+    { label: "Accounts Receivable Financing", href: "/financing-options/accounts-receivable", dark: true },
   ];
 
   return (
