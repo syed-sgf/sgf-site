@@ -300,8 +300,12 @@ export default function BusinessLoanCalculatorPage() {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: G.gold }} />
         <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "5rem 2rem 4rem" }}>
           <div style={{ maxWidth: 680 }}>
-            <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1.25rem 0", maxWidth: "none" }}>
+            <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 0.75rem 0", maxWidth: "none" }}>
               Financial Tools
+            </p>
+            <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "0 0 1.25rem 0", maxWidth: "none" }}>
+              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>Tools</Link>
+              {" → "}Business Loan Calculator
             </p>
             <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "1.25rem" }}>
               Business Loan Calculator
