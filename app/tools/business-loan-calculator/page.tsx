@@ -407,7 +407,7 @@ export default function BusinessLoanCalculatorPage() {
           <div className="sgf-tools-grid">
             {[
               { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: true },
-              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-lines-of-credit", dark: false },
+              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-loc", dark: false },
               { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
               { label: "Equipment Financing", href: "/financing-options/equipment-financing", dark: true },
             ].map(({ label, href, dark }) => (
