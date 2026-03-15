@@ -582,6 +582,7 @@ p {
   .sgf-calc-grid { grid-template-columns: 1fr !important; }
   .sgf-calc-layout { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .sgf-calc-card { flex-direction: column !important; }
+  .sgf-related-grid { grid-template-columns: 1fr !important; }
 }
 .sgf-calc-card:hover { border-color: #118241 !important; box-shadow: 0 4px 16px rgba(17,130,65,0.12) !important; }
 

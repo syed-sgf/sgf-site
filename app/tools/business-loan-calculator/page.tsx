@@ -89,6 +89,7 @@ function buildSchedule(
   return rows;
 }
 
+// FIX 3: Gold (#C9A84C) border on hover
 function HoverCard({ children, style = {} }: { children: React.ReactNode; style?: React.CSSProperties }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -97,9 +98,9 @@ function HoverCard({ children, style = {} }: { children: React.ReactNode; style?
       onMouseLeave={() => setHovered(false)}
       style={{
         background: "#fff",
-        border: `1px solid ${hovered ? G.gold : G.border}`,
+        border: `1px solid ${hovered ? "#C9A84C" : G.border}`,
         transition: "border-color 0.2s, box-shadow 0.2s",
-        boxShadow: hovered ? "0 4px 16px rgba(206,149,98,0.12)" : "none",
+        boxShadow: hovered ? "0 4px 16px rgba(201,168,76,0.15)" : "none",
         ...style,
       }}
     >
@@ -209,6 +210,35 @@ function ResultCard({ label, value }: { label: string; value: string }) {
   );
 }
 
+// FIX 2+3+6: RelatedCard — centered, gold border on hover
+function RelatedCard({ label, href, description }: { label: string; href: string; description: string }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left",
+        background: "#fff", borderRadius: 4, padding: "1.5rem",
+        border: `1px solid ${hovered ? "#C9A84C" : G.green}`,
+        boxShadow: hovered ? "0 4px 16px rgba(201,168,76,0.15)" : "0 1px 3px rgba(0,0,0,0.05)",
+        transition: "border-color 0.2s, box-shadow 0.2s", textDecoration: "none",
+      }}
+    >
+      <span style={{ fontWeight: 700, color: hovered ? G.green : G.textDark, fontSize: "0.95rem", marginBottom: "0.5rem", transition: "color 0.2s", fontFamily: G.sans }}>
+        {label}
+      </span>
+      <span style={{ fontSize: "0.825rem", color: G.textMid, lineHeight: 1.65, marginBottom: "1rem", fontFamily: G.sans }}>
+        {description}
+      </span>
+      <span style={{ fontSize: "0.825rem", fontWeight: 600, color: hovered ? "#C9A84C" : G.green, transition: "color 0.2s", fontFamily: G.sans, marginTop: "auto" }}>
+        Learn More →
+      </span>
+    </Link>
+  );
+}
+
 function CTABand() {
   return (
     <section style={{ background: G.dark, padding: "4.5rem 2rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -259,7 +289,7 @@ export default function BusinessLoanCalculatorPage() {
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
-      {/* ── Hero ─────────────────────────────────────────────────── */}
+      {/* ── Hero — FIX 1: Tools → Business Loan Calculator ───────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
@@ -280,7 +310,7 @@ export default function BusinessLoanCalculatorPage() {
               Estimate your monthly payment, total interest, and full amortization schedule for any term loan.
             </p>
             <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: 0, maxWidth: "none" }}>
-              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>Tools Hub</Link>
+              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>Tools</Link>
               {" → "}Business Loan Calculator
             </p>
           </div>
@@ -296,79 +326,37 @@ export default function BusinessLoanCalculatorPage() {
             subtitle="Enter your loan details below. Results are estimates only — not a financing commitment."
           />
           <div className="sgf-calc-layout">
-
-            {/* LEFT — Inputs */}
             <HoverCard style={{ padding: "2rem" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                <CalcInput
-                  label="Loan Amount ($)"
-                  value={loanAmount}
-                  onChange={setLoanAmount}
-                  placeholder="250,000"
-                  tooltip="The total amount you want to borrow. Enter principal only, not including fees."
-                />
-                <CalcInput
-                  label="Annual Interest Rate (%)"
-                  value={annualRate}
-                  onChange={setAnnualRate}
-                  placeholder="7.5"
-                  tooltip="The nominal annual interest rate. Do not enter as a decimal — enter 7.5 for 7.5%."
-                />
-                <CalcInput
-                  label="Loan Period (Years)"
-                  value={loanPeriod}
-                  onChange={setLoanPeriod}
-                  placeholder="10"
-                  tooltip="The total repayment term in years. SBA 7(a) loans go up to 10 years for working capital, 25 years for real estate."
-                />
-                <CalcInput
-                  label="Payments per Year"
-                  value={paymentsPerYear}
-                  onChange={setPaymentsPerYear}
-                  placeholder="e.g. 12"
-                  tooltip="How many payments per year. Typically 12 for monthly. Enter 12 unless your lender specifies otherwise."
-                />
-                <CalcInput
-                  label="Loan Start Date"
-                  value={startDate}
-                  onChange={setStartDate}
-                  type="date"
-                  tooltip="The date your loan begins. Used to generate dates in the amortization schedule."
-                />
+                <CalcInput label="Loan Amount ($)" value={loanAmount} onChange={setLoanAmount} placeholder="250,000" tooltip="The total amount you want to borrow. Enter principal only, not including fees." />
+                <CalcInput label="Annual Interest Rate (%)" value={annualRate} onChange={setAnnualRate} placeholder="7.5" tooltip="The nominal annual interest rate. Do not enter as a decimal — enter 7.5 for 7.5%." />
+                <CalcInput label="Loan Period (Years)" value={loanPeriod} onChange={setLoanPeriod} placeholder="10" tooltip="The total repayment term in years. SBA 7(a) loans go up to 10 years for working capital, 25 years for real estate." />
+                <CalcInput label="Payments per Year" value={paymentsPerYear} onChange={setPaymentsPerYear} placeholder="e.g. 12" tooltip="How many payments per year. Typically 12 for monthly. Enter 12 unless your lender specifies otherwise." />
+                <CalcInput label="Loan Start Date" value={startDate} onChange={setStartDate} type="date" tooltip="The date your loan begins. Used to generate dates in the amortization schedule." />
                 <CalcButton label="Calculate Loan" onClick={handleCalculate} />
               </div>
             </HoverCard>
 
-            {/* RIGHT — Results */}
             <div>
               {results ? (
                 <HoverCard style={{ padding: "2rem" }}>
-                  <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700, color: G.dark, marginBottom: "1.25rem" }}>
-                    Loan Summary
-                  </h3>
+                  <h3 style={{ fontFamily: G.serif, fontSize: "1.1rem", fontWeight: 700, color: G.dark, marginBottom: "1.25rem" }}>Loan Summary</h3>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
                     <ResultCard label="Monthly Payment" value={fmt(results.payment)} />
                     <ResultCard label="Annual Debt Service" value={fmt(results.annualDebtService)} />
                     <ResultCard label="Total Interest Paid" value={fmt(results.totalInterest)} />
                     <ResultCard label="Total Amount Paid" value={fmt(results.totalPaid)} />
                   </div>
-
-                  <button
-                    onClick={() => setShowAmortization(!showAmortization)}
-                    style={{ background: "none", border: `1px solid ${G.border}`, color: G.textDark, padding: "0.6rem 1.25rem", cursor: "pointer", fontSize: "0.875rem", fontFamily: G.sans, marginBottom: "1rem", width: "100%" }}
-                  >
+                  <button onClick={() => setShowAmortization(!showAmortization)} style={{ background: "none", border: `1px solid ${G.border}`, color: G.textDark, padding: "0.6rem 1.25rem", cursor: "pointer", fontSize: "0.875rem", fontFamily: G.sans, marginBottom: "1rem", width: "100%" }}>
                     {showAmortization ? "Hide Amortization Schedule ▲" : "Show Amortization Schedule ▼"}
                   </button>
-
                   {showAmortization && (
                     <div style={{ overflowX: "auto" }}>
                       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
                         <thead>
                           <tr style={{ background: G.dark }}>
                             {["#", "Date", "Payment", "Principal", "Interest", "Balance"].map((h) => (
-                              <th key={h} style={{ padding: "0.6rem 0.75rem", textAlign: "right", fontWeight: 600, fontFamily: G.sans, whiteSpace: "nowrap", color: "#fff" }}>
-                                {h}
-                              </th>
+                              <th key={h} style={{ padding: "0.6rem 0.75rem", textAlign: "right", fontWeight: 600, fontFamily: G.sans, whiteSpace: "nowrap", color: "#fff" }}>{h}</th>
                             ))}
                           </tr>
                         </thead>
@@ -387,7 +375,6 @@ export default function BusinessLoanCalculatorPage() {
                       </table>
                     </div>
                   )}
-
                   <p style={{ fontSize: "0.8rem", color: G.textMid, fontStyle: "italic", marginTop: "1.25rem", maxWidth: "none" }}>
                     This calculator provides estimated loan payments only. Final loan terms, rates, and fees are determined by the lender.
                   </p>
@@ -404,21 +391,26 @@ export default function BusinessLoanCalculatorPage() {
         </div>
       </section>
 
-      {/* ── Related Programs ─────────────────────────────────────── */}
-      <section style={{ padding: "3rem 2rem", borderTop: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1rem 0", maxWidth: "none" }}>
+      {/* ── Related Programs — FIX 2+3+4+6: centered, gold hover, 4 cards, mobile ── */}
+      <section style={{ padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 0.5rem 0" }}>
             Related Programs
           </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.4rem, 3vw, 1.875rem)", fontWeight: 700, color: G.dark, marginBottom: "0.75rem", lineHeight: 1.25 }}>
+            Financing Programs That Use This Calculator
+          </h2>
+          <p style={{ fontSize: "0.95rem", color: G.textMid, lineHeight: 1.8, maxWidth: 520, margin: "0 auto 2.5rem" }}>
+            Run your numbers, then explore the program that fits your deal.
+          </p>
+          <div className="sgf-related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", maxWidth: 820, width: "100%" }}>
             {[
-              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans" },
-              { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate" },
-              { label: "Equipment Financing", href: "/financing-options/equipment-financing" },
-            ].map(({ label, href }) => (
-              <Link key={href} href={href} style={{ border: `1px solid ${G.green}`, color: G.green, padding: "0.5rem 1.25rem", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
-                {label} →
-              </Link>
+              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", desc: "Government-backed financing for business acquisition, expansion & real estate." },
+              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-lines-of-credit", desc: "Flexible working capital and fixed-term financing for operations and growth." },
+              { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", desc: "Purchase, refinance, or cash-out on owner-occupied and investment properties." },
+              { label: "Equipment Financing", href: "/financing-options/equipment-financing", desc: "Finance heavy equipment, vehicles, and machinery with terms up to 84 months." },
+            ].map(({ label, href, desc }) => (
+              <RelatedCard key={href} label={label} href={href} description={desc} />
             ))}
           </div>
         </div>
