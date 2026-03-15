@@ -310,10 +310,6 @@ export default function BusinessLoanCalculatorPage() {
             <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "1.25rem" }}>
               Business Loan Calculator
             </h1>
-<p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "0 0 1rem 0", maxWidth: "none" }}>
-              <Link href="/tools" style={{ color: G.gold, textDecoration: "none" }}>Tools</Link>
-              {" → "}Business Loan Calculator
-            </p>
             <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
               Estimate your monthly payment, total interest, and full amortization schedule for any term loan.
             </p>
