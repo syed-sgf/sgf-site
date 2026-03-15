@@ -240,6 +240,60 @@ function RelatedCard({ label, href, dark = false }: { label: string; href: strin
   );
 }
 
+const faqs = [
+  {
+    q: "What does the monthly payment include?",
+    a: "The monthly payment is the fixed amount you repay each month on a fully amortizing loan. It includes both principal and interest. SBA and other commercial loans may also carry fees — guarantee fees, origination, and closing costs — which are not reflected in this calculator.",
+  },
+  {
+    q: "What is total principal?",
+    a: "Total principal is the original amount you borrowed. Over the life of the loan, your payments chip away at this balance until it reaches zero at the final payment.",
+  },
+  {
+    q: "What is total interest and can I reduce it?",
+    a: "Total interest is the cumulative amount paid to the lender over the full loan term. You may reduce it by repaying early — but check your agreement first, as some lenders charge a prepayment penalty that can offset the savings.",
+  },
+  {
+    q: "What is total principal & interest?",
+    a: "This is the sum of every payment made over the life of the loan — the amount you borrowed plus all interest charged. It represents the true total cost of the loan before fees.",
+  },
+  {
+    q: "How does the amortization schedule work?",
+    a: "The amortization schedule shows how each monthly payment is split between principal and interest. Early payments are mostly interest. Over time, as the balance decreases, more of each payment goes toward principal. Your monthly payment stays the same throughout — only the split changes.",
+  },
+  {
+    q: "Can I use this as an SBA Loan Calculator?",
+    a: "Yes. This calculator works for SBA 7(a) and SBA 504 loans. For SBA 7(a) working capital loans enter terms up to 10 years; for real estate loans terms go up to 25 years. Current SBA 7(a) rates are variable and tied to prime — enter your quoted rate to get an accurate estimate.",
+  },
+];
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: `1px solid ${G.border}` }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%", display: "flex", justifyContent: "space-between",
+          alignItems: "center", padding: "1.25rem 0",
+          background: "none", border: "none", cursor: "pointer",
+          textAlign: "left", gap: "1rem",
+        }}
+      >
+        <span style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: G.dark, lineHeight: 1.4 }}>
+          {q}
+        </span>
+        <span style={{ color: G.gold, fontSize: "1.25rem", flexShrink: 0, transform: open ? "rotate(45deg)" : "rotate(0deg)", transition: "transform 0.2s" }}>+</span>
+      </button>
+      {open && (
+        <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: 1.8, padding: "0 0 1.25rem", margin: 0, maxWidth: "none" }}>
+          {a}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function CTABand() {
   return (
     <section style={{ background: G.dark, padding: "4.5rem 2rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -311,8 +365,11 @@ export default function BusinessLoanCalculatorPage() {
             <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "1.25rem" }}>
               Business Loan Calculator
             </h1>
-            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
-              Estimate your monthly payment, total interest, and full amortization schedule for any term loan.
+            <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.85, maxWidth: 580, margin: "0 auto 1rem" }}>
+              Estimate your monthly payment, total interest, and full amortization schedule for any business or SBA loan.
+            </p>
+            <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", margin: "0 auto", maxWidth: 520 }}>
+              Also works as an <strong style={{ color: G.gold, fontWeight: 600 }}>SBA Loan Calculator</strong> — plug in your SBA 7(a) or 504 loan details to estimate payments before you apply.
             </p>
           </div>
         </div>
@@ -412,6 +469,21 @@ export default function BusinessLoanCalculatorPage() {
               { label: "Equipment Financing", href: "/financing-options/equipment-financing", dark: true },
             ].map(({ label, href, dark }) => (
               <RelatedCard key={href} label={label} href={href} dark={dark} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────────── */}
+      <section style={{ background: G.cream, padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <div style={{ maxWidth: 760, margin: "0 auto" }}>
+          <SectionHeader
+            eyebrow="Frequently Asked Questions"
+            title="Business Loan Calculator — Common Questions"
+          />
+          <div>
+            {faqs.map((faq) => (
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </div>
         </div>
