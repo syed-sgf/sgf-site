@@ -111,7 +111,7 @@ function HoverCard({ children, style = {} }: { children: React.ReactNode; style?
 
 function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: React.ReactNode; subtitle?: string }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+    <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
       <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 0.6rem 0", maxWidth: "none" }}>
         {eyebrow}
       </p>
@@ -210,31 +210,32 @@ function ResultCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-// FIX 2+3+6: RelatedCard — centered, gold border on hover
-function RelatedCard({ label, href, description }: { label: string; href: string; description: string }) {
+// ProgramCard — matches DSCR page style exactly
+function RelatedCard({ label, href, dark = false }: { label: string; href: string; dark?: boolean; description?: string }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <Link
-      href={href}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left",
-        background: "#fff", borderRadius: 4, padding: "1.5rem",
-        border: `1px solid ${hovered ? "#C9A84C" : G.green}`,
-        boxShadow: hovered ? "0 4px 16px rgba(201,168,76,0.15)" : "0 1px 3px rgba(0,0,0,0.05)",
-        transition: "border-color 0.2s, box-shadow 0.2s", textDecoration: "none",
-      }}
-    >
-      <span style={{ fontWeight: 700, color: hovered ? G.green : G.textDark, fontSize: "0.95rem", marginBottom: "0.5rem", transition: "color 0.2s", fontFamily: G.sans }}>
-        {label}
-      </span>
-      <span style={{ fontSize: "0.825rem", color: G.textMid, lineHeight: 1.65, marginBottom: "1rem", fontFamily: G.sans }}>
-        {description}
-      </span>
-      <span style={{ fontSize: "0.825rem", fontWeight: 600, color: hovered ? "#C9A84C" : G.green, transition: "color 0.2s", fontFamily: G.sans, marginTop: "auto" }}>
-        Learn More →
-      </span>
+    <Link href={href} onMouseEnter={() => {}} style={{ textDecoration: "none" }}>
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          background: dark ? G.dark : G.cream,
+          border: `1px solid ${hovered ? G.gold : G.border}`,
+          padding: "1.5rem",
+          transition: "border-color 0.2s, box-shadow 0.2s",
+          boxShadow: hovered ? "0 4px 16px rgba(206,149,98,0.12)" : "none",
+          textAlign: "center",
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center", gap: "0.5rem",
+        }}
+      >
+        <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: dark ? "#fff" : G.dark, margin: 0, maxWidth: "none", lineHeight: 1.3 }}>
+          {label}
+        </p>
+        <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>
+          Learn More →
+        </span>
+      </div>
     </Link>
   );
 }
@@ -403,14 +404,14 @@ export default function BusinessLoanCalculatorPage() {
           <p style={{ fontSize: "0.95rem", color: G.textMid, lineHeight: 1.8, maxWidth: 520, margin: "0 auto 2.5rem" }}>
             Run your numbers, then explore the program that fits your deal.
           </p>
-          <div className="sgf-related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", maxWidth: 820, width: "100%" }}>
+          <div className="sgf-tools-grid">
             {[
-              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", desc: "Government-backed financing for business acquisition, expansion & real estate." },
-              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-lines-of-credit", desc: "Flexible working capital and fixed-term financing for operations and growth." },
-              { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", desc: "Purchase, refinance, or cash-out on owner-occupied and investment properties." },
-              { label: "Equipment Financing", href: "/financing-options/equipment-financing", desc: "Finance heavy equipment, vehicles, and machinery with terms up to 84 months." },
-            ].map(({ label, href, desc }) => (
-              <RelatedCard key={href} label={label} href={href} description={desc} />
+              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: true },
+              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-lines-of-credit", dark: false },
+              { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
+              { label: "Equipment Financing", href: "/financing-options/equipment-financing", dark: true },
+            ].map(({ label, href, dark }) => (
+              <RelatedCard key={href} label={label} href={href} dark={dark} />
             ))}
           </div>
         </div>
