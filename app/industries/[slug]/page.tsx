@@ -43,9 +43,9 @@ const SEO_META: Record<string, { title: string; description: string; keywords: s
     keywords: ["healthcare practice loans", "medical equipment financing", "dental practice loan", "physician practice acquisition", "SBA loans healthcare", "medical practice working capital"],
   },
   "oil-gas": {
-    title: "Oil & Gas Business Financing | Equipment, A/R & Working Capital | Starting Gate Financial",
-    description: "Capital solutions for oilfield services, upstream, and midstream companies. Equipment financing, accounts receivable financing, and working capital for oil and gas businesses in Texas.",
-    keywords: ["oil gas business loans", "oilfield equipment financing", "oil gas working capital", "accounts receivable oilfield", "energy sector financing", "oilfield services financing"],
+    title: "Oil & Gas Financing | Energy Loans for Upstream, Midstream & Downstream | Starting Gate Financial",
+    description: "Specialized energy loans and oil & gas financing for upstream exploration, midstream infrastructure, and downstream operations. Equipment financing, A/R financing, and working capital for oilfield services companies in Texas.",
+    keywords: ["oil gas financing", "energy loans", "oilfield equipment financing", "upstream financing", "midstream loans", "downstream working capital", "oil gas working capital Texas", "oilfield services financing", "energy sector loans"],
   },
   "real-estate-investors": {
     title: "Real Estate Investor Financing | DSCR Loans, Fix & Flip & CRE | Starting Gate Financial",
@@ -146,6 +146,66 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           ))}
         </div>
       </section>
+
+      {/* ── OIL & GAS SEGMENT SECTION — only renders for oil-gas ── */}
+      {slug === "oil-gas" && (
+        <section style={{ padding: "4rem 2rem", background: G.dark, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
+          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+              <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>
+                Energy Sector Lending
+              </p>
+              <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem", textAlign: "center" }}>
+                Power Your Operations with Strategic Energy Sector Lending
+              </h2>
+              <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.65)", maxWidth: "620px", lineHeight: "1.75", fontFamily: G.sans, margin: 0 }}>
+                We offer scalable commercial loans, dedicated equipment financing, and flexible lines of credit to fund everything from infrastructure expansion and regulatory compliance to covering payroll during price fluctuations.
+              </p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="fin-insight-grid">
+              {[
+                {
+                  icon: "⛏️",
+                  title: "Upstream & Exploration Financing",
+                  body: "Fund drilling projects, acquire leases, and purchase critical extraction equipment with capital solutions tailored to the risks and timelines of exploration.",
+                },
+                {
+                  icon: "🔧",
+                  title: "Midstream & Infrastructure Loans",
+                  body: "Finance the development, expansion, and maintenance of pipelines, storage facilities, and transportation networks essential for energy logistics.",
+                },
+                {
+                  icon: "🏭",
+                  title: "Downstream & Refining Working Capital",
+                  body: "Manage inventory, cover operational costs, and invest in facility upgrades for refining and distribution operations with flexible, high-limit credit lines.",
+                },
+              ].map((item) => (
+                <div key={item.title} style={{ padding: "1.75rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px" }}>
+                  <div style={{ fontSize: "1.5rem", marginBottom: "0.75rem" }}>{item.icon}</div>
+                  <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem" }}>{item.title}</p>
+                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.65)", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Process badges */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", marginTop: "2.5rem" }} className="sgf-fica-grid">
+              {[
+                { icon: "📋", title: "Simple Application", body: "Our 15-second online application gets you matched with offers in minutes." },
+                { icon: "✅", title: "No Minimum FICO", body: "Most of our top energy financing options have no minimum credit score requirement." },
+                { icon: "💰", title: "Larger Amounts", body: "Get matched with the best financing options with the highest funding amounts available." },
+                { icon: "⚡", title: "Same-Day Funding", body: "Fintech speed gets you through underwriting in hours with same-day funding available." },
+              ].map((item) => (
+                <div key={item.title} style={{ padding: "1.25rem", background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.08)`, borderRadius: "4px", textAlign: "center" }}>
+                  <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>{item.icon}</div>
+                  <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.4rem" }}>{item.title}</p>
+                  <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", lineHeight: "1.6", margin: 0, fontFamily: G.sans }}>{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── FINANCING NEEDS ──────────────────────────────────────── */}
       <section style={{ padding: "4rem 2rem", background: "#fff", borderBottom: `1px solid ${G.border}` }}>

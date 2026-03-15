@@ -93,15 +93,15 @@ export const industries: Industry[] = [
   {
     slug: "oil-gas",
     title: "Oil & Gas",
-    subtitle: "Capital solutions for upstream, midstream, and oilfield services",
+    subtitle: "Energy loans and oil & gas financing for upstream, midstream, and downstream operations",
     description:
-      "Oil and gas businesses operate in a capital-intensive, cyclical environment where access to equipment and working capital determines whether you capture opportunities or lose them to better-financed competitors. We structure financing around the operational realities of the energy sector.",
+      "The oil and gas industry operates on a scale and timeline that standard commercial lending cannot support. At SGF, we provide specialized energy loans designed for the sector's unique capital intensity, regulatory demands, and dynamic market cycles. Whether you're in upstream exploration, midstream logistics, or downstream refining, our solutions are engineered for your segment.",
     commonFinancingNeeds: [
       "Heavy equipment and fleet financing for oilfield operations",
       "Working capital lines for drilling and service contracts",
       "Accounts receivable financing on operator invoices",
-      "Commercial real estate for field offices and operations facilities",
-      "Business lines of credit for operational flexibility",
+      "Financing for acquisition, compliance, and expansion",
+      "Same-day and fast-turnaround capital for complex operations",
     ],
     relevantProducts: [
       "equipment-financing",
