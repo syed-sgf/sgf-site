@@ -178,8 +178,6 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               return (
                 <Link key={product.slug} href={`/financing/${product.slug}`}
                   style={{ padding: "1.75rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", display: "block", transition: "border-color 0.2s, border-top-color 0.2s, box-shadow 0.2s" }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#C9A84C"; el.style.borderTopColor = "#C9A84C"; el.style.boxShadow = "0 4px 16px rgba(201,168,76,0.15)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = G.border; el.style.borderTopColor = G.primary; el.style.boxShadow = "none"; }}
                 >
                   <h3 style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.4rem" }}>{product.title}</h3>
                   <p style={{ fontSize: "0.85rem", color: G.textMid, margin: "0 0 0.85rem", fontFamily: G.sans, lineHeight: "1.5" }}>{product.subtitle}</p>
