@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/financing-data";
 
@@ -29,14 +30,14 @@ const heroSlides = [
 
 /* ── Program icons ──────────────────────────────────────────────── */
 const programIcons: Record<string, string> = {
-  "business-loc": "◈",
+  "business-loc-term-loans": "◈",
   "commercial-real-estate": "⬡",
-  "sba-loans": "★",
+  "sba-financing": "★",
   "equipment-financing": "⚙",
   "fix-and-flip": "⌂",
-  "dscr-rental": "⊞",
+  "dscr-rental-loans": "⊞",
   "franchise-financing": "◉",
-  "accounts-receivable": "⊜",
+  "accounts-receivable-financing": "⊜",
   "startup-financing": "◎",
   "merchant-cash-advance": "⟁",
 };
@@ -70,14 +71,8 @@ function HeroSlideshow() {
       {/* Slides */}
       {heroSlides.map((slide, i) => (
         <div key={slide.url} style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, transition: "opacity 1.2s ease-in-out" }}>
-          <img
-            src={slide.url}
-            alt={slide.label}
-            loading={i === 0 ? "eager" : "lazy"}
-            fetchPriority={i === 0 ? "high" : "low"}
-            decoding={i === 0 ? "sync" : "async"}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
-          />
+          <Image src={slide.url} alt={slide.label} fill priority={i === 0} sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }} />
         </div>
       ))}
 
@@ -88,17 +83,17 @@ function HeroSlideshow() {
       <div style={{ position: "relative", zIndex: 3, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", padding: "0 2rem", textAlign: "center" }}>
         <p style={{ fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1rem", fontFamily: G.sans }}>Financing Programs</p>
         <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2rem,4vw,3rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", maxWidth: "700px", marginBottom: "1.25rem" }}>
-          Capital Structures Built for Your Business
+          Financing Programs for Business Operators
         </h1>
         <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.8)", maxWidth: "540px", lineHeight: "1.7", fontFamily: G.sans, marginBottom: "2rem" }}>
-          SGF works as a capital advisor — not a product vendor. Every engagement starts with understanding how the capital will be used.
+          Each program is structured around use of funds, underwriting requirements, and business profile — not marketing categories.
         </p>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="/apply" style={{ display: "inline-block", padding: "0.85rem 2rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-            Start Pre-Qualification
+          <Link href="/contact" style={{ display: "inline-block", padding: "0.85rem 2rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+            Start a Financing Review
           </Link>
           <Link href="/industries" style={{ display: "inline-block", padding: "0.85rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.5)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-            Browse by Industry
+            Explore All Programs
           </Link>
         </div>
       </div>
@@ -142,7 +137,7 @@ export default function FinancingOptionsPage() {
               return (
                 <Link
                   key={program.slug}
-                  href={`/financing/${program.slug}`}
+                  href={`/financing-options/${program.slug}`}
                   style={{
                     gridColumn: isLastAndOdd ? "1 / -1" : undefined,
                     maxWidth: isLastAndOdd ? "560px" : undefined,
@@ -210,13 +205,13 @@ export default function FinancingOptionsPage() {
       {/* CTA band */}
       <section style={{ background: G.dark, padding: "3.5rem 2rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Get Started</p>
+          <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Ready to Move Forward</p>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Not Sure Which Program Fits?</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
-            Start a pre-qualification conversation. We'll identify the right structure based on your business profile, capital need, and timeline.
+            We&apos;ll review your business profile and identify which programs are worth pursuing — before any lender sees your file.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+            <Link href="/contact" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
               Request a Financing Review
             </Link>
             <Link href="/industries" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>

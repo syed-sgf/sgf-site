@@ -7,7 +7,7 @@ export default function PrivacyPage() {
         <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2rem, 4vw, 2.75rem)", color: G.textDark, marginBottom: "2rem", fontWeight: 700 }}>Privacy Policy</h1>
         <div style={{ fontSize: "0.95rem", color: G.textMid, lineHeight: 1.8, display: "flex", flexDirection: "column", gap: "1.25rem" }}>
           <p>Last updated: {new Date().getFullYear()}</p>
-          <p>Starting Gate Financial ("SGF") is committed to protecting your privacy. This policy outlines how we collect, use, and safeguard your personal information.</p>
+          <p>Starting Gate Financial (&quot;SGF&quot;) is committed to protecting your privacy. This policy outlines how we collect, use, and safeguard your personal information.</p>
           <p><strong style={{ color: G.textDark }}>Information We Collect:</strong> We collect information you provide directly, such as name, contact details, and business information submitted through our forms and applications.</p>
           <p><strong style={{ color: G.textDark }}>How We Use Your Information:</strong> Information is used solely to evaluate financing inquiries, communicate with you about your request, and improve our services. We do not sell your personal information to third parties.</p>
           <p><strong style={{ color: G.textDark }}>Data Security:</strong> We implement appropriate security measures to protect your information. However, no method of transmission over the internet is 100% secure.</p>

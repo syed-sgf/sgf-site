@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const slides = [
   "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=80",
@@ -33,7 +34,7 @@ export default function Hero() {
               fontFamily: "var(--font-source-sans)"
             }}>
               <span style={{ display: "block", width: "24px", height: "1px", background: "#CE9562" }} />
-              Commercial Loan Brokerage · Richardson, TX
+              Commercial Financing · Richardson, TX
             </p>
 
             <h1 style={{
@@ -80,7 +81,7 @@ export default function Hero() {
 
             {/* CTAs */}
             <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
-              <a href="/apply" style={{
+              <Link href="/apply" style={{
                 display: "inline-flex", alignItems: "center", gap: "0.5rem",
                 background: "#118241", color: "white",
                 padding: "0.9rem 2rem", fontSize: "0.88rem", fontWeight: "600",
@@ -89,15 +90,15 @@ export default function Hero() {
                 fontFamily: "var(--font-source-sans)"
               }}>
                 Start Pre-Qualification →
-              </a>
-              <a href="/financing-options" style={{
+              </Link>
+              <Link href="/financing-options" style={{
                 display: "inline-flex", alignItems: "center", gap: "0.4rem",
                 color: "#082B09", fontSize: "0.9rem", fontWeight: "600",
                 textDecoration: "none", borderBottom: "1px solid #CE9562",
                 paddingBottom: "2px", fontFamily: "var(--font-source-sans)"
               }}>
                 Explore Financing Options →
-              </a>
+              </Link>
             </div>
 
             {/* Trusted by */}

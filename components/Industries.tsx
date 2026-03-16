@@ -1,13 +1,14 @@
 "use client";
+import Link from "next/link";
 
 const industries = [
-  { name: "Construction & Contractors", desc: "Project-driven capital for builders, GCs, and specialty trades", href: "/industries/construction" },
-  { name: "Healthcare & Medical", desc: "Practice acquisition, expansion, and equipment upgrades", href: "/industries/healthcare" },
-  { name: "Restaurants & Food Service", desc: "Cash flow-aware financing for operators", href: "/industries/restaurants" },
-  { name: "Real Estate Investors", desc: "Portfolio growth, DSCR, and bridge capital", href: "/industries/real-estate-investors" },
-  { name: "Oil & Gas Services", desc: "Capital for equipment, expansion, and project execution", href: "/industries/oil-and-gas" },
+  { name: "Construction", desc: "Project-driven capital for builders, GCs, and specialty trades", href: "/industries/construction" },
+  { name: "Restaurants & Food", desc: "Cash flow-aware financing for operators", href: "/industries/restaurants-food" },
+  { name: "Medical & Healthcare", desc: "Practice acquisition, expansion, and equipment upgrades", href: "/industries/medical-healthcare" },
+  { name: "Retail & E-Commerce", desc: "Inventory financing and working capital for retail operators", href: "/industries/retail-ecommerce" },
   { name: "Trucking & Transportation", desc: "Fleet financing and working capital for operators", href: "/industries/trucking-transportation" },
   { name: "Professional Services", desc: "Growth capital for established service businesses", href: "/industries/professional-services" },
+  { name: "Oil & Gas Services", desc: "Capital for oilfield service and support businesses", href: "/industries/oil-gas-services" },
 ];
 
 export default function Industries() {
@@ -35,7 +36,7 @@ export default function Industries() {
           border: "1px solid rgba(255,255,255,0.08)"
         }}>
           {industries.map((ind, index) => (
-            <a key={ind.href} href={ind.href} style={{
+            <Link key={ind.href} href={ind.href} style={{
               display: "block", padding: "2rem",
               background: "#082B09", textDecoration: "none",
               borderRight: (index % 3 !== 2) ? "1px solid rgba(255,255,255,0.08)" : "none",
@@ -62,17 +63,17 @@ export default function Industries() {
                 fontSize: "0.8rem", color: "rgba(255,255,255,0.45)",
                 fontFamily: "var(--font-source-sans)", lineHeight: "1.55"
               }}>{ind.desc}</p>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: "2.25rem" }}>
-          <a href="/industries" style={{
+          <Link href="/industries" style={{
             fontSize: "0.88rem", fontWeight: "600",
             color: "rgba(255,255,255,0.65)", textDecoration: "none",
             borderBottom: "1px solid #CE9562", paddingBottom: "2px",
             fontFamily: "var(--font-source-sans)"
-          }}>Explore all industries →</a>
+          }}>Explore all industries →</Link>
         </div>
       </div>
     </section>

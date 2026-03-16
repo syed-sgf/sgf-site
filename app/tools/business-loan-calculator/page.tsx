@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -233,7 +234,7 @@ function RelatedCard({ label, href, dark = false }: { label: string; href: strin
           {label}
         </p>
         <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>
-          Learn More →
+          View Program →
         </span>
       </div>
     </Link>
@@ -341,8 +342,17 @@ export default function BusinessLoanCalculatorPage() {
     setResults({ payment: calc.payment, annualDebtService, totalPaid, totalInterest, schedule });
   }
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Tools & Calculators", path: "/tools" },
+    { name: "Business Loan Calculator", path: "/tools/business-loan-calculator" },
+  ]);
+  const faqLd = faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
+
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero — FIX 1: Tools → Business Loan Calculator ───────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
@@ -449,6 +459,13 @@ export default function BusinessLoanCalculatorPage() {
         </div>
       </section>
 
+      {/* ── Disclaimer ────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f6f1", padding: "1.5rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <p style={{ fontSize: "0.78rem", color: "#64748b", fontStyle: "italic", textAlign: "center", maxWidth: 780, margin: "0 auto", lineHeight: 1.7 }}>
+          Results are estimates based on the inputs provided and standard assumptions. They do not represent a loan offer, approval, rate commitment, or lender decision. Actual terms are determined by lenders based on full underwriting review.
+        </p>
+      </section>
+
       {/* ── Related Programs — FIX 2+3+4+6: centered, gold hover, 4 cards, mobile ── */}
       <section style={{ padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -463,8 +480,8 @@ export default function BusinessLoanCalculatorPage() {
           </p>
           <div className="sgf-tools-grid">
             {[
-              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: true },
-              { label: "Business Lines of Credit & Term Loans", href: "/financing-options/business-loc", dark: false },
+              { label: "SBA Financing", href: "/financing-options/sba-financing", dark: true },
+              { label: "Business LOC & Term Loans", href: "/financing-options/business-loc-term-loans", dark: false },
               { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
               { label: "Equipment Financing", href: "/financing-options/equipment-financing", dark: true },
             ].map(({ label, href, dark }) => (

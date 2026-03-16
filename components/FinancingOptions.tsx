@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 const programs = [
   { title: "SBA Financing", desc: "Long-term capital for owner-operated growth", href: "/financing-options/sba-financing" },
@@ -6,7 +7,7 @@ const programs = [
   { title: "Business LOC & Term Loans", desc: "Working capital and operational stability", href: "/financing-options/business-loc-term-loans" },
   { title: "Equipment Financing", desc: "Acquire without straining cash flow", href: "/financing-options/equipment-financing" },
   { title: "DSCR Rental Loans", desc: "Investment property financing on cash flow", href: "/financing-options/dscr-rental-loans" },
-  { title: "Fix & Flip Loans", desc: "Short-term capital for rehab execution", href: "/financing-options/fix-and-flip-loans" },
+  { title: "Fix & Flip Loans", desc: "Short-term capital for rehab execution", href: "/financing-options/fix-and-flip" },
   { title: "Accounts Receivable", desc: "Turn outstanding invoices into working capital", href: "/financing-options/accounts-receivable-financing" },
   { title: "Franchise Financing", desc: "Structured capital for startup and expansion", href: "/financing-options/franchise-financing" },
   { title: "Merchant Cash Advance", desc: "Revenue-based advances for fast-moving businesses", href: "/financing-options/merchant-cash-advance" },
@@ -38,7 +39,7 @@ export default function FinancingOptions() {
           border: "1px solid #E2DDD6"
         }}>
           {programs.map((p, i) => (
-            <a key={p.href} href={p.href} style={{
+            <Link key={p.href} href={p.href} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "1.35rem 1.75rem", background: "white", textDecoration: "none",
               borderRight: i % 2 === 0 ? "1px solid #E2DDD6" : "none",
@@ -56,16 +57,16 @@ export default function FinancingOptions() {
                 <p style={{ fontSize: "0.8rem", color: "#64748B", fontFamily: "var(--font-source-sans)" }}>{p.desc}</p>
               </div>
               <span style={{ color: "#CE9562", fontSize: "1rem", marginLeft: "1rem", flexShrink: 0 }}>→</span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: "2.25rem" }}>
-          <a href="/financing-options" style={{
+          <Link href="/financing-options" style={{
             fontSize: "0.88rem", fontWeight: "600", color: "#082B09",
             textDecoration: "none", borderBottom: "1px solid #CE9562",
             paddingBottom: "2px", fontFamily: "var(--font-source-sans)"
-          }}>View all financing options →</a>
+          }}>View all financing options →</Link>
         </div>
       </div>
     </section>

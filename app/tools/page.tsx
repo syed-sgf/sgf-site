@@ -111,13 +111,22 @@ const tools = [
     href: "/tools/mca-calculator",
     icon: icons.mca,
     tag: "Fast Capital",
-    label: "MCA Planning Tool",
+    label: "MCA Calculator",
     description:
       "Estimate total repayment for a Merchant Cash Advance using advance amount and factor rate.",
-    ariaLabel: "Open MCA Planning Tool",
+    ariaLabel: "Open MCA Calculator",
   },
   {
-    href: "/tools/fica-tip-calculator",
+    href: "/tools/working-capital-calculator",
+    icon: icons.businessLoan,
+    tag: "Working Capital",
+    label: "Working Capital Calculator",
+    description:
+      "Calculate your working capital position, current ratio, and quick ratio to understand your short-term liquidity.",
+    ariaLabel: "Open Working Capital Calculator",
+  },
+  {
+    href: "/tools/fica-tip-credit-calculator",
     icon: icons.fica,
     tag: "Tax Credit",
     label: "FICA Tip Credit Calculator",
@@ -273,14 +282,13 @@ export default function ToolsHubPage() {
               fontWeight: 700, color: "#fff", lineHeight: 1.2,
               marginBottom: "1.25rem",
             }}>
-              Estimate. Understand. Decide.
+              Financial Calculators for Business Financing
             </h1>
             <p style={{
               fontSize: "1.05rem", color: "rgba(255,255,255,0.8)",
               lineHeight: 1.85, maxWidth: 580, margin: "0 auto",
             }}>
-              Free financial calculators built around real underwriting
-              standards — not marketing copy.
+              These calculators provide estimates to support financing conversations — not approvals, not quotes, not lender decisions.
             </p>
           </div>
         </div>
@@ -294,7 +302,7 @@ export default function ToolsHubPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SectionHeader
             eyebrow="Our Tools"
-            title="Four Calculators. One Purpose."
+            title="Five Calculators. One Purpose."
             subtitle="Run the numbers before the conversation. Each tool is built around how lenders actually evaluate deals."
           />
           {/* Issue 1 fix: 4 tools matching nav — Business Loan, DSCR, MCA, FICA */}

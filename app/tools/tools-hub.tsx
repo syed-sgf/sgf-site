@@ -80,7 +80,7 @@ const calculators = [
   },
   {
     id: "05",
-    href: "/tools/fica-tip-calculator",
+    href: "/tools/fica-tip-credit-calculator",
     title: "FICA Tip Credit Calculator",
     subtitle: "IRC § 45B employer tax credit",
     description:
@@ -131,12 +131,11 @@ export default function ToolsHubPage() {
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem",
         }} className="sgf-tools-why-grid">
           {[
-            { icon: "⚖️", title: "Deterministic Only", body: "Every output is a direct result of your inputs. No scoring models, no AI inferences, no assumptions baked in." },
-            { icon: "🎯", title: "Decision Support", body: "Use these tools to pressure-test a deal before talking to a lender — or to walk into a consultation better prepared." },
-            { icon: "🔒", title: "No Approval Language", body: "These calculators do not determine eligibility. They estimate. Final terms are set by lenders, not by tools." },
-          ].map(({ icon, title, body }) => (
+            { title: "Deterministic Only", body: "Every output is a direct result of your inputs. No scoring models, no AI inferences, no assumptions baked in." },
+            { title: "Decision Support", body: "Use these tools to pressure-test a deal before talking to a lender — or to walk into a consultation better prepared." },
+            { title: "No Approval Language", body: "These calculators do not determine eligibility. They estimate. Final terms are set by lenders, not by tools." },
+          ].map(({ title, body }) => (
             <div key={title} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-              <span style={{ fontSize: "1.5rem", flexShrink: 0 }}>{icon}</span>
               <div>
                 <h3 style={{
                   fontFamily: "var(--font-playfair)", fontSize: "1rem",

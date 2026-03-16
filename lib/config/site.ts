@@ -50,11 +50,11 @@ export const routes = {
 
 // ── Financing program slugs (canonical) ──
 export const financingPrograms = [
-  "sba-financing",
-  "commercial-real-estate",
   "business-loc-term-loans",
+  "commercial-real-estate",
+  "sba-financing",
   "equipment-financing",
-  "fix-and-flip-loans",
+  "fix-and-flip",
   "dscr-rental-loans",
   "franchise-financing",
   "accounts-receivable-financing",
@@ -64,18 +64,20 @@ export const financingPrograms = [
 
 // ── Industry slugs (canonical) ──
 export const industrySlugList = [
-  "construction-contractors",
-  "food-beverage",
-  "healthcare-medical",
-  "oil-gas",
-  "real-estate-investors",
+  "construction",
+  "restaurants-food",
+  "medical-healthcare",
+  "retail-ecommerce",
+  "trucking-transportation",
+  "professional-services",
+  "oil-gas-services",
 ] as const;
 
 // ── Calculator slugs (canonical) ──
 export const calculatorSlugs = [
   "business-loan-calculator",
   "dscr-calculator",
-  "working-capital-calculator",
   "mca-calculator",
-  "fica-tip-calculator",
+  "working-capital-calculator",
+  "fica-tip-credit-calculator",
 ] as const;

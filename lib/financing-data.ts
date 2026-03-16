@@ -13,7 +13,7 @@ export type FinancingProduct = {
 
 export const products: FinancingProduct[] = [
   {
-    slug: "business-loc",
+    slug: "business-loc-term-loans",
     title: "Business Lines of Credit & Term Loans",
     subtitle: "Flexible working capital structured around your cash flow",
     description:
@@ -22,8 +22,8 @@ export const products: FinancingProduct[] = [
       "Revolving credit lines from $25K to $500K",
       "Fixed-rate term loans with predictable monthly payments",
       "Draw-as-needed flexibility on lines of credit",
-      "Fast funding — often within 5–10 business days",
-      "No collateral required for qualifying businesses",
+      "Funding timelines vary by lender and documentation readiness",
+      "Collateral requirements vary by program and lender",
       "Transparent fee structures with no hidden costs",
     ],
     useCases: [
@@ -49,7 +49,7 @@ export const products: FinancingProduct[] = [
       "LTV up to 75% on most property types",
       "Fixed and variable rate options available",
       "Interest-only periods available on select programs",
-      "Streamlined process for experienced investors",
+      "Structured process tailored for experienced investors",
       "Multi-family, retail, office, industrial, and mixed-use eligible",
     ],
     useCases: [
@@ -65,8 +65,8 @@ export const products: FinancingProduct[] = [
     ctaText: "Discuss Your Property",
   },
   {
-    slug: "sba-loans",
-    title: "SBA Loans",
+    slug: "sba-financing",
+    title: "SBA Financing",
     subtitle: "Government-backed financing for owner-operated businesses",
     description:
       "SBA 7(a) and 504 loans offer the lowest long-term cost of capital for qualified owner-operated businesses. We structure your application the way lenders and the SBA expect — improving approval outcomes and preserving your equity.",
@@ -74,7 +74,7 @@ export const products: FinancingProduct[] = [
       "SBA 7(a) loans up to $5 million",
       "SBA 504 for real estate and heavy equipment up to $5.5M",
       "Terms up to 25 years for real estate, 10 years for working capital",
-      "Competitive interest rates tied to WSJ Prime",
+      "Variable interest rates tied to WSJ Prime",
       "Lower down payment requirements than conventional loans",
       "Eligible for acquisition, expansion, and refinance",
     ],
@@ -125,7 +125,7 @@ export const products: FinancingProduct[] = [
     keyFeatures: [
       "Loan-to-cost up to 90%",
       "After-repair value (ARV) lending up to 70%",
-      "Fast funding — close in as few as 7–10 days",
+      "Timeline varies by lender and title/documentation readiness",
       "Interest-only payments during the renovation period",
       "Flexible draw schedules for renovation disbursements",
       "Programs available for first-time and experienced investors",
@@ -143,34 +143,8 @@ export const products: FinancingProduct[] = [
     ctaText: "Fund Your Next Flip",
   },
   {
-    slug: "bridge-construction",
-    title: "Bridge & Construction Loans",
-    subtitle: "Short-term construction capital for developers and builders",
-    description:
-      "Bridge and construction financing provides fast, project-based capital for horizontal and vertical construction. We fund ground-up builds, lot acquisitions, and construction-to-permanent transitions — structured around draw schedules, not just personal credit.",
-    keyFeatures: [
-      "Construction loans from $50K to $25M+",
-      "Horizontal and vertical construction eligible",
-      "Draw schedules aligned with project milestones",
-      "Interest-only during the construction period",
-      "Transition to permanent financing at completion",
-      "Decisions driven by project scope and developer track record",
-    ],
-    useCases: [
-      "Ground-up residential and commercial construction",
-      "Horizontal land development and infrastructure",
-      "Builder spec homes and subdivision development",
-      "Construction-to-permanent bridge financing",
-      "Lot acquisition and pre-development funding",
-    ],
-    minAmount: "$50,000",
-    maxAmount: "$25,000,000",
-    termRange: "6 – 24 months",
-    ctaText: "Fund Your Construction Project",
-  },
-  {
-    slug: "rental-loans",
-    title: "Rental Property Loans",
+    slug: "dscr-rental-loans",
+    title: "DSCR Rental Loans",
     subtitle: "DSCR-based financing for long-term rental portfolios",
     description:
       "DSCR rental loans qualify based on the property's income — not the borrower's personal tax returns. Ideal for investors with multiple properties or complex income structures who need a straightforward path to long-term financing.",
@@ -221,7 +195,7 @@ export const products: FinancingProduct[] = [
     ctaText: "Structure Your Franchise Deal",
   },
   {
-    slug: "accounts-receivable",
+    slug: "accounts-receivable-financing",
     title: "Accounts Receivable Financing",
     subtitle: "Turn outstanding invoices into immediate working capital",
     description:
@@ -257,7 +231,7 @@ export const products: FinancingProduct[] = [
       "Collateral-backed lending for early-stage companies",
       "Equipment financing with manufacturer support programs",
       "Revenue-based options for post-launch businesses",
-      "Franchise-specific startup programs with streamlined approval",
+      "Franchise-specific startup programs with dedicated underwriting tracks",
       "Capitalization plan structuring for bank presentation",
     ],
     useCases: [
@@ -275,16 +249,16 @@ export const products: FinancingProduct[] = [
   {
     slug: "merchant-cash-advance",
     title: "Merchant Cash Advance",
-    subtitle: "Revenue-based advances for fast-moving businesses",
+    subtitle: "Last-resort short-term advance for businesses that cannot access conventional financing",
     description:
-      "A merchant cash advance provides a lump sum in exchange for a portion of future sales. While MCAs carry a higher cost than conventional debt, they offer speed and flexibility. Our MCA planning tool helps you evaluate the true cost before you commit.",
+      "Merchant cash advances carry high effective rates and short repayment terms. SGF reviews MCA as a last-resort option when conventional financing is not available. If you are considering an MCA, use our calculator to understand the true cost before committing.",
     keyFeatures: [
-      "Funding in as fast as 24–48 hours",
       "Repayment tied to daily or weekly sales volume",
       "No fixed monthly payment — payments flex with revenue",
-      "Factor rates vary based on risk profile and term",
-      "No collateral or real estate required",
-      "Suitable for businesses with strong card or ACH revenue",
+      "Factor rates vary based on risk profile and advance term",
+      "Underwriting based on revenue volume, not credit score",
+      "Collateral requirements vary by provider",
+      "Suitable only when conventional financing options have been exhausted",
     ],
     useCases: [
       "Bridge a short-term cash flow emergency",

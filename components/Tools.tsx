@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 const tools = [
   { title: "SBA Loan Calculator", desc: "Payment scenarios for SBA and term loans", href: "/tools/sba-loan-calculator" },
@@ -32,7 +33,7 @@ export default function Tools() {
           gap: "1.25rem", marginBottom: "2.5rem"
         }}>
           {tools.map((t) => (
-            <a key={t.href} href={t.href} style={{
+            <Link key={t.href} href={t.href} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "1.75rem 2rem", border: "1px solid #E2DDD6",
               background: "white", textDecoration: "none", borderRadius: "2px",
@@ -55,16 +56,16 @@ export default function Tools() {
                 <p style={{ fontSize: "0.81rem", color: "#64748B", fontFamily: "var(--font-source-sans)" }}>{t.desc}</p>
               </div>
               <span style={{ color: "#118241", fontSize: "1.1rem", marginLeft: "1rem", flexShrink: 0 }}>→</span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a href="/tools" style={{
+          <Link href="/tools" style={{
             fontSize: "0.88rem", fontWeight: "600", color: "#082B09",
             textDecoration: "none", borderBottom: "1px solid #CE9562",
             paddingBottom: "2px", fontFamily: "var(--font-source-sans)"
-          }}>Open all calculators →</a>
+          }}>Open all calculators →</Link>
         </div>
       </div>
     </section>

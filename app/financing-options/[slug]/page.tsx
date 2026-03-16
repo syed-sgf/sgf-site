@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/financing-data";
+import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 
 
 export async function generateStaticParams() {
@@ -40,46 +41,46 @@ const G = {
 };
 
 const goodFitMap: Record<string, string[]> = {
-  "business-loc": ["Businesses with seasonal or cyclical revenue", "Companies needing ongoing access to working capital", "Operators managing 30–90 day invoice cycles", "Businesses with 2+ years operating history"],
+  "business-loc-term-loans": ["Businesses with seasonal or cyclical revenue", "Companies needing ongoing access to working capital", "Operators managing 30–90 day invoice cycles", "Businesses with 2+ years operating history"],
   "commercial-real-estate": ["Owner-operators purchasing their business premises", "Investors acquiring income-producing properties", "Developers seeking construction-to-perm financing", "Businesses refinancing existing commercial debt"],
-  "sba-loans": ["Businesses that can't qualify for conventional financing", "Acquisitions requiring longer amortization periods", "Startups with strong projections but limited history", "Owner-occupied real estate purchases"],
+  "sba-financing": ["Businesses that can't qualify for conventional financing", "Acquisitions requiring longer amortization periods", "Startups with strong projections but limited history", "Owner-occupied real estate purchases"],
   "equipment-financing": ["Businesses needing specific equipment to operate", "Companies preserving working capital for operations", "Operators replacing or upgrading existing equipment", "Businesses with strong equipment collateral"],
   "fix-and-flip": ["Experienced investors with a documented track record", "Projects with clear ARV and defined exit strategy", "Investors with access to renovation contractors", "Short-term bridge needs with defined timelines"],
-  "rental-loans": ["Investors building long-term rental portfolios", "Properties with stable, documentable rental income", "Investors who prefer asset-based underwriting", "Landlords refinancing existing rental debt"],
+  "dscr-rental-loans": ["Investors building long-term rental portfolios", "Properties with stable, documentable rental income", "Investors who prefer asset-based underwriting", "Landlords refinancing existing rental debt"],
   "franchise-financing": ["Established franchise brands with proven unit economics", "Operators with industry experience and liquidity", "Multi-unit expansion with existing franchise agreements", "First-time franchisees with strong financial profiles"],
-  "accounts-receivable": ["B2B businesses with creditworthy commercial clients", "Companies with 30–90 day payment cycles", "Businesses experiencing rapid growth", "Operators needing to fund payroll or inventory"],
+  "accounts-receivable-financing": ["B2B businesses with creditworthy commercial clients", "Companies with 30–90 day payment cycles", "Businesses experiencing rapid growth", "Operators needing to fund payroll or inventory"],
   "startup-financing": ["Pre-revenue businesses with strong founder profiles", "Companies with signed contracts or LOIs", "SBA-eligible startups with industry experience", "Businesses with sufficient collateral or equity injection"],
   "merchant-cash-advance": ["Businesses needing capital within 24–72 hours", "High-volume card processors needing short-term bridge", "Operators with strong daily revenue who can't wait", "Businesses using MCA as a last resort bridge only"],
 };
 
 const notFitMap: Record<string, string[]> = {
-  "business-loc": ["Startups under 1 year with no revenue history", "Businesses with recent bankruptcies or tax liens", "Companies seeking capital for real estate purchases", "Borrowers needing a one-time lump sum only"],
+  "business-loc-term-loans": ["Startups under 1 year with no revenue history", "Businesses with recent bankruptcies or tax liens", "Companies seeking capital for real estate purchases", "Borrowers needing a one-time lump sum only"],
   "commercial-real-estate": ["Businesses purchasing residential rental properties", "Borrowers with debt-service coverage below 1.20x", "Properties with environmental issues or title problems", "Speculative land purchases with no development plan"],
-  "sba-loans": ["Businesses in ineligible SBA industries", "Borrowers who need funding in under 30 days", "Companies with unresolved federal tax debt", "Real estate investors buying non-owner-occupied property"],
+  "sba-financing": ["Businesses in ineligible SBA industries", "Borrowers who need funding in under 30 days", "Companies with unresolved federal tax debt", "Real estate investors buying non-owner-occupied property"],
   "equipment-financing": ["General working capital needs unrelated to equipment", "Businesses with no clear equipment collateral", "Startups with no revenue or operating history", "Equipment purchases under $10K — often not worth structuring"],
   "fix-and-flip": ["First-time investors with no rehab experience", "Projects without a clear comparable sales analysis", "Borrowers who need long-term hold financing", "Properties in markets with poor liquidity or comps"],
-  "rental-loans": ["Properties that are vacant with no lease in place", "Owner-occupied properties — not investor programs", "Borrowers needing fast close with no documentation", "Properties with below-market or subsidized rents"],
+  "dscr-rental-loans": ["Properties that are vacant with no lease in place", "Owner-occupied properties — not investor programs", "Borrowers needing fast close with no documentation", "Properties with below-market or subsidized rents"],
   "franchise-financing": ["Unproven or emerging franchise concepts", "Operators with no industry or management experience", "Franchises with unresolved litigation or FDD issues", "Borrowers with significant consumer debt load"],
-  "accounts-receivable": ["B2C businesses with retail consumers as clients", "Businesses with disputed or aged receivables", "Companies with receivables under $25K monthly", "Industries with high chargeback or return rates"],
+  "accounts-receivable-financing": ["B2C businesses with retail consumers as clients", "Businesses with disputed or aged receivables", "Companies with receivables under $25K monthly", "Industries with high chargeback or return rates"],
   "startup-financing": ["Pre-idea stage with no business plan or financials", "Borrowers with recent foreclosures or judgments", "Businesses in high-risk or SBA-ineligible industries", "Operators unwilling to provide personal guarantee"],
   "merchant-cash-advance": ["Businesses that qualify for conventional financing", "Long-term capital needs — MCA is expensive short-term bridge", "Businesses with thin margins that can't absorb factor rates", "Operators already carrying multiple MCA positions"],
 };
 
 const structureMap: Record<string, string> = {
-  "business-loc": "Revolving credit lines draw and repay like a credit card — you borrow what you need, repay it, and access it again. Term loans provide a lump sum repaid over a fixed schedule with predictable monthly payments. Both are structured around your business cash flow and creditworthiness, not hard assets.",
+  "business-loc-term-loans": "Revolving credit lines draw and repay like a credit card — you borrow what you need, repay it, and access it again. Term loans provide a lump sum repaid over a fixed schedule with predictable monthly payments. Both are structured around your business cash flow and creditworthiness, not hard assets.",
   "commercial-real-estate": "CRE loans are typically structured as first-lien mortgages on the subject property, amortized over 20–25 years with balloon payments at 5, 7, or 10 years. SBA 504 structures split financing between a conventional first lien and an SBA debenture. Bridge loans are shorter-term with interest-only periods.",
-  "sba-loans": "SBA 7(a) loans are partially guaranteed by the federal government, allowing lenders to extend credit to businesses that wouldn't qualify conventionally. SBA 504 loans split financing between a bank (50%) and a Certified Development Company (40%) with a 10% equity injection. Terms extend to 25 years for real estate.",
-  "equipment-financing": "Equipment loans use the financed equipment as collateral, reducing risk for the lender and enabling higher approval rates. The equipment's useful life typically defines the loan term. Leases may be structured as operating or capital leases depending on accounting and tax objectives.",
+  "sba-financing": "SBA 7(a) loans are partially guaranteed by the federal government, allowing lenders to extend credit to businesses that wouldn't qualify conventionally. SBA 504 loans split financing between a bank (50%) and a Certified Development Company (40%) with a 10% equity injection. Terms extend to 25 years for real estate.",
+  "equipment-financing": "Equipment loans use the financed equipment as collateral, reducing risk for the lender. The equipment's useful life typically defines the loan term. Leases may be structured as operating or capital leases depending on accounting and tax objectives.",
   "fix-and-flip": "Fix and flip loans are typically structured as short-term bridge loans with interest-only payments during the renovation period. The loan covers purchase price plus a portion of renovation costs, with the after-repair value (ARV) as the primary underwriting metric.",
-  "rental-loans": "DSCR loans underwrite the property's rental income rather than the borrower's personal income. The debt service coverage ratio — net operating income divided by total debt service — must typically exceed 1.20x. These are long-term, fully amortizing loans structured like conventional mortgages.",
+  "dscr-rental-loans": "DSCR loans underwrite the property's rental income rather than the borrower's personal income. The debt service coverage ratio — net operating income divided by total debt service — must typically exceed 1.20x. These are long-term, fully amortizing loans structured like conventional mortgages.",
   "franchise-financing": "Franchise financing is typically structured as SBA 7(a) loans, which recognize franchise agreements as collateral and allow longer amortization. Conventional financing may also apply for multi-unit operators with existing cash flow. Lenders evaluate both the borrower profile and the franchise brand's unit economics.",
-  "accounts-receivable": "Accounts receivable financing advances a percentage of outstanding invoices — typically 70–85% — with the remainder held in reserve until the client pays. The advance is repaid when the invoice is collected. Factoring transfers collection responsibility to the lender; invoice financing keeps collections in-house.",
+  "accounts-receivable-financing": "Accounts receivable financing advances a percentage of outstanding invoices — typically 70–85% — with the remainder held in reserve until the client pays. The advance is repaid when the invoice is collected. Factoring transfers collection responsibility to the lender; invoice financing keeps collections in-house.",
   "startup-financing": "Startup financing is often structured through SBA programs that allow projections-based underwriting with limited operating history. Equity injection requirements (typically 10–30%) and personal guarantees are standard. Collateral is evaluated broadly — not just business assets.",
   "merchant-cash-advance": "An MCA is not a loan — it's a purchase of future receivables at a discount. Repayment is structured as a fixed percentage of daily card sales or ACH debits, which means payments fluctuate with revenue. Factor rates (not APR) determine the total repayment amount.",
 };
 
 const faqMap: Record<string, {q: string; a: string}[]> = {
-  "business-loc": [
+  "business-loc-term-loans": [
     { q: "What's the difference between a line of credit and a term loan?", a: "A line of credit is revolving — you draw, repay, and reuse it. A term loan is a one-time lump sum with a fixed repayment schedule. Lines of credit work best for ongoing working capital needs; term loans suit one-time investments." },
     { q: "How is the credit limit determined?", a: "Lenders evaluate your annual revenue, cash flow, time in business, and creditworthiness. Limits typically range from 10–20% of annual revenue for well-qualified borrowers." },
     { q: "Do I need collateral for a business line of credit?", a: "Not always. Unsecured lines are available for strong-credit borrowers, but higher limits often require a blanket lien on business assets or real estate collateral." },
@@ -89,7 +90,7 @@ const faqMap: Record<string, {q: string; a: string}[]> = {
     { q: "What is debt service coverage ratio (DSCR)?", a: "DSCR measures whether a property generates enough income to cover its debt payments. A 1.25x DSCR means the property earns 25% more than the annual debt payment. Most lenders require 1.20–1.25x minimum." },
     { q: "Can I use CRE financing to renovate an existing property?", a: "Yes. Construction-to-permanent loans fund both acquisition and renovation, converting to a long-term mortgage upon project completion." },
   ],
-  "sba-loans": [
+  "sba-financing": [
     { q: "How long does an SBA loan take to close?", a: "SBA 7(a) loans typically close in 30–90 days depending on lender, loan size, and documentation completeness. SBA Express loans can close faster but have lower guarantee percentages." },
     { q: "What credit score do I need for an SBA loan?", a: "Most SBA lenders look for a personal credit score of 650 or above, though some programs have flexibility. Business credit history and overall financial profile matter equally." },
     { q: "Can I use an SBA loan to buy a business?", a: "Yes. SBA 7(a) loans are commonly used for business acquisitions and include goodwill in the financing, which conventional lenders typically won't fund." },
@@ -104,7 +105,7 @@ const faqMap: Record<string, {q: string; a: string}[]> = {
     { q: "How fast can a fix and flip loan close?", a: "Hard money and bridge lenders often close in 7–14 days. Speed depends on property evaluation, borrower experience, and documentation readiness." },
     { q: "Do I need prior experience to qualify?", a: "Most lenders prefer borrowers with at least one completed flip. First-time investors may qualify with a strong financial profile, larger down payment, and experienced contractor partnerships." },
   ],
-  "rental-loans": [
+  "dscr-rental-loans": [
     { q: "Does my personal income matter for a DSCR loan?", a: "No. DSCR loans qualify the property based on rental income relative to debt service — not your personal W-2 or tax returns. This is particularly useful for self-employed investors or those with complex income structures." },
     { q: "What DSCR ratio do lenders require?", a: "Most lenders require a minimum DSCR of 1.20x, meaning the property earns 20% more than the debt payment. Some portfolio lenders will go to 1.0x with compensating factors." },
     { q: "Can I use a DSCR loan for short-term rentals?", a: "Some lenders accept short-term rental income from platforms like Airbnb, but they typically require a 12-month operating history and apply a haircut to projected income." },
@@ -114,7 +115,7 @@ const faqMap: Record<string, {q: string; a: string}[]> = {
     { q: "Can I finance my franchise fee with SBA financing?", a: "Yes. SBA 7(a) loans can include the initial franchise fee, leasehold improvements, equipment, and working capital in a single loan structure." },
     { q: "What is a typical equity injection requirement?", a: "SBA franchise loans typically require 10–20% equity injection from the borrower. Multi-unit expansions backed by existing cash flow may qualify for lower injection requirements." },
   ],
-  "accounts-receivable": [
+  "accounts-receivable-financing": [
     { q: "What is the difference between factoring and invoice financing?", a: "With factoring, you sell your invoices to a lender who collects directly from your clients. With invoice financing, you retain collection responsibility and use invoices as collateral. Factoring is faster but clients know you've used a lender." },
     { q: "How quickly can I access funds?", a: "After initial setup (3–5 days), ongoing advances typically fund within 24 hours of invoice submission. This makes AR financing one of the fastest capital deployment tools available." },
     { q: "Does the creditworthiness of my clients matter?", a: "Yes. Because repayment depends on your clients paying their invoices, lenders evaluate the credit quality of your client base — not just your business. Invoices from creditworthy commercial clients command better advance rates." },
@@ -143,8 +144,19 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
 
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Financing Programs", path: "/financing-options" },
+    { name: product.title, path: `/financing-options/${product.slug}` },
+  ]);
+
   return (
     <main style={{ background: G.cream, fontFamily: G.sans }}>
+      {/* Structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      {faqs.length > 0 && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })))) }} />
+      )}
 
       {/* HERO */}
       <section style={{ background: G.dark, padding: "5rem 2rem 4rem", borderBottom: `3px solid ${G.gold}` }}>
@@ -174,11 +186,23 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
         </div>
       </section>
 
+      {/* MCA LAST-RESORT WARNING — only for merchant-cash-advance */}
+      {product.slug === "merchant-cash-advance" && (
+        <section style={{ background: "#fff7ed", borderTop: "3px solid #f59e0b", borderBottom: "1px solid #fde68a", padding: "1.5rem 2rem" }}>
+          <div style={{ maxWidth: "800px", margin: "0 auto", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+            <span style={{ fontSize: "1.25rem", flexShrink: 0 }}>⚠</span>
+            <p style={{ fontSize: "0.9rem", color: "#92400e", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>
+              <strong>Important:</strong> Merchant cash advances carry high effective rates and short repayment terms. SGF reviews MCA as a last-resort option when conventional financing is not available. If you qualify for an SBA loan, business line of credit, or equipment financing, those programs will cost significantly less. <a href="/contact" style={{ color: "#92400e", fontWeight: 700 }}>Schedule a consultation</a> to explore conventional options first.
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* USE CASES */}
       <section style={{ padding: "4rem 2rem", background: G.cream }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
-            <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>What It's Used For</p>
+            <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>What It&apos;s Used For</p>
             <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem", textAlign: "center" }}>Common Use Cases</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }} className="fin-grid-3">
@@ -301,7 +325,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>{product.ctaText}</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>No cost. No obligation. A direct conversation about whether this program fits your deal.</p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }} className="fin-cta-btns">
-            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification</Link>
+            <Link href="/contact" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Request a Financing Review</Link>
             <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>View All Programs</Link>
           </div>
         </div>

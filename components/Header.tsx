@@ -11,8 +11,9 @@ type MenuKey = "financing" | "industries" | "tools" | null;
 const toolLinks = [
   { label: "Business Loan Calculator",   href: "/tools/business-loan-calculator" },
   { label: "DSCR Calculator",            href: "/tools/dscr-calculator" },
-  { label: "MCA Planning Tool",          href: "/tools/mca-calculator" },
-  { label: "FICA Tip Credit Calculator", href: "/tools/fica-tip-calculator" },
+  { label: "MCA Calculator",             href: "/tools/mca-calculator" },
+  { label: "Working Capital Calculator", href: "/tools/working-capital-calculator" },
+  { label: "FICA Tip Credit Calculator", href: "/tools/fica-tip-credit-calculator" },
 ];
 
 function Chevron({ rotated }: { rotated: boolean }) {
@@ -102,7 +103,7 @@ export default function Header() {
     setMobileSection(null);
   }
 
-  const financingLinks = products.map((p) => ({ label: p.title, href: `/financing/${p.slug}` }));
+  const financingLinks = products.map((p) => ({ label: p.title, href: `/financing-options/${p.slug}` }));
   const industryLinks  = industries.map((i) => ({ label: i.title, href: `/industries/${i.slug}` }));
 
   return (
@@ -212,8 +213,8 @@ export default function Header() {
 
         {/* Desktop CTA — single button until /apply is live */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }} className="sgf-desktop-ctas">
-          <Link href="/contact" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Get Started
+          <Link href="/apply" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+            Get Pre-Qualified
           </Link>
         </div>
 
@@ -262,9 +263,9 @@ export default function Header() {
 
           {/* Mobile CTA */}
           <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid #e2e8f0" }}>
-            <Link href="/contact" onClick={closeMobile}
+            <Link href="/apply" onClick={closeMobile}
               style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-              Get Started
+              Get Pre-Qualified
             </Link>
           </div>
         </div>

@@ -18,13 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/financing-options`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/industries`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/tools`,
@@ -42,18 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/about`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/partners`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
       priority: 0.7,
     },
     {
@@ -75,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/financing-options/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.85,
+    priority: 0.7,
   }));
 
   // ── Industry detail pages ─────────────────────────────────
@@ -83,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/industries/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.8,
+    priority: 0.7,
   }));
 
   // ── Calculator pages ──────────────────────────────────────
@@ -91,7 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/tools/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.75,
+    priority: 0.6,
   }));
 
   return [

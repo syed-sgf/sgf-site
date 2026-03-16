@@ -1,5 +1,7 @@
+import Link from "next/link";
+
 const reviews = [
-  { stars: 5, text: "Syed helped us secure an SBA loan when two other brokers couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", detail: "Restaurant Owner · Dallas TX" },
+  { stars: 5, text: "Syed helped us secure an SBA loan when two other sources couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", detail: "Restaurant Owner · Dallas TX" },
   { stars: 5, text: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.", name: "Linda K.", detail: "Healthcare Practice Owner" },
   { stars: 5, text: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.", name: "Carlos R.", detail: "Trucking Company Owner" },
   { stars: 5, text: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.", name: "David M.", detail: "Real Estate Investor · Fort Worth TX" },
@@ -127,12 +129,12 @@ export default function Process() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a href="/apply" style={{
+          <Link href="/apply" style={{
             display: "inline-block", background: "#118241", color: "white",
             padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "600",
             letterSpacing: "0.05em", textTransform: "uppercase", textDecoration: "none",
             borderRadius: "2px", fontFamily: "var(--font-source-sans)"
-          }}>Start Pre-Qualification</a>
+          }}>Start Pre-Qualification</Link>
         </div>
       </div>
     </section>

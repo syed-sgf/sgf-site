@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { industries, getIndustry } from "@/lib/industry-data";
 import { getProduct } from "@/lib/financing-data";
+import { breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   dark: "#082B09",
@@ -18,39 +20,51 @@ const G = {
 
 // ── Relevant hero photos per industry ────────────────────────────────
 const HERO_PHOTOS: Record<string, string> = {
-  "construction":          "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=85&auto=format&fit=crop",
-  "food-beverage":         "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=85&auto=format&fit=crop",
-  "healthcare":            "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&q=85&auto=format&fit=crop",
-  "oil-gas":               "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=85&auto=format&fit=crop",
-  "real-estate-investors": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=85&auto=format&fit=crop",
+  "construction":           "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=85&auto=format&fit=crop",
+  "restaurants-food":       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=85&auto=format&fit=crop",
+  "medical-healthcare":     "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&q=85&auto=format&fit=crop",
+  "retail-ecommerce":       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=85&auto=format&fit=crop",
+  "trucking-transportation": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=85&auto=format&fit=crop",
+  "professional-services":  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=85&auto=format&fit=crop",
+  "oil-gas-services":       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=85&auto=format&fit=crop",
 };
 
 // ── Rich SEO metadata per industry ───────────────────────────────────
 const SEO_META: Record<string, { title: string; description: string; keywords: string[] }> = {
   "construction": {
-    title: "Construction & Contractor Financing | SBA Loans, Equipment & LOC | Starting Gate Financial",
+    title: "Construction Financing | SBA Loans, Equipment & LOC | Starting Gate Financial",
     description: "Finance your construction business with SBA loans, equipment financing, working capital lines, and accounts receivable financing. Built for contractors and trades in Texas and nationwide.",
     keywords: ["construction business loans", "contractor financing", "equipment financing contractors", "SBA loans construction", "working capital contractors", "accounts receivable construction"],
   },
-  "food-beverage": {
+  "restaurants-food": {
     title: "Restaurant & Food Service Financing | SBA Loans, Equipment & MCA | Starting Gate Financial",
-    description: "Restaurant loans, equipment financing, and working capital for food & beverage operators. SBA 7(a), franchise financing, and merchant cash advance for restaurants, bars, and food producers.",
+    description: "Restaurant loans, equipment financing, and working capital for food & beverage operators. SBA financing, franchise financing, and merchant cash advance for restaurants, bars, and food producers.",
     keywords: ["restaurant business loans", "food beverage financing", "restaurant SBA loan", "restaurant equipment financing", "franchise financing", "bar and restaurant working capital"],
   },
-  "healthcare": {
-    title: "Healthcare Practice Financing | Medical Equipment, SBA & Practice Acquisition | Starting Gate Financial",
-    description: "Financing for physicians, dentists, and healthcare operators — medical equipment loans, practice acquisitions, SBA 7(a) loans, and working capital for healthcare businesses in Texas.",
+  "medical-healthcare": {
+    title: "Medical & Healthcare Financing | Equipment, SBA & Practice Acquisition | Starting Gate Financial",
+    description: "Financing for physicians, dentists, and healthcare operators — medical equipment loans, practice acquisitions, SBA financing, and working capital for healthcare businesses in Texas.",
     keywords: ["healthcare practice loans", "medical equipment financing", "dental practice loan", "physician practice acquisition", "SBA loans healthcare", "medical practice working capital"],
   },
-  "oil-gas": {
-    title: "Oil & Gas Financing | Energy Loans for Upstream, Midstream & Downstream | Starting Gate Financial",
-    description: "Specialized energy loans and oil & gas financing for upstream exploration, midstream infrastructure, and downstream operations. Equipment financing, A/R financing, and working capital for oilfield services companies in Texas.",
-    keywords: ["oil gas financing", "energy loans", "oilfield equipment financing", "upstream financing", "midstream loans", "downstream working capital", "oil gas working capital Texas", "oilfield services financing", "energy sector loans"],
+  "retail-ecommerce": {
+    title: "Retail & E-Commerce Financing | Inventory, Equipment & Working Capital | Starting Gate Financial",
+    description: "Capital solutions for retail and e-commerce operators — inventory financing, working capital lines, equipment loans, and SBA financing for store acquisition and multi-location expansion.",
+    keywords: ["retail business loans", "ecommerce financing", "inventory financing", "retail working capital", "SBA loans retail", "e-commerce business loans"],
   },
-  "real-estate-investors": {
-    title: "Real Estate Investor Financing | DSCR Loans, Fix & Flip & CRE | Starting Gate Financial",
-    description: "Financing for real estate investors — DSCR rental loans, fix-and-flip bridge loans, commercial real estate acquisition, and business lines of credit. No W-2 required for DSCR.",
-    keywords: ["real estate investor loans", "DSCR rental loans", "fix and flip financing", "commercial real estate loans", "investment property loans Texas", "rental portfolio financing"],
+  "trucking-transportation": {
+    title: "Trucking & Transportation Financing | Fleet, A/R & Working Capital | Starting Gate Financial",
+    description: "Equipment financing for trucks and trailers, accounts receivable financing, and working capital lines for trucking operators and freight companies in Texas and nationwide.",
+    keywords: ["trucking business loans", "fleet financing", "transportation equipment financing", "freight invoice financing", "truck financing", "commercial vehicle loans"],
+  },
+  "professional-services": {
+    title: "Professional Services Financing | Working Capital, SBA & Acquisition Loans | Starting Gate Financial",
+    description: "Financing for law firms, consultancies, and professional service businesses — working capital lines, SBA acquisition loans, accounts receivable financing, and partner buyout loans.",
+    keywords: ["professional services business loans", "law firm financing", "consulting firm working capital", "SBA loans professional services", "practice acquisition financing", "accounts receivable professional services"],
+  },
+  "oil-gas-services": {
+    title: "Oil & Gas Services Financing | Equipment, A/R & Working Capital | Starting Gate Financial",
+    description: "Financing for oilfield service and support businesses — equipment financing, accounts receivable financing, and working capital lines for contractors and service companies supporting the energy sector.",
+    keywords: ["oilfield services financing", "oil gas equipment financing", "energy services loans", "oilfield working capital", "oil gas contractor financing", "energy sector service companies"],
   },
 };
 
@@ -88,14 +102,23 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   const relatedProducts = industry.relevantProducts.map((s) => getProduct(s)).filter(Boolean);
   const heroPhoto = HERO_PHOTOS[slug] ?? HERO_PHOTOS["construction"];
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Industries", path: "/industries" },
+    { name: industry.title, path: `/industries/${slug}` },
+  ]);
+
   return (
     <main style={{ background: G.cream, fontFamily: G.sans }}>
+      {/* Structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
       {/* ── HERO — relevant photo per industry ───────────────────── */}
       <section style={{ position: "relative", minHeight: "460px", display: "flex", alignItems: "center", overflow: "hidden" }}>
         {/* Background photo */}
         <div style={{ position: "absolute", inset: 0 }}>
-          <img src={heroPhoto} alt={industry.title} loading="eager" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+          <Image src={heroPhoto} alt={industry.title} fill priority sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }} />
         </div>
         {/* Overlay */}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(8,43,9,0.93) 0%, rgba(8,43,9,0.78) 60%, rgba(8,43,9,0.5) 100%)" }} />
@@ -125,11 +148,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </p>
           {/* CTAs */}
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
-            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-              Start Pre-Qualification
+            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              See Relevant Financing Options
             </Link>
-            <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-              Explore All Programs
+            <Link href="/contact" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
+              Schedule a Consultation
             </Link>
           </div>
         </div>
@@ -147,59 +170,39 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      {/* ── OIL & GAS SEGMENT SECTION — only renders for oil-gas ── */}
-      {slug === "oil-gas" && (
+      {/* ── OIL & GAS SERVICES SEGMENT SECTION — only renders for oil-gas-services ── */}
+      {slug === "oil-gas-services" && (
         <section style={{ padding: "4rem 2rem", background: G.dark, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
           <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
               <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>
-                Energy Sector Lending
+                Oilfield Services Financing
               </p>
               <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem", textAlign: "center" }}>
-                Power Your Operations with Strategic Energy Sector Lending
+                Capital Built for Oilfield Service Companies
               </h2>
               <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.65)", maxWidth: "620px", lineHeight: "1.75", fontFamily: G.sans, margin: 0 }}>
-                We offer scalable commercial loans, dedicated equipment financing, and flexible lines of credit to fund everything from infrastructure expansion and regulatory compliance to covering payroll during price fluctuations.
+                We finance the service and support businesses that keep energy operations running — contractors, equipment rental operators, transportation providers, and maintenance firms. Not E&P operators.
               </p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="fin-insight-grid">
               {[
                 {
-                  icon: "⛏️",
-                  title: "Upstream & Exploration Financing",
-                  body: "Fund drilling projects, acquire leases, and purchase critical extraction equipment with capital solutions tailored to the risks and timelines of exploration.",
+                  title: "Equipment Financing",
+                  body: "Finance oilfield service equipment, specialty vehicles, and tools. The equipment serves as collateral — enabling competitive terms even for companies with limited balance sheet strength.",
                 },
                 {
-                  icon: "🔧",
-                  title: "Midstream & Infrastructure Loans",
-                  body: "Finance the development, expansion, and maintenance of pipelines, storage facilities, and transportation networks essential for energy logistics.",
+                  title: "Accounts Receivable Financing",
+                  body: "Advance capital against outstanding operator invoices. Oilfield service companies routinely wait 60–90 days for payment — A/R financing closes that gap without taking on long-term debt.",
                 },
                 {
-                  icon: "🏭",
-                  title: "Downstream & Refining Working Capital",
-                  body: "Manage inventory, cover operational costs, and invest in facility upgrades for refining and distribution operations with flexible, high-limit credit lines.",
+                  title: "Working Capital Lines",
+                  body: "Revolving lines of credit for fuel, payroll, maintenance, and mobilization costs. Draw when you need it, repay as contracts pay out.",
                 },
               ].map((item) => (
                 <div key={item.title} style={{ padding: "1.75rem", background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px" }}>
-                  <div style={{ fontSize: "1.5rem", marginBottom: "0.75rem" }}>{item.icon}</div>
                   <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: "#fff", margin: "0 0 0.75rem" }}>{item.title}</p>
                   <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.65)", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Process badges */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", marginTop: "2.5rem" }} className="sgf-fica-grid">
-              {[
-                { icon: "📋", title: "Simple Application", body: "Our 15-second online application gets you matched with offers in minutes." },
-                { icon: "✅", title: "No Minimum FICO", body: "Most of our top energy financing options have no minimum credit score requirement." },
-                { icon: "💰", title: "Larger Amounts", body: "Get matched with the best financing options with the highest funding amounts available." },
-                { icon: "⚡", title: "Same-Day Funding", body: "Fintech speed gets you through underwriting in hours with same-day funding available." },
-              ].map((item) => (
-                <div key={item.title} style={{ padding: "1.25rem", background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.08)`, borderRadius: "4px", textAlign: "center" }}>
-                  <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>{item.icon}</div>
-                  <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.4rem" }}>{item.title}</p>
-                  <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", lineHeight: "1.6", margin: 0, fontFamily: G.sans }}>{item.body}</p>
                 </div>
               ))}
             </div>
@@ -236,7 +239,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             {relatedProducts.map((product) => {
               if (!product) return null;
               return (
-                <Link key={product.slug} href={`/financing/${product.slug}`}
+                <Link key={product.slug} href={`/financing-options/${product.slug}`}
                   style={{ padding: "1.75rem", background: G.cream, border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", display: "block", transition: "border-color 0.2s, border-top-color 0.2s, box-shadow 0.2s" }}
                 >
                   <h3 style={{ fontFamily: G.serif, fontSize: "1.05rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.4rem" }}>{product.title}</h3>
@@ -265,12 +268,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="fin-insight-grid">
             {[
-              { icon: "📋", title: "Industry-Specific File Prep", body: "We structure your application around the revenue patterns, collateral types, and risk factors lenders in your sector actually evaluate." },
-              { icon: "🏦", title: "Lender Network Alignment", body: "We match your deal to lenders who specialize in your industry — not generalist banks unfamiliar with how your business generates cash." },
-              { icon: "⚡", title: "Faster Approvals", body: "When your file is positioned correctly for your industry from the start, underwriting moves faster and approval rates improve significantly." },
+              { title: "Industry-Specific File Prep", body: "We structure your application around the revenue patterns, collateral types, and risk factors lenders in your sector actually evaluate." },
+              { title: "Lender Network Alignment", body: "We match your deal to lenders who specialize in your industry — not generalist banks unfamiliar with how your business generates cash." },
+              { title: "Cleaner Underwriting", body: "When your file is positioned correctly for your industry from the start, underwriters have fewer open questions — which reduces back-and-forth and friction in the process." },
             ].map((item) => (
               <div key={item.title} style={{ padding: "1.75rem", background: "#fff", border: `1px solid ${G.border}`, borderTop: `3px solid ${G.primary}`, borderRadius: "4px" }}>
-                <div style={{ fontSize: "1.5rem", marginBottom: "0.75rem" }}>{item.icon}</div>
                 <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem" }}>{item.title}</p>
                 <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{item.body}</p>
               </div>
@@ -286,7 +288,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Let&apos;s Structure Your Deal</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>No cost. No obligation. A direct conversation about whether SGF is the right fit for your deal.</p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Start Pre-Qualification</Link>
+            <Link href="/contact" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Schedule a Consultation</Link>
             <Link href="/industries" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>Browse All Industries</Link>
           </div>
         </div>

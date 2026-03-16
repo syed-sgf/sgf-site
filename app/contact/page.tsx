@@ -199,7 +199,7 @@ export default function ContactPage() {
           fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase",
           color: G.gold, fontWeight: 600, marginBottom: "0.75rem", textAlign: "center",
         }}>
-          Free Consultation
+          Contact Us
         </p>
         <h2 style={{
           fontFamily: G.serif, fontSize: "clamp(1.6rem, 3vw, 2.25rem)",

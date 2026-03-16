@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -133,7 +134,7 @@ function ProgramCard({ label, href, dark = false }: { label: string; href: strin
       <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
         style={{ background: dark ? G.dark : G.cream, border: `1px solid ${hovered ? G.gold : G.border}`, padding: "1.5rem", transition: "border-color 0.2s, box-shadow 0.2s", boxShadow: hovered ? "0 4px 16px rgba(206,149,98,0.12)" : "none", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
         <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: dark ? "#fff" : G.dark, margin: 0, lineHeight: 1.3 }}>{label}</p>
-        <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>Learn More →</span>
+        <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>View Program →</span>
       </div>
     </Link>
   );
@@ -196,12 +197,8 @@ export default function FicaTipCalculatorPage() {
   const [tipPct, setTipPct] = useState("60");
   const [cashWage, setCashWage] = useState("7.25");
   const [mwBasis, setMwBasis] = useState("5.15");
-  const [results, setResults] = useState<Results>(() =>
-    calcFICA(1, 35, 41500, 173, 60, 7.25, 5.15)
-  );
-
-  useEffect(() => {
-    const r = calcFICA(
+  const results = useMemo(() =>
+    calcFICA(
       clamp0(Math.floor(num(locations, 1))),
       clamp0(Math.floor(num(serversPer, 0))),
       clamp0(num(incomeAnnual, 0)),
@@ -209,19 +206,28 @@ export default function FicaTipCalculatorPage() {
       clamp0(num(tipPct, 0)),
       clamp0(num(cashWage, 0)),
       clamp0(num(mwBasis, 5.15))
-    );
-    setResults(r);
-  }, [locations, serversPer, incomeAnnual, hoursPerMonth, tipPct, cashWage, mwBasis]);
+    ),
+    [locations, serversPer, incomeAnnual, hoursPerMonth, tipPct, cashWage, mwBasis]
+  );
 
   const relatedPrograms = [
-    { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: true },
-    { label: "Business Lines of Credit", href: "/financing-options/business-loc", dark: false },
+    { label: "SBA Financing", href: "/financing-options/sba-financing", dark: true },
+    { label: "Business Lines of Credit", href: "/financing-options/business-loc-term-loans", dark: false },
     { label: "Equipment Financing", href: "/financing-options/equipment-financing", dark: false },
     { label: "Commercial Real Estate", href: "/financing-options/commercial-real-estate", dark: true },
   ];
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Tools & Calculators", path: "/tools" },
+    { name: "FICA Tip Credit Calculator", path: "/tools/fica-tip-credit-calculator" },
+  ]);
+  const faqLd = faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
+
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
@@ -328,6 +334,13 @@ export default function FicaTipCalculatorPage() {
             This is an estimate only. Actual credit requires per-employee calculations. Consult a qualified tax professional before filing under IRC §45B.
           </p>
         </div>
+      </section>
+
+      {/* ── Disclaimer ────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f6f1", padding: "1.5rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <p style={{ fontSize: "0.78rem", color: "#64748b", fontStyle: "italic", textAlign: "center", maxWidth: 780, margin: "0 auto", lineHeight: 1.7 }}>
+          Results are estimates based on the inputs provided and standard assumptions. They do not represent a loan offer, approval, rate commitment, or lender decision. Actual terms are determined by lenders based on full underwriting review.
+        </p>
       </section>
 
       {/* ── Related Programs ─────────────────────────────────────── */}

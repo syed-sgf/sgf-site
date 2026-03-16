@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const G = {
@@ -8,36 +9,35 @@ const G = {
 };
 
 const financingLinks = [
-  { label: "Financing Programs Overview", href: "/financing-options" },
-  { label: "SBA Loans",                   href: "/financing/sba-loans" },
-  { label: "Commercial Real Estate",      href: "/financing/commercial-real-estate" },
-  { label: "Equipment Financing",         href: "/financing/equipment-financing" },
-  { label: "Business Lines of Credit",    href: "/financing/business-loc" },
-  { label: "Fix & Flip Loans",            href: "/financing/fix-and-flip" },
+  { label: "Financing Programs Overview",  href: "/financing-options" },
+  { label: "SBA Financing",               href: "/financing-options/sba-financing" },
+  { label: "Commercial Real Estate",       href: "/financing-options/commercial-real-estate" },
+  { label: "Equipment Financing",          href: "/financing-options/equipment-financing" },
+  { label: "Business LOC & Term Loans",    href: "/financing-options/business-loc-term-loans" },
+  { label: "Fix & Flip Loans",             href: "/financing-options/fix-and-flip" },
 ];
 
 const industryLinks = [
-  { label: "Industries Overview",        href: "/industries" },
-  { label: "Construction & Contractors", href: "/industries/construction" },
-  { label: "Food & Beverage",            href: "/industries/food-beverage" },
-  { label: "Healthcare & Medical",       href: "/industries/healthcare" },
-  { label: "Oil & Gas",                  href: "/industries/oil-gas" },
-  { label: "Real Estate Investors",      href: "/industries/real-estate-investors" },
+  { label: "Industries Overview",          href: "/industries" },
+  { label: "Construction",                 href: "/industries/construction" },
+  { label: "Restaurants & Food",           href: "/industries/restaurants-food" },
+  { label: "Medical & Healthcare",         href: "/industries/medical-healthcare" },
+  { label: "Oil & Gas Services",           href: "/industries/oil-gas-services" },
+  { label: "Trucking & Transportation",    href: "/industries/trucking-transportation" },
 ];
 
 const toolLinks = [
-  { label: "Business Loan Calculator",    href: "/tools/business-loan-calculator" },
-  { label: "DSCR Calculator",             href: "/tools/dscr-calculator" },
-  { label: "MCA Planning Tool",           href: "/tools/mca-calculator" },
-  { label: "FICA Tip Credit Calculator",  href: "/tools/fica-tip-calculator" },
+  { label: "Business Loan Calculator",     href: "/tools/business-loan-calculator" },
+  { label: "DSCR Calculator",              href: "/tools/dscr-calculator" },
+  { label: "MCA Calculator",               href: "/tools/mca-calculator" },
+  { label: "Working Capital Calculator",   href: "/tools/working-capital-calculator" },
+  { label: "FICA Tip Credit Calculator",   href: "/tools/fica-tip-credit-calculator" },
 ];
 
 const companyLinks = [
   { label: "About Us",         href: "/about" },
-  { label: "Contact Us",       href: "/contact" },
-  { label: "Blog",             href: "/blog" },
-  { label: "Become a Partner", href: "/partners" },
-  { label: "Apply Now",        href: "/apply" },
+  { label: "Contact",          href: "/contact" },
+  { label: "Get Pre-Qualified", href: "/apply" },
 ];
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
@@ -71,14 +71,16 @@ export default function Footer() {
           {/* Col 1 — Brand + Contact */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             <Link href="/" style={{ textDecoration: "none" }}>
-              <img
+              <Image
                 src="/FB_Logo.png"
                 alt="Starting Gate Financial"
-                style={{ height: 56, width: "auto", display: "block" }}
+                width={140}
+                height={56}
+                style={{ height: 56, width: "auto" }}
               />
             </Link>
             <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, margin: 0 }}>
-              Commercial financing solutions for businesses across the DFW Metroplex. SBA loans, commercial real estate, equipment financing, and more.
+              Starting Gate Financial is a commercial financing firm based in Richardson, TX, helping business operators structure and secure financing.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               <a href="tel:+12149231694" className="footer-contact-link">
@@ -112,9 +114,11 @@ export default function Footer() {
           © {new Date().getFullYear()} Starting Gate Financial. All rights reserved.&nbsp;·&nbsp;Richardson, TX
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Link href="/terms"   className="footer-legal-link">Terms of Use</Link>
+          <Link href="/terms"       className="footer-legal-link">Terms of Use</Link>
           <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "11px" }}>|</span>
-          <Link href="/privacy" className="footer-legal-link">Privacy Policy</Link>
+          <Link href="/privacy"     className="footer-legal-link">Privacy Policy</Link>
+          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "11px" }}>|</span>
+          <Link href="/disclosures" className="footer-legal-link">Disclosures</Link>
         </div>
       </div>
 

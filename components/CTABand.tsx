@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTABand() {
   return (
     <section style={{
@@ -21,17 +23,17 @@ export default function CTABand() {
         lineHeight: "1.75", fontFamily: "var(--font-source-sans)"
       }}>No credit pull. No obligation. Just a structured conversation about your financing options.</p>
       <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-        <a href="/apply" style={{
+        <Link href="/apply" style={{
           display: "inline-block", background: "white", color: "#082B09",
           padding: "0.9rem 2.25rem", fontSize: "0.88rem", fontWeight: "700",
           letterSpacing: "0.04em", textTransform: "uppercase",
           textDecoration: "none", borderRadius: "2px"
-        }}>Get Pre-Qualified</a>
-        <a href="/contact" style={{
+        }}>Get Pre-Qualified</Link>
+        <Link href="/contact" style={{
           display: "inline-block", border: "1px solid rgba(255,255,255,0.3)",
           color: "white", padding: "0.9rem 2.25rem", fontSize: "0.88rem",
           fontWeight: "600", textDecoration: "none", borderRadius: "2px"
-        }}>Contact Us</a>
+        }}>Schedule a Consultation</Link>
       </div>
     </section>
   )

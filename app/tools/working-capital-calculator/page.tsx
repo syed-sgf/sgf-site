@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -198,8 +199,15 @@ export default function WorkingCapitalCalculatorPage() {
     setResults(calc);
   }
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Tools & Calculators", path: "/tools" },
+    { name: "Working Capital Calculator", path: "/tools/working-capital-calculator" },
+  ]);
+
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
@@ -306,6 +314,13 @@ export default function WorkingCapitalCalculatorPage() {
         </div>
       </section>
 
+      {/* ── Disclaimer ────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f6f1", padding: "1.5rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <p style={{ fontSize: "0.78rem", color: "#64748b", fontStyle: "italic", textAlign: "center", maxWidth: 780, margin: "0 auto", lineHeight: 1.7 }}>
+          Results are estimates based on the inputs provided and standard assumptions. They do not represent a loan offer, approval, rate commitment, or lender decision. Actual terms are determined by lenders based on full underwriting review.
+        </p>
+      </section>
+
       {/* ── Related Programs ─────────────────────────────────────── */}
       <section style={{ padding: "3rem 2rem", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -314,9 +329,9 @@ export default function WorkingCapitalCalculatorPage() {
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             {[
-              { label: "Business Lines of Credit", href: "/financing-options/lines-of-credit" },
+              { label: "Business Lines of Credit", href: "/financing-options/business-loc-term-loans" },
               { label: "Merchant Cash Advance", href: "/financing-options/merchant-cash-advance" },
-              { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans" },
+              { label: "SBA Financing", href: "/financing-options/sba-financing" },
             ].map(({ label, href }) => (
               <Link key={href} href={href} style={{ border: `1px solid ${G.green}`, color: G.green, padding: "0.5rem 1.25rem", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
                 {label} →

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -44,8 +45,7 @@ function calcMCA(
   advanceAmount: number,
   factorRate: number,
   holdbackPct: number,
-  monthlyCardSales: number,
-  paymentBasis: string
+  monthlyCardSales: number
 ): Results | null {
   if (!isFinite(advanceAmount) || advanceAmount <= 0) return null;
   if (!isFinite(factorRate) || factorRate < 1) return null;
@@ -245,7 +245,7 @@ function ProgramCard({ label, href, dark = false }: { label: string; href: strin
         }}
       >
         <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: dark ? "#fff" : G.dark, margin: 0, lineHeight: 1.3 }}>{label}</p>
-        <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>Learn More →</span>
+        <span style={{ fontSize: "0.8rem", color: dark ? G.gold : G.green, fontWeight: 600 }}>View Program →</span>
       </div>
     </Link>
   );
@@ -318,8 +318,8 @@ function CTABand() {
         <Link href="/contact" style={{ background: G.gold, color: G.dark, padding: "0.875rem 2.5rem", fontWeight: 700, fontSize: "0.9rem", textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em", display: "inline-block" }}>
           Schedule a Consultation →
         </Link>
-        <Link href="/apply" style={{ background: "transparent", color: "#fff", padding: "0.875rem 2rem", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em", border: "1.5px solid rgba(255,255,255,0.3)", display: "inline-block" }}>
-          Apply Now →
+        <Link href="/financing-options" style={{ background: "transparent", color: "#fff", padding: "0.875rem 2rem", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em", border: "1.5px solid rgba(255,255,255,0.3)", display: "inline-block" }}>
+          Explore Financing Programs →
         </Link>
       </div>
     </section>
@@ -348,7 +348,7 @@ export default function MCACalculatorPage() {
       return;
     }
 
-    const calc = calcMCA(amount, rate, hb, sales, paymentBasis);
+    const calc = calcMCA(amount, rate, hb, sales);
     if (!calc) {
       setError("Please check your inputs. Factor rate must be ≥ 1.0 and holdback must be between 1–99%.");
       return;
@@ -358,13 +358,22 @@ export default function MCACalculatorPage() {
 
   const relatedPrograms = [
     { label: "Merchant Cash Advance", href: "/financing-options/merchant-cash-advance", dark: true },
-    { label: "Business Lines of Credit", href: "/financing-options/business-loc", dark: false },
-    { label: "SBA 7(a) & 504 Loans", href: "/financing-options/sba-loans", dark: false },
-    { label: "Accounts Receivable Financing", href: "/financing-options/accounts-receivable", dark: true },
+    { label: "Business Lines of Credit", href: "/financing-options/business-loc-term-loans", dark: false },
+    { label: "SBA Financing", href: "/financing-options/sba-financing", dark: false },
+    { label: "Accounts Receivable Financing", href: "/financing-options/accounts-receivable-financing", dark: true },
   ];
+
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Tools & Calculators", path: "/tools" },
+    { name: "MCA Calculator", path: "/tools/mca-calculator" },
+  ]);
+  const faqLd = faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
 
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
@@ -391,7 +400,7 @@ export default function MCACalculatorPage() {
               Free Merchant Cash Advance Calculator — estimate your total payback, daily payment, repayment period, and effective APR before you commit.
             </p>
             <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", margin: "0 auto", maxWidth: 520 }}>
-              MCA financing is fast but expensive. <strong style={{ color: G.gold, fontWeight: 600 }}>Understand the true cost upfront.</strong>
+              MCAs carry high effective rates and short repayment terms. <strong style={{ color: G.gold, fontWeight: 600 }}>Understand the true cost before committing.</strong>
             </p>
           </div>
         </div>
@@ -587,12 +596,19 @@ export default function MCACalculatorPage() {
         </div>
       </section>
 
+      {/* ── Disclaimer ────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f6f1", padding: "1.5rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <p style={{ fontSize: "0.78rem", color: "#64748b", fontStyle: "italic", textAlign: "center", maxWidth: 780, margin: "0 auto", lineHeight: 1.7 }}>
+          Results are estimates based on the inputs provided and standard assumptions. They do not represent a loan offer, approval, rate commitment, or lender decision. Actual terms are determined by lenders based on full underwriting review.
+        </p>
+      </section>
+
       {/* ── Related Programs ─────────────────────────────────────── */}
       <section style={{ padding: "4rem 2rem", borderTop: `1px solid ${G.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SectionHeader
             eyebrow="Related Programs"
-            title="Financing Programs for Fast Capital"
+            title="Financing Programs to Consider Instead"
             subtitle="MCAs are one option. Explore others that may cost less and fit your deal better."
           />
           <div className="sgf-tools-grid">
@@ -616,12 +632,12 @@ export default function MCACalculatorPage() {
             ))}
           </div>
           <div style={{ marginTop: "2rem", textAlign: "center" }}>
-            <Link href="/apply" style={{
+            <Link href="/contact" style={{
               display: "inline-block", background: G.green, color: "#fff",
               padding: "0.875rem 2.5rem", fontWeight: 700, fontSize: "0.9rem",
               textDecoration: "none", fontFamily: G.sans, letterSpacing: "0.05em",
             }}>
-              Apply Now →
+              Schedule a Consultation →
             </Link>
           </div>
         </div>

@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/financing-data";
+import { localBusinessSchema } from "@/lib/seo/schema";
 
 /* ── Design tokens ──────────────────────────────────────────────── */
 const G = {
@@ -55,7 +57,7 @@ export default function HomePage() {
   ];
 
   const testimonials = [
-    { stars: 5, quote: "Syed helped us secure an SBA loan when two other brokers couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", title: "Restaurant Owner · Dallas TX" },
+    { stars: 5, quote: "Syed helped us secure an SBA loan when two other sources couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", title: "Restaurant Owner · Dallas TX" },
     { stars: 5, quote: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.", name: "Linda K.", title: "Healthcare Practice Owner" },
     { stars: 5, quote: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.", name: "David R.", title: "Contractor · Fort Worth TX" },
     { stars: 5, quote: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.", name: "Priya M.", title: "CRE Investor · DFW" },
@@ -63,6 +65,8 @@ export default function HomePage() {
 
   return (
     <main style={{ background: G.cream, fontFamily: G.sans }}>
+      {/* LocalBusiness structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }} />
 
       {/* ── HERO ── */}
       <section style={{ position: "relative", minHeight: "580px", overflow: "hidden", background: G.dark }}>
@@ -72,8 +76,8 @@ export default function HomePage() {
         {/* Slides */}
         {heroSlides.map((slide, i) => (
           <div key={slide.url} style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, transition: "opacity 1.2s ease-in-out" }}>
-            <img src={slide.url} alt={slide.label} loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : "low"} decoding={i === 0 ? "sync" : "async"}
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+            <Image src={slide.url} alt={slide.label} fill priority={i === 0} sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center" }} />
           </div>
         ))}
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${G.dark}CC 0%, ${G.dark}88 55%, ${G.dark}55 100%)`, zIndex: 2 }} />
@@ -87,11 +91,11 @@ export default function HomePage() {
               Richardson, TX · Nationwide Commercial Financing
             </p>
             <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem,4vw,3.2rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", marginBottom: "1.25rem" }}>
-              SBA Loans & Business Financing,{" "}
-              <em style={{ color: G.gold, fontStyle: "italic" }}>Built for Approval.</em>
+              Business Financing{" "}
+              <em style={{ color: G.gold, fontStyle: "italic" }}>Built Around Lender Expectations.</em>
             </h1>
             <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.75", marginBottom: "2rem", maxWidth: "480px", fontFamily: G.sans }}>
-              We structure SBA loans, commercial real estate, and working capital deals the way underwriters expect — so your file gets funded, not declined.
+              Starting Gate Financial works with business operators to identify the right financing structure, prepare documentation, and connect with lenders that fit the deal.
             </p>
 
             {/* Trust badges */}
@@ -106,7 +110,7 @@ export default function HomePage() {
             {/* CTAs */}
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2rem", background: G.primary, color: "#fff", fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-                Start Pre-Qualification →
+                Get Pre-Qualified →
               </Link>
               <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.45)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
                 Explore Financing Options →
@@ -125,7 +129,7 @@ export default function HomePage() {
 
           {/* Right — GHL form slot */}
           <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.12)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px", padding: "2rem" }}>
-            <p style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.5rem", fontFamily: G.sans }}>Free Consultation</p>
+            <p style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.5rem", fontFamily: G.sans }}>Get Pre-Qualified</p>
             <p style={{ fontFamily: G.serif, fontSize: "1.2rem", fontWeight: "700", color: "#fff", marginBottom: "1.5rem", lineHeight: "1.3" }}>See If You Qualify</p>
             {/* GHL FORM — DO NOT MODIFY */}
             <div id="ghl-form-container" style={{ minHeight: "300px" }}>
@@ -157,7 +161,7 @@ export default function HomePage() {
           <SectionHeader eyebrow="01 — Financing Programs" h2="Capital Structures We Work With" sub="Every program is matched to your business profile, not reverse-engineered from a product sheet." />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem", marginBottom: "2rem" }} className="sgf-programs-grid">
             {products.map((p) => (
-              <Link key={p.slug} href={`/financing/${p.slug}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 1.25rem", background: "#fff", border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }}
+              <Link key={p.slug} href={`/financing-options/${p.slug}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 1.25rem", background: "#fff", border: `1px solid ${G.border}`, borderLeft: `3px solid ${G.primary}`, borderRadius: "3px", textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderLeftColor = G.gold; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(8,43,9,0.08)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderLeftColor = G.primary; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                 <div>
@@ -218,7 +222,7 @@ export default function HomePage() {
             {testimonials.map((t) => (
               <div key={t.name} style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", padding: "1.75rem" }}>
                 <div style={{ color: G.gold, fontSize: "0.9rem", marginBottom: "1rem" }}>{"★".repeat(t.stars)}</div>
-                <p style={{ fontFamily: G.serif, fontSize: "1rem", color: G.textDark, lineHeight: "1.7", marginBottom: "1.25rem", fontStyle: "italic" }}>"{t.quote}"</p>
+                <p style={{ fontFamily: G.serif, fontSize: "1rem", color: G.textDark, lineHeight: "1.7", marginBottom: "1.25rem", fontStyle: "italic" }}>&ldquo;{t.quote}&rdquo;</p>
                 <div style={{ borderTop: `1px solid ${G.border}`, paddingTop: "1rem" }}>
                   <p style={{ fontFamily: G.sans, fontWeight: "700", fontSize: "0.9rem", color: G.textDark, margin: "0 0 0.2rem" }}>{t.name}</p>
                   <p style={{ fontFamily: G.sans, fontSize: "0.8rem", color: G.textMid, margin: "0 0 0.4rem" }}>{t.title}</p>
@@ -234,13 +238,13 @@ export default function HomePage() {
       <section style={{ background: G.dark, padding: "3.5rem 2rem", borderTop: `3px solid ${G.gold}` }}>
         <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.75rem", fontFamily: G.sans }}>Ready to Move Forward</p>
-          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Let's Talk About Your Capital Need</h2>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>Let&apos;s Talk About Your Capital Need</h2>
           <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.7", marginBottom: "2rem", fontFamily: G.sans }}>
             No cost. No obligation. A direct conversation about whether SGF is the right fit for your deal.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/apply" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
-              Start Pre-Qualification
+              Get Pre-Qualified
             </Link>
             <Link href="/financing-options" style={{ display: "inline-block", padding: "0.9rem 2.25rem", background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.4)", fontFamily: G.sans, fontWeight: "600", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}>
               Explore Programs

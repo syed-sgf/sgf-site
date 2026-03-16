@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -386,7 +387,7 @@ function ProgramCard({
           fontSize: "0.8rem", color: dark ? G.gold : G.green,
           fontWeight: 600,
         }}>
-          Learn More →
+          View Program →
         </span>
       </div>
     </Link>
@@ -416,14 +417,23 @@ export default function DSCRCalculatorPage() {
   }
 
   const relatedPrograms = [
-    { label: "DSCR Rental Loans", href: "/financing-options/rental-loans", dark: true },
+    { label: "DSCR Rental Loans", href: "/financing-options/dscr-rental-loans", dark: true },
     { label: "Fix & Flip Loans", href: "/financing-options/fix-and-flip", dark: false },
     { label: "Commercial Real Estate Financing", href: "/financing-options/commercial-real-estate", dark: false },
-    { label: "SBA Loans", href: "/financing-options/sba-loans", dark: true },
+    { label: "SBA Financing", href: "/financing-options/sba-financing", dark: true },
   ];
+
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Tools & Calculators", path: "/tools" },
+    { name: "DSCR Calculator", path: "/tools/dscr-calculator" },
+  ]);
+  const faqLd = faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
 
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section style={{
@@ -709,6 +719,13 @@ export default function DSCRCalculatorPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ── Disclaimer ────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f6f1", padding: "1.5rem 2rem", borderTop: `1px solid ${G.border}` }}>
+        <p style={{ fontSize: "0.78rem", color: "#64748b", fontStyle: "italic", textAlign: "center", maxWidth: 780, margin: "0 auto", lineHeight: 1.7 }}>
+          Results are estimates based on the inputs provided and standard assumptions. They do not represent a loan offer, approval, rate commitment, or lender decision. Actual terms are determined by lenders based on full underwriting review.
+        </p>
       </section>
 
       {/* ── Related Programs ─────────────────────────────────────── */}

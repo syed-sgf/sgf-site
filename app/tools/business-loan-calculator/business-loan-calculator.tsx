@@ -129,7 +129,7 @@ export default function BusinessLoanCalculatorPage() {
 
               <div>
                 <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 700, color: "#334155", marginBottom: "0.5rem" }}>
-                  <Tooltip text="The nominal annual interest rate on the loan. Current SBA 7(a) rates typically range from 10%–15.5% depending on term and prime rate. Enter as a percentage (e.g., 10.5).">
+                  <Tooltip text="The nominal annual interest rate on the loan. Rates vary by program, lender, and market conditions. Enter as a percentage (e.g., 10.5).">
                     Annual Interest Rate
                   </Tooltip>
                 </label>

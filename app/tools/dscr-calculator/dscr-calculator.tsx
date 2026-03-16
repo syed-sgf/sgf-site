@@ -232,7 +232,7 @@ export default function DSCRCalculatorPage() {
             {[
               { label: "Commercial Real Estate", href: "/financing-options/commercial-real-estate" },
               { label: "DSCR Rental Loans", href: "/financing-options/dscr-rental-loans" },
-              { label: "Fix & Flip Loans", href: "/financing-options/fix-and-flip-loans" },
+              { label: "Fix & Flip Loans", href: "/financing-options/fix-and-flip" },
             ].map(({ label, href }) => (
               <Link key={href} href={href} style={{ border: `1px solid ${G.green}`, color: G.green, padding: "0.5rem 1.25rem", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
                 {label} →
