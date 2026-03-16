@@ -561,6 +561,18 @@ p {
   .sgf-expectations-grid { grid-template-columns: 1fr !important; }
 }
 
+/* Apply page responsive */
+@media (max-width: 768px) {
+  .sgf-apply-next-grid { grid-template-columns: 1fr !important; }
+  .sgf-apply-form-container { padding: 2rem 1rem !important; }
+  .sgf-apply-form-section { padding: 2rem 1rem !important; }
+}
+
+/* Thank-you page responsive */
+@media (max-width: 768px) {
+  .sgf-thankyou-container { padding: 0 0.5rem; }
+}
+
 /* ── Tools Hub Grid & Calculator Layout (base) ────────────── */
 .sgf-tools-grid {
   display: grid;
