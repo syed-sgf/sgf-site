@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const G = {
@@ -13,6 +16,13 @@ const G = {
 };
 
 export default function ApplyPage() {
+  const [pageUrl, setPageUrl] = useState("");
+
+  useEffect(() => {
+    const id = setTimeout(() => setPageUrl(window.location.href), 0);
+    return () => clearTimeout(id);
+  }, []);
+
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark }}>
 
@@ -91,7 +101,7 @@ export default function ApplyPage() {
 
           <div className="sgf-apply-form-container">
             <iframe
-              src="https://api.leadconnectorhq.com/widget/form/k6xrXegrb3C2Zf5IEgNu"
+              src={`https://api.leadconnectorhq.com/widget/form/k6xrXegrb3C2Zf5IEgNu${pageUrl ? `?url=${encodeURIComponent(pageUrl)}` : ""}`}
               style={{
                 width: "100%",
                 minHeight: "600px",
@@ -113,6 +123,30 @@ export default function ApplyPage() {
               title="SGF Pre-Qualification Form"
             />
             <script src="https://link.msgsndr.com/js/form_embed.js" async />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function() {
+                    function sendPageUrl() {
+                      var iframe = document.getElementById('inline-k6xrXegrb3C2Zf5IEgNu');
+                      if (iframe && iframe.contentWindow) {
+                        iframe.contentWindow.postMessage(
+                          { type: 'SET_FIELD', field: 'pageUrl', value: window.location.href },
+                          '*'
+                        );
+                      }
+                    }
+                    var iframe = document.getElementById('inline-k6xrXegrb3C2Zf5IEgNu');
+                    if (iframe) {
+                      iframe.addEventListener('load', sendPageUrl);
+                    }
+                    window.addEventListener('message', function(e) {
+                      if (e.data && e.data.type === 'FORM_LOADED') { sendPageUrl(); }
+                    });
+                  })();
+                `,
+              }}
+            />
           </div>
         </div>
       </section>
