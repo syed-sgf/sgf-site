@@ -89,9 +89,30 @@ export default function ApplyPage() {
             No commitment required. No upfront fees. A starting point for a real conversation.
           </p>
 
-          {/* GHL FORM — DO NOT MODIFY */}
-          <div id="ghl-form-container" style={{ minHeight: "300px" }}>
-            {/* GoHighLevel embed renders here */}
+          <div className="sgf-apply-form-container">
+            <iframe
+              src="https://api.leadconnectorhq.com/widget/form/k6xrXegrb3C2Zf5IEgNu"
+              style={{
+                width: "100%",
+                minHeight: "600px",
+                border: "none",
+                borderRadius: "8px",
+              }}
+              id="inline-k6xrXegrb3C2Zf5IEgNu"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="SGF Pre-Qualification"
+              data-height="600"
+              data-layout-iframe-id="inline-k6xrXegrb3C2Zf5IEgNu"
+              data-form-id="k6xrXegrb3C2Zf5IEgNu"
+              title="SGF Pre-Qualification Form"
+            />
+            <script src="https://link.msgsndr.com/js/form_embed.js" async />
           </div>
         </div>
       </section>
