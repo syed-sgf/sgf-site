@@ -88,14 +88,14 @@ export default function HomePage() {
           {/* Left */}
           <div>
             <p style={{ fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "1.25rem", fontFamily: G.sans }}>
-              Richardson, TX · Nationwide Commercial Financing
+              Richardson, Texas · SBA Loans · Commercial Real Estate · Business Capital
             </p>
             <h1 style={{ fontFamily: G.serif, fontSize: "clamp(2.2rem,4vw,3.2rem)", fontWeight: "700", color: "#fff", lineHeight: "1.15", marginBottom: "1.25rem" }}>
-              Business Financing{" "}
-              <em style={{ color: G.gold, fontStyle: "italic" }}>Built Around Lender Expectations.</em>
+              SBA Loans, Commercial Real Estate, and Business Capital —{" "}
+              <em style={{ color: G.gold, fontStyle: "italic" }}>Structured to Get Funded.</em>
             </h1>
             <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.78)", lineHeight: "1.75", marginBottom: "2rem", maxWidth: "480px", fontFamily: G.sans }}>
-              Starting Gate Financial works with business operators to identify the right financing structure, prepare documentation, and connect with lenders that fit the deal.
+              Starting Gate Financial prepares business owners to pursue financing with stronger documentation, clearer positioning, and a direct path to lenders who fit the deal.
             </p>
 
             {/* Trust badges */}
