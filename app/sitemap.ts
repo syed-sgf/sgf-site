@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig, financingPrograms, industrySlugList, calculatorSlugs } from "@/lib/config/site";
+import { getAllPosts } from "@/lib/blog";
 
 const BASE_URL = siteConfig.url;
 
@@ -88,10 +89,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // ── Blog pages ────────────────────────────────────────────
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const blogPosts = getAllPosts();
+    blogPages = [
+      {
+        url: `${BASE_URL}/blog`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      },
+      ...blogPosts.map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: post.date,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      })),
+    ];
+  } catch {
+    blogPages = [];
+  }
+
   return [
     ...staticPages,
     ...financingPages,
     ...industryPages,
     ...calculatorPages,
+    ...blogPages,
   ];
 }
