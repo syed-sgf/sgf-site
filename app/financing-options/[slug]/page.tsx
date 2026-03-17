@@ -211,17 +211,6 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
         </div>
       </section>
 
-      {/* MCA LAST-RESORT WARNING — only for merchant-cash-advance */}
-      {product.slug === "merchant-cash-advance" && (
-        <section style={{ background: "#fff7ed", borderTop: "3px solid #f59e0b", borderBottom: "1px solid #fde68a", padding: "1.5rem 2rem" }}>
-          <div style={{ maxWidth: "800px", margin: "0 auto", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-            <span style={{ fontSize: "1.25rem", flexShrink: 0 }}>⚠</span>
-            <p style={{ fontSize: "0.9rem", color: "#92400e", lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>
-              <strong>Important:</strong> Merchant cash advances carry high effective rates and short repayment terms. SGF reviews MCA as a last-resort option when conventional financing is not available. If you qualify for an SBA loan, business line of credit, or equipment financing, those programs will cost significantly less. <a href="/contact" style={{ color: "#92400e", fontWeight: 700 }}>Schedule a consultation</a> to explore conventional options first.
-            </p>
-          </div>
-        </section>
-      )}
 
       {/* USE CASES */}
       <section style={{ padding: "4rem 2rem", background: G.cream }}>
