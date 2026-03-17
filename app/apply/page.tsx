@@ -28,46 +28,59 @@ export default function ApplyPage() {
 
       {/* ── SECTION 1: Institutional Hero ───────────────────────── */}
       <section style={{
-        background: G.dark,
         padding: "5rem 2rem 4rem",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
+        backgroundImage: "url(https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}>
-        {/* Gold top accent */}
+        {/* Dark overlay */}
         <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`,
-        }} />
-        {/* Gold bottom accent */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`,
+          position: "absolute",
+          inset: 0,
+          background: "rgba(8, 43, 9, 0.82)",
+          zIndex: 0,
         }} />
 
-        <div style={{ maxWidth: 680, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <p style={{
-            fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
-            color: G.gold, fontWeight: 600, fontFamily: G.sans, marginBottom: "1.25rem",
-          }}>
-            Get Pre-Qualified
-          </p>
-          <h1 style={{
-            fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 2.75rem)",
-            fontWeight: 700, color: "#fff", lineHeight: 1.2,
-            marginBottom: "1.5rem", textAlign: "center",
-          }}>
-            Start Your Financing Review
-          </h1>
-          <p style={{
-            fontSize: "1.05rem", color: "rgba(255,255,255,0.72)",
-            lineHeight: 1.8, maxWidth: 560, textAlign: "center", margin: 0,
-          }}>
-            Complete the form below and a member of the SGF team will review your
-            information and follow up within one business day. This is not an
-            application for credit — it is the first step in understanding your
-            financing options.
-          </p>
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {/* Gold top accent */}
+          <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, height: 3,
+            background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`,
+          }} />
+          {/* Gold bottom accent */}
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
+            background: `linear-gradient(90deg, transparent, ${G.gold}, transparent)`,
+          }} />
+
+          <div style={{ maxWidth: 680, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <p style={{
+              fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase",
+              color: G.gold, fontWeight: 600, fontFamily: G.sans, marginBottom: "1.25rem",
+            }}>
+              Get Pre-Qualified
+            </p>
+            <h1 style={{
+              fontFamily: G.serif, fontSize: "clamp(2rem, 4vw, 2.75rem)",
+              fontWeight: 700, color: "#fff", lineHeight: 1.2,
+              marginBottom: "1.5rem", textAlign: "center",
+            }}>
+              Start Your Financing Review
+            </h1>
+            <p style={{
+              fontSize: "1.05rem", color: "rgba(255,255,255,0.72)",
+              lineHeight: 1.8, maxWidth: 560, textAlign: "center", margin: 0,
+            }}>
+              Complete the form below and a member of the SGF team will review your
+              information and follow up within one business day. This is not an
+              application for credit — it is the first step in understanding your
+              financing options.
+            </p>
+          </div>
         </div>
       </section>
 
