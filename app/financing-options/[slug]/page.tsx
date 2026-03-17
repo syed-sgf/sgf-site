@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products } from "@/lib/financing-data";
+import { products, heroImageMap } from "@/lib/financing-data";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 
 
@@ -159,7 +159,31 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
       )}
 
       {/* HERO */}
-      <section style={{ background: G.dark, padding: "5rem 2rem 4rem", borderBottom: `3px solid ${G.gold}` }}>
+      <section
+        style={{
+          position: "relative",
+          padding: "5rem 2rem 4rem",
+          borderBottom: `3px solid ${G.gold}`,
+          backgroundImage: heroImageMap[product.slug]
+            ? `url(${heroImageMap[product.slug]})`
+            : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Dark overlay so text stays readable */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: heroImageMap[product.slug]
+              ? "rgba(8, 43, 9, 0.82)"
+              : G.dark,
+            zIndex: 0,
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
             <Link href="/financing-options" style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", fontFamily: G.sans, textDecoration: "none" }}>Financing Programs</Link>
@@ -183,6 +207,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
               </div>
             ))}
           </div>
+        </div>
         </div>
       </section>
 

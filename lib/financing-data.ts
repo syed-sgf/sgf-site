@@ -277,3 +277,47 @@ export const products: FinancingProduct[] = [
 export function getProduct(slug: string): FinancingProduct | undefined {
   return products.find((p) => p.slug === slug);
 }
+
+// Curated Unsplash photo IDs — one per financing slug
+// Format: https://images.unsplash.com/photo-{ID}?auto=format&fit=crop&w=1600&q=80
+export const heroImageMap: Record<string, string> = {
+  "business-loc-term-loans":
+    "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80",
+  // Business finance / desk with paperwork & cash flow charts
+
+  "commercial-real-estate":
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+  // Glass office tower / commercial property exterior
+
+  "sba-financing":
+    "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&w=1600&q=80",
+  // Small business owner / storefront consultation
+
+  "equipment-financing":
+    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=80",
+  // Industrial machinery / manufacturing floor
+
+  "fix-and-flip":
+    "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1600&q=80",
+  // Residential renovation / construction inside house
+
+  "dscr-rental-loans":
+    "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80",
+  // Suburban rental property exterior
+
+  "franchise-financing":
+    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80",
+  // Restaurant / franchise storefront interior
+
+  "accounts-receivable-financing":
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80",
+  // Invoice / business paperwork on desk
+
+  "startup-financing":
+    "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80",
+  // Startup team at whiteboard / ideation
+
+  "merchant-cash-advance":
+    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80",
+  // POS terminal / card payment / retail counter
+};
