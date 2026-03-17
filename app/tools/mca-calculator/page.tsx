@@ -379,7 +379,7 @@ export default function MCACalculatorPage() {
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=85&auto=format&fit=crop')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1556742208-999815fca738?w=1600&q=85&auto=format&fit=crop')",
           backgroundSize: "cover", backgroundPosition: "center",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(8,43,9,0.93) 0%, rgba(8,43,9,0.78) 60%, rgba(8,43,9,0.5) 100%)" }} />
