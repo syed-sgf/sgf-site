@@ -127,14 +127,52 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right — GHL form slot */}
-          <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.12)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px", padding: "2rem" }}>
-            <p style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.5rem", fontFamily: G.sans }}>Get Pre-Qualified</p>
-            <p style={{ fontFamily: G.serif, fontSize: "1.2rem", fontWeight: "700", color: "#fff", marginBottom: "1.5rem", lineHeight: "1.3" }}>See If You Qualify</p>
-            {/* GHL FORM — DO NOT MODIFY */}
-            <div id="ghl-form-container" style={{ minHeight: "300px" }}>
-              {/* GoHighLevel embed renders here */}
+          {/* Right — CTA Card (replaces empty GHL slot) */}
+          <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.12)`, borderTop: `3px solid ${G.gold}`, borderRadius: "4px", padding: "2.5rem 2rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+
+            {/* Eyebrow */}
+            <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", fontFamily: G.sans, margin: 0 }}>
+              Get Pre-Qualified
+            </p>
+
+            {/* Heading */}
+            <p style={{ fontFamily: G.serif, fontSize: "1.35rem", fontWeight: "700", color: "#fff", lineHeight: "1.35", margin: 0 }}>
+              Find Out If You Qualify — No Cost, No Commitment
+            </p>
+
+            {/* Checklist */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+              {[
+                "SBA 7(a) & 504 Loans",
+                "Commercial Real Estate",
+                "Equipment Financing",
+                "Business Lines of Credit",
+                "Fix & Flip · DSCR Rentals",
+                "Startup & Franchise Capital",
+              ].map((item) => (
+                <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <span style={{ color: G.gold, fontSize: "0.75rem", flexShrink: 0 }}>◆</span>
+                  <span style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.8)", fontFamily: G.sans }}>{item}</span>
+                </div>
+              ))}
             </div>
+
+            {/* Divider */}
+            <div style={{ height: "1px", background: "rgba(255,255,255,0.1)" }} />
+
+            {/* CTA Button */}
+            <Link
+              href="/apply"
+              style={{ display: "block", textAlign: "center", padding: "1rem 1.5rem", background: G.gold, color: G.dark, fontFamily: G.sans, fontWeight: "700", fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: "2px" }}
+            >
+              Start Pre-Qualification →
+            </Link>
+
+            {/* Reassurance */}
+            <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.45)", fontFamily: G.sans, textAlign: "center", margin: 0, lineHeight: "1.6" }}>
+              No upfront fees · No obligation<br />Response within 1 business day
+            </p>
+
           </div>
         </div>
       </section>
