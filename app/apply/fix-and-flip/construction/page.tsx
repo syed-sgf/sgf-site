@@ -1,10 +1,9 @@
-// TODO: Replace REPLACE_CONSTRUCTION_FORM_ID with the real GHL form ID
 import FixFlipApplicationPage from "../FixFlipApplicationPage";
 
 export default function ConstructionPage() {
   return (
     <FixFlipApplicationPage
-      formId="REPLACE_CONSTRUCTION_FORM_ID"
+      formId="tPI4gdntEHL9cD2wtC9A"
       formName="SGF Construction Loan Application"
       activeTab="construction"
       heading="Construction Loan Application"
