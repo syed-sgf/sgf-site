@@ -39,6 +39,22 @@ const nextConfig: NextConfig = {
         destination: "/financing-options",
         permanent: true,
       },
+      // ── WP → Next.js application page redirects ──────────────
+      {
+        source: "/apply/app/fix-and-flip",
+        destination: "/apply/fix-and-flip",
+        permanent: true,
+      },
+      {
+        source: "/apply/app/loan-application",
+        destination: "/apply/loan-application",
+        permanent: true,
+      },
+      {
+        source: "/apply/app/equipment-finance",
+        destination: "/apply/equipment-finance",
+        permanent: true,
+      },
     ];
   },
 };
