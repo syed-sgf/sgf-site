@@ -74,18 +74,7 @@ export default async function PartnerSlugPage({
   return (
     <main className="sgf-partners-page" style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
-      {/* Breadcrumb */}
-      <div style={{ background: G.cream, borderBottom: `1px solid ${G.border}`, padding: "0.75rem 1.5rem" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", gap: "0.5rem", alignItems: "center", fontSize: 12, color: G.textMid }}>
-          <Link href="/" style={{ color: G.textMid, textDecoration: "none" }}>Home</Link>
-          <span>›</span>
-          <Link href="/partners" style={{ color: G.textMid, textDecoration: "none" }}>Partners</Link>
-          <span>›</span>
-          <span style={{ color: G.primary, fontWeight: 600 }}>{partner.title}</span>
-        </div>
-      </div>
-
-      {/* Hero */}
+      {/* Hero — breadcrumb lives inside */}
       <section style={{
         position: "relative", overflow: "hidden",
         background: G.dark, padding: "5rem 1.5rem 4rem",
@@ -100,6 +89,14 @@ export default async function PartnerSlugPage({
           }}
         />
         <div style={{ position: "relative", zIndex: 1, maxWidth: 780, margin: "0 auto", textAlign: "center" }}>
+          {/* Breadcrumb */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
+            <Link href="/" style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Home</Link>
+            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.8rem" }}>›</span>
+            <Link href="/partners" style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Partners</Link>
+            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.8rem" }}>›</span>
+            <span style={{ fontSize: "0.8rem", color: G.gold }}>{partner.title}</span>
+          </div>
           <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 700, marginBottom: "1rem" }}>
             Partner Program
           </p>
