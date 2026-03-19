@@ -60,10 +60,10 @@ export default function HomePage() {
   ];
 
   const testimonials = [
-    { stars: 5, quote: "Syed helped us secure an SBA loan when two other sources couldn't get it done. He knew exactly what the lender needed and walked us through every step. Closed in under 60 days.", name: "Marcus T.", title: "Restaurant Owner · Dallas TX" },
-    { stars: 5, quote: "Very professional and knowledgeable. SGF structured our equipment financing the right way — no surprises at closing. Will use again for our next location.", name: "Linda K.", title: "Healthcare Practice Owner" },
-    { stars: 5, quote: "I came to SGF after getting turned down twice. Syed reviewed my financials, told me exactly where I stood, and got us funded. Straight shooter, no runaround.", name: "David R.", title: "Contractor · Fort Worth TX" },
-    { stars: 5, quote: "SGF handled our commercial real estate financing from start to finish. Syed knows lenders, knows the market, and delivers. Highly recommend for any serious business owner.", name: "Priya M.", title: "CRE Investor · DFW" },
+    { stars: 5, quote: "Words cannot express how amazing our services have been. Syed takes you through each step, finds a financial institution that fits your needs, and his guidance is most valued. He has been our broker for over 3 years and it has been the best decision we made to give him a call.", name: "Google Reviewer", title: "Verified Google Review" },
+    { stars: 5, quote: "They are so comprehensive and yet even if you are a new business or startup they treat you like that is their only function! They call back so much quicker than any financial service company I have ever even heard of. They take time to get to know exactly what your business needs and come up with exactly what they need.", name: "Google Reviewer", title: "Verified Google Review" },
+    { stars: 5, quote: "What a breath of fresh air with this company! With the amount of knowledge and experience, you are in good hands and will be well taken care of by Starting Gate Financial.", name: "Google Reviewer", title: "Verified Google Review" },
+    { stars: 5, quote: "Highly professional, competitive rates, and lightning-fast funding. Starting Gate Financial exceeded all my expectations. The process was straightforward, and their expertise in securing the right capital for my business was evident from the start. I would highly recommend them to any business owner looking for a hassle-free loan process.", name: "Google Reviewer", title: "Verified Google Review" },
   ];
 
   return (
@@ -255,11 +255,11 @@ export default function HomePage() {
 
           {/* Rating bar */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", padding: "1rem 2rem", background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", marginBottom: "2rem", flexWrap: "wrap" }}>
-            <span style={{ color: G.gold, fontSize: "1rem" }}>★★★★★ <strong style={{ color: G.textDark, fontFamily: G.sans }}>5.0</strong> <span style={{ color: G.textMid, fontSize: "0.85rem" }}>Google Rating</span></span>
+            <span style={{ color: G.gold, fontSize: "1rem" }}>★★★★★ <strong style={{ color: G.textDark, fontFamily: G.sans }}>4.9</strong> <span style={{ color: G.textMid, fontSize: "0.85rem" }}>Google Rating</span></span>
             <span style={{ width: "1px", height: "24px", background: G.border }} />
             <span style={{ fontSize: "0.85rem", color: G.textMid, fontFamily: G.sans }}>SBA · CRE · Equipment · Working Capital</span>
             <span style={{ width: "1px", height: "24px", background: G.border }} />
-            <Link href="#" style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans, textDecoration: "none" }}>Read All Reviews →</Link>
+            <Link href="https://g.page/r/Ce4JN4bjU5HuEAE/review" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.85rem", color: G.primary, fontWeight: "600", fontFamily: G.sans, textDecoration: "none" }}>Read All Reviews →</Link>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }} className="sgf-testimonials-grid">
