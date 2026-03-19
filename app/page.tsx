@@ -49,11 +49,14 @@ export default function HomePage() {
   }, []);
 
   const industries = [
-    { name: "Construction & Contractors", slug: "construction", icon: "⚒" },
-    { name: "Restaurants & Food", slug: "restaurants-food", icon: "🍽" },
-    { name: "Medical & Healthcare", slug: "medical-healthcare", icon: "⚕" },
-    { name: "Oil & Gas Services", slug: "oil-gas-services", icon: "⛽" },
-    { name: "Trucking & Transportation", slug: "trucking-transportation", icon: "🚛" },
+    { name: "Construction & Contractors", slug: "construction" },
+    { name: "Restaurants & Food",         slug: "restaurants-food" },
+    { name: "Medical & Healthcare",       slug: "medical-healthcare" },
+    { name: "Oil & Gas Services",         slug: "oil-gas-services" },
+    { name: "Trucking & Transportation",  slug: "trucking-transportation" },
+    { name: "Retail & E-Commerce",        slug: "retail-ecommerce" },
+    { name: "Professional Services",      slug: "professional-services" },
+    { name: "Real Estate Investors",      slug: "real-estate-investors" },
   ];
 
   const testimonials = [
@@ -222,7 +225,7 @@ export default function HomePage() {
       <section style={{ background: G.dark, padding: "4rem 2rem", borderTop: `3px solid ${G.gold}`, borderBottom: `3px solid ${G.gold}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <SectionHeader eyebrow="02 — Industry Expertise" h2="We Understand How Your Industry Operates" sub="Capital needs differ by sector. We structure financing around how your business actually earns, spends, and grows." light />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem" }} className="sgf-industry-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem" }} className="sgf-industry-grid">
             {industries.map((ind) => (
               <Link key={ind.slug} href={`/industries/${ind.slug}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "1.5rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "4px", textDecoration: "none", transition: "background 0.2s, border-color 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(206,149,98,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = G.gold; }}
@@ -233,6 +236,9 @@ export default function HomePage() {
                   {ind.slug === "medical-healthcare" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
                   {ind.slug === "oil-gas-services" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
                   {ind.slug === "trucking-transportation" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+                  {ind.slug === "retail-ecommerce" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>}
+                  {ind.slug === "professional-services" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>}
+                  {ind.slug === "real-estate-investors" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>}
                 </span>
                 <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
                 <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>

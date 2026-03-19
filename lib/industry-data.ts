@@ -194,6 +194,32 @@ export const industries: Industry[] = [
       { label: "Funding Timeline", value: "5–15 business days" },
     ],
   },
+  {
+    slug: "real-estate-investors",
+    title: "Real Estate Investors",
+    subtitle: "Financing for fix-and-flip, DSCR rental, and construction projects",
+    description:
+      "Real estate investors require fast, flexible capital that moves on deal timelines — not bank timelines. We structure fix-and-flip loans, DSCR rental financing, construction loans, and bridge capital for investors acquiring, rehabbing, and holding residential and commercial properties.",
+    commonFinancingNeeds: [
+      "Fix-and-flip loans for acquisition and rehab of residential and commercial properties",
+      "DSCR rental loans based on property cash flow, not personal income",
+      "New construction financing for ground-up residential and light commercial projects",
+      "Bridge loans to close quickly while permanent financing is arranged",
+      "Business lines of credit for repeat investors managing multiple projects",
+    ],
+    relevantProducts: [
+      "fix-and-flip",
+      "dscr-rental-loans",
+      "commercial-real-estate",
+      "business-loc-term-loans",
+      "sba-financing",
+    ],
+    keyStats: [
+      { label: "Fix & Flip Loan Range", value: "$75K–$5M" },
+      { label: "DSCR Rental LTV", value: "Up to 80%" },
+      { label: "Bridge Loan Terms", value: "6–24 months" },
+    ],
+  },
 ];
 
 export function getIndustry(slug: string): Industry | undefined {

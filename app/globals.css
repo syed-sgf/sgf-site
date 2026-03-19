@@ -339,7 +339,7 @@ p {
     grid-template-columns: 1fr !important;
   }
 
-  /* Industry cards: 5-col → 2-col → 1-col */
+  /* Industry cards: 4-col → 2-col → 1-col */
   .sgf-industry-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
