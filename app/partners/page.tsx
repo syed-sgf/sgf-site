@@ -172,7 +172,7 @@ export default function PartnersPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: G.primary, padding: "4.5rem 1.5rem", textAlign: "center" }}>
+      <section style={{ background: G.dark, padding: "4.5rem 1.5rem", textAlign: "center" }}>
         <div style={{ maxWidth: 600, margin: "0 auto" }}>
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>
             Ready to Partner with SGF?
