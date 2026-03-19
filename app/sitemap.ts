@@ -89,6 +89,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // ── Partner pages ─────────────────────────────────────────
+  const partnerSlugs = ["ic-broker", "referral-partner", "cpa-accountant", "real-estate-agent"];
+  const partnerPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/partners`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    ...partnerSlugs.map((slug) => ({
+      url: `${BASE_URL}/partners/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
   // ── Blog pages ────────────────────────────────────────────
   let blogPages: MetadataRoute.Sitemap = [];
   try {
@@ -116,6 +133,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...financingPages,
     ...industryPages,
     ...calculatorPages,
+    ...partnerPages,
     ...blogPages,
   ];
 }
