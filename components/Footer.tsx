@@ -108,16 +108,6 @@ export default function Footer() {
       {/* Divider */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", maxWidth: 1280, margin: "0 auto" }} />
 
-      {/* Partner callout strip */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "1.25rem 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-        <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.4)", margin: 0, lineHeight: 1.6 }}>
-          Are you a finance professional, CPA, or real estate agent?{" "}
-          <Link href="/partners" style={{ color: G.gold, textDecoration: "none", fontWeight: 600 }}>
-            Learn about our partner program →
-          </Link>
-        </p>
-      </div>
-
       {/* Legal band */}
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "1.5rem 2rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
         <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.22)", margin: 0, textAlign: "center", lineHeight: 1.7 }}>
