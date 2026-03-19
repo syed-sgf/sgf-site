@@ -207,6 +207,10 @@ export default function Header() {
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             Blog
           </Link>
+          <Link href="/partners"
+            style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
+            Partners
+          </Link>
           <Link href="/contact"
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             Contact
@@ -260,6 +264,10 @@ export default function Header() {
             <Link href="/blog" onClick={closeMobile}
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
               Blog
+            </Link>
+            <Link href="/partners" onClick={closeMobile}
+              style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
+              Partners
             </Link>
             <Link href="/contact" onClick={closeMobile}
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
