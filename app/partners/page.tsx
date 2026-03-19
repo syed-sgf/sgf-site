@@ -46,7 +46,7 @@ const partnerBadges: Record<string, string> = {
 
 export default function PartnersPage() {
   return (
-    <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+    <main className="sgf-partners-page" style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
       {/* Hero */}
       <section style={{ background: G.dark, padding: "5rem 1.5rem 4rem" }}>

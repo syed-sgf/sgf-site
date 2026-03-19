@@ -72,7 +72,7 @@ export default async function PartnerSlugPage({
   const otherPartners = partners.filter((p) => p.slug !== slug).slice(0, 3);
 
   return (
-    <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
+    <main className="sgf-partners-page" style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
 
       {/* Breadcrumb */}
       <div style={{ background: G.cream, borderBottom: `1px solid ${G.border}`, padding: "0.75rem 1.5rem" }}>

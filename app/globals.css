@@ -644,6 +644,15 @@ p {
   max-width: none;
 }
 
+/* ═══════════════════════════════════════════════
+   PARTNERS — Scoped p reset
+═══════════════════════════════════════════════ */
+.sgf-partners-page p {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
+
 .blog-page { background: var(--color-cream, #F8F6F1); }
 
 .blog-hero {
