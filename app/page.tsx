@@ -50,10 +50,10 @@ export default function HomePage() {
 
   const industries = [
     { name: "Construction & Contractors", slug: "construction", icon: "⚒" },
-    { name: "Food & Beverage", slug: "food-beverage", icon: "🍽" },
-    { name: "Healthcare & Medical", slug: "healthcare", icon: "⚕" },
-    { name: "Oil & Gas", slug: "oil-gas", icon: "⛽" },
-    { name: "Real Estate Investors", slug: "real-estate-investors", icon: "⬡" },
+    { name: "Restaurants & Food", slug: "restaurants-food", icon: "🍽" },
+    { name: "Medical & Healthcare", slug: "medical-healthcare", icon: "⚕" },
+    { name: "Oil & Gas Services", slug: "oil-gas-services", icon: "⛽" },
+    { name: "Trucking & Transportation", slug: "trucking-transportation", icon: "🚛" },
   ];
 
   const testimonials = [
@@ -229,10 +229,10 @@ export default function HomePage() {
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; }}>
                 <span style={{ fontSize: "1.75rem", marginBottom: "0.75rem", opacity: 0.85 }}>
                   {ind.slug === "construction" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M2 20h20M6 20V10l6-6 6 6v10M10 20v-6h4v6"/></svg>}
-                  {ind.slug === "food-beverage" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>}
-                  {ind.slug === "healthcare" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
-                  {ind.slug === "oil-gas" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
-                  {ind.slug === "real-estate-investors" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>}
+                  {ind.slug === "restaurants-food" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>}
+                  {ind.slug === "medical-healthcare" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
+                  {ind.slug === "oil-gas-services" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
+                  {ind.slug === "trucking-transportation" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
                 </span>
                 <p style={{ fontFamily: G.serif, fontSize: "0.9rem", fontWeight: "700", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>{ind.name}</p>
                 <span style={{ fontSize: "0.75rem", color: G.gold, fontFamily: G.sans }}>View Programs →</span>
