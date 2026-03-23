@@ -248,10 +248,100 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── TOOLS ── */}
+      <section style={{ padding: "4rem 2rem", background: "#fff" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <SectionHeader
+            eyebrow="03 — Calculators"
+            h2="Run the Numbers Before You Apply"
+            sub="Free tools to estimate payments, coverage ratios, and advance costs. No sign-up, no advisory logic — just math."
+          />
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "1.5rem",
+            marginTop: "2.5rem",
+          }}
+          className="sgf-tools-grid"
+          >
+            {[
+              {
+                title: "Business Loan Calculator",
+                desc: "Estimate monthly payments for SBA 7(a), term loans, and general business financing.",
+                href: "/tools/business-loan-calculator",
+                icon: "💵",
+              },
+              {
+                title: "DSCR Calculator",
+                desc: "Evaluate debt service coverage ratio for rental and commercial real estate deals.",
+                href: "/tools/dscr-calculator",
+                icon: "🏢",
+              },
+              {
+                title: "MCA Calculator",
+                desc: "Calculate total payback and effective cost of a merchant cash advance.",
+                href: "/tools/mca-calculator",
+                icon: "⚡",
+              },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="sgf-tool-card"
+                style={{
+                  display: "block",
+                  padding: "2rem 1.75rem",
+                  border: `1px solid #E2DDD6`,
+                  borderRadius: "4px",
+                  background: "#F8F6F1",
+                  textDecoration: "none",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+              >
+                <div style={{ fontSize: "1.75rem", marginBottom: "0.75rem" }}>{tool.icon}</div>
+                <h3 style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                  color: "#082B09",
+                  marginBottom: "0.5rem",
+                }}>
+                  {tool.title}
+                </h3>
+                <p style={{
+                  fontFamily: "var(--font-source-sans)",
+                  fontSize: "0.9rem",
+                  color: "#475569",
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}>
+                  {tool.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <Link
+              href="/tools"
+              style={{
+                fontFamily: "var(--font-source-sans)",
+                fontSize: "0.9rem",
+                color: "#118241",
+                textDecoration: "none",
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              View all calculators →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── TESTIMONIALS ── */}
       <section style={{ padding: "4rem 2rem", background: G.cream }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <SectionHeader eyebrow="03 — Client Outcomes" h2="Real Businesses. Real Closings." sub="What business owners say about working with Starting Gate Financial." />
+          <SectionHeader eyebrow="04 — Client Outcomes" h2="Real Businesses. Real Closings." sub="What business owners say about working with Starting Gate Financial." />
 
           {/* Rating bar */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", padding: "1rem 2rem", background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", marginBottom: "2rem", flexWrap: "wrap" }}>
