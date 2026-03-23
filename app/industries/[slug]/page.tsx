@@ -27,6 +27,7 @@ const HERO_PHOTOS: Record<string, string> = {
   "trucking-transportation": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=85&auto=format&fit=crop",
   "professional-services":  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=85&auto=format&fit=crop",
   "oil-gas-services":       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=85&auto=format&fit=crop",
+  "real-estate-investors":  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=85&auto=format&fit=crop",
 };
 
 // ── Rich SEO metadata per industry ───────────────────────────────────
@@ -65,6 +66,11 @@ const SEO_META: Record<string, { title: string; description: string; keywords: s
     title: "Oil & Gas Services Financing | Equipment, A/R & Working Capital | Starting Gate Financial",
     description: "Financing for oilfield service and support businesses — equipment financing, accounts receivable financing, and working capital lines for contractors and service companies supporting the energy sector.",
     keywords: ["oilfield services financing", "oil gas equipment financing", "energy services loans", "oilfield working capital", "oil gas contractor financing", "energy sector service companies"],
+  },
+  "real-estate-investors": {
+    title: "Real Estate Investor Financing | Fix & Flip, DSCR & Bridge Loans | Starting Gate Financial",
+    description: "Financing for real estate investors — fix-and-flip loans, DSCR rental financing, construction loans, and bridge capital. Fast, flexible capital that moves on deal timelines.",
+    keywords: ["real estate investor loans", "fix and flip financing", "DSCR rental loans", "bridge loans real estate", "construction loans investors", "hard money alternative"],
   },
 };
 

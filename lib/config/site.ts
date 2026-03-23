@@ -71,6 +71,7 @@ export const industrySlugList = [
   "trucking-transportation",
   "professional-services",
   "oil-gas-services",
+  "real-estate-investors",
 ] as const;
 
 // ── Calculator slugs (canonical) ──
