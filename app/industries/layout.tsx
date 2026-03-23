@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 export const metadata: Metadata = {
   title: "Industries We Finance | Construction, Healthcare, Oil & Gas & More | Starting Gate Financial",
   description: "Starting Gate Financial provides specialized business financing for construction, food & beverage, healthcare, oil & gas, and real estate investors. Find the capital solution built for your industry.",
@@ -17,7 +19,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: { canonical: "https://startinggatefinancial.com/industries" },
-  robots: { index: true, follow: true },
+  robots: isProd
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export default function IndustriesLayout({ children }: { children: ReactNode }) {

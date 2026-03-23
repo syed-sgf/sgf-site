@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { partners } from "@/lib/partner-data";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 export const metadata: Metadata = {
   title: "Become a Partner | Starting Gate Financial",
   description:
@@ -15,7 +17,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: { canonical: "https://startinggatefinancial.com/partners" },
-  robots: { index: true, follow: true },
+  robots: isProd
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 const G = {

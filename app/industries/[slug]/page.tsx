@@ -6,6 +6,8 @@ import { industries, getIndustry } from "@/lib/industry-data";
 import { getProduct } from "@/lib/financing-data";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 const G = {
   dark: "#082B09",
   primary: "#118241",
@@ -96,7 +98,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: [{ url: HERO_PHOTOS[slug] ?? "", width: 1600, height: 900, alt: industry.title }],
     },
     alternates: { canonical: `https://startinggatefinancial.com/industries/${slug}` },
-    robots: { index: true, follow: true },
+    robots: isProd
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 

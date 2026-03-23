@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 export const metadata: Metadata = {
   title: "Business Financing Options | SBA Loans, Equipment, CRE & More | Starting Gate Financial",
   description: "Explore all business financing programs at Starting Gate Financial — SBA 7(a) & 504 loans, equipment financing, commercial real estate, business lines of credit, fix & flip, DSCR rental loans, and more.",
@@ -18,7 +20,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: { canonical: "https://startinggatefinancial.com/financing-options" },
-  robots: { index: true, follow: true },
+  robots: isProd
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export default function FinancingOptionsLayout({ children }: { children: ReactNode }) {

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { partners } from "@/lib/partner-data";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 export async function generateStaticParams() {
   return partners.map((p) => ({ slug: p.slug }));
 }
@@ -26,7 +28,9 @@ export async function generateMetadata({
       type: "website",
     },
     alternates: { canonical: `https://startinggatefinancial.com/partners/${slug}` },
-    robots: { index: true, follow: true },
+    robots: isProd
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 

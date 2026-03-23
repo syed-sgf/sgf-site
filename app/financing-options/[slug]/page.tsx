@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { products, heroImageMap } from "@/lib/financing-data";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 
+const isProd = process.env.VERCEL_ENV === "production";
+
 
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -24,7 +26,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "website",
     },
     alternates: { canonical: `https://startinggatefinancial.com/financing-options/${slug}` },
-    robots: { index: true, follow: true },
+    robots: isProd
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 
