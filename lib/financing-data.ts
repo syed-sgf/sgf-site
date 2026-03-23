@@ -34,8 +34,8 @@ export const products: FinancingProduct[] = [
       "Manage accounts payable more strategically",
     ],
     minAmount: "$25,000",
-    maxAmount: "$500,000",
-    termRange: "6 months – 5 years",
+    maxAmount: "$1,000,000",
+    termRange: "6 months – 10 years",
     ctaText: "Start Pre-Qualification",
   },
   {
@@ -123,7 +123,7 @@ export const products: FinancingProduct[] = [
     description:
       "Fix-and-flip financing provides fast, asset-based capital for investors acquiring and renovating residential properties. Loan decisions are driven by the property and the deal — not just personal credit — making this program accessible to both seasoned and first-time investors.",
     keyFeatures: [
-      "Loan-to-cost up to 90%",
+      "Loan-to-cost up to 92%",
       "After-repair value (ARV) lending up to 70%",
       "Timeline varies by lender and title/documentation readiness",
       "Interest-only payments during the renovation period",
@@ -139,7 +139,7 @@ export const products: FinancingProduct[] = [
     ],
     minAmount: "$75,000",
     maxAmount: "$3,000,000",
-    termRange: "6 – 24 months",
+    termRange: "6 – 36 months",
     ctaText: "Fund Your Next Flip",
   },
   {
@@ -298,8 +298,8 @@ export const heroImageMap: Record<string, string> = {
   // Industrial machinery / manufacturing floor
 
   "fix-and-flip":
-    "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1600&q=80",
-  // Residential renovation / construction inside house
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80",
+  // House under construction / renovation framing exterior
 
   "dscr-rental-loans":
     "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80",
