@@ -41,7 +41,6 @@ export const routes = {
   partners: "/partners",
   blog: "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,
-  technology: "/technology",
   privacy: "/privacy",
   terms: "/terms",
   disclosures: "/disclosures",
