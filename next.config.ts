@@ -68,9 +68,9 @@ const nextConfig: NextConfig = {
       { source: "/fica-tip-credit-calculator", destination: "/tools/fica-tip-credit-calculator", permanent: true },
       { source: "/business-loan-calculator", destination: "/tools/business-loan-calculator", permanent: true },
 
-      { source: "/healthcare", destination: "/industries/healthcare", permanent: true },
-      { source: "/oil-and-gas-industry", destination: "/industries/oil-and-gas", permanent: true },
-      { source: "/food-and-beverage-industry", destination: "/industries/restaurants", permanent: true },
+      { source: "/healthcare", destination: "/industries/medical-healthcare", permanent: true },
+      { source: "/oil-and-gas-industry", destination: "/industries/oil-gas-services", permanent: true },
+      { source: "/food-and-beverage-industry", destination: "/industries/restaurants-food", permanent: true },
       { source: "/contractors", destination: "/industries/construction", permanent: true },
 
       { source: "/commercial-lending-partner-program", destination: "/partners", permanent: true },
