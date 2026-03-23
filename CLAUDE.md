@@ -7,7 +7,7 @@ All build decisions defer to these documents in priority order:
 1. Website Architecture & Page Registry v1.4
 2. Internal Linking Matrix & Ruleset v1.0
 3. Build Phase Execution Plan v1.0
-4. Individual spec documents (Homepage, Programs, Industries, Calculators, Industries, Technology)
+4. Individual spec documents (Homepage, Programs, Industries, Calculators, Partners)
 
 ## CANONICAL ROUTE NAMESPACES
 
@@ -44,6 +44,7 @@ All build decisions defer to these documents in priority order:
 | Trucking & Transportation | trucking-transportation |
 | Professional Services | professional-services |
 | Oil & Gas Services | oil-gas-services |
+| Real Estate Investors | real-estate-investors |
 
 ### Tools Hub
 - Hub: /tools
