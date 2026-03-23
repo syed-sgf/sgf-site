@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "MCA Calculator — True Cost of Merchant Cash Advance",
+  title: "MCA Calculator — Free Merchant Cash Advance & Loan Calculator",
   description:
-    "Calculate the true cost of a merchant cash advance: factor rate, APR equivalent, and daily payment. Understand total repayment before you sign — includes Texas cost-of-credit disclosure.",
+    "Free MCA calculator. Enter your advance amount and factor rate to see total repayment, APR equivalent, and daily payment. Know the true cost before you sign any merchant cash advance.",
   path: "/tools/mca-calculator",
 });
 
