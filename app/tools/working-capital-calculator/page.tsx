@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { breadcrumbSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 
 const G = {
   green: "#118241",
@@ -184,6 +184,29 @@ function CTABand() {
   );
 }
 
+const faqs = [
+  {
+    q: "What is working capital?",
+    a: "Working capital is the difference between a business's current assets and current liabilities. It measures short-term liquidity — whether the business has enough resources to cover its near-term obligations.",
+  },
+  {
+    q: "What is a good working capital ratio?",
+    a: "A ratio between 1.5 and 2.0 is generally considered healthy. Below 1.0 means current liabilities exceed current assets, which signals short-term liquidity risk. Above 2.0 may indicate underutilized assets.",
+  },
+  {
+    q: "What is the quick ratio?",
+    a: "The quick ratio excludes inventory from current assets, measuring only the most liquid assets — cash, receivables, and short-term investments — against current liabilities. It is a stricter liquidity test than the working capital ratio.",
+  },
+  {
+    q: "How is line of credit sizing calculated?",
+    a: "Line of credit sizing is typically based on a percentage of accounts receivable and inventory. Lenders commonly advance 70-85% against eligible receivables and 25-50% against inventory, depending on industry and asset quality.",
+  },
+  {
+    q: "Can this calculator help me apply for a line of credit?",
+    a: "This calculator provides planning estimates only. It does not constitute a financing offer or approval. Contact SGF to discuss your actual line of credit options based on your full financial profile.",
+  },
+];
+
 export default function WorkingCapitalCalculatorPage() {
   const [monthlyRevenue, setMonthlyRevenue] = useState("");
   const [monthlyExpenses, setMonthlyExpenses] = useState("");
@@ -204,10 +227,12 @@ export default function WorkingCapitalCalculatorPage() {
     { name: "Tools & Calculators", path: "/tools" },
     { name: "Working Capital Calculator", path: "/tools/working-capital-calculator" },
   ]);
+  const faqLd = faqSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
 
   return (
     <main style={{ fontFamily: G.sans, color: G.textDark, background: "#fff" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section style={{ position: "relative", minHeight: 400, display: "flex", alignItems: "center", overflow: "hidden" }}>
