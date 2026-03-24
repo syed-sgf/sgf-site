@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { partners } from "@/lib/partner-data";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const isProd = process.env.VERCEL_ENV === "production";
 
@@ -207,14 +208,7 @@ export default async function PartnerSlugPage({
           <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, color: G.dark, textAlign: "center", marginBottom: "2.5rem" }}>
             Frequently Asked Questions
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            {partner.faqs.map((faq) => (
-              <div key={faq.q} style={{ background: "#fff", border: `1px solid ${G.border}`, padding: "1.5rem 1.75rem" }}>
-                <h4 style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: G.dark, marginBottom: "0.6rem" }}>{faq.q}</h4>
-                <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: 1.75, margin: 0 }}>{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion faqs={partner.faqs} />
         </div>
       </section>
 

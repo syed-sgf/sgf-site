@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products, heroImageMap } from "@/lib/financing-data";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const isProd = process.env.VERCEL_ENV === "production";
 
@@ -305,14 +306,7 @@ export default async function FinancingSlugPage(props: { params: Promise<{ slug:
               <p style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: "600", marginBottom: "0.6rem", fontFamily: G.sans }}>Common Questions</p>
               <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.6rem,2.5vw,2.1rem)", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem", textAlign: "center" }}>Frequently Asked Questions</h2>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {faqs.map((faq) => (
-                <div key={faq.q} style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: "3px", padding: "1.5rem" }}>
-                  <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: "700", color: G.textDark, margin: "0 0 0.75rem" }}>{faq.q}</p>
-                  <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: "1.7", margin: 0, fontFamily: G.sans }}>{faq.a}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion faqs={faqs} />
           </div>
         </section>
       )}
