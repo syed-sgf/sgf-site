@@ -152,7 +152,7 @@ export default async function HomePage() {
             gap: "1.5rem",
             marginTop: "2.5rem",
           }}
-          className="sgf-tools-grid"
+          className="sgf-homepage-tools-grid"
           >
             {[
               {
