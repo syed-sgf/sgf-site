@@ -348,11 +348,11 @@ export default function WorkingCapitalCalculatorPage() {
 
       {/* ── Related Programs ─────────────────────────────────────── */}
       <section style={{ padding: "3rem 2rem", borderTop: `1px solid ${G.border}` }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
           <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 1rem 0", maxWidth: "none" }}>
             Related Programs
           </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
             {[
               { label: "Business Lines of Credit", href: "/financing-options/business-loc-term-loans" },
               { label: "Merchant Cash Advance", href: "/financing-options/merchant-cash-advance" },
@@ -361,6 +361,32 @@ export default function WorkingCapitalCalculatorPage() {
               <Link key={href} href={href} style={{ border: `1px solid ${G.green}`, color: G.green, padding: "0.5rem 1.25rem", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
                 {label} →
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────────── */}
+      <section style={{ padding: "4rem 2rem", background: G.cream, borderTop: `1px solid ${G.border}` }}>
+        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <p style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: G.gold, fontWeight: 600, margin: "0 0 0.5rem 0", textAlign: "center", maxWidth: "none" }}>
+            Common Questions
+          </p>
+          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.5rem, 2.5vw, 2rem)", fontWeight: 700, color: G.dark, textAlign: "center", marginBottom: "2.5rem" }}>
+            Working Capital — Frequently Asked Questions
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {[
+              { q: "What is working capital?", a: "Working capital is the difference between a business's current assets and current liabilities. It measures short-term liquidity — whether the business has enough resources to cover its near-term obligations." },
+              { q: "What is a good working capital ratio?", a: "A ratio between 1.5 and 2.0 is generally considered healthy. Below 1.0 means current liabilities exceed current assets, which signals short-term liquidity risk. Above 2.0 may indicate underutilized assets." },
+              { q: "What is the quick ratio?", a: "The quick ratio excludes inventory from current assets, measuring only the most liquid assets — cash, receivables, and short-term investments — against current liabilities. It is a stricter liquidity test than the working capital ratio." },
+              { q: "How is line of credit sizing calculated?", a: "Line of credit sizing is typically based on a percentage of accounts receivable and inventory. Lenders commonly advance 70–85% against eligible receivables and 25–50% against inventory, depending on industry and asset quality." },
+              { q: "Can this calculator help me apply for a line of credit?", a: "This calculator provides planning estimates only. It does not constitute a financing offer or approval. Contact SGF to discuss your actual line of credit options based on your full financial profile." },
+            ].map(({ q, a }) => (
+              <div key={q} style={{ background: "#fff", border: `1px solid ${G.border}`, borderRadius: "4px", padding: "1.5rem 1.75rem" }}>
+                <p style={{ fontFamily: G.serif, fontSize: "1rem", fontWeight: 700, color: G.dark, marginBottom: "0.5rem" }}>{q}</p>
+                <p style={{ fontSize: "0.9rem", color: G.textMid, lineHeight: 1.7, margin: 0, maxWidth: "none" }}>{a}</p>
+              </div>
             ))}
           </div>
         </div>
