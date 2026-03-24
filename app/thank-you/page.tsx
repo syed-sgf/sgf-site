@@ -1,9 +1,8 @@
-import Link from "next/link";
+"use client";
 
-export const metadata = {
-  title: "Thank You | Starting Gate Financial",
-  robots: { index: false, follow: false },
-};
+import { useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const G = {
   dark:    "#082B09",
@@ -15,7 +14,20 @@ const G = {
   sans:    "var(--font-source-sans)",
 };
 
-export default function ThankYouPage() {
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const source = searchParams.get("source") ?? "unknown";
+
+  useEffect(() => {
+    const w = window as Window & { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag === "function") {
+      w.gtag("event", "generate_lead", {
+        event_category: "conversion",
+        event_label: source,
+      });
+    }
+  }, [source]);
+
   return (
     <main style={{
       fontFamily: G.sans,
@@ -93,5 +105,13 @@ export default function ThankYouPage() {
 
       </div>
     </main>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={null}>
+      <ThankYouContent />
+    </Suspense>
   );
 }
