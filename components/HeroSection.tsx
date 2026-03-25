@@ -10,8 +10,8 @@ const G = {
 };
 
 const heroSlides = [
-  { url: "/images/hero-1.jpg", label: "Business Capital" },
   { url: "/images/hero-2.jpg", label: "Commercial Real Estate" },
+  { url: "/images/hero-1.jpg", label: "Business Capital" },
   { url: "/images/hero-3.jpg", label: "Construction" },
   { url: "/images/hero-4.webp", label: "Oil & Gas" },
   { url: "/images/hero-5.jpg", label: "Business Financing" },
