@@ -10,11 +10,11 @@ const G = {
 };
 
 const heroSlides = [
-  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=70&auto=format&fit=crop&fm=webp", label: "Commercial Real Estate" },
-  { url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=70&auto=format&fit=crop&fm=webp", label: "Construction" },
-  { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=70&auto=format&fit=crop&fm=webp", label: "Business Capital" },
-  { url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=70&auto=format&fit=crop&fm=webp", label: "Oil & Gas" },
-  { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=70&auto=format&fit=crop&fm=webp", label: "Food & Beverage" },
+  { url: "/images/hero-1.jpg", label: "Business Capital" },
+  { url: "/images/hero-2.jpg", label: "Commercial Real Estate" },
+  { url: "/images/hero-3.jpg", label: "Construction" },
+  { url: "/images/hero-4.webp", label: "Oil & Gas" },
+  { url: "/images/hero-5.jpg", label: "Business Financing" },
 ];
 
 const DURATION = 5;
@@ -27,8 +27,8 @@ export function HeroSection() {
 
       <style>{`
         @keyframes sgf-fade {
-          0%, ${Math.round(100/TOTAL - 4)}%  { opacity: 1; }
-          ${Math.round(100/TOTAL)}%, 100%    { opacity: 0; }
+          0%, 16%  { opacity: 1; }
+          20%, 100% { opacity: 0; }
         }
         .sgf-slide-0 { animation: sgf-fade ${CYCLE}s ${0 * DURATION}s infinite; }
         .sgf-slide-1 { animation: sgf-fade ${CYCLE}s ${1 * DURATION}s infinite; opacity: 0; }
