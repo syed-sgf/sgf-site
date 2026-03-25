@@ -53,6 +53,7 @@ export function HeroSection() {
             fill
             priority={i === 0}
             loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : "auto"}
             sizes="(max-width: 768px) 100vw, 100vw"
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
