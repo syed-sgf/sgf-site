@@ -13,11 +13,11 @@ const G = {
 };
 
 const heroSlides = [
-  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=90&auto=format&fit=crop", label: "Commercial Real Estate" },
-  { url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=90&auto=format&fit=crop", label: "Construction" },
-  { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=90&auto=format&fit=crop", label: "Business Capital" },
-  { url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=90&auto=format&fit=crop", label: "Oil & Gas" },
-  { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90&auto=format&fit=crop", label: "Food & Beverage" },
+  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=75&auto=format&fit=crop", label: "Commercial Real Estate" },
+  { url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=75&auto=format&fit=crop", label: "Construction" },
+  { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=75&auto=format&fit=crop", label: "Business Capital" },
+  { url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=75&auto=format&fit=crop", label: "Oil & Gas" },
+  { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=75&auto=format&fit=crop", label: "Food & Beverage" },
 ];
 
 export function HeroSection() {
@@ -36,7 +36,7 @@ export function HeroSection() {
       {/* Slides */}
       {heroSlides.map((slide, i) => (
         <div key={slide.url} style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, transition: "opacity 1.2s ease-in-out" }}>
-          <Image src={slide.url} alt={slide.label} fill priority={i === 0} sizes="100vw"
+          <Image src={slide.url} alt={slide.label} fill priority={i === 0} loading={i === 0 ? "eager" : "lazy"} sizes="(max-width: 768px) 100vw, 100vw"
             style={{ objectFit: "cover", objectPosition: "center" }} />
         </div>
       ))}
