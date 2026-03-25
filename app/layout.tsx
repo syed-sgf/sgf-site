@@ -28,6 +28,10 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${sourceSans.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body>
         {GA_ID && (
           <>
