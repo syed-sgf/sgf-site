@@ -112,8 +112,9 @@ export default async function PartnerSlugPage({
             {partner.tagline}
           </p>
           <Link
-            href="/contact"
-            style={{ display: "inline-block", background: G.gold, color: "#fff", padding: "0.9rem 2rem", fontSize: 14, fontWeight: 700, textDecoration: "none" }}
+            href="/partners/apply"
+            className="hero-cta"
+            style={{ display: "inline-block", background: G.gold, color: "#fff", padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 40px)", fontSize: "clamp(0.9rem, 2vw, 1rem)", fontWeight: 700, textDecoration: "none" }}
           >
             Apply to This Program
           </Link>
@@ -247,7 +248,7 @@ export default async function PartnerSlugPage({
             Contact us to start the application process. We review every partner application personally.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/contact" style={{ display: "inline-block", background: G.gold, color: "#fff", padding: "0.9rem 2rem", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
+            <Link href="/partners/apply" className="hero-cta" style={{ display: "inline-block", background: G.gold, color: "#fff", padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 40px)", fontSize: "clamp(0.9rem, 2vw, 1rem)", fontWeight: 700, textDecoration: "none" }}>
               Apply to This Program
             </Link>
             <Link href="/partners" style={{ display: "inline-block", background: "transparent", color: "#fff", padding: "0.9rem 2rem", fontSize: 14, fontWeight: 700, textDecoration: "none", border: "1px solid rgba(255,255,255,0.35)" }}>

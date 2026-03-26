@@ -1012,3 +1012,11 @@ p {
     height: 1500px !important;
   }
 }
+
+@media (max-width: 768px) {
+  .sgf-partners-page .hero-cta,
+  .sgf-partners-slug-page .hero-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
