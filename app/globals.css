@@ -1002,17 +1002,6 @@ p {
   max-width: none;
 }
 
-.sgf-partners-apply-page iframe {
-  width: 100% !important;
-  max-width: 100%;
-}
-
-@media (max-width: 768px) {
-  .sgf-partners-apply-page iframe {
-    height: 1500px !important;
-  }
-}
-
 @media (max-width: 768px) {
   .sgf-partners-page .hero-cta,
   .sgf-partners-slug-page .hero-cta {
