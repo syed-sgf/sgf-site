@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { partners } from "@/lib/partner-data";
 
 const isProd = process.env.VERCEL_ENV === "production";
@@ -175,25 +176,56 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ background: G.dark, padding: "4.5rem 1.5rem", textAlign: "center" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: G.serif, fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>
-            Ready to Partner with SGF?
+      {/* Partner Application Form */}
+      <section className="sgf-partners-form-section" style={{
+        background: '#F8F6F1',
+        padding: '80px 24px',
+      }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-playfair)',
+            color: '#082B09',
+            fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+            marginBottom: '12px',
+            textAlign: 'center',
+          }}>
+            Apply to Become a Partner
           </h2>
-          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.7, marginBottom: "2rem" }}>
-            Select your program track and start the conversation. We review every application personally.
+          <p style={{
+            fontFamily: 'var(--font-source-sans)',
+            color: '#444',
+            fontSize: '1rem',
+            textAlign: 'center',
+            marginBottom: '40px',
+          }}>
+            Complete the form below and our team will reach out within one business day.
           </p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="#partner-programs" style={{ display: "inline-block", background: G.gold, color: "#fff", padding: "0.9rem 2rem", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
-              Choose Your Track
-            </Link>
-            <Link href="/contact" style={{ display: "inline-block", background: "transparent", color: "#fff", padding: "0.9rem 2rem", fontSize: 14, fontWeight: 700, textDecoration: "none", border: "1px solid rgba(255,255,255,0.4)" }}>
-              Talk to Us First
-            </Link>
-          </div>
+
+          <iframe
+            src="https://api.leadconnectorhq.com/widget/form/CnaPJWXqSamJrlefepg0"
+            style={{
+              width: '100%',
+              height: '1350px',
+              border: 'none',
+              borderRadius: '4px',
+            }}
+            id="inline-CnaPJWXqSamJrlefepg0"
+            data-layout='{"id":"INLINE"}'
+            data-trigger-type="alwaysShow"
+            data-activation-type="alwaysActivated"
+            data-deactivation-type="neverDeactivate"
+            data-form-name="SGF Partner Application"
+            data-height="1313"
+            data-layout-iframe-id="inline-CnaPJWXqSamJrlefepg0"
+            data-form-id="CnaPJWXqSamJrlefepg0"
+            title="SGF Partner Application"
+          />
         </div>
       </section>
+      <Script
+        src="https://link.msgsndr.com/js/form_embed.js"
+        strategy="lazyOnload"
+      />
 
       <style>{`
         .sgf-partner-card:hover { border-color: #CE9562 !important; box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important; }

@@ -989,3 +989,9 @@ p {
   .blog-post-body.prose p,
   .blog-post-body.prose li { font-size: 16px; }
 }
+
+.sgf-partners-form-section p {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
