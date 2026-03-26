@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import { partners } from "@/lib/partner-data";
 
 const isProd = process.env.VERCEL_ENV === "production";
@@ -176,62 +175,73 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Partner Application Form */}
-      <section className="sgf-partners-form-section" style={{
-        background: '#F8F6F1',
-        padding: '80px 24px',
-      }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <h2 style={{
-            fontFamily: 'var(--font-playfair)',
-            color: '#082B09',
-            fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
-            marginBottom: '12px',
-            textAlign: 'center',
-          }}>
-            Apply to Become a Partner
-          </h2>
-          <p style={{
-            fontFamily: 'var(--font-source-sans)',
-            color: '#444',
-            fontSize: '1rem',
-            textAlign: 'center',
-            marginBottom: '40px',
-          }}>
-            Complete the form below and our team will reach out within one business day.
+      {/* FAQ */}
+      <section style={{ padding: '5rem 1.5rem', background: '#fff' }}>
+        <div style={{ maxWidth: 860, margin: '0 auto' }}>
+          <p style={{ fontFamily: G.sans, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: G.gold, fontWeight: 700, textAlign: 'center', marginBottom: '0.75rem' }}>
+            Common Questions
           </p>
-
-          <iframe
-            src="https://api.leadconnectorhq.com/widget/form/CnaPJWXqSamJrlefepg0"
-            style={{
-              width: '100%',
-              height: '1350px',
-              border: 'none',
-              borderRadius: '4px',
-            }}
-            id="inline-CnaPJWXqSamJrlefepg0"
-            data-layout='{"id":"INLINE"}'
-            data-trigger-type="alwaysShow"
-            data-activation-type="alwaysActivated"
-            data-deactivation-type="neverDeactivate"
-            data-form-name="SGF Partner Application"
-            data-height="1313"
-            data-layout-iframe-id="inline-CnaPJWXqSamJrlefepg0"
-            data-form-id="CnaPJWXqSamJrlefepg0"
-            title="SGF Partner Application"
-          />
+          <h2 style={{ fontFamily: G.serif, fontSize: 'clamp(1.6rem, 3vw, 2.25rem)', fontWeight: 700, color: G.dark, textAlign: 'center', marginBottom: '3rem' }}>
+            What You Should Know Before Applying
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {[
+              {
+                q: 'What is an Independent Contractor (IC) Broker?',
+                a: 'An IC Broker is a licensed or experienced finance professional who actively structures and submits commercial financing deals on behalf of clients. IC Brokers work deals end-to-end and earn commission-based compensation tied directly to funded transactions.',
+              },
+              {
+                q: 'What is a Referral Partner?',
+                a: 'A Referral Partner introduces business owners to SGF and steps back. You make the introduction, we handle qualification, structuring, and close. You earn a referral fee at funding — no deal management required on your end.',
+              },
+              {
+                q: 'Why partner with Starting Gate Financial?',
+                a: 'SGF gives you access to a full commercial financing platform — SBA loans, CRE, equipment, working capital, fix-and-flip, and more — under one relationship. Your compensation is defined in writing before your first deal. We handle underwriting and lender routing so you can focus on your clients.',
+              },
+              {
+                q: 'How does the partner process work?',
+                a: 'You apply, we review your application personally, and schedule a brief conversation to confirm fit. Once onboarded and agreements are signed, you submit deals through our intake process. SGF handles everything from qualification to close. You get paid at funding.',
+              },
+            ].map((item) => (
+              <div key={item.q} style={{ borderBottom: `1px solid ${G.border}`, paddingBottom: '1.5rem' }}>
+                <h3 style={{ fontFamily: G.serif, fontSize: '1.05rem', fontWeight: 700, color: G.dark, marginBottom: '0.5rem' }}>{item.q}</h3>
+                <p style={{ fontSize: '0.925rem', color: G.textMid, lineHeight: 1.75, margin: 0 }}>{item.a}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <Script
-        src="https://link.msgsndr.com/js/form_embed.js"
-        strategy="lazyOnload"
-      />
+
+      {/* CTA */}
+      <section style={{ background: G.dark, padding: '5rem 1.5rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          <p style={{ fontFamily: G.sans, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: G.gold, fontWeight: 700, marginBottom: '1rem' }}>
+            Ready to Get Started?
+          </p>
+          <h2 style={{ fontFamily: G.serif, fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', fontWeight: 700, color: '#fff', marginBottom: '1rem' }}>
+            Apply to Become a Partner
+          </h2>
+          <p style={{ fontSize: '1rem', color: '#cbd5e1', lineHeight: 1.75, marginBottom: '2.5rem', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
+            Applications are reviewed personally. Our team will be in touch within one business day.
+          </p>
+          <Link
+            href="/partners/apply"
+            style={{ display: 'inline-block', background: G.gold, color: '#fff', fontFamily: G.sans, fontWeight: 700, fontSize: '0.95rem', padding: '0.9rem 2.5rem', textDecoration: 'none', letterSpacing: '0.04em' }}
+          >
+            Apply Now
+          </Link>
+        </div>
+      </section>
 
       <style>{`
         .sgf-partner-card:hover { border-color: #CE9562 !important; box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important; }
         @media (max-width: 768px) {
           .sgf-partner-why-grid { grid-template-columns: 1fr !important; }
           .sgf-partner-card-grid { grid-template-columns: 1fr !important; }
+          .sgf-partners-page section {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+          }
         }
       `}</style>
     </main>
