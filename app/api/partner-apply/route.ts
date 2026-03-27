@@ -20,13 +20,15 @@ export async function POST(req: NextRequest) {
     const formData = new URLSearchParams();
     formData.append('first_name', firstName || '');
     formData.append('last_name', lastName || '');
-    formData.append('company_name', companyName || '');
-    formData.append('partner_type', partnerType || '');
+    formData.append('name', `${firstName || ''} ${lastName || ''}`.trim());
+    formData.append('companyName', companyName || '');
     formData.append('phone', phone || '');
     formData.append('email', email || '');
-    formData.append('partner_state', state || '');
+    formData.append('state', state || '');
     formData.append('website', website || '');
     formData.append('source', source || '');
+    formData.append('customField[partner_type]', partnerType || '');
+    formData.append('customField[partner_state]', state || '');
     formData.append('formId', 'CnaPJWXqSamJrlefepg0');
     formData.append('location_id', '4zICUYwDaFijaZX4Qx6p');
 
@@ -38,10 +40,12 @@ export async function POST(req: NextRequest) {
       body: formData.toString(),
     });
 
+    console.log('GHL response status:', ghlRes.status);
+    const responseText = await ghlRes.text();
+    console.log('GHL response body:', responseText);
+
     if (!ghlRes.ok) {
-      const errText = await ghlRes.text();
-      console.error('GHL submission error:', ghlRes.status, errText);
-      return NextResponse.json({ success: false, error: 'GHL submission failed' }, { status: 500 });
+      return NextResponse.json({ success: false, error: `GHL error: ${ghlRes.status} - ${responseText}` }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
