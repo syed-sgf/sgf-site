@@ -1026,3 +1026,11 @@ p {
     height: 1100px !important;
   }
 }
+
+.sgf-privacy-page p,
+.sgf-terms-page p,
+.sgf-disclosures-page p {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}

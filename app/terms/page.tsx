@@ -1,7 +1,7 @@
 export default function TermsPage() {
   const G = { dark: "#082B09", gold: "#CE9562", cream: "#F8F6F1", textDark: "#0F172A", textMid: "#475569" };
   return (
-    <main style={{ background: G.cream, minHeight: "60vh", padding: "5rem 2rem" }}>
+    <main className="sgf-terms-page" style={{ background: G.cream, minHeight: "60vh", padding: "5rem 2rem" }}>
       <div style={{ maxWidth: 800, margin: "0 auto" }}>
         <p style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: G.gold, fontWeight: 600, marginBottom: "1rem" }}>Legal</p>
         <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2rem, 4vw, 2.75rem)", color: G.textDark, marginBottom: "2rem", fontWeight: 700 }}>Terms of Use</h1>
