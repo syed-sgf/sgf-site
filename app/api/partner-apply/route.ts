@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = {
+      locationId: '4zICUYwDaFijaZX4Qx6p',
       firstName: firstName || '',
       lastName: lastName || '',
       email: email || '',
@@ -33,12 +34,12 @@ export async function POST(req: NextRequest) {
       tags: ['partner-lead'],
       customFields: [
         {
-          key: 'partner_type',
-          field_value: partnerType || '',
+          id: 'partner_type',
+          value: partnerType || '',
         },
         {
-          key: 'partner_state',
-          field_value: state || '',
+          id: 'partner_state',
+          value: state || '',
         },
       ],
     };
