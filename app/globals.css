@@ -1021,13 +1021,6 @@ p {
   max-width: 100%;
 }
 
-@media (max-width: 768px) {
-  .sgf-partners-apply-page iframe {
-    min-height: 700px !important;
-    height: auto !important;
-  }
-}
-
 .sgf-privacy-page p,
 .sgf-terms-page p,
 .sgf-disclosures-page p {
