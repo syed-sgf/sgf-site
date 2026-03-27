@@ -16,36 +16,50 @@ export async function POST(req: NextRequest) {
       source,
     } = body;
 
-    // Submit to GHL forms endpoint server-side (no CORS)
-    const formData = new URLSearchParams();
-    formData.append('first_name', firstName || '');
-    formData.append('last_name', lastName || '');
-    formData.append('name', `${firstName || ''} ${lastName || ''}`.trim());
-    formData.append('companyName', companyName || '');
-    formData.append('phone', phone || '');
-    formData.append('email', email || '');
-    formData.append('state', state || '');
-    formData.append('website', website || '');
-    formData.append('source', source || '');
-    formData.append('customField[partner_type]', partnerType || '');
-    formData.append('customField[partner_state]', state || '');
-    formData.append('formId', 'CnaPJWXqSamJrlefepg0');
-    formData.append('location_id', '4zICUYwDaFijaZX4Qx6p');
+    const apiKey = process.env.GHL_PRIVATE_API_KEY;
+    if (!apiKey) {
+      console.error('GHL_PRIVATE_API_KEY is not set');
+      return NextResponse.json({ success: false, error: 'Server configuration error' }, { status: 500 });
+    }
 
-    const ghlRes = await fetch('https://backend.leadconnectorhq.com/forms/submit', {
+    const payload = {
+      firstName: firstName || '',
+      lastName: lastName || '',
+      name: `${firstName || ''} ${lastName || ''}`.trim(),
+      email: email || '',
+      phone: phone || '',
+      companyName: companyName || '',
+      website: website || '',
+      source: source || '',
+      tags: ['partner-lead'],
+      customField: {
+        partner_type: partnerType || '',
+        partner_state: state || '',
+      },
+      contactType: 'Partner_Lead',
+    };
+
+    console.log('Submitting to GHL Contacts API:', JSON.stringify(payload));
+
+    const ghlRes = await fetch('https://services.leadconnectorhq.com/contacts/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'Version': '2021-07-28',
       },
-      body: formData.toString(),
+      body: JSON.stringify(payload),
     });
 
-    console.log('GHL response status:', ghlRes.status);
     const responseText = await ghlRes.text();
+    console.log('GHL response status:', ghlRes.status);
     console.log('GHL response body:', responseText);
 
     if (!ghlRes.ok) {
-      return NextResponse.json({ success: false, error: `GHL error: ${ghlRes.status} - ${responseText}` }, { status: 500 });
+      return NextResponse.json(
+        { success: false, error: `GHL error: ${ghlRes.status} - ${responseText}` },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });
