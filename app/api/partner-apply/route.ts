@@ -25,18 +25,22 @@ export async function POST(req: NextRequest) {
     const payload = {
       firstName: firstName || '',
       lastName: lastName || '',
-      name: `${firstName || ''} ${lastName || ''}`.trim(),
       email: email || '',
       phone: phone || '',
       companyName: companyName || '',
       website: website || '',
       source: source || '',
       tags: ['partner-lead'],
-      customField: {
-        partner_type: partnerType || '',
-        partner_state: state || '',
-      },
-      contactType: 'Partner_Lead',
+      customFields: [
+        {
+          key: 'partner_type',
+          field_value: partnerType || '',
+        },
+        {
+          key: 'partner_state',
+          field_value: state || '',
+        },
+      ],
     };
 
     console.log('Submitting to GHL Contacts API:', JSON.stringify(payload));
