@@ -91,23 +91,26 @@ export default function PartnerApplicationForm() {
     setLoading(true);
 
     try {
-      const payload = new FormData();
-      payload.append('first_name', form.firstName);
-      payload.append('last_name', form.lastName);
-      payload.append('company_name', form.companyName);
-      payload.append('partner_type', form.partnerType);
-      payload.append('phone', form.phone);
-      payload.append('email', form.email);
-      payload.append('partner_state', form.state);
-      payload.append('website', form.website);
-      payload.append('source', form.source);
-      payload.append('formId', 'CnaPJWXqSamJrlefepg0');
-      payload.append('location_id', '4zICUYwDaFijaZX4Qx6p');
-
-      await fetch('https://backend.leadconnectorhq.com/forms/submit', {
+      const res = await fetch('/api/partner-apply', {
         method: 'POST',
-        body: payload,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          companyName: form.companyName,
+          partnerType: form.partnerType,
+          phone: form.phone,
+          email: form.email,
+          state: form.state,
+          website: form.website,
+          source: form.source,
+        }),
       });
+
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.error || 'Submission failed');
+      }
 
       router.push('/thank-you');
     } catch {
