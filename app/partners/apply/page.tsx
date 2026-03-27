@@ -44,7 +44,7 @@ export default function PartnersApplyPage() {
       {/* Form */}
       <section style={{ background: "#F8F6F1", padding: "60px 24px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-          <div style={{ width: "100%", border: "1px solid #e2e8f0", background: "#f8f6f1", overflow: "hidden" }}>
+          <div style={{ width: "100%", boxShadow: '0 4px 24px rgba(0,0,0,0.08)', border: '1px solid #E2DDD6', borderRadius: '4px', background: '#fff', padding: '0', overflow: 'hidden' }}>
             <iframe
               src="https://api.leadconnectorhq.com/widget/survey/Z5ndLPu9ozYpURppdcuF"
               style={{ border: "none", width: "100%", minHeight: 750, display: "block" }}
