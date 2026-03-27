@@ -34,17 +34,36 @@ The key distinction: **you're not borrowing — you're selling.** Ownership of t
 
 ## Key Differences Side by Side
 
-| Feature | Asset-Based Lending | Factoring |
-|---|---|---|
-| Structure | Loan / line of credit | Sale of invoices |
-| Ownership of receivables | You retain ownership | Factor takes ownership |
-| Who collects from your customers | You | The factor |
-| Customer awareness | Usually none | Factor contacts your customers |
-| Minimum size | Typically $700K+/month | No minimum — works for small businesses |
-| Speed to funding | Days to weeks (more due diligence) | Often 24–48 hours |
-| Cost | Lower — priced as APR | Higher — priced as invoice discount % |
-| Credit requirement | Based on your business financials | Based on your customers' creditworthiness |
-| Business stage | More established companies | Startups and growing companies |
+<div style={{overflowX: 'auto', margin: '2rem 0'}}>
+  <table style={{width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem'}}>
+    <thead>
+      <tr style={{backgroundColor: '#082B09', color: '#F8F6F1'}}>
+        <th style={{padding: '12px 16px', textAlign: 'left', fontWeight: '600'}}>Feature</th>
+        <th style={{padding: '12px 16px', textAlign: 'left', fontWeight: '600'}}>Asset-Based Lending</th>
+        <th style={{padding: '12px 16px', textAlign: 'left', fontWeight: '600'}}>Factoring</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[
+        ['Structure', 'Loan / line of credit', 'Sale of invoices'],
+        ['Ownership of receivables', 'You retain ownership', 'Factor takes ownership'],
+        ['Who collects from customers', 'You', 'The factor'],
+        ['Customer awareness', 'Usually none', 'Factor contacts your customers'],
+        ['Minimum size', 'Typically $700K+/month', 'No minimum — works for small businesses'],
+        ['Speed to funding', 'Days to weeks', 'Often 24–48 hours'],
+        ['Cost', 'Lower — priced as APR', 'Higher — priced as invoice discount %'],
+        ['Credit requirement', 'Your business financials', "Your customers' creditworthiness"],
+        ['Business stage', 'More established companies', 'Startups and growing companies'],
+      ].map(([feature, abl, factoring], i) => (
+        <tr key={i} style={{backgroundColor: i % 2 === 0 ? '#F8F6F1' : '#ffffff', borderBottom: '1px solid #e5e7eb'}}>
+          <td style={{padding: '12px 16px', fontWeight: '600', color: '#082B09'}}>{feature}</td>
+          <td style={{padding: '12px 16px', color: '#374151'}}>{abl}</td>
+          <td style={{padding: '12px 16px', color: '#374151'}}>{factoring}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 ---
 
