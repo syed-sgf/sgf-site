@@ -45,25 +45,17 @@ export default function PartnersApplyPage() {
       {/* Form */}
       <section style={{ background: "#F8F6F1", padding: "60px 24px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-          <div style={{ width: '100%', minHeight: '900px' }}>
+          <div style={{ width: '100%', minHeight: '600px' }}>
             <iframe
-              src="https://api.leadconnectorhq.com/widget/form/CnaPJWXqSamJrlefepg0"
+              src="https://api.leadconnectorhq.com/widget/survey/Z5ndLPu9ozYpURppdcuF"
               style={{
-                width: '100%',
-                height: '900px',
                 border: 'none',
-                borderRadius: '4px',
+                width: '100%',
+                minHeight: '600px',
               }}
-              id="inline-CnaPJWXqSamJrlefepg0"
-              data-layout='{"id":"INLINE"}'
-              data-trigger-type="alwaysShow"
-              data-activation-type="alwaysActivated"
-              data-deactivation-type="neverDeactivate"
-              data-form-name="SGF Partner Application"
-              data-height="900"
-              data-layout-iframe-id="inline-CnaPJWXqSamJrlefepg0"
-              data-form-id="CnaPJWXqSamJrlefepg0"
-              title="SGF Partner Application"
+              scrolling="no"
+              id="Z5ndLPu9ozYpURppdcuF"
+              title="SGF Partner Signup Form"
             />
           </div>
         </div>

@@ -1023,7 +1023,8 @@ p {
 
 @media (max-width: 768px) {
   .sgf-partners-apply-page iframe {
-    height: 1100px !important;
+    min-height: 700px !important;
+    height: auto !important;
   }
 }
 
