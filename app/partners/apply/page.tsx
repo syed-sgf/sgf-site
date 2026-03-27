@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PartnerApplicationForm from "@/components/PartnerApplicationForm";
+import Script from "next/script";
 
 const isProd = process.env.VERCEL_ENV === "production";
 
@@ -44,8 +44,34 @@ export default function PartnersApplyPage() {
 
       {/* Form */}
       <section style={{ background: "#F8F6F1", padding: "60px 24px" }}>
-        <PartnerApplicationForm />
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <div style={{ width: '100%', minHeight: '900px' }}>
+            <iframe
+              src="https://api.leadconnectorhq.com/widget/form/CnaPJWXqSamJrlefepg0"
+              style={{
+                width: '100%',
+                height: '900px',
+                border: 'none',
+                borderRadius: '4px',
+              }}
+              id="inline-CnaPJWXqSamJrlefepg0"
+              data-layout='{"id":"INLINE"}'
+              data-trigger-type="alwaysShow"
+              data-activation-type="alwaysActivated"
+              data-deactivation-type="neverDeactivate"
+              data-form-name="SGF Partner Application"
+              data-height="900"
+              data-layout-iframe-id="inline-CnaPJWXqSamJrlefepg0"
+              data-form-id="CnaPJWXqSamJrlefepg0"
+              title="SGF Partner Application"
+            />
+          </div>
+        </div>
       </section>
+      <Script
+        src="https://link.msgsndr.com/js/form_embed.js"
+        strategy="lazyOnload"
+      />
 
       <style>{`
         @media (max-width: 768px) {
