@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   keywords: [
     "industry financing", "construction financing", "restaurant financing",
     "healthcare practice loans", "oil gas financing", "real estate investor loans",
-    "SBA loans by industry", "business loans Texas", "Starting Gate Financial",
+    "SBA loans by industry", "business loans nationwide", "Starting Gate Financial",
   ],
   openGraph: {
     title: "Industries We Finance | Starting Gate Financial",

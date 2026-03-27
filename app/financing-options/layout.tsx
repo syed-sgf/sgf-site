@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "business financing options", "SBA loans", "equipment financing",
     "commercial real estate loans", "business lines of credit", "DSCR loans",
     "fix and flip loans", "merchant cash advance", "accounts receivable financing",
-    "startup financing Texas", "Starting Gate Financial",
+    "startup financing nationwide", "Starting Gate Financial",
   ],
   openGraph: {
     title: "Business Financing Options | Starting Gate Financial",

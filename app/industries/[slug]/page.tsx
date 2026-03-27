@@ -36,7 +36,7 @@ const HERO_PHOTOS: Record<string, string> = {
 const SEO_META: Record<string, { title: string; description: string; keywords: string[] }> = {
   "construction": {
     title: "Construction Financing | SBA Loans, Equipment & LOC | Starting Gate Financial",
-    description: "Finance your construction business with SBA loans, equipment financing, working capital lines, and accounts receivable financing. Built for contractors and trades in Texas and nationwide.",
+    description: "Finance your construction business with SBA loans, equipment financing, working capital lines, and accounts receivable financing. Built for contractors and trades nationwide.",
     keywords: ["construction business loans", "contractor financing", "equipment financing contractors", "SBA loans construction", "working capital contractors", "accounts receivable construction"],
   },
   "restaurants-food": {
@@ -46,7 +46,7 @@ const SEO_META: Record<string, { title: string; description: string; keywords: s
   },
   "medical-healthcare": {
     title: "Medical & Healthcare Financing | Equipment, SBA & Practice Acquisition | Starting Gate Financial",
-    description: "Financing for physicians, dentists, and healthcare operators — medical equipment loans, practice acquisitions, SBA financing, and working capital for healthcare businesses in Texas.",
+    description: "Financing for physicians, dentists, and healthcare operators — medical equipment loans, practice acquisitions, SBA financing, and working capital for healthcare businesses nationwide.",
     keywords: ["healthcare practice loans", "medical equipment financing", "dental practice loan", "physician practice acquisition", "SBA loans healthcare", "medical practice working capital"],
   },
   "retail-ecommerce": {
@@ -56,7 +56,7 @@ const SEO_META: Record<string, { title: string; description: string; keywords: s
   },
   "trucking-transportation": {
     title: "Trucking & Transportation Financing | Fleet, A/R & Working Capital | Starting Gate Financial",
-    description: "Equipment financing for trucks and trailers, accounts receivable financing, and working capital lines for trucking operators and freight companies in Texas and nationwide.",
+    description: "Equipment financing for trucks and trailers, accounts receivable financing, and working capital lines for trucking operators and freight companies nationwide.",
     keywords: ["trucking business loans", "fleet financing", "transportation equipment financing", "freight invoice financing", "truck financing", "commercial vehicle loans"],
   },
   "professional-services": {

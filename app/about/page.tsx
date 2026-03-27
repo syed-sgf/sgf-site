@@ -387,7 +387,7 @@ export default function AboutPage() {
               fontSize: "0.95rem", color: "rgba(255,255,255,0.7)",
               lineHeight: 1.85,
             }}>
-              Based in the Dallas-Fort Worth market, we operate nationwide
+              Nationwide commercial financing, headquartered in the Dallas-Fort Worth market,
               across all major commercial financing categories.
             </p>
           </div>
