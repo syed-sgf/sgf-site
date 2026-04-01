@@ -11,14 +11,9 @@ type MenuKey = "financing" | "industries" | "tools" | null;
 const toolLinks = [
   { label: "Business Loan Calculator",   href: "/tools/business-loan-calculator" },
   { label: "DSCR Calculator",            href: "/tools/dscr-calculator" },
-<<<<<<< HEAD
-  { label: "MCA Planning Tool",          href: "/tools/mca-calculator" },
-  { label: "FICA Tip Credit Calculator", href: "/tools/fica-tip-calculator" },
-=======
   { label: "MCA Calculator",             href: "/tools/mca-calculator" },
   { label: "Working Capital Calculator", href: "/tools/working-capital-calculator" },
   { label: "FICA Tip Credit Calculator", href: "/tools/fica-tip-credit-calculator" },
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
 ];
 
 function Chevron({ rotated }: { rotated: boolean }) {
@@ -108,11 +103,7 @@ export default function Header() {
     setMobileSection(null);
   }
 
-<<<<<<< HEAD
-  const financingLinks = products.map((p) => ({ label: p.title, href: `/financing/${p.slug}` }));
-=======
   const financingLinks = products.map((p) => ({ label: p.title, href: `/financing-options/${p.slug}` }));
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
   const industryLinks  = industries.map((i) => ({ label: i.title, href: `/industries/${i.slug}` }));
 
   return (
@@ -208,9 +199,6 @@ export default function Header() {
             )}
           </div>
 
-<<<<<<< HEAD
-          {/* Contact only — About/Blog/Partners hidden until pages are built */}
-=======
           <Link href="/about"
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             About
@@ -223,7 +211,6 @@ export default function Header() {
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             Partners
           </Link>
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
           <Link href="/contact"
             style={{ display: "flex", alignItems: "center", padding: "0 1rem", fontSize: 13, fontWeight: 600, color: "#334155", textDecoration: "none" }}>
             Contact
@@ -233,13 +220,8 @@ export default function Header() {
 
         {/* Desktop CTA — single button until /apply is live */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }} className="sgf-desktop-ctas">
-<<<<<<< HEAD
-          <Link href="/contact" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Get Started
-=======
           <Link href="/apply" style={{ background: "#118241", color: "#fff", padding: "0.5rem 1.1rem", fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
             Get Pre-Qualified
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
           </Link>
         </div>
 
@@ -275,9 +257,6 @@ export default function Header() {
             <MobileSection label="Tools" isOpen={mobileSection === "tools"} onToggle={() => toggleMobile("tools")}
               links={toolLinks} allHref="/tools" allLabel="All tools" onLinkClick={closeMobile} />
 
-<<<<<<< HEAD
-            {/* Contact only — About/Blog hidden until pages are built */}
-=======
             <Link href="/about" onClick={closeMobile}
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
               About
@@ -290,7 +269,6 @@ export default function Header() {
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
               Partners
             </Link>
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
             <Link href="/contact" onClick={closeMobile}
               style={{ display: "block", padding: "1rem 0", fontSize: 14, fontWeight: 600, color: "#334155", textDecoration: "none", borderBottom: "1px solid #f1f5f9" }}>
               Contact
@@ -299,15 +277,9 @@ export default function Header() {
 
           {/* Mobile CTA */}
           <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid #e2e8f0" }}>
-<<<<<<< HEAD
-            <Link href="/contact" onClick={closeMobile}
-              style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-              Get Started
-=======
             <Link href="/apply" onClick={closeMobile}
               style={{ display: "block", textAlign: "center", padding: "0.85rem", background: "#118241", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
               Get Pre-Qualified
->>>>>>> 63ea10755fc061e1ff60b6f79f884c8e5d7808b8
             </Link>
           </div>
         </div>
