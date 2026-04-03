@@ -158,7 +158,7 @@ const nextConfig: NextConfig = {
       { source: "/the-ultimate-guide-to-equipment-financing-for-small-businesses", destination: "/blog/equipment-financing-strategy", permanent: true },
       { source: "/saas-financing-solutions-fuel-your-subscription-business-growth", destination: "/financing-options/business-loc-term-loans", permanent: true },
       { source: "/fast-business-loans-vs-smart-funding-find-the-right-fit", destination: "/financing-options", permanent: true },
-      { source: "/tips-to-help-improve-your-credit-score-for-sba-loan-approval", destination: "/blog/sba-loan-approval-guide", permanent: true },
+      { source: "/tips-to-help-improve-your-credit-score-for-sba-loan-approval-2", destination: "/blog/sba-loan-approval-guide", permanent: true },
       { source: "/how-to-fix-your-business-credit-score", destination: "/blog/sba-loan-approval-guide", permanent: true },
       { source: "/rental-property-investing-in-the-current-market-with-starting-gate", destination: "/blog/real-estate-investor-financing-guide", permanent: true },
       { source: "/quick-business-loans-how-to-apply-and-get-approved-fast", destination: "/financing-options/business-loc-term-loans", permanent: true },
