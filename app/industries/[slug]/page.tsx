@@ -97,6 +97,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "website",
       images: [{ url: HERO_PHOTOS[slug] ?? "", width: 1600, height: 900, alt: industry.title }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: seo?.title ?? `${industry.title} Financing | Starting Gate Financial`,
+      description: seo?.description ?? industry.description,
+      images: [HERO_PHOTOS[slug] ?? ""],
+    },
     alternates: { canonical: `https://startinggatefinancial.com/industries/${slug}` },
     robots: isProd
       ? { index: true, follow: true }
