@@ -113,7 +113,7 @@ export default function Header() {
         {/* Logo — next/image for automatic WebP + size optimization */}
         <Link href="/" onClick={closeMobile} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
           <Image
-            src="/FB_Logo.png"
+            src="/sgf-logo-white.png"
             alt="Starting Gate Financial"
             width={180}
             height={56}

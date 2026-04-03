@@ -72,7 +72,7 @@ export default function Footer() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             <Link href="/" style={{ textDecoration: "none" }}>
               <Image
-                src="/FB_Logo.png"
+                src="/sgf-logo-transparent.png"
                 alt="Starting Gate Financial"
                 width={140}
                 height={56}

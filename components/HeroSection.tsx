@@ -10,11 +10,13 @@ const G = {
 };
 
 const heroSlides = [
-  { url: "/images/hero-2.jpg", label: "Commercial Real Estate" },
-  { url: "/images/hero-1.jpg", label: "Business Capital" },
-  { url: "/images/hero-3.jpg", label: "Construction" },
-  { url: "/images/hero-4.webp", label: "Oil & Gas" },
-  { url: "/images/hero-5.jpg", label: "Business Financing" },
+  { url: "/images/hero-new-1.webp", label: "Commercial Real Estate" },
+  { url: "/images/hero-new-2.jpg",  label: "Business Capital" },
+  { url: "/images/hero-2.jpg",      label: "Commercial Properties" },
+  { url: "/images/hero-1.jpg",      label: "Business Capital" },
+  { url: "/images/hero-3.jpg",      label: "Construction" },
+  { url: "/images/hero-4.webp",     label: "Oil & Gas" },
+  { url: "/images/hero-5.jpg",      label: "Business Financing" },
 ];
 
 const DURATION = 5;
@@ -34,6 +36,8 @@ export function HeroSection() {
         .sgf-slide-2 { animation: sgf-fade ${CYCLE}s ${2 * DURATION}s infinite; opacity: 0; }
         .sgf-slide-3 { animation: sgf-fade ${CYCLE}s ${3 * DURATION}s infinite; opacity: 0; }
         .sgf-slide-4 { animation: sgf-fade ${CYCLE}s ${4 * DURATION}s infinite; opacity: 0; }
+        .sgf-slide-5 { animation: sgf-fade ${CYCLE}s ${5 * DURATION}s infinite; opacity: 0; }
+        .sgf-slide-6 { animation: sgf-fade ${CYCLE}s ${6 * DURATION}s infinite; opacity: 0; }
         @media (max-width: 768px) {
           .sgf-hero-grid { grid-template-columns: 1fr !important; }
           .sgf-hero-card { display: none !important; }
