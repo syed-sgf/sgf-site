@@ -18,7 +18,6 @@ export default function robots(): MetadataRoute.Robots {
           "/author/",
           "/category/",
           "/?s=",
-          "/tips-to-help-improve-your-credit-score-for-sba-loan-approval-2",
         ],
       },
     ],
